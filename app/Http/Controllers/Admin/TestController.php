@@ -129,7 +129,6 @@ class TestController extends Controller
     public function show($id)
     {
         $data   =   Tests::findOrFail($id);
-        
         return view('admin.master.branch.show',compact('data'));
     }
 }

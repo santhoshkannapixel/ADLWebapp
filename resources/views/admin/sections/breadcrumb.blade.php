@@ -24,6 +24,10 @@
         {{ Route::is('banner.index') ? "Banner List" : '' }}
         {{ Route::is('banner.create') ? "Create Banner" : '' }}
         {{ Route::is('banner.edit') ? "Edit Banner" : '' }}
+
+        {{ Route::is('api_config.index') ? "Api Configuration" : '' }}
+        {{ Route::is('api_config.craete') ? "Craete Api Configuration" : '' }}
+        {{ Route::is('api_config.edit') ? "Edit Api Configuration" : '' }}
     </div>
 </div>
 <div class="d-flex align-items-center">
@@ -51,6 +55,10 @@
                 {{ Route::is('banner.index') ? "Masters / Banner List" : '' }}
                 {{ Route::is('banner.create') ? "Masters / Create Banner" : '' }}
                 {{ Route::is('banner.edit') ? "Masters / Edit Banner" : '' }} 
+
+                {{ Route::is('api_config.index') ? "Api Configuration" : '' }}
+                {{ Route::is('api_config.craete') ? "Craete Api Configuration" : '' }}
+                {{ Route::is('api_config.edit') ? "Edit Api Configuration" : '' }}
             </li>
         </ol>
     </nav>

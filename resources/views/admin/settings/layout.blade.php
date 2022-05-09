@@ -17,9 +17,9 @@
          </a> 
       </li>
       <li class="nav-item">
-         <a class="nav-link" href="#">
-            <i class="bi bi-question-circle-fill me-2"></i>
-            Help
+         <a class="nav-link  {{ Route::is(['api_config.index','api_config.create', 'api_config.edit']) ? "active" : "" }}" href="{{ route('api_config.index') }}">
+            <i class="fa fa-usb me-2"></i>
+            Api config
          </a>
       </li>
    </ul>

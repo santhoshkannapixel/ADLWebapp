@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\TestController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ApiConfigController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
  
@@ -30,6 +31,15 @@ Route::middleware(['auth_users'])->group(function () {
         Route::get('/user-update/{id}', function () {   
             return redirect()->back();
         })->name('user.update');
+
+        
+        Route::get('/api-config', [ApiConfigController::class, 'index'])->name('api_config.index');
+        Route::get('/api-config/create', [ApiConfigController::class, 'create'])->name('api_config.create');
+        Route::get('/api-config/{id}', [ApiConfigController::class, 'edit'])->name('api_config.edit');
+        Route::post('/api-config/{id?}', [ApiConfigController::class, 'updateOrCreate'])->name('api_config.store');
+        Route::post('/api-config-delete/{id}', [ApiConfigController::class, 'destroy'])->name('api_config.delete');
+
+        
 
 
          // Role Routes 

@@ -24,7 +24,20 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('admin.settings') }}" class="nav-link text-white {{ Route::is(['admin.settings','user.index','user.create','user.edit','role.index','role.create', 'role.edit']) ? "active" : "" }}">
+            <a href="{{ route('admin.settings') }}" class="nav-link text-white {{ Route::is([
+                    'admin.settings',
+                    'user.index',
+                    'user.create',
+                    'user.edit',
+                    'role.index',
+                    'role.create', 
+                    'role.edit',
+                    'test.index',
+                    'test.show',
+                    'api_config.index',
+                    'api_config.edit',
+                    'api_config.create',
+                ]) ? "active" : "" }}">
                 <i class="fa fa-cogs me-3"></i>Settings
             </a>
         </li>

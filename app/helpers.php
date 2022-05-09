@@ -1,5 +1,6 @@
 <?php
 
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Support\Facades\Storage;
 
 if(!function_exists('asset_url')) {
@@ -13,5 +14,12 @@ if(!function_exists('asset_url')) {
         }
         
         return asset('public/images/no-image.jpg');
+    }
+}
+
+if(!function_exists('auth_id')) {
+    function auth_id()
+    {  
+        return Sentinel::getUser()->name;
     }
 }
