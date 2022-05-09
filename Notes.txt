@@ -1,0 +1,4 @@
+Install Laravel 
+npm install
+  npm i --save laravel-mix-angular-templatecache
+npm i toastr

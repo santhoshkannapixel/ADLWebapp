@@ -1,0 +1,7 @@
+{
+    "/ng-app/angular.min.js": "/ng-app/angular.min.js",
+    "/ng-app/angular-route.min.js": "/ng-app/angular-route.min.js",
+    "/ng-app/ng-app.js": "/ng-app/ng-app.js",
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css"
+}
