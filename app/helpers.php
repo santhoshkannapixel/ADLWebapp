@@ -27,7 +27,7 @@ if(!function_exists('button')) {
     {  
         if($type == 'edit') {
             return '
-                <a href="'.$url.'" class="m-1  shadow btn btn-sm text-primary btn-outline-light" title="Edit"> 
+                <a href="'.$url.'" class="m-1  shadow-sm btn btn-sm text-primary btn-outline-light" title="Edit"> 
                     <i class="bi bi-pencil"></i>
                 </a>
             ';
@@ -37,7 +37,7 @@ if(!function_exists('button')) {
             return '
                 <form method="post" action="'.$url.'" class="d-inline-block"> 
                         '.csrf_field().'
-                    <button id="confirmDelete" type="submit" class="m-1 shadow btn btn-sm text-danger btn-outline-light" title="Delete">
+                    <button id="confirmDelete" type="submit" class="m-1 shadow-sm btn btn-sm text-danger btn-outline-light" title="Delete">
                         <i class="bi bi-trash"></i>
                     </button>
                 </form>
@@ -45,7 +45,7 @@ if(!function_exists('button')) {
         }
 
         if($type == 'show') {
-            return '<a href="'.$url.'" class="m-1 shadow btn btn-sm text-success btn-outline-light"><i class="fa fa-eye"></i></a>';
+            return '<a href="'.$url.'" class="m-1 shadow-sm btn btn-sm text-success btn-outline-light"><i class="fa fa-eye"></i></a>';
         }
     }
 }
