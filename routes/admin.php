@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\TestController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ApiConfigController;
+use App\Http\Controllers\Admin\PaymentConfigController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
  
@@ -39,7 +40,12 @@ Route::middleware(['auth_users'])->group(function () {
         Route::post('/api-config/{id?}', [ApiConfigController::class, 'updateOrCreate'])->name('api_config.store');
         Route::post('/api-config-delete/{id}', [ApiConfigController::class, 'destroy'])->name('api_config.delete');
 
-        
+        Route::get('/payment-config', [PaymentConfigController::class, 'index'])->name('payment_config.index');
+        Route::get('/payment-config/create', [PaymentConfigController::class, 'create'])->name('payment_config.create');
+        Route::get('/payment-config/{id}', [PaymentConfigController::class, 'edit'])->name('payment_config.edit');
+        Route::post('/payment-config/{id?}', [PaymentConfigController::class, 'updateOrCreate'])->name('payment_config.store');
+        Route::post('/payment-config-delete/{id}', [PaymentConfigController::class, 'destroy'])->name('payment_config.delete');
+
 
 
          // Role Routes 

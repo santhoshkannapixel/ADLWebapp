@@ -25,9 +25,13 @@
         {{ Route::is('banner.create') ? "Create Banner" : '' }}
         {{ Route::is('banner.edit') ? "Edit Banner" : '' }}
 
-        {{ Route::is('api_config.index') ? "Api Configuration" : '' }}
-        {{ Route::is('api_config.craete') ? "Craete Api Configuration" : '' }}
-        {{ Route::is('api_config.edit') ? "Edit Api Configuration" : '' }}
+        {{ Route::is('api_config.index') ? "API Configuration" : '' }}
+        {{ Route::is('api_config.create') ? "Create API Configuration" : '' }}
+        {{ Route::is('api_config.edit') ? "Edit API Configuration" : '' }}
+
+        {{ Route::is('payment_config.index') ? "Payment Configuration" : '' }}
+        {{ Route::is('payment_config.create') ? "Create Payment Configuration" : '' }}
+        {{ Route::is('payment_config.edit') ? "Edit Payment Configuration" : '' }}
     </div>
 </div>
 <div class="d-flex align-items-center">
@@ -35,7 +39,7 @@
         <ol class="breadcrumb m-0">
             <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
             <li class="breadcrumb-item active" aria-current="page">
-                {{ Route::is('admin.dashboard') ? "Settings / Home" : '' }}
+                {{ Route::is('admin.dashboard') ? " Home" : '' }}
                 {{ Route::is('admin.settings') ? "Settings / Settings" : '' }}
                 {{ Route::is('user.create') ? "Settings / New User" : "" }}
                 {{ Route::is('user.index') ? "Settings / Users List" : "" }}
@@ -56,9 +60,13 @@
                 {{ Route::is('banner.create') ? "Masters / Create Banner" : '' }}
                 {{ Route::is('banner.edit') ? "Masters / Edit Banner" : '' }} 
 
-                {{ Route::is('api_config.index') ? "Api Configuration" : '' }}
-                {{ Route::is('api_config.craete') ? "Craete Api Configuration" : '' }}
-                {{ Route::is('api_config.edit') ? "Edit Api Configuration" : '' }}
+                {{ Route::is('api_config.index') ? "Settings /  API Configuration" : '' }}
+                {{ Route::is('api_config.create') ? "Settings /  Create API Configuration" : '' }}
+                {{ Route::is('api_config.edit') ? "Settings /  Edit API Configuration" : '' }}
+
+                {{ Route::is('payment_config.index') ? "Settings /  Payment Configuration" : '' }}
+                {{ Route::is('payment_config.create') ? "Settings /  Create Payment Configuration" : '' }}
+                {{ Route::is('payment_config.edit') ? "Settings /  Edit Payment Configuration" : '' }}
             </li>
         </ol>
     </nav>

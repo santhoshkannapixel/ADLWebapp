@@ -50,6 +50,9 @@ a {
 .rounded-5 {
     border-radius: 8px !important;
 }
+.datepicker table tr td.active.active {
+    background: linear-gradient(45deg, var(--primary), #f1333c , #f39314) !important;
+}
 .swal-button--confirm {
     background: linear-gradient(45deg, var(--primary), #f1333c) !important;
     &:hover {

@@ -19,7 +19,13 @@
       <li class="nav-item">
          <a class="nav-link  {{ Route::is(['api_config.index','api_config.create', 'api_config.edit']) ? "active" : "" }}" href="{{ route('api_config.index') }}">
             <i class="fa fa-usb me-2"></i>
-            Api config
+            API config
+         </a>
+      </li>
+      <li class="nav-item">
+         <a class="nav-link  {{ Route::is(['payment_config.index','payment_config.create', 'payment_config.edit']) ? "active" : "" }}" href="{{ route('payment_config.index') }}">
+            <i class="fa fa-inr me-2"></i>
+            Payment config
          </a>
       </li>
    </ul>

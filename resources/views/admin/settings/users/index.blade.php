@@ -12,13 +12,13 @@
             <table class="table table-bordered table-centered m-0 tr-sm table-hover" id="data-table">
                 <thead> 
                     <tr>
-                        <th class="table-th">No</th>
-                        <th class="table-th">Name</th>
-                        <th class="table-th">Email</th>
-                        <th class="table-th">Role</th>
-                        <th class="table-th">Last Login</th>
-                        <th class="table-th">Status</th>
-                        <th class="table-th" width="100px">Action</th>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Last Login</th>
+                        <th>Status</th>
+                        <th width="100px">Action</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -42,7 +42,7 @@
                     {data: 'email', name: 'email'},
                     {data: 'role', name: 'role', defaultContent: '',},
                     {data: 'last_login', name: 'last_login'},
-                    {data: 'status', name: 'status'},
+                    {data: 'status', name: 'status'}, 
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ],
             });

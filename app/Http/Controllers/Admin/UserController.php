@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
@@ -31,12 +33,10 @@ class UserController extends Controller
             ->addColumn('role', function ($data) {
                 return $data->roles()->first()->name;
             })
-        
             ->addColumn('status', function($data){
                 $status = 'Active';
                 return $status;
             })
-
             ->addColumn('action', function($data){
                 $action = '
                     <div class="btn-group">
@@ -49,10 +49,9 @@ class UserController extends Controller
                 ';
                 return $action;
             })
-           
             ->rawColumns(array(
                 'status',
-                'action'
+                'action',
             ))
             ->make(true);
         }
@@ -143,11 +142,18 @@ class UserController extends Controller
 
     public function update(Request $request , $id)
     {
+   
         try {
-        
-            User::find($id)->update([
-                'name'  => $request->name,
-                'email' => $request->email,
+            $user = User::find($id);
+
+            if($request->new_password != null) {
+                $password  =  Hash::make($request->new_password);
+            }
+
+            $user->update([
+                'name'      => $request->name,
+                'email'     => $request->email,
+                'password'  =>  $password ??  $user->password,
             ]);
 
             RoleUsers::where("user_id",$id)->update([

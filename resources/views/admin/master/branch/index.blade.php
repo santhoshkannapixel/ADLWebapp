@@ -20,16 +20,16 @@
             <table class="table table-bordered table-centered m-0 tr-sm table-hover" id="data-table">
                 <thead> 
                     <tr>
-                        <th class="table-th">S.No</th>
-                        <th class="table-th">Branch Code</th>
-                        <th class="table-th">Branch Name</th>
-                        <th class="table-th">City</th>
-                        <th class="table-th">Contact</th>
-                        <th class="table-th">Email</th>
-                        <th class="table-th">Processing</th>
-                        <th class="table-th">State</th>
-                        <th class="table-th">Pincode</th>
-                        <th class="table-th">Action</th>
+                        <th>S.No</th>
+                        <th>Branch Code</th>
+                        <th>Branch Name</th>
+                        <th>City</th>
+                        <th>Contact</th>
+                        <th>Email</th>
+                        <th>Processing</th>
+                        <th>State</th>
+                        <th>Pincode</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody></tbody>

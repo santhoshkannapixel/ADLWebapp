@@ -37,6 +37,9 @@
                     'api_config.index',
                     'api_config.edit',
                     'api_config.create',
+                    'payment_config.index',
+                    'payment_config.edit',
+                    'payment_config.create',
                 ]) ? "active" : "" }}">
                 <i class="fa fa-cogs me-3"></i>Settings
             </a>
