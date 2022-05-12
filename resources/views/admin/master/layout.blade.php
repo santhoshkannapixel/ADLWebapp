@@ -17,7 +17,7 @@
             </a> 
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ Route::is(['test.index','test.show']) ? "active" : "" }}" href="{{ route('test.index') }}">
+            <a class="nav-link {{ Route::is(['test.index','test.show','test.edit']) ? "active" : "" }}" href="{{ route('test.index') }}">
                 <i class="fa fa-flask me-2"></i>
                 Test Master
             </a>

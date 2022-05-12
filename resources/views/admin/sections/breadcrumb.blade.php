@@ -20,6 +20,8 @@
 
         {{ Route::is('test.index') ? "Test List" : '' }}
         {{ Route::is('test.show') ? "Test View" : '' }}
+        {{ Route::is('test.edit') ? "Edit Test"  : '' }}
+
 
         {{ Route::is('banner.index') ? "Banner List" : '' }}
         {{ Route::is('banner.create') ? "Create Banner" : '' }}
@@ -55,6 +57,8 @@
 
                 {{ Route::is('test.index') ? "Test List" : '' }}
                 {{ Route::is('test.show') ? "Masters / Test View" : '' }}
+                {{ Route::is('test.edit') ? "Masters /  Edit Test Details" : '' }}
+
 
                 {{ Route::is('banner.index') ? "Masters / Banner List" : '' }}
                 {{ Route::is('banner.create') ? "Masters / Create Banner" : '' }}
@@ -64,7 +68,7 @@
                 {{ Route::is('api_config.create') ? "Settings /  Create API Configuration" : '' }}
                 {{ Route::is('api_config.edit') ? "Settings /  Edit API Configuration" : '' }}
 
-                {{ Route::is('payment_config.index') ? "Settings /  Payment Configuration" : '' }}
+                {{ Route::is('test.index') ? "Settings /  Payment Configuration" : '' }}
                 {{ Route::is('payment_config.create') ? "Settings /  Create Payment Configuration" : '' }}
                 {{ Route::is('payment_config.edit') ? "Settings /  Edit Payment Configuration" : '' }}
             </li>

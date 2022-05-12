@@ -19,7 +19,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('master.index') }}" class="nav-link text-white {{ Route::is(['master.index','branch.show','city.index', 'banner.edit' , 'banner.create', 'banner.index']) ? "active" : "" }}">
+            <a href="{{ route('master.index') }}" class="nav-link text-white {{ Route::is(['master.index','branch.show','city.index', 'banner.edit', 'test.edit' , 'banner.create', 'banner.index']) ? "active" : "" }}">
                 <i class="bi bi-sliders me-3"></i>Master
             </a>
         </li>
