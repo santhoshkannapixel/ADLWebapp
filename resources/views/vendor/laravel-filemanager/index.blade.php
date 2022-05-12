@@ -26,7 +26,7 @@
   {{-- Use the line below instead of the above if you need to cache the css. --}}
   <link rel="stylesheet" href="{{ asset('/vendor/laravel-filemanager/css/lfm.css') }}">
 </head>
-<body>
+<body class="">
   <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-gradient" id="nav">
     <a class="navbar-brand invisible-lg d-none d-lg-inline" id="to-previous">
       <i class="fas fa-arrow-left fa-fw"></i>
@@ -71,9 +71,9 @@
   </nav>
 
   <nav class="bg-light fixed-bottom border-top d-none" id="actions">
-    <a data-action="open" data-multiple="false"><i class="fas fa-folder-open"></i>{{ trans('laravel-filemanager::lfm.btn-open') }}</a>
-    <a data-action="preview" data-multiple="true"><i class="fas fa-images"></i>{{ trans('laravel-filemanager::lfm.menu-view') }}</a>
-    <a data-action="use" data-multiple="true"><i class="fas fa-check"></i>{{ trans('laravel-filemanager::lfm.btn-confirm') }}</a>
+    <a class="text-white rounded-0 btn btn-success" data-action="open" data-multiple="false"><i class="text-white fas fa-folder-open"></i>{{ trans('laravel-filemanager::lfm.btn-open') }}</a>
+    <a class="rounded-0 btn btn-light" data-action="preview" data-multiple="true"><i class="fas fa-images"></i>{{ trans('laravel-filemanager::lfm.menu-view') }}</a>
+    <a class="text-white rounded-0 btn btn-gradient" data-action="use" data-multiple="true"><i class="text-white fas fa-check"></i>{{ trans('laravel-filemanager::lfm.btn-confirm') }}</a>
   </nav>
 
   <div class="d-flex flex-row">
@@ -121,7 +121,7 @@
             <div class="form-group" id="attachment">
               <div class="controls text-center">
                 <div class="input-group w-100">
-                  <a class="btn btn-primary w-100 text-white" id="upload-button">{{ trans('laravel-filemanager::lfm.message-choose') }}</a>
+                  <a class="btn btn-gradient w-100 text-white" id="upload-button">{{ trans('laravel-filemanager::lfm.message-choose') }}</a>
                 </div>
               </div>
             </div>
@@ -143,7 +143,7 @@
         <div class="modal-body"></div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary w-100" data-dismiss="modal">{{ trans('laravel-filemanager::lfm.btn-close') }}</button>
-          <button type="button" class="btn btn-primary w-100" data-dismiss="modal">{{ trans('laravel-filemanager::lfm.btn-confirm') }}</button>
+          <button type="button" class="btn btn-gradient w-100" data-dismiss="modal">{{ trans('laravel-filemanager::lfm.btn-confirm') }}</button>
         </div>
       </div>
     </div>
@@ -160,7 +160,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary w-100" data-dismiss="modal">{{ trans('laravel-filemanager::lfm.btn-close') }}</button>
-          <button type="button" class="btn btn-primary w-100" data-dismiss="modal">{{ trans('laravel-filemanager::lfm.btn-confirm') }}</button>
+          <button type="button" class="btn btn-gradient w-100" data-dismiss="modal">{{ trans('laravel-filemanager::lfm.btn-confirm') }}</button>
         </div>
       </div>
     </div>
@@ -199,12 +199,12 @@
   <script>
     var lang = {!! json_encode(trans('laravel-filemanager::lfm')) !!};
     var actions = [
-      // {
-      //   name: 'use',
-      //   icon: 'check',
-      //   label: 'Confirm',
-      //   multiple: true
-      // },
+      {
+        name: 'use',
+        icon: 'check',
+        label: 'Confirm',
+        multiple: true
+      },
       {
         name: 'rename',
         icon: 'edit',
@@ -217,18 +217,18 @@
         label: lang['menu-download'],
         multiple: true
       },
-      // {
-      //   name: 'preview',
-      //   icon: 'image',
-      //   label: lang['menu-view'],
-      //   multiple: true
-      // },
       {
-        name: 'move',
-        icon: 'paste',
-        label: lang['menu-move'],
+        name: 'preview',
+        icon: 'image',
+        label: lang['menu-view'],
         multiple: true
       },
+      // {
+      //   name: 'move',
+      //   icon: 'paste',
+      //   label: lang['menu-move'],
+      //   multiple: true
+      // },
       {
         name: 'resize',
         icon: 'arrows-alt',

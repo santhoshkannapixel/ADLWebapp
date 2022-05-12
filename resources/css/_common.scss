@@ -1,8 +1,11 @@
 @import '_var';
-.btn-gradient {
+.btn-gradient , .fab-toggle, .page-item.active .page-link{
     background: linear-gradient(45deg, #62298b, #f1333c , #f39314) !important;
     color: white !important;
     font-weight: 800 !important;
+    &:hover {
+        background: linear-gradient(65deg, #62298b, #f1333c , #f39314) !important;
+    }
 }
 a {
     text-decoration: none !important;
@@ -104,11 +107,16 @@ table th,td {
 }
  
 .table-hover > tbody > tr:hover {
-    background: #ffe1c0 !important;
+    background: white !important;
+    box-shadow:   0 0px 5px #c1c1c1;
+    opacity: 1 !important;
     cursor: pointer;
     td {
         color: var(--primary) !important;
     }
+}
+.table-hover > tbody > tr:hover td {
+    background: white !important;
 }
 .table-bordered > :not(caption) > * {
     border-width: 1px 0;

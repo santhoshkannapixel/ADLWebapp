@@ -37,9 +37,9 @@
                 <div class="col-10"> 
                     <div class="input-group">
                         <span class="input-group-btn">
-                          <a id="lfm2" data-input="thumbnail2" data-preview="holder2" class="btn btn-primary text-white">
-                            <i class="fa fa-picture-o"></i> Choose
-                          </a>
+                            <a id="lfm2" data-input="thumbnail2" data-preview="holder2" class="btn btn-primary text-white">
+                                <i class="fa fa-picture-o"></i> Choose
+                            </a>
                         </span>
                         <input id="thumbnail2" class="form-control" type="text" name="TestImages">
                     </div>
@@ -104,8 +104,6 @@
                 };
             });
         };
-
         lfm('lfm2', 'file', {prefix: route_prefix});
-
     </script>
 @endsection
