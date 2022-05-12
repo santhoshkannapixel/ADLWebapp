@@ -34,6 +34,7 @@ class CreateTestsTable extends Migration
             $table->string("ModifiedDate")->nullable();
             $table->string("TestSchedule")->nullable();
             $table->integer("TestPrice")->nullable();
+            $table->longText("TestImages")->nullable();
             $table->timestamps();
         });
     }

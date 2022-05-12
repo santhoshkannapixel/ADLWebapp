@@ -16,15 +16,7 @@ class PaymentConfigController extends Controller
             $data = PaymentConfig::all();
             return datatables()->of($data)
             ->addColumn('action', function($data){
-                $action = '
-                    <div class="btn-group">
-                        <a href="'.route('payment_config.edit', $data->id).'" class="btn btn-sm text-primary" title="Edit"> <i class="bi bi-pencil-square"></i> </a>
-                        <form method="post" action="'.route('payment_config.delete', $data->id).'"> 
-                                '.csrf_field().'
-                            <button id="confirmDelete" type="submit" class="btn btn-sm text-danger" title="Delete"><i class="bi bi-trash"></i> </button>
-                        </form>
-                    </div>
-                ';
+                $action = button('edit',route('payment_config.edit', $data->id)).button('delete',route('payment_config.delete', $data->id)); 
                 return $action;
             })
             ->rawColumns(array(

@@ -38,9 +38,8 @@ class BranchController extends Controller
                     return $status;
                 })
                 
-                ->addColumn('action', function ($data) {
-                    $action  =  '<a href="'.route('branch.show', $data->id).'" class="btn btn-sm text-primary t-center"><i class="fa fa-eye"></i></a>';
-                    return $action;
+                ->addColumn('action', function ($data) { 
+                    return button('show',route('branch.show', $data->id));
                 })
             ->rawColumns(['action','processing'])
             ->make(true);

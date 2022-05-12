@@ -33,15 +33,7 @@ class RoleController extends Controller
                 return DataTables::eloquent($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
-                    $action = '
-                        <div class="btn-group">
-                            <a href="'.route('role.edit', $data->id).'" class="btn btn-sm text-primary" title="Edit"> <i class="bi bi-pencil-square"></i> </a>
-                            <form method="post" action="'.route('role.delete', $data->id).'"> 
-                                    '.csrf_field().'
-                                <button id="confirmDelete" type="submit" class="btn btn-sm text-danger" title="Delete"><i class="bi bi-trash"></i> </button>
-                            </form>
-                        </div>
-                    ';
+                    $action = button('edit',route('role.edit', $data->id)).button('delete',route('role.delete', $data->id)); 
                     return $action;
                 })
                 

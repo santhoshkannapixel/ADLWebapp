@@ -55,14 +55,13 @@ class TestController extends Controller
                     $type    =  $data->HomeCollection == 'N' ? 'ban' : 'check-circle';
                     $status  =  '<span class="fa-20 t-center fa fa-'.$type.' text-'.$flag.'"></span>';
                     return $status;
-                })
-                ->addColumn('action', function ($data) {
-                    $action  =  '<a href="'.route('test.show', $data->id).'" class="btn btn-sm text-primary t-center"><i class="fa fa-eye"></i></a>';
-                    return $action;
-                })
+                }) 
                 ->addColumn('Test_Schedule', function ($data) {
                     $TestSchedule  =  '<small>'.str_replace(',',' ' , $data->TestSchedule).'</small>';
                     return $TestSchedule;
+                })
+                ->addColumn('action', function ($data) {
+                    return button('show', route('test.show', $data->id)).button('edit', route('test.edit', $data->id));
                 })
                 ->rawColumns(['action','Is_Package','Test_Schedule','Drive_Through','Home_Collection','Applicable_Gender'])
                 ->make(true);
@@ -130,5 +129,11 @@ class TestController extends Controller
     {
         $data   =   Tests::findOrFail($id);
         return view('admin.master.branch.show',compact('data'));
+    }
+
+    public function edit($id)
+    {
+        $data   =   Tests::findOrFail($id);
+        return view('admin.master.branch.edit',compact('data'));
     }
 }

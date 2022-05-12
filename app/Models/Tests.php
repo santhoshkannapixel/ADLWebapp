@@ -29,7 +29,8 @@ class Tests extends Model
         "CteateDate",
         "ModifiedDate",
         "TestSchedule",
-        "TestPrice"
+        "TestPrice",
+        "TestImages"
     ];
 
     public function SubTestList()

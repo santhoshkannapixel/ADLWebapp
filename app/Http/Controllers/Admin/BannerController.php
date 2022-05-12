@@ -40,15 +40,7 @@ class BannerController extends Controller
                     ';
                 })                
                 ->addColumn('action', function ($data) {
-                    return '
-                        <div class="btn-group">
-                            <a href="'.route('banner.edit', $data->id).'" class="btn btn-sm text-primary" title="Edit"> <i class="bi bi-pencil-square"></i> </a>
-                            <form method="post" action="'.route('banner.delete', $data->id).'"> 
-                                    '.csrf_field().'
-                                <button id="confirmDelete" type="submit" class="btn btn-sm text-danger" title="Delete"><i class="bi bi-trash"></i> </button>
-                            </form>
-                        </div>
-                    ';
+                    return button('edit',route('banner.edit', $data->id)).button('delete',route('banner.delete', $data->id));
                 })
             ->rawColumns(['action','Mobile_Image','Desktop_Image'])
             ->make(true);
