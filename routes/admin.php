@@ -74,6 +74,7 @@ Route::middleware(['auth_users'])->group(function () {
         Route::get('master/test', [TestController::class, 'index'])->name('test.index');
         Route::get('master/test/{id}', [TestController::class, 'show'])->name('test.show');
         Route::get('master/test/edit/{id}', [TestController::class, 'edit'])->name('test.edit');
+        Route::post('master/test/edit/{id}', [TestController::class, 'update'])->name('test.edit');
         Route::post('master/test', [TestController::class, 'syncRequest'])->name('test.sync');
 
         // Banner Master

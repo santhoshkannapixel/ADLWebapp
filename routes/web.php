@@ -1,8 +1,7 @@
 <?php
 include 'auth.php';
 include 'admin.php';
-use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Route; 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function() {
     return redirect('/login');
 }); 
+
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['auth_users']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});

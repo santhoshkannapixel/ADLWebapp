@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('admin_title')</title>
-    <link rel="shortcut icon" href="{{ asset('public/images/logo/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('images/logo/favicon.png') }}">
     @include('styles.admin')
 </head>
 <body class="root_admin"> 

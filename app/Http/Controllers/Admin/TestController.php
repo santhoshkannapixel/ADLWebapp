@@ -128,12 +128,22 @@ class TestController extends Controller
     public function show($id)
     {
         $data   =   Tests::findOrFail($id);
-        return view('admin.master.branch.show',compact('data'));
+        return view('admin.master.tests.show',compact('data'));
     }
 
     public function edit($id)
     {
         $data   =   Tests::findOrFail($id);
-        return view('admin.master.branch.edit',compact('data'));
+        return view('admin.master.tests.edit',compact('data'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data   =   Tests::findOrFail($id);
+        $data->TestImages  = $request->TestImages;
+        $data->save();
+
+        Flash::success( __('masters.sync_success'));
+        return redirect()->back();
     }
 }

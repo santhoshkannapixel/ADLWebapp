@@ -9,12 +9,14 @@
         "cartalyst/sentinel": "^5.1",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "intervention/image": "^2.7",
         "lab2view/laravel-repository-generator": "^1.8",
         "laracasts/flash": "^3.2",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravelcollective/html": "^6.3",
+        "unisharp/laravel-filemanager": "^2.4",
         "yajra/laravel-datatables-oracle": "^9.19"
     },
     "require-dev": {

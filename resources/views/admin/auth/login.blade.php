@@ -7,7 +7,7 @@
         <div class="card-body p-4">
             <form class="text-center m-0" action="{{ route("login") }}" method="POST"> 
                 @csrf
-                <img class="mb-4 mx-auto" src="{{ asset('public/images/logo/logo.png') }}"  width="80%">
+                <img class="mb-4 mx-auto" src="{{ asset('images/logo/logo.png') }}"  width="80%">
                 {{-- <h3 class="mb-3"><b>Sign In </b></h3>
                 <i class="fa fa-user-circle text-primary fa-3x mb-3"></i> --}}
                 <div class="form-floating">
