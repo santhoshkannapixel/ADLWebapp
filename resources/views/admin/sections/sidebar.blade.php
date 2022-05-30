@@ -1,6 +1,6 @@
 <div class="d-flex flex-column flex-shrink-0 text-white   side_bar" style="width: 280px;">
     <a href="{{ route('admin.dashboard') }}" class="d-flex shadow p-3 border-light align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none" style="border-bottom: 1px solid #ffffff24 !important">
-        <img src="{{ asset('images/logo/logo-dark.png') }}" alt="logo" width="90%" class="mx-auto">
+        <img src="{{ asset('public/images/logo/logo-dark.png') }}" alt="logo" width="90%" class="mx-auto">
     </a>
     <ul class="nav nav-pills flex-column mb-auto mt-3 pt-0 p-3">
         <li class="nav-item">

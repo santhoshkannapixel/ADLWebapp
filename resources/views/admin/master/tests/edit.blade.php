@@ -64,7 +64,7 @@
     <script>
         var route_prefix = "{{ url('laravel-filemanager') }}";
     </script>
-    <script src="{{ asset('vendor/unisharp/laravel-filemanager/public/js/stand-alone-button.js') }}"></script>
+    <script src="{{ asset('public/vendor/unisharp/laravel-filemanager/public/js/stand-alone-button.js') }}"></script>
     <script>$('#lfm').filemanager('file', {prefix: route_prefix});</script>
     <script>
         var lfm = function(id, type, options) {

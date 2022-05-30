@@ -11,7 +11,7 @@ if(!function_exists('asset_url')) {
                 return url('/storage/app/'.$value);
             }
         }
-        return asset('images/no-image.jpg');
+        return asset('public/images/no-image.jpg');
     }
 }
 

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function() {
-    return redirect('/login');
+    return redirect('public/login');
 }); 
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['auth_users']], function () {
