@@ -6,3 +6,7 @@ use Illuminate\Support\Facades\Route;
  
  
 Route::get('banners', [ApiController::class,'banners']);
+Route::get('topBookedTest', [ApiController::class,'topBookedTest']);
+Route::get('test/{id}', [ApiController::class,'testDetails']);
+
+Route::post('bannerContactForm', [ApiController::class,'bannerContactForm']);
