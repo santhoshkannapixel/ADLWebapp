@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banners;
+use App\Models\SubTests;
 use App\Models\Tests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -27,10 +28,14 @@ class ApiController extends Controller
     }
     public function testDetails($id)
     {
-        $data   = Tests::findOrFail($id);
+        $data    = Tests::find($id);
+        $subData = SubTests::where("TestId", $data->id)->get();
         return response()->json([
             "status"    =>  true,
-            "data"      =>  $data
+            "data"      =>  [
+                "test"      => $data,
+                "sub_test"  => $subData,
+            ]
         ]);
     }
     public function bannerContactForm(Request $request)
