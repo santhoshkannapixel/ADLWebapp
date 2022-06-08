@@ -46,4 +46,12 @@ class ApiController extends Controller
             "message"   =>  "Form Submit Success !"
         ]);
     }
+    public function testLists(Request $request)
+    {
+        $data   =   Tests::with('SubTestList')->skip(0)->take($request->tack)->get();
+        return response()->json([
+            "status"    =>  true,
+            "data"      =>  $data
+        ]);
+    }
 }

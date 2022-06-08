@@ -35,6 +35,6 @@ class Tests extends Model
 
     public function SubTestList()
     {
-       return $this->hasMany(SubTests::class, 'TestId', 'id');
+       return $this->hasMany(SubTests::class, 'TestID', 'id');
     }
 }
