@@ -18,8 +18,8 @@ class CreateTestsTable extends Migration
             $table->string("TestId")->nullable();
             $table->string("DosCode")->nullable();
             $table->text("TestName")->nullable();
-            $table->string("AliasName1")->nullable();
-            $table->string("AliasName2")->nullable();
+            $table->text("AliasName1")->nullable();
+            $table->text("AliasName2")->nullable();
             $table->string("ApplicableGender")->nullable();
             $table->string("IsPackage")->nullable();
             $table->string("Classifications")->nullable();

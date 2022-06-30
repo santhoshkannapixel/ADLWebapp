@@ -12,6 +12,7 @@ class Enquiries extends Model
     protected $fillable = [
         "Name",
         "Email",
+        "Type",
         "Mobile",
         "Address",
         "EnquiryType",
