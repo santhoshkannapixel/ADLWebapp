@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a26edddf2fbb9373c928283523c1e04e",
+    "content-hash": "50f3fb22baa749b50dc6b77122d757a4",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1182,56 +1182,6 @@
                 }
             ],
             "time": "2022-05-21T17:30:32+00:00"
-        },
-        {
-            "name": "lab2view/laravel-repository-generator",
-            "version": "1.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lab2view/laravel-repository-generator.git",
-                "reference": "2d82f26dcf41527eb30f6741a4eeeb960932f028"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lab2view/laravel-repository-generator/zipball/2d82f26dcf41527eb30f6741a4eeeb960932f028",
-                "reference": "2d82f26dcf41527eb30f6741a4eeeb960932f028",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "illuminate/console": "^6.0|^7.0|^8.0",
-                "illuminate/support": "^6.0|^7.0|^8.0",
-                "php": "^7.4|^8.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Lab2view\\RepositoryGenerator\\RepositoryServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Lab2view\\RepositoryGenerator\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Lab2View SARL",
-                    "email": "lab2view@gmail.com"
-                }
-            ],
-            "description": "Generate Repository from Eloquent models",
-            "support": {
-                "issues": "https://github.com/lab2view/laravel-repository-generator/issues",
-                "source": "https://github.com/lab2view/laravel-repository-generator/tree/1.8"
-            },
-            "time": "2022-01-18T11:18:25+00:00"
         },
         {
             "name": "laracasts/flash",

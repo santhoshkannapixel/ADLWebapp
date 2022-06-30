@@ -48,7 +48,12 @@ class ApiController extends Controller
     }
     public function testLists(Request $request)
     {
-        $data   =   Tests::with('SubTestList')->skip(0)->take($request->tack)->get();
+        $data   =   Tests::with('SubTestList')
+                            ->where('TestName', 'like', '%'.$request->search.'%')
+                            ->skip(0)
+                            ->take($request->tack)
+                            ->orderBy('TestPrice', ($request->sort == 'low' ? "DESC" : null) === null ? "DESC" : 'ASC'  )
+                            ->get();
         return response()->json([
             "status"    =>  true,
             "data"      =>  $data
