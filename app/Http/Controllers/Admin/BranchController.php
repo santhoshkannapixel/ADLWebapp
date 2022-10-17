@@ -50,7 +50,6 @@ class BranchController extends Controller
 
     public function syncRequest()
     {
-
         $response = Http::get('http://reports.anandlab.com/listest/labapi.asmx/GetBranchMaster', [
             'CorporateID'   =>    config('auth.CorporateID'),
             'passCode'      =>    config('auth.passCode'),
