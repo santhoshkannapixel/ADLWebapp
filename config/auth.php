@@ -2,8 +2,9 @@
 
 return [
 
-    'CorporateID'   => 514,
-    'passCode'      => 'neuberg123',
+    'BangaloreAPI'    => "http://reports.anandlab.com/listest/labapi.asmx/GetTestMaster?CorporateID=514&passCode=neuberg123",
+    'MangaloreAPI'    => "http://reports.anandlab.com/listest/labapi.asmx/GetTestMaster?CorporateID=1140&passCode=LMLOR34815",
+    'RestofBangalore' => "http://reports.anandlab.com/listest/labapi.asmx/GetTestMaster?CorporateID=3360&passCode=MEVIS7618",
 
     /*
     |--------------------------------------------------------------------------

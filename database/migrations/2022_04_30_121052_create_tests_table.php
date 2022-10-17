@@ -30,8 +30,6 @@ class CreateTestsTable extends Migration
             $table->longText("BasicInstruction")->nullable();
             $table->string("DriveThrough")->nullable();
             $table->string("HomeCollection")->nullable();
-            $table->string("CteateDate")->nullable();
-            $table->string("ModifiedDate")->nullable();
             $table->string("TestSchedule")->nullable();
             $table->integer("TestPrice")->nullable();
             $table->longText("TestImages")->nullable();
