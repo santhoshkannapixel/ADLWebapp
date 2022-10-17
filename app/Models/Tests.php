@@ -26,8 +26,6 @@ class Tests extends Model
         "BasicInstruction",
         "DriveThrough",
         "HomeCollection",
-        "CteateDate",
-        "ModifiedDate",
         "TestSchedule",
         "TestPrice",
         "TestImages"

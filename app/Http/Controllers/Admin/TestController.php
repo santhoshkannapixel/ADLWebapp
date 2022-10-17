@@ -74,54 +74,51 @@ class TestController extends Controller
 
     public function syncRequest()
     {
-         
-        $response = Http::get('http://reports.anandlab.com/listest/labapi.asmx/GetTestMaster', [
-            'CorporateID'   =>    config('auth.CorporateID'),
-            'passCode'      =>    config('auth.passCode'),
-        ]);
-
-        $response_data = json_decode($response->body())[0]->Data;
-        
-        foreach ($response_data as $data) {
-            $test = Tests::updateOrCreate([
-                "TestId"                            =>  $data->TestId ?? null,
-                "DosCode"                           =>  $data->DosCode ?? null,
-                "TestName"                          =>  $data->TestName ?? null,
-                "AliasName1"                        =>  $data->AliasName1 ?? null,
-                "AliasName2"                        =>  $data->AliasName2 ?? null,
-                "ApplicableGender"                  =>  $data->ApplicableGender ?? null,
-                "IsPackage"                         =>  $data->IsPackage ?? null,
-                "Classifications"                   =>  $data->Classifications ?? null,
-                "TransportCriteria"                 =>  $data->TransportCriteria ?? null,
-                "SpecialInstructionsForPatient"     =>  $data->SpecialInstructionsForPatient ?? null,
-                "SpecialInstructionsForCorporates"  =>  $data->SpecialInstructionsForCorporates ?? null,
-                "SpecialInstructionsForDoctors"     =>  $data->SpecialInstructionsForDoctors ?? null,
-                "BasicInstruction"                  =>  $data->BasicInstruction ?? null,
-                "DriveThrough"                      =>  $data->DriveThrough ?? null,
-                "HomeCollection"                    =>  $data->HomeCollection ?? null,
-                "CteateDate"                        =>  $data->CteateDate ?? null,
-                "ModifiedDate"                      =>  $data->ModifiedDate ?? null,
-                "TestSchedule"                      =>  $data->TestSchedule ?? null,
-                "TestPrice"                         =>  $data->TestPrice ?? null,
-            ]);
-          
-            if($data->SubTestList != null) {
-                 
-                foreach ($data->SubTestList as  $subTest) {
-
-                    $test->SubTestList()->create([
-                        "SubTestId"         =>  $subTest->SubTestId,
-                        "SubTestDOSCode"    =>  $subTest->SubTestDOSCode,
-                        "SubTestName"       =>  $subTest->SubTestName,
-                    ]);
-
+        $response[] = Http::get(config('auth.BangaloreAPI'));
+        $response[] = Http::get(config('auth.MangaloreAPI'));
+        $response[] = Http::get(config('auth.RestofBangalore'));
+    
+        foreach($response as $res)  {
+            if(!is_null(json_decode($res->body())[0]->Data)) {
+                foreach (json_decode($res->body())[0]->Data as $data) {
+                    try {
+                        $test = Tests::updateOrCreate(["TestId" => $data->TestId],[
+                            "TestId"                            =>  $data->TestId ?? null,
+                            "DosCode"                           =>  $data->DosCode ?? null,
+                            "TestName"                          =>  $data->TestName ?? null,
+                            "AliasName1"                        =>  $data->AliasName1 ?? null,
+                            "AliasName2"                        =>  $data->AliasName2 ?? null,
+                            "ApplicableGender"                  =>  $data->ApplicableGender ?? null,
+                            "IsPackage"                         =>  $data->IsPackage ?? null,
+                            "Classifications"                   =>  $data->Classifications ?? null,
+                            "TransportCriteria"                 =>  $data->TransportCriteria ?? null,
+                            "SpecialInstructionsForPatient"     =>  $data->SpecialInstructionsForPatient ?? null,
+                            "SpecialInstructionsForCorporates"  =>  $data->SpecialInstructionsForCorporates ?? null,
+                            "SpecialInstructionsForDoctors"     =>  $data->SpecialInstructionsForDoctors ?? null,
+                            "BasicInstruction"                  =>  $data->BasicInstruction ?? null,
+                            "DriveThrough"                      =>  $data->DriveThrough ?? null,
+                            "HomeCollection"                    =>  $data->HomeCollection ?? null,
+                            "TestSchedule"                      =>  $data->TestSchedule ?? null,
+                            "TestPrice"                         =>  $data->TestPrice ?? null,
+                        ]);
+                      
+                        if(!is_null($data->SubTestList)) {
+                            foreach ($data->SubTestList as  $subTest) {
+                                $test->SubTestList()->create([
+                                    "SubTestId"         =>  $subTest->SubTestId,
+                                    "SubTestDOSCode"    =>  $subTest->SubTestDOSCode,
+                                    "SubTestName"       =>  $subTest->SubTestName,
+                                ]);
+                            }
+                        }
+                        Flash::success( __('masters.sync_success'));
+                    } catch (\Throwable $th) {
+                       Log::error($th->getMessage());
+                       Flash::error($th->getMessage());
+                    }
                 }
             }
-            
-        }
-
-        Flash::success( __('masters.sync_success'));
-
+        } 
         return redirect()->back();
     } 
 
