@@ -1,13 +1,13 @@
-@extends('admin.settings.layout')
+@extends('admin.enquiry.layout')
 
-@section('admin_settings_content') 
+@section('admin_enquiry_content') 
     
     <div class="card custom table-card"> 
         <div class="card-header">
             <div class="card-title">
-                Role List
+                FeedBack
             </div>
-            <a class="btn btn-primary"  href="{{ route('role.create') }}"><i class="fa fa-plus"></i> Add Role</a>
+            
         </div>
         <div class="card-body"> 
             <table class="table table-bordered table-centered m-0 tr-sm table-hover" id="data-table">
@@ -16,7 +16,9 @@
                         <th width="10%">No</th>
                         <th>Name</th>
                         <th>Mobile</th>
+                        <th>Email</th>
                         <th>Location</th>
+                        <th>Message</th>
                         <th>Created At</th>
                         <th width="100px">Action</th>
                     </tr>
@@ -35,10 +37,14 @@
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('role.index') }}",
+                ajax: "{{ route('feedback.index') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'id',orderable: false, searchable: false},
                     {data: 'name', name: 'name'},
+                    {data: 'mobile', name: 'mobile'},
+                    {data: 'email', name: 'email'},
+                    {data: 'location', name: 'location'},
+                    {data: 'message', name: 'message'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]

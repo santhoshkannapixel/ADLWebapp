@@ -14,6 +14,44 @@
         {{ Route::is('role.index') ? "Roles List" : "" }}
         {{ Route::is('role.edit') ? "Edit Role" : "" }}
 
+ 
+        {{ Route::is('home-collection.index') ? "Home Collection List" : "" }}
+        {{ Route::is('home-collection.show') ? "Show Home Collection" : "" }}
+
+        {{ Route::is('patients-consumers.index') ? "Patients Consumers List" : "" }}
+        {{ Route::is('patients-consumers.show') ? "Show Patients Consumers" : "" }}
+
+        {{ Route::is('feedback.index') ? "FeedBack List" : "" }}
+        {{ Route::is('feedback.show') ? "Show FeedBack" : "" }}
+
+        {{ Route::is('faq.index') ? "Frequently Asked Questions List" : "" }}
+        {{ Route::is('faq.show') ? "Show Frequently Asked Questions" : "" }}
+
+        {{ Route::is('hospital-lab-management.index') ? "Hospital Lab Management" : "" }}
+        {{ Route::is('hospital-lab-management.show') ? "Hospital Lab Management" : "" }}
+
+        {{ Route::is('clinical-lab-management.index') ? "Clinician Lab Management" : "" }}
+        {{ Route::is('clinical-lab-management.show') ? "Clinician Lab Management" : "" }}
+
+        {{ Route::is('franchising-opportunities.index') ? "Franchising Opportunities" : "" }}
+        {{ Route::is('franchising-opportunities.show') ? "Franchising Opportunities" : "" }}
+
+        {{ Route::is('research.index') ? "Research" : "" }}
+        {{ Route::is('research.show') ? "Research" : "" }}
+
+        {{ Route::is('book-an-appointment.index') ? "Book an Appointment" : "" }}
+        {{ Route::is('book-an-appointment.show') ? "Book an Appointment" : "" }}
+
+        {{ Route::is('head-office.index') ? "Head Office" : "" }}
+        {{ Route::is('head-office.show') ? "Head Office" : "" }}
+
+        {{ Route::is('anandlab-franchise.index') ? "Anand Franchise" : "" }}
+        {{ Route::is('anandlab-franchise.show') ? "Show Anand Franchise" : "" }}
+
+        {{ Route::is('covidtesting-employees.index') ? "COVID Testing For Employees" : "" }}
+        {{ Route::is('covidtesting-employees.show') ? "Show COVID Testing For Employees" : "" }}
+
+
         {{ Route::is('master.index') ? "Branch List" : '' }}
         {{ Route::is('branch.show') ? "Branch View" : '' }} 
         {{ Route::is('city.index') ? "City List" : '' }}
@@ -50,6 +88,44 @@
                 {{ Route::is('role.create') ? "Settings / New Role" : "" }}
                 {{ Route::is('role.index') ? "Settings / Roles List" : "" }}
                 {{ Route::is('role.edit') ? "Settings / Edit Role" : "" }}
+
+               
+                {{ Route::is('home-collection.index') ? "Enquiries / Home Collection List" : "" }}
+                {{ Route::is('home-collection.show') ? "Enquiries / Show Home Collection" : "" }}
+
+                {{ Route::is('patients-consumers.index') ? "Enquiries / Patients Consumers List" : "" }}
+                {{ Route::is('patients-consumers.show') ? "Enquiries / Show Patients Consumers" : "" }}
+
+                {{ Route::is('feedback.index') ? "Enquiries / FeedBack List" : "" }}
+                {{ Route::is('feedback.show') ? "Enquiries / Show FeedBack" : "" }}
+
+                {{ Route::is('faq.index') ? "Enquiries /  Frequently Asked Questions List" : "" }}
+                {{ Route::is('faq.show') ? "Enquiries /  Show Frequently Asked Questions" : "" }}
+
+                {{ Route::is('hospital-lab-management.index') ? "Doctors /  Hospital  Lab Management" : "" }}
+                {{ Route::is('hospital-lab-management.show') ? "Doctors / Show Hospital Lab Management" : "" }}
+
+                {{ Route::is('clinical-lab-management.index') ? "Doctors /  Clinician  Lab Management" : "" }}
+                {{ Route::is('clinical-lab-management.show') ? "Doctors / Show Clinician Lab Management" : "" }}
+
+                {{ Route::is('franchising-opportunities.index') ? "Doctors /  Franchising Opportunities" : "" }}
+                {{ Route::is('franchising-opportunities.show') ? "Doctors / Show Franchising Opportunities" : "" }}
+                
+                {{ Route::is('research.index') ? "Doctors / Research" : "" }}
+                {{ Route::is('research.show') ? "Doctors / Show Research" : "" }}
+
+                {{ Route::is('book-an-appointment.index') ? "Doctors / Book an Appointment" : "" }}
+                {{ Route::is('book-an-appointment.show') ? "Doctors / Show Book an Appointment" : "" }}
+
+                {{ Route::is('head-office.index') ? "Reach Us / Head Office" : "" }}
+                {{ Route::is('head-office.show') ? "Reach Us / Show Head Office" : "" }}
+
+                {{ Route::is('anandlab-franchise.index') ? "Reach Us / Anand Franchise" : "" }}
+                {{ Route::is('anandlab-franchise.show') ? "Reach Us / Show Anand Franchise" : "" }}
+
+                {{ Route::is('covidtesting-employees.index') ? "Reach Us / COVID Testing For Employees" : "" }}
+                {{ Route::is('covidtesting-employees.show') ? "Reach Us / Show COVID Testing For Employees" : "" }}
+        
 
                 {{ Route::is('master.index') ? "Masters / Branch List" : '' }}
                 {{ Route::is('branch.show') ? "Masters / Branch view" : '' }}

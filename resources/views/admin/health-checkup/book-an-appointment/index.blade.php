@@ -1,13 +1,13 @@
-@extends('admin.settings.layout')
+@extends('admin.health-checkup.layout')
 
-@section('admin_settings_content') 
+@section('admin_health_checkup_content') 
     
     <div class="card custom table-card"> 
         <div class="card-header">
             <div class="card-title">
-                Role List
+                book-an-appointment
             </div>
-            <a class="btn btn-primary"  href="{{ route('role.create') }}"><i class="fa fa-plus"></i> Add Role</a>
+            
         </div>
         <div class="card-body"> 
             <table class="table table-bordered table-centered m-0 tr-sm table-hover" id="data-table">
@@ -17,6 +17,9 @@
                         <th>Name</th>
                         <th>Mobile</th>
                         <th>Location</th>
+                        <th>Test Name</th>
+                        <th>Test Type</th>
+                        <th>File</th>
                         <th>Created At</th>
                         <th width="100px">Action</th>
                     </tr>
@@ -35,10 +38,15 @@
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('role.index') }}",
+                ajax: "{{ route('book-an-appointment.index') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'id',orderable: false, searchable: false},
                     {data: 'name', name: 'name'},
+                    {data: 'mobile', name: 'mobile'},
+                    {data: 'location', name: 'location'},
+                    {data: 'test_name', name: 'test_name'},
+                    {data: 'test_type', name: 'test_type'},
+                    {data: 'download', name: 'download'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]

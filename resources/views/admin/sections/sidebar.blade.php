@@ -44,6 +44,63 @@
                 <i class="fa fa-cogs me-3"></i>Settings
             </a>
         </li>
+        <li>
+            <a href="{{ route('admin.patients') }}" class="nav-link text-white {{ Route::is([
+                    'admin.patients',
+                    'home-collection.index',
+                    'home-collection.show',
+                    'patients-consumers.index',
+                    'patients-consumers.show',
+                    'feedback.index',
+                    'feedback.show',
+                    'faq.index',
+                    'faq.show',
+                    
+                ]) ? "active" : "" }}">
+                <i class="fa fa-cogs me-3"></i>Patients
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('admin.doctors') }}" class="nav-link text-white {{ Route::is([
+                    'admin.doctors',
+                    'hospital-lab-management.index',
+                    'hospital-lab-management.show',
+                    'clinical-lab-management.index',
+                    'clinical-lab-management.show',
+                    'franchising-opportunities.index',
+                    'franchising-opportunities.show',
+                    'research.index',
+                    'research.show',
+                    
+                    
+                ]) ? "active" : "" }}">
+                <i class="fa-user-md me-3"></i>Doctors
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('admin.health-checkup') }}" class="nav-link text-white {{ Route::is([
+                    'admin.health-checkup',
+                    'book-an-appointment.index',
+                    'book-an-appointment.show',
+                ]) ? "active" : "" }}">
+                <i class="fa fa-cogs me-3"></i>Health Checkup
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('admin.reach-us') }}" class="nav-link text-white {{ Route::is([
+                    'admin.reach-us',
+                    'head-office.index',
+                    'head-office.show',
+                    'anandlab-franchise.index',
+                    'anandlab-franchise.show',
+                    'covidtesting-employees.index',
+                    'covidtesting-employees.show',
+                    
+                ]) ? "active" : "" }}">
+                <i class="fa fa-cogs me-3"></i>Reach Us
+            </a>
+        </li>
+        
     </ul>
     <hr>
     <div class="dropdown p-3 pt-0">

@@ -1,13 +1,13 @@
-@extends('admin.settings.layout')
+@extends('admin.reach-us.layout')
 
-@section('admin_settings_content') 
+@section('admin_reach_us_content') 
     
     <div class="card custom table-card"> 
         <div class="card-header">
             <div class="card-title">
-                Role List
+                Head Office
             </div>
-            <a class="btn btn-primary"  href="{{ route('role.create') }}"><i class="fa fa-plus"></i> Add Role</a>
+            
         </div>
         <div class="card-body"> 
             <table class="table table-bordered table-centered m-0 tr-sm table-hover" id="data-table">
@@ -16,7 +16,10 @@
                         <th width="10%">No</th>
                         <th>Name</th>
                         <th>Mobile</th>
-                        <th>Location</th>
+                        <th>Email</th>
+                        <th>Company Name</th>
+                        <th>Designation</th>
+                        <th>Message</th>
                         <th>Created At</th>
                         <th width="100px">Action</th>
                     </tr>
@@ -35,10 +38,15 @@
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('role.index') }}",
+                ajax: "{{ route('head-office.index') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'id',orderable: false, searchable: false},
                     {data: 'name', name: 'name'},
+                    {data: 'mobile', name: 'mobile'},
+                    {data: 'email', name: 'email'},
+                    {data: 'company_name', name: 'company_name'},
+                    {data: 'designation', name: 'designation'},
+                    {data: 'message', name: 'message'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
