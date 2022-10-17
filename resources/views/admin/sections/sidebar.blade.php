@@ -2,20 +2,20 @@
     <a href="{{ route('admin.dashboard') }}" class="d-flex shadow p-3 border-light align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none" style="border-bottom: 1px solid #ffffff24 !important">
         <img src="{{ asset('public/images/logo/logo-dark.png') }}" alt="logo" width="90%" class="mx-auto">
     </a>
-    <ul class="nav nav-pills flex-column mb-auto mt-3 pt-0 p-3">
-        <li class="nav-item">
+    <ul class="nav nav-pills flex-column mb-auto mt-3 pt-0 p-3 side-navbar">
+        <li>
             <a href="{{ route('admin.dashboard') }}" class="nav-link text-white {{ Route::is('admin.dashboard') ? "active" : "" }}" aria-current="page">
-                <i class="bi bi-speedometer2 me-3"></i>Dashboard</a>
+                <i class="fa fa-home"></i>Dashboard</a>
             </a>
         </li>
         <li>
             <a href="#" class="nav-link text-white">
-            <i class="fa fa-shopping-cart me-3"></i>Orders
+            <i class="fa fa-shopping-cart"></i>Orders
             </a>
         </li>
         <li>
             <a href="#" class="nav-link text-white">
-                <i class="bi bi-person-lines-fill me-3"></i>Customers
+                <i class="fa fa-users"></i>Customers
             </a>
         </li> 
         <li>
@@ -30,7 +30,7 @@
                     'faq.index',
                     'faq.show',
                 ]) ? "active" : "" }}">
-                <i class="fa fa-users me-3"></i>Patients
+                <i class="fa fa-address-card"></i>Patients
             </a>
         </li>
         <li>
@@ -45,7 +45,7 @@
                     'research.index',
                     'research.show',
                 ]) ? "active" : "" }}">
-                <i class="fa fa-user-md me-3"></i>Doctors
+                <i class="fa fa-user-md"></i>Doctors
             </a>
         </li>
         <li>
@@ -54,7 +54,7 @@
                     'book-an-appointment.index',
                     'book-an-appointment.show',
                 ]) ? "active" : "" }}">
-                <i class="fa fa-medkit me-3"></i>Health Checkup
+                <i class="fa fa-medkit"></i>Health Checkup
             </a>
         </li>
         <li>
@@ -68,12 +68,12 @@
                     'covidtesting-employees.show',
                     
                 ]) ? "active" : "" }}">
-                <i class="fa fa-calendar-check-o me-3"></i>Reach Us
+                <i class="fa fa-calendar-check-o"></i>Reach Us
             </a>
         </li>
         <li>
             <a href="{{ route('master.index') }}" class="nav-link text-white {{ Route::is(['master.index','branch.show','city.index', 'banner.edit', 'test.edit' , 'banner.create', 'banner.index']) ? "active" : "" }}">
-                <i class="bi bi-sliders me-3"></i>Master
+                <i class="fa fa-cog"></i>Master
             </a>
         </li>
         <li>
@@ -94,7 +94,7 @@
                     'payment_config.edit',
                     'payment_config.create',
                 ]) ? "active" : "" }}">
-                <i class="fa fa-cogs me-3"></i>Settings
+                <i class="fa fa-cogs"></i>Settings
             </a>
         </li>
     </ul>

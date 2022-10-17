@@ -341,7 +341,7 @@ table td {
 .root_admin .side_bar .nav-link.active {
   background: linear-gradient(45deg, #62298b, #f1333c, #f39314);
   transition: all 0.5s !important;
-  font-weight: bold !important;
+  /* font-weight: bold !important; */
   color: white !important;
 }
 .root_admin .side_bar .nav-link.active:hover {
@@ -373,4 +373,19 @@ table td {
 }
 .root_admin .dataTables_wrapper .row:nth-child(3) {
   margin-top: 15px !important;
+}
+.root_admin .side_bar .nav-link.active i {
+  background: white;
+  color: #622889;
+}
+.side-navbar i{
+  width: 28px !important;
+  height: 28px !important;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: #622889;
+  border-radius: 50%;
+  margin-right: 10px;
+  box-shadow: 0 0 10px black;
 }
