@@ -74,9 +74,9 @@ class TestController extends Controller
 
     public function syncRequest()
     {
-        $response[] = Http::get(config('auth.BangaloreAPI'));
-        $response[] = Http::get(config('auth.MangaloreAPI'));
-        $response[] = Http::get(config('auth.RestofBangalore'));
+        $response[] = Http::get(config('auth.GetTestMasterBangaloreAPI'));
+        $response[] = Http::get(config('auth.GetTestMasterMangaloreAPI'));
+        $response[] = Http::get(config('auth.GetTestMasterRestofBangalore'));
     
         foreach($response as $res)  {
             if(!is_null(json_decode($res->body())[0]->Data)) {
