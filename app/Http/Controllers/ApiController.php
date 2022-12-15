@@ -46,10 +46,16 @@ class ApiController extends Controller
             "message"   =>  "Form Submit Success !"
         ]);
     }
-    public function testLists(Request $request)
+    public function testLists(Request $request,$type=null)
     {
+        if(is_null($type)) {
+            $IsPackage = 'No';
+        } else {
+            $IsPackage = 'Yes';
+        }
         $data   =   Tests::with('SubTestList')
                             ->where('TestName', 'like', '%'.$request->search.'%')
+                            ->where('IsPackage', $IsPackage)
                             ->skip(0)
                             ->take($request->tack)
                             ->orderBy('TestPrice', ($request->sort == 'low' ? "DESC" : null) === null ? "DESC" : 'ASC'  )
