@@ -2,17 +2,17 @@
 
 return [
 
-    'GetTestMasterBangaloreAPI'    => "http://reports.anandlab.com/listest/labapi.asmx/GetTestMaster?CorporateID=514&passCode=neuberg123",
-    'GetTestMasterMangaloreAPI'    => "http://reports.anandlab.com/listest/labapi.asmx/GetTestMaster?CorporateID=1140&passCode=LMLOR34815",
-    'GetTestMasterRestofBangalore' => "http://reports.anandlab.com/listest/labapi.asmx/GetTestMaster?CorporateID=3360&passCode=MEVIS7618",
+    'GetTestMasterBangaloreAPI'    => "https://reports.anandlab.com/v3/labapi.asmx/GetTestMaster?CorporateID=514&passCode=neuberg123",
+    'GetTestMasterMangaloreAPI'    => "https://reports.anandlab.com/v3/labapi.asmx/GetTestMaster?CorporateID=1140&passCode=LMLOR34815",
+    'GetTestMasterRestofBangalore' => "https://reports.anandlab.com/v3/labapi.asmx/GetTestMaster?CorporateID=3360&passCode=MEVIS7618",
 
-    'GetBranchMasterBangaloreAPI'    => "http://reports.anandlab.com/listest/labapi.asmx/GetBranchMaster?CorporateID=514&passCode=neuberg123",
-    'GetBranchMasterMangaloreAPI'    => "http://reports.anandlab.com/listest/labapi.asmx/GetBranchMaster?CorporateID=1140&passCode=LMLOR34815",
-    'GetBranchMasterRestofBangalore' => "http://reports.anandlab.com/listest/labapi.asmx/GetBranchMaster?CorporateID=3360&passCode=MEVIS7618",
+    'GetBranchMasterBangaloreAPI'    => "https://reports.anandlab.com/v3/labapi.asmx/GetBranchMaster?CorporateID=514&passCode=neuberg123",
+    'GetBranchMasterMangaloreAPI'    => "https://reports.anandlab.com/v3/labapi.asmx/GetBranchMaster?CorporateID=1140&passCode=LMLOR34815",
+    'GetBranchMasterRestofBangalore' => "https://reports.anandlab.com/v3/labapi.asmx/GetBranchMaster?CorporateID=3360&passCode=MEVIS7618",
 
-    'GetCityMasterBangaloreAPI'    => "http://reports.anandlab.com/listest/labapi.asmx/GetCityMaster?CorporateID=514&passCode=neuberg123",
-    'GetCityMasterMangaloreAPI'    => "http://reports.anandlab.com/listest/labapi.asmx/GetCityMaster?CorporateID=1140&passCode=LMLOR34815",
-    'GetCityMasterRestofBangalore' => "http://reports.anandlab.com/listest/labapi.asmx/GetCityMaster?CorporateID=3360&passCode=MEVIS7618",
+    'GetCityMasterBangaloreAPI'    => "https://reports.anandlab.com/v3/labapi.asmx/GetCityMaster?CorporateID=514&passCode=neuberg123",
+    'GetCityMasterMangaloreAPI'    => "https://reports.anandlab.com/v3/labapi.asmx/GetCityMaster?CorporateID=1140&passCode=LMLOR34815",
+    'GetCityMasterRestofBangalore' => "https://reports.anandlab.com/v3/labapi.asmx/GetCityMaster?CorporateID=3360&passCode=MEVIS7618",
 
 
 
