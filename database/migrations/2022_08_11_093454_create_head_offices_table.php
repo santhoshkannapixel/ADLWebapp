@@ -20,7 +20,7 @@ class CreateHeadOfficesTable extends Migration
             $table->string('email')->nullable();
             $table->string('company_name')->nullable();
             $table->string('designation')->nullable();
-            $table->string('message')->nullable();
+            $table->longText('message')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

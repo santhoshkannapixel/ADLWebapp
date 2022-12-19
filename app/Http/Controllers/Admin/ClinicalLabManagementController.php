@@ -51,7 +51,7 @@ class ClinicalLabManagementController extends Controller
     public function show($id)
     {
         // $data   =   ClinicalLabManagement::findOrFail($id);
-        $data   =   ClinicalLabManagement::select(DB::raw("doctors_name as doctors_name,specialization as specialization,associated_hospitals_Clinics as associated_hospitals_Clinics,mobile as mobile,email as email,message as message,DATE_FORMAT(created_at,'%d/%m/%Y') as created_date,DATE_FORMAT(updated_at,'%d/%m/%Y') as updated_date,DATE_FORMAT(deleted_at,'%d/%m/%Y') as deleted_date"))->findOrFail($id);
+        $data   =   ClinicalLabManagement::select(DB::raw("doctors_name as doctors_name,specialization as specialization,associated_hospitals_clinics as associated_hospitals_clinics,mobile as mobile,email as email,message as message,DATE_FORMAT(created_at,'%d/%m/%Y') as created_date,DATE_FORMAT(updated_at,'%d/%m/%Y') as updated_date,DATE_FORMAT(deleted_at,'%d/%m/%Y') as deleted_date"))->findOrFail($id);
 
         return view('admin.doctors.clinical-lab-management.show', compact('data'));
     }

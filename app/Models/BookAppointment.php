@@ -17,4 +17,14 @@ class BookAppointment extends Model
         "test_name",
         "test_type",
     ];
+  
+    public function location()
+    {
+        return $this->belongsTo(Cities::class,'location_id','AreaId');
+    }
+    public function test()
+    {
+        return $this->belongsTo(Tests::class,'test_id','id');
+    }
+    
 }

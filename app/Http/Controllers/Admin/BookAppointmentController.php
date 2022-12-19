@@ -17,12 +17,11 @@ class BookAppointmentController extends Controller
     {
         if ($request->ajax()) {
 
-            $data = BookAppointment::orderBy('id', 'DESC');
-
+            $data = BookAppointment::with(['location','test'])->orderBy('id', 'DESC');
             return DataTables::eloquent($data)
                 ->addIndexColumn()
                 ->addColumn('download', function ($data) {
-                    return '<a href="' . url('/public') . '/admin/book_an_appointment/' . $data->file . '" class="m-1  shadow-sm btn btn-sm text-primary btn-outline-light" title="Download" download> 
+                    return '<a href="' . url('/storage/app/') .'/' . $data->file . '" class="m-1  shadow-sm btn btn-sm text-primary btn-outline-light" title="Download" download> 
                     <i class="bi bi-download"></i>
                     </a>';
                 })
@@ -55,8 +54,13 @@ class BookAppointmentController extends Controller
     public function show($id)
     {
         // $data   =   BookAppointment::findOrFail($id);
-        $data   =   BookAppointment::select(DB::raw("name as name,location as location,mobile as mobile,file as file,test_name as test_name,test_type as test_type,DATE_FORMAT(created_at,'%d/%m/%Y') as created_date,DATE_FORMAT(updated_at,'%d/%m/%Y') as updated_date,DATE_FORMAT(deleted_at,'%d/%m/%Y') as deleted_date"))->findOrFail($id);
-
+        $data   =   BookAppointment::select(DB::raw("book_appointments.name as name,book_appointments.mobile as mobile,
+        book_appointments.file as file,
+        book_appointments.test_id as test_name,book_appointments.test_type as test_type,cities.AreaName as area_name,tests.TestName as test_name,DATE_FORMAT(book_appointments.created_at,'%d/%m/%Y') as created_date,
+        DATE_FORMAT(book_appointments.updated_at,'%d/%m/%Y') as updated_date,DATE_FORMAT(book_appointments.deleted_at,'%d/%m/%Y') as deleted_date"))
+        ->join('cities','cities.AreaId','=','book_appointments.location_id')
+        ->join('tests','tests.id','=','book_appointments.test_id')
+        ->findOrFail($id);
         return view('admin.health-checkup.book-an-appointment.show', compact('data'));
     }
 }

@@ -14,7 +14,14 @@ if (!function_exists('asset_url')) {
         return asset('public/images/no-image.jpg');
     }
 }
-
+function filedCall($data)
+{
+    return response()->json(['Status'=>200,'Error'=>true,'Message'=>$data]);
+}
+function successCall()
+{
+    return response()->json(['Status'=>200,'Errors'=>true,'Message'=>'Created Success']);
+}
 if (!function_exists('auth_id')) {
     function auth_id()
     {

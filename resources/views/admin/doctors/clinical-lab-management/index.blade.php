@@ -43,7 +43,7 @@
                     {data: 'DT_RowIndex', name: 'id',orderable: false, searchable: false},
                     {data: 'doctors_name', name: 'doctors_name'},
                     {data: 'specialization', name: 'specialization'},
-                    {data: 'associated_hospitals_Clinics', name: 'associated_hospitals_Clinics'},
+                    {data: 'associated_hospitals_clinics', name: 'associated_hospitals_clinics'},
                     {data: 'mobile', name: 'mobile'},
                     {data: 'email', name: 'email'},
                     {data: 'message', name: 'message'},

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClinicalLabManagementTable extends Migration
+class CreateNewsLettersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,9 @@ class CreateClinicalLabManagementTable extends Migration
      */
     public function up()
     {
-        Schema::create('clinical_lab_management', function (Blueprint $table) {
+        Schema::create('news_letters', function (Blueprint $table) {
             $table->id();
-            $table->string('doctors_name')->nullable();
-            $table->string('specialization')->nullable();
-            $table->string('associated_hospitals_clinics')->nullable();
             $table->string('email')->nullable();
-            $table->string('mobile')->nullable();
-            $table->string('message')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -33,6 +28,6 @@ class CreateClinicalLabManagementTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clinical_lab_management');
+        Schema::dropIfExists('news_letters');
     }
 }

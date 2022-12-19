@@ -16,10 +16,10 @@ class CreateBookAppointmentsTable extends Migration
         Schema::create('book_appointments', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('location')->nullable();
+            $table->string('location_id')->nullable();
             $table->string('mobile')->nullable();
             $table->string('file')->nullable();
-            $table->string('test_name')->nullable();
+            $table->string('test_id')->nullable();
             $table->string('test_type')->nullable();
             $table->softDeletes();
             $table->timestamps();
