@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\ApiConfigController;
 use App\Http\Controllers\Admin\ResearchController;
 use App\Http\Controllers\Admin\PaymentConfigController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NewsAndEventsController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -42,7 +43,7 @@ Route::middleware(['auth_users'])->group(function () {
         Route::get('health-checkup', [HealthCheckupController::class, 'index'])->name('admin.health-checkup');
         Route::get('reach-us', [ReachUsController::class, 'index'])->name('admin.reach-us');
 
-        // User Routes 
+        // User Routes
         Route::get('/user', [UserController::class, 'index'])->name('user.index');
         Route::post('/user', [UserController::class, 'store'])->name('user.store');
         Route::get('/user-create', [UserController::class, 'create'])->name('user.create');
@@ -68,7 +69,7 @@ Route::middleware(['auth_users'])->group(function () {
 
 
 
-        // Role Routes 
+        // Role Routes
         Route::get('/role', [RoleController::class, 'index'])->name('role.index');
         Route::post('/role', [RoleController::class, 'store'])->name('role.store');
         Route::get('/role-create', [RoleController::class, 'create'])->name('role.create');
@@ -132,7 +133,7 @@ Route::middleware(['auth_users'])->group(function () {
 
 
 
-        // Master 
+        // Master
         Route::get('master/branch', [BranchController::class, 'index'])->name('master.index');
 
         // Branch  Master
@@ -156,5 +157,7 @@ Route::middleware(['auth_users'])->group(function () {
         Route::get('master/banner/{id}', [BannerController::class, 'edit'])->name('banner.edit');
         Route::post('master/banner/{id?}', [BannerController::class, 'store'])->name('banner.store');
         Route::post('master/banner/delete/{id?}', [BannerController::class, 'delete'])->name('banner.delete');
+
+        Route::resource('news-and-events',NewsAndEventsController::class);
     });
 });

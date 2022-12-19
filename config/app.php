@@ -13,6 +13,7 @@ return [
     |
     */
 
+    'date_format' => 'd/m/Y H:i:s',
     'name' => env('APP_NAME', 'Laravel'),
 
     /*
@@ -67,7 +68,7 @@ return [
     |
     */
 
-    'timezone' => 'GMT',
+    'timezone' => 'Asia/Kolkata',
 
     /*
     |--------------------------------------------------------------------------
