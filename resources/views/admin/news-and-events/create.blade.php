@@ -12,7 +12,7 @@
         </div>
         <div class="card-body">
             {!! Form::open(['route' => 'news-and-events.store', 'class' => 'py-4', 'method'=> 'post']) !!}
-                @csrf
+                @csrf 
                 @include('admin.news-and-events.form')
                 <div class="row ">
                     <div class="col-10 offset-2">
