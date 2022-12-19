@@ -29,12 +29,19 @@ if (!function_exists('auth_id')) {
     }
 }
 
+if (!function_exists('auth_user')) {
+    function auth_user()
+    {
+        return Sentinel::getUser();
+    }
+}
+
 if (!function_exists('button')) {
     function button($type, $url)
     {
         if ($type == 'edit') {
             return '
-                <a href="' . $url . '" class="m-1  shadow-sm btn btn-sm text-primary btn-outline-light" title="Edit"> 
+                <a href="' . $url . '" class="m-1  shadow-sm btn btn-sm text-primary btn-outline-light" title="Edit">
                     <i class="bi bi-pencil"></i>
                 </a>
             ';
@@ -42,8 +49,9 @@ if (!function_exists('button')) {
 
         if ($type == 'delete') {
             return '
-                <form method="post" action="' . $url . '" class="d-inline-block"> 
+                <form method="post" action="' . $url . '" class="d-inline-block">
                         ' . csrf_field() . '
+                    <input type="hidden" name="_method" value="DELETE">
                     <button id="confirmDelete" type="submit" class="m-1 shadow-sm btn btn-sm text-danger btn-outline-light" title="Delete">
                         <i class="bi bi-trash"></i>
                     </button>

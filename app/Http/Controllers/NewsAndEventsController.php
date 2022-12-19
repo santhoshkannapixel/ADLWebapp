@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\NewsEvent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Laracasts\Flash\Flash;
 use Yajra\DataTables\DataTables;
 
 class NewsAndEventsController extends Controller
@@ -19,8 +21,7 @@ class NewsAndEventsController extends Controller
             $data = NewsEvent::select('*');
             return DataTables::eloquent($data)->addIndexColumn()
                 ->addColumn('action', function ($data) {
-                    $action = button('edit',route('role.edit', $data->id)).button('delete',route('role.delete', $data->id));
-                    return $action;
+                    return button('edit',route('news-and-events.edit', $data->id)).button('delete',route('news-and-events.destroy', $data->id));
                 })->make(true);
         }
         return view('admin.news-and-events.index');
@@ -44,7 +45,22 @@ class NewsAndEventsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request['slug'] = Str::slug($request->title);
+        $request->validate([
+            'title'       => 'required',
+            'description' => 'required',
+            'slug'        => 'unique:news_events,slug'
+        ],[ 'slug.unique' => 'Title Already been Taken' ]);
+        $result = NewsEvent::create([
+            'title'       => $request->title,
+            'slug'        => Str::slug($request->title),
+            'description' => $request->description,
+            'posted_by'   => auth_user()->name,
+        ]);
+        if($result) {
+            Flash::success(__('action.created',['type' => 'News & Events']));
+        }
+        return redirect()->route('news-and-events.index');
     }
 
     /**
@@ -89,6 +105,9 @@ class NewsAndEventsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(NewsEvent::find($id)->delete()) {
+            Flash::success(__('action.deleted',['type' => 'News & Events']));
+        }
+        return redirect()->route('news-and-events.index');
     }
 }
