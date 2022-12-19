@@ -17,7 +17,7 @@
             <a href="#" class="nav-link text-white">
                 <i class="fa fa-users"></i>Customers
             </a>
-        </li> 
+        </li>
         <li>
             <a href="{{ route('admin.patients') }}" class="nav-link text-white {{ Route::is([
                     'admin.patients',
@@ -66,9 +66,14 @@
                     'anandlab-franchise.show',
                     'covidtesting-employees.index',
                     'covidtesting-employees.show',
-                    
+
                 ]) ? "active" : "" }}">
                 <i class="fa fa-calendar-check-o"></i>Reach Us
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('news-and-events.index') }}" class="nav-link text-white {{ Route::is(['news-and-events.index']) ? "active" : "" }}">
+                <i class="fa fa-book"></i>News & Events
             </a>
         </li>
         <li>
@@ -83,7 +88,7 @@
                     'user.create',
                     'user.edit',
                     'role.index',
-                    'role.create', 
+                    'role.create',
                     'role.edit',
                     'test.index',
                     'test.show',
@@ -102,7 +107,7 @@
     <div class="dropdown p-3 pt-0">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="http://www.staroceans.org/w3c/img_avatar.png" alt="" width="32" height="32" class="rounded-5 me-2">
-            <b>{{ Sentinel::getUser()->name }}</b> 
+            <b>{{ Sentinel::getUser()->name }}</b>
             <small class="ms-2 badge bg-success text-white">
                 {{ Sentinel::getUser()->roles[0]->name }}
             </small>
