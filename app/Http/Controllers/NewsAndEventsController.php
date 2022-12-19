@@ -82,7 +82,8 @@ class NewsAndEventsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = NewsEvent::findOrFail($id);
+        return view('admin.news-and-events.edit',compact('data'));
     }
 
     /**
@@ -94,7 +95,21 @@ class NewsAndEventsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title'       => 'required',
+            'description' => 'required',
+        ],[ 'slug.unique' => 'Title Already been Taken' ]);
+
+        $result = NewsEvent::findOrFail($id)->update([
+            'title'       => $request->title,
+            'slug'        => Str::slug($request->title),
+            'description' => $request->description,
+            'posted_by'   => auth_user()->name,
+        ]);
+        if($result) {
+            Flash::success(__('action.updated',['type' => 'News & Events']));
+        }
+        return redirect()->back();
     }
 
     /**
