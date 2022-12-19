@@ -95,11 +95,12 @@ class NewsAndEventsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request['slug'] = Str::slug($request->title);
         $request->validate([
             'title'       => 'required',
             'description' => 'required',
-        ],[ 'slug.unique' => 'Title Already been Taken' ]);
-
+            'slug'        => 'unique:news_events,slug,'.$id.',id'
+        ]);
         $result = NewsEvent::findOrFail($id)->update([
             'title'       => $request->title,
             'slug'        => Str::slug($request->title),
