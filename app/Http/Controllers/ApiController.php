@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banners;
+use App\Models\NewsEvent;
 use App\Models\SubTests;
 use App\Models\Tests;
 use Illuminate\Http\Request;
@@ -63,6 +64,13 @@ class ApiController extends Controller
         return response()->json([
             "status"    =>  true,
             "data"      =>  $data
+        ]);
+    }
+    public function newsAndEvents()
+    {
+        return response()->json([
+            "status"    =>  true,
+            "data"      =>  NewsEvent::all()
         ]);
     }
 }

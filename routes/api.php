@@ -9,7 +9,6 @@ use App\Http\Controllers\Website\BookAppointmentController;
 use App\Http\Controllers\Website\FranchisingOpportunitiesController;
 use App\Http\Controllers\Website\HeadOfficeController;
 use App\Http\Controllers\Website\NewsLetterController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Website\PatientsConsumersController;
 use App\Http\Controllers\Website\ResearchController;
@@ -19,6 +18,7 @@ Route::get('topBookedTest', [ApiController::class,'topBookedTest']);
 Route::get('test/{id}', [ApiController::class,'testDetails']);
 Route::post('test-list/{type?}', [ApiController::class,'testLists']);
 Route::post('bannerContactForm', [ApiController::class,'bannerContactForm']);
+Route::post('newsAndEvents', [ApiController::class,'newsAndEvents']);
 
 Route::post('/patients-consumers', [PatientsConsumersController::class, 'store'])->name('patients-consumers');
 // Route::get('/patients-consumers/{id}', [PatientsConsumersController::class, 'index'])->name('patients-consumers');
