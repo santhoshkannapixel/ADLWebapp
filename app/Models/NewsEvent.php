@@ -16,6 +16,6 @@ class NewsEvent extends Model
         'posted_by',
     ];
     public function getCreatedAtAttribute($value) {
-        return Carbon::parse($value)->format(config('app.date_format'));
+        return Carbon::parse($value)->format('d M Y');
     }
 }
