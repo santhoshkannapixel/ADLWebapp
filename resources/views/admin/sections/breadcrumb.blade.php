@@ -65,6 +65,10 @@
         {{ Route::is('banner.create') ? "Create Banner" : '' }}
         {{ Route::is('banner.edit') ? "Edit Banner" : '' }}
 
+        {{ Route::is('news-letter.index') ? "News Letter List" : '' }}
+        {{ Route::is('news-letter.show') ? "News Letter Show" : '' }}
+
+
         {{ Route::is('api_config.index') ? "API Configuration" : '' }}
         {{ Route::is('api_config.create') ? "Create API Configuration" : '' }}
         {{ Route::is('api_config.edit') ? "Edit API Configuration" : '' }}
@@ -139,6 +143,8 @@
                 {{ Route::is('banner.index') ? "Masters / Banner List" : '' }}
                 {{ Route::is('banner.create') ? "Masters / Create Banner" : '' }}
                 {{ Route::is('banner.edit') ? "Masters / Edit Banner" : '' }}
+
+                {{ Route::is('news-letter.show') ?  "Masters / News Letter View": '' }}
 
                 {{ Route::is('api_config.index') ? "Settings /  API Configuration" : '' }}
                 {{ Route::is('api_config.create') ? "Settings /  Create API Configuration" : '' }}

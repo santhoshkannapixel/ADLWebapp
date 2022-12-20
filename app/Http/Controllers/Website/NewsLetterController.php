@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NewsLetterMail;
 use App\Models\NewsLetter;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Validator;
 
 class NewsLetterController extends Controller
@@ -23,6 +25,18 @@ class NewsLetterController extends Controller
             $news = new NewsLetter();
             $news->email                                             = $request->email;
             $res = $news->save();
+            $mail = 'santhoshd.pixel@gmail.com';
+           
+            $details = [
+                'email' => $request->email,
+               
+            ];
+            // Mail::to($mail)->send(new \App\Mail\NewsLetterMail($details));
+            try {
+                $resMail = Mail::to($mail)->send(new \App\Mail\NewsLetterMail($details));
+            } catch (\Exception $e) {
+                $message = 'Data inserted successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+            }
         }
         else{
             return response()->json(['Message'=>"Already Your Mail Id Subscribed to our News Letter."]);

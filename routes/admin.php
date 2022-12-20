@@ -27,6 +27,7 @@ use App\Http\Controllers\Admin\ResearchController;
 use App\Http\Controllers\Admin\PaymentConfigController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsAndEventsController;
+use App\Http\Controllers\Admin\NewsLetterController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -96,6 +97,9 @@ Route::middleware(['auth_users'])->group(function () {
                 Route::get('edit/{id}', [BannerController::class, 'edit'])->name('banner.edit');
                 Route::delete('delete/{id?}', [BannerController::class, 'delete'])->name('banner.delete');
             });
+            Route::get('news-letter', [NewsLetterController::class, 'index'])->name('news-letter.index');
+            Route::get('news-letter/{id}', [NewsLetterController::class, 'show'])->name('news-letter.show');
+            Route::post('news-letter/{id?}', [NewsLetterController::class, 'delete'])->name('news-letter.delete');
         });
         Route::group(['prefix' => 'news-and-events'], function () {
             Route::get('/', [NewsAndEventsController::class, 'index'])->name('news-and-events.index');

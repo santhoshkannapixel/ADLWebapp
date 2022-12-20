@@ -28,6 +28,12 @@
                 Banner Master
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link {{ Route::is(['news-letter.index','news-letter.show']) ? "active" : "" }}" href="{{ route('news-letter.index') }}">
+                <i class="fa fa-picture-o me-2"></i>
+                News Letter
+            </a>
+        </li>
    </ul>
    <div class="my-4">
       @yield('admin_master_content')

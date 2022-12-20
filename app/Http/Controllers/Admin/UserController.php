@@ -60,6 +60,7 @@ class UserController extends Controller
 
     public function store(Request $request)
     {  
+        dd("!11");
         $request->validate([
             'email'     => 'required|unique:users|max:255',
             'role_id'   => 'required',
