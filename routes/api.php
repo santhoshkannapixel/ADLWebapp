@@ -19,9 +19,11 @@ Route::get('test/{id}', [ApiController::class,'testDetails']);
 Route::post('test-list/{type?}', [ApiController::class,'testLists']);
 Route::post('bannerContactForm', [ApiController::class,'bannerContactForm']);
 Route::post('newsAndEvents', [ApiController::class,'newsAndEvents']);
+Route::post('register', [ApiController::class,'register']);
 
-Route::post('/patients-consumers', [PatientsConsumersController::class, 'store'])->name('patients-consumers');
+
 // Route::get('/patients-consumers/{id}', [PatientsConsumersController::class, 'index'])->name('patients-consumers');
+Route::post('/patients-consumers', [PatientsConsumersController::class, 'store'])->name('patients-consumers');
 Route::post('/feedback', [FeedBackController::class, 'store'])->name('feedback');
 Route::post('/faq', [FrequentlyAskedQuestionsController::class, 'store'])->name('faq');
 Route::post('/hospital-lab-management', [HospitalLabManagementController::class, 'store'])->name('hospital-lab-management');
