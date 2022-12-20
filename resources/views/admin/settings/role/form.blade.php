@@ -13,8 +13,14 @@
                     <div class="row m-0 align-content-center">
                         @foreach ($route as $key => $name)
                             <div class="form-check col-3">
-                                <input class="form-check-input" type="checkbox" value="true" name="{{ $name }}" id="{{ $name }}"
-                                    {{ isset($permissions[$name]) && $permissions[$name] == 1 ? 'checked' : '' }}>
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    value="true"
+                                    name="{{ formatRoute($name) }}"
+                                    id="{{ $name }}"
+                                    @isset($permissions) {{ $permissions[formatRoute($name)] ?? 'false' == 'true' ? 'checked' : ''}} @endisset
+                                />
                                 <label for="{{ $name }}">
                                     @php $function_name = explode('.',$name) @endphp
                                     {{ ucwords(str_replace('-', ' ', end($function_name))) }}
