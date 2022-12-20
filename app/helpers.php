@@ -14,13 +14,13 @@ if (!function_exists('asset_url')) {
         return asset('public/images/no-image.jpg');
     }
 }
-if (!function_exists('auth_id')) {
+if (!function_exists('filedCall')) {
     function filedCall($data)
     {
         return response()->json(['Status'=>200,'Error'=>true,'Message'=>$data]);
     }
 }
-if (!function_exists('auth_id')) {
+if (!function_exists('successCall')) {
     function successCall()
     {
         return response()->json(['Status'=>200,'Errors'=>true,'Message'=>'Created Success']);

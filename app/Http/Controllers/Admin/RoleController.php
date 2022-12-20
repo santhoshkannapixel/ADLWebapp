@@ -8,6 +8,7 @@ use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\Roles;
+use App\Models\User;
 use Illuminate\Support\Str;
 
 class RoleController extends Controller
@@ -61,7 +62,17 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        DD($request->all());
+        unset($request['_token']);
+        $permissions = $request->all();
+        unset($permissions['name']);
+
+        Roles::create([
+            "name"        => $request->name,
+            "slug"        => Str::slug($request->name),
+            "user_id"     => auth_user()->id,
+            "permissions" => json_encode($permissions)
+        ]);
+
         Flash::success(__('auth.role_creation_successful'));
         return redirect()->route('role.index');
     }
@@ -86,7 +97,8 @@ class RoleController extends Controller
     public function edit($id)
     {
         $role           = Sentinel::findRoleById($id);
-        $permissions    = $role->permissions ?? config('permission');
+        $permissions    = $role->permissions;
+        // dd($permissions);
         return view('admin.settings.role.edit', compact('role', 'permissions'));
     }
 
@@ -99,40 +111,17 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $dataDb = Sentinel::findRoleById($id);
-
-        if (empty($dataDb)) {
-            Flash::error( __('global.denied'));
-            return redirect()->back();
-        }
-
-
-        $permissions = [
-
-            // Withdrawal
-            'user.view.dashboard'    =>  $request -> user_view_dashboard   == 'true' ? true : false,
-            'user.add.dashboard'     =>  $request -> user_add_dashboard    == 'true' ? true : false,
-            'user.edit.dashboard'    =>  $request -> user_edit_dashboard   == 'true' ? true : false,
-            'user.delete.dashboard'  =>  $request -> user_delete_dashboard == 'true' ? true : false,
-
-            // Search or Add
-            'user.view.settings'    =>  $request -> user_view_settings   == 'true' ? true : false,
-            'user.add.settings'     =>  $request -> user_add_settings   == 'true' ? true : false,
-            'user.edit.settings'    =>  $request -> user_edit_settings   == 'true' ? true : false,
-            'user.delete.settings'  =>  $request -> user_delete_settings   == 'true' ? true : false,
-
-        ];
-
-        Sentinel::findRoleById($id)->update(['permissions'  =>  null]);
-
-        Sentinel::findRoleById($id)->update([
+        unset($request['_token']);
+        unset($request['_method']);
+        $permissions = $request->all();
+        unset($permissions['name']);
+        Roles::findOrFail($id)->update([
             'name'         =>  $request->name,
             'slug'         =>  Str::slug($request->name),
-            'permissions'  =>  $permissions,
+            "permissions" => json_encode($permissions)
         ]);
 
         Flash::success( __('auth.role_update_successful'));
-
         return redirect()->route('role.index');
     }
 
