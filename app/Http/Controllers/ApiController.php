@@ -6,7 +6,9 @@ use App\Models\Banners;
 use App\Models\NewsEvent;
 use App\Models\SubTests;
 use App\Models\Tests;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class ApiController extends Controller
@@ -71,6 +73,18 @@ class ApiController extends Controller
         return response()->json([
             "status"    =>  true,
             "data"      =>  NewsEvent::all()
+        ]);
+    }
+    public function register(Request $request)
+    {
+        $User = User::create([
+            'name'     => $request->name,
+            'email'    => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+        return response()->json([
+            "status"    =>  true,
+            "data"      =>  $User
         ]);
     }
 }
