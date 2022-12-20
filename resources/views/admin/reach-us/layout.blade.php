@@ -10,18 +10,18 @@
            Head Office
          </a>
       </li>
-      <li class="nav-item">
+      {{-- <li class="nav-item">
          <a class="nav-link {{ Route::is(['anandlab-franchise.index','anandlab-franchise.show']) ? "active" : "" }}" href="{{ route('anandlab-franchise.index') }}">
             <i class="fa-users fa me-2"></i>
             Anand Franchise
          </a>
-      </li>
-      <li class="nav-item">
+      </li> --}}
+      {{-- <li class="nav-item">
          <a class="nav-link {{ Route::is(['covidtesting-employees.index','covidtesting-employees.show']) ? "active" : "" }}" href="{{ route('covidtesting-employees.index') }}">
             <i class="fa-users fa me-2"></i>
             COVID Testing For Employees
          </a>
-      </li>
+      </li> --}}
       
       
    </ul>

@@ -158,11 +158,11 @@ Route::middleware(['auth_users'])->group(function () {
     Route::post('/head-office/{id}', [HeadOfficeController::class, 'destroy'])->name('head-office.delete');
     Route::get('/head-office/{id}', [HeadOfficeController::class, 'show'])->name('head-office.show');
 
-    Route::get('/anandlab-franchise', [AnandFranchiseController::class, 'index'])->name('anandlab-franchise.index');
-    Route::post('/anandlab-franchise/{id}', [AnandFranchiseController::class, 'destroy'])->name('anandlab-franchise.delete');
-    Route::get('/anandlab-franchise/{id}', [AnandFranchiseController::class, 'show'])->name('anandlab-franchise.show');
+    // Route::get('/anandlab-franchise', [AnandFranchiseController::class, 'index'])->name('anandlab-franchise.index');
+    // Route::post('/anandlab-franchise/{id}', [AnandFranchiseController::class, 'destroy'])->name('anandlab-franchise.delete');
+    // Route::get('/anandlab-franchise/{id}', [AnandFranchiseController::class, 'show'])->name('anandlab-franchise.show');
 
-    Route::get('/covidtesting-employees', [CovidTestingEmployeesController::class, 'index'])->name('covidtesting-employees.index');
-    Route::post('/covidtesting-employees/{id}', [CovidTestingEmployeesController::class, 'destroy'])->name('covidtesting-employees.delete');
-    Route::get('/covidtesting-employees/{id}', [CovidTestingEmployeesController::class, 'show'])->name('covidtesting-employees.show');
+    // Route::get('/covidtesting-employees', [CovidTestingEmployeesController::class, 'index'])->name('covidtesting-employees.index');
+    // Route::post('/covidtesting-employees/{id}', [CovidTestingEmployeesController::class, 'destroy'])->name('covidtesting-employees.delete');
+    // Route::get('/covidtesting-employees/{id}', [CovidTestingEmployeesController::class, 'show'])->name('covidtesting-employees.show');
 });
