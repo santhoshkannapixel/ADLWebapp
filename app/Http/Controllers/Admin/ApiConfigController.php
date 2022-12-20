@@ -12,12 +12,12 @@ class ApiConfigController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()) {
-            
+
             $data = ApiConfig::all();
-    
+
             return datatables()->of($data)
             ->addColumn('action', function($data){
-                $action = button('edit',route('api_config.edit', $data->id)).button('delete',route('api_config.delete', $data->id)); 
+                $action = button('edit',route('api_config.edit', $data->id)).button('delete',route('api_config.delete', $data->id));
                 return $action;
             })
             ->rawColumns(array(
@@ -33,10 +33,9 @@ class ApiConfigController extends Controller
         return view('admin.settings.api-config.create');
     }
 
-    public function updateOrCreate(Request $request , $id = null)
+    public function store(Request $request)
     {
-  
-        ApiConfig::updateOrCreate(["id" => $id], [
+        ApiConfig::create([
             'CorporateID'  =>  $request->CorporateID,
             'passCode'     =>  $request->passCode,
             'BaseUrl'      =>  $request->BaseUrl,
@@ -46,6 +45,20 @@ class ApiConfigController extends Controller
 
         Flash::success( __('action.saved', ['type' => 'Api Config']));
 
+        return redirect()->route('api_config.index');
+    }
+
+    public function update(Request $request , $id)
+    {
+        ApiConfig::find($id)->update([
+            'CorporateID'  =>  $request->CorporateID,
+            'passCode'     =>  $request->passCode,
+            'BaseUrl'      =>  $request->BaseUrl,
+            'SiteId'       =>  $request->SiteId,
+            'created_by'   =>  auth_id(),
+        ]);
+
+        Flash::success( __('action.saved', ['type' => 'Api Config']));
         return redirect()->route('api_config.index');
     }
 

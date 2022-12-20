@@ -9,7 +9,7 @@
             <a href="{{ route('payment_config.index') }}" class="btn btn-primary"><i class="fa fa-list me-2"></i> Appi List</a>
         </div>
 
-        {!! Form::model($paymentConfig,['route' =>['payment_config.store' , $paymentConfig->id] , "roleForm", "Method" => "POST"]) !!}
+        {!! Form::model($paymentConfig,['route' =>['payment_config.update' , $paymentConfig->id] , "roleForm", "Method" => "POST"]) !!}
             <div class="card-body"> 
                 @include('admin.settings.payment-config.form')
             </div>

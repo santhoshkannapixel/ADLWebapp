@@ -2,7 +2,7 @@
 
 @section('admin_title') Home @endsection
 
-@section('admin_content') 
+@section('admin_content')
     <div class="p-1 mb-3">
         <div class="mb-1 lead"><strong>Welcome  <b class="text-gradient">{{ Sentinel::getUser()->name }}</b></strong></div>
         <span><b class="text-dark">Role :</b> <span class="badge bg-gradient">{{ Sentinel::getUser()->roles[0]->name }}</span></span>
@@ -63,7 +63,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-4 p-1"> 
+        <div class="col-4 p-1">
             <div class="card card-body shadow-sm">
                 <div class="x-between y-center">
                     <div>
@@ -85,7 +85,7 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
     <div class="card custom table-card m-1 mt-2">
         <div class="card-header">
             <div class="card-title">
@@ -114,12 +114,12 @@
         </div>
     </div>
 @endsection
- 
+
 @section('scripts')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript">
-    
+
         $(document).ready(function(){
             $('.input-daterange').datepicker({
                 todayBtn:'linked',
@@ -127,14 +127,14 @@
                 autoclose:true
             });
 
-             
+
             function load_data(from_date = '', to_date = '')    {
                 $('#data-table').DataTable({
                     lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                     processing: true,
                     serverSide: true,
                     ajax: {
-                        url: "{{ route('admin.dashboard') }}",
+                        url: "{{ route('dashboard.index') }}",
                         data:{from_date:from_date, to_date:to_date}
                     },
                     columns: [
@@ -150,12 +150,12 @@
             $('#filter').click(function(){
                 var from_date   =   $('#from_date').val();
                 var to_date     =   $('#to_date').val();
-                
+
                 if(from_date != '' &&  to_date != '')        {
                     $('#data-table').DataTable().destroy();
                     load_data(from_date, to_date);
                 }else{
-                    
+
                     toastr.error("Both Date is required")
                 }
             });

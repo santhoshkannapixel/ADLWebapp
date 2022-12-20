@@ -32,10 +32,24 @@ class PaymentConfigController extends Controller
         return view('admin.settings.payment-config.create');
     }
 
-    public function updateOrCreate(Request $request , $id = null)
+    public function store(Request $request)
     {
   
-        PaymentConfig::updateOrCreate(["id" => $id], [
+        PaymentConfig::create([
+            'gateWayName'   => $request->gateWayName,
+            'payKeyId'      => $request->payKeyId,
+            'paySecretKey'  => $request->paySecretKey,
+        ]);
+
+        Flash::success( __('action.saved', ['type' => 'Payment Config']));
+
+        return redirect()->route('payment_config.index');
+    }
+
+    public function update(Request $request , $id)
+    {
+  
+        PaymentConfig::find($id)->update([
             'gateWayName'   => $request->gateWayName,
             'payKeyId'      => $request->payKeyId,
             'paySecretKey'  => $request->paySecretKey,

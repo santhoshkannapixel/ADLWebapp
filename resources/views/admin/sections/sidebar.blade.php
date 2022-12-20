@@ -1,10 +1,10 @@
 <div class="d-flex flex-column flex-shrink-0 text-white   side_bar" style="width: 280px;">
-    <a href="{{ route('admin.dashboard') }}" class="d-flex shadow p-3 border-light align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none" style="border-bottom: 1px solid #ffffff24 !important">
+    <a href="{{ route('dashboard.index') }}" class="d-flex shadow p-3 border-light align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none" style="border-bottom: 1px solid #ffffff24 !important">
         <img src="{{ asset('public/images/logo/logo-dark.png') }}" alt="logo" width="90%" class="mx-auto">
     </a>
     <ul class="nav nav-pills flex-column mb-auto mt-3 pt-0 p-3 side-navbar">
         <li>
-            <a href="{{ route('admin.dashboard') }}" class="nav-link text-white {{ Route::is('admin.dashboard') ? "active" : "" }}" aria-current="page">
+            <a href="{{ route('dashboard.index') }}" class="nav-link text-white {{ Route::is('dashboard.index') ? "active" : "" }}" aria-current="page">
                 <i class="fa fa-home"></i>Dashboard</a>
             </a>
         </li>

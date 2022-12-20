@@ -14,19 +14,19 @@ class AuthController extends Controller
     public function index(Request $request)
     {
         if(Sentinel::check()) {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('dashboard.index');
         }
         return view('admin.auth.login');
     }
-    
+
     public function login(Request $request)
     {
-       
+
         $credentials = [
             'email'     => $request->email,
             'password'  => $request->password,
         ];
-        
+
 
         try {
             if($user = Sentinel::authenticate($credentials , $request->get('remember', false))) {
@@ -36,7 +36,7 @@ class AuthController extends Controller
                 // } else if(Sentinel::inRole('employee')) {
                 //     return redirect(route('employee.dashboard'));
                 // }
-                return redirect(route('admin.dashboard'));
+                return redirect(route('dashboard.index'));
             } else {
                 Flash::error( __('auth.login_unsuccessful'));
                 return redirect(route('login'));
@@ -45,9 +45,9 @@ class AuthController extends Controller
 
             Flash::error(__('auth.login_timeout'));
             return redirect()->route('login');
-            
+
         } catch (NotActivatedException $ex) {
-            Flash::error(__('auth.login_unsuccessful_not_active')); 
+            Flash::error(__('auth.login_unsuccessful_not_active'));
             return redirect()->route('login');
         }
     }
@@ -58,5 +58,5 @@ class AuthController extends Controller
         Sentinel::logout(null, true);
         Flash::success(__('auth.logout_successful'));
         return redirect(route('login'));
-    } 
+    }
 }

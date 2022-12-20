@@ -14,13 +14,17 @@ if (!function_exists('asset_url')) {
         return asset('public/images/no-image.jpg');
     }
 }
-function filedCall($data)
-{
-    return response()->json(['Status'=>200,'Error'=>true,'Message'=>$data]);
+if (!function_exists('auth_id')) {
+    function filedCall($data)
+    {
+        return response()->json(['Status'=>200,'Error'=>true,'Message'=>$data]);
+    }
 }
-function successCall()
-{
-    return response()->json(['Status'=>200,'Errors'=>true,'Message'=>'Created Success']);
+if (!function_exists('auth_id')) {
+    function successCall()
+    {
+        return response()->json(['Status'=>200,'Errors'=>true,'Message'=>'Created Success']);
+    }
 }
 if (!function_exists('auth_id')) {
     function auth_id()
@@ -64,6 +68,7 @@ if (!function_exists('button')) {
         }
     }
 }
+if (!function_exists('toggleButton')) {
 function toggleButton($type, $url, $data)
 {
     if ($type == 'status') {
@@ -78,4 +83,5 @@ function toggleButton($type, $url, $data)
             <div class="slider round"></div>
             </label>';
     }
+}
 }

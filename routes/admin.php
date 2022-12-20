@@ -32,132 +32,133 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth_users'])->group(function () {
 
-    Route::group(['prefix' => 'admin'], function () {
+    // ================================================= //
+        Route::group(['prefix' => 'dashboard'], function () {
+            Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+            Route::get('/red', [DashboardController::class, 'red'])->name('dashboard.red');
+        });
+        Route::group(['prefix' => 'settings'], function () {
+            Route::get('/', [SettingsController::class, 'index'])->name('admin.settings');
+            Route::group(['prefix' => 'user'], function () {
+                Route::get('/', [UserController::class, 'index'])->name('user.index');
+                Route::get('create', [UserController::class, 'create'])->name('user.create');
+                Route::post('create', [UserController::class, 'store'])->name('user.store');
+                Route::get('edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+                Route::put('edit/{id}', [UserController::class, 'update'])->name('user.update');
+                Route::delete('delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
+            });
+            Route::group(['prefix' => 'role'], function () {
+                Route::get('/', [RoleController::class, 'index'])->name('role.index');
+                Route::get('create', [RoleController::class, 'create'])->name('role.create');
+                Route::post('create', [RoleController::class, 'store'])->name('role.store');
+                Route::get('edit/{id}', [RoleController::class, 'edit'])->name('role.edit');
+                Route::put('edit/{id}', [RoleController::class, 'update'])->name('role.update');
+                Route::delete('delete/{id}', [RoleController::class, 'destroy'])->name('role.delete');
+            });
+            Route::group(['prefix' => 'api-config'], function () {
+                Route::get('/', [ApiConfigController::class, 'index'])->name('api_config.index');
+                Route::get('create', [ApiConfigController::class, 'create'])->name('api_config.create');
+                Route::post('create', [ApiConfigController::class, 'store'])->name('api_config.store');
+                Route::get('edit/{id}', [ApiConfigController::class, 'edit'])->name('api_config.edit');
+                Route::post('edit/{id?}', [ApiConfigController::class, 'update'])->name('api_config.update');
+                Route::delete('delete/{id}', [ApiConfigController::class, 'destroy'])->name('api_config.delete');
+            });
+            Route::group(['prefix' => 'payment-config'], function () {
+                Route::get('/', [PaymentConfigController::class, 'index'])->name('payment_config.index');
+                Route::get('create', [PaymentConfigController::class, 'create'])->name('payment_config.create');
+                Route::post('create', [PaymentConfigController::class, 'store'])->name('payment_config.store');
+                Route::get('edit/{id}', [PaymentConfigController::class, 'edit'])->name('payment_config.edit');
+                Route::post('/edit/{id?}', [PaymentConfigController::class, 'update'])->name('payment_config.update');
+                Route::delete('/payment-config-delete/{id}', [PaymentConfigController::class, 'destroy'])->name('payment_config.delete');
+            });
+        });
+        Route::group(['prefix' => 'master'], function () {
+            Route::group(['prefix' => 'branch'], function () {
+                Route::get('/', [BranchController::class, 'index'])->name('master.index');
+                Route::post('/', [BranchController::class, 'syncRequest'])->name('branch.sync');
+                Route::get('show/{id}', [BranchController::class, 'show'])->name('branch.show');
+            });
+            Route::group(['prefix' => 'city'], function () {
+                Route::get('/', [CityController::class, 'index'])->name('city.index');
+                Route::post('/', [CityController::class, 'syncRequest'])->name('city.sync');
+            });
+            Route::group(['prefix' => 'test'], function () {
+                Route::get('/', [TestController::class, 'index'])->name('test.index');
+                Route::post('/', [TestController::class, 'syncRequest'])->name('test.sync');
+                Route::get('show/{id}', [TestController::class, 'show'])->name('test.show');
+                Route::get('edit/{id}', [TestController::class, 'edit'])->name('test.edit');
+                Route::post('edit/{id}', [TestController::class, 'update'])->name('test.edit');
+            });
+            Route::group(['prefix' => 'banner'], function () {
+                Route::get('/', [BannerController::class, 'index'])->name('banner.index');
+                Route::get('create', [BannerController::class, 'create'])->name('banner.create');
+                Route::post('create/{id?}', [BannerController::class, 'store'])->name('banner.store');
+                Route::get('edit/{id}', [BannerController::class, 'edit'])->name('banner.edit');
+                Route::delete('delete/{id?}', [BannerController::class, 'delete'])->name('banner.delete');
+            });
+        });
+        Route::group(['prefix' => 'news-and-events'], function () {
+            Route::get('/', [NewsAndEventsController::class, 'index'])->name('news-and-events.index');
+            Route::get('create', [NewsAndEventsController::class, 'create'])->name('news-and-events.create');
+            Route::post('create/{id?}', [NewsAndEventsController::class, 'store'])->name('news-and-events.store');
+            Route::post('update/{id?}', [NewsAndEventsController::class, 'update'])->name('news-and-events.update');
+            Route::get('edit/{id}', [NewsAndEventsController::class, 'edit'])->name('news-and-events.edit');
+            Route::delete('delete/{id?}', [NewsAndEventsController::class, 'destroy'])->name('news-and-events.destroy');
+        });
+    // ================================================= //
 
-        Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('patients', [EnquiryController::class, 'index'])->name('admin.patients');
+    Route::get('doctors', [DoctorsController::class, 'index'])->name('admin.doctors');
+    Route::get('health-checkup', [HealthCheckupController::class, 'index'])->name('admin.health-checkup');
+    Route::get('reach-us', [ReachUsController::class, 'index'])->name('admin.reach-us');
+    //home-collection
+    Route::get('/home-collection', [BookHomeCollectionController::class, 'index'])->name('home-collection.index');
+    Route::post('/home-collection/{id}', [BookHomeCollectionController::class, 'destroy'])->name('home-collection.delete');
+    Route::get('/home-collection/{id}', [BookHomeCollectionController::class, 'show'])->name('home-collection.show');
+    //patients-consumers
+    Route::get('/feedback', [FeedBackController::class, 'index'])->name('feedback.index');
+    Route::post('/feedback/{id}', [FeedBackController::class, 'destroy'])->name('feedback.delete');
+    Route::get('/feedback/{id}', [FeedBackController::class, 'show'])->name('feedback.show');
 
+    Route::get('/faq', [FrequentlyAskedQuestionsController::class, 'index'])->name('faq.index');
+    Route::post('/faq/{id}', [FrequentlyAskedQuestionsController::class, 'destroy'])->name('faq.delete');
+    Route::get('/faq/{id}', [FrequentlyAskedQuestionsController::class, 'show'])->name('faq.show');
 
-        Route::get('settings', [SettingsController::class, 'index'])->name('admin.settings');
-        Route::get('patients', [EnquiryController::class, 'index'])->name('admin.patients');
-        Route::get('doctors', [DoctorsController::class, 'index'])->name('admin.doctors');
-        Route::get('health-checkup', [HealthCheckupController::class, 'index'])->name('admin.health-checkup');
-        Route::get('reach-us', [ReachUsController::class, 'index'])->name('admin.reach-us');
+    Route::get('/hospital-lab-management', [HospitalLabManagementController::class, 'index'])->name('hospital-lab-management.index');
+    Route::post('/hospital-lab-management/{id}', [HospitalLabManagementController::class, 'destroy'])->name('hospital-lab-management.delete');
+    Route::get('/hospital-lab-management/{id}', [HospitalLabManagementController::class, 'show'])->name('hospital-lab-management.show');
 
-        // User Routes
-        Route::get('/user', [UserController::class, 'index'])->name('user.index');
-        Route::post('/user', [UserController::class, 'store'])->name('user.store');
-        Route::get('/user-create', [UserController::class, 'create'])->name('user.create');
-        Route::post('/user-delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
-        Route::get('/user-edit/{id}', [UserController::class, 'edit'])->name('user.edit');
-        Route::put('/user-update/{id}', [UserController::class, 'update'])->name('user.update');
-        Route::get('/user-update/{id}', function () {
-            return redirect()->back();
-        })->name('user.update');
+    Route::get('/clinical-lab-management', [ClinicalLabManagementController::class, 'index'])->name('clinical-lab-management.index');
+    Route::post('/clinical-lab-management/{id}', [ClinicalLabManagementController::class, 'destroy'])->name('clinical-lab-management.delete');
+    Route::get('/clinical-lab-management/{id}', [ClinicalLabManagementController::class, 'show'])->name('clinical-lab-management.show');
 
+    Route::get('/franchising-opportunities', [FranchisingOpportunitiesController::class, 'index'])->name('franchising-opportunities.index');
+    Route::post('/franchising-opportunities/{id}', [FranchisingOpportunitiesController::class, 'destroy'])->name('franchising-opportunities.delete');
+    Route::get('/franchising-opportunities/{id}', [FranchisingOpportunitiesController::class, 'show'])->name('franchising-opportunities.show');
 
-        Route::get('/api-config', [ApiConfigController::class, 'index'])->name('api_config.index');
-        Route::get('/api-config/create', [ApiConfigController::class, 'create'])->name('api_config.create');
-        Route::get('/api-config/{id}', [ApiConfigController::class, 'edit'])->name('api_config.edit');
-        Route::post('/api-config/{id?}', [ApiConfigController::class, 'updateOrCreate'])->name('api_config.store');
-        Route::post('/api-config-delete/{id}', [ApiConfigController::class, 'destroy'])->name('api_config.delete');
+    Route::get('/research', [ResearchController::class, 'index'])->name('research.index');
+    Route::post('/research/{id}', [ResearchController::class, 'destroy'])->name('research.delete');
+    Route::get('/research/{id}', [ResearchController::class, 'show'])->name('research.show');
 
-        Route::get('/payment-config', [PaymentConfigController::class, 'index'])->name('payment_config.index');
-        Route::get('/payment-config/create', [PaymentConfigController::class, 'create'])->name('payment_config.create');
-        Route::get('/payment-config/{id}', [PaymentConfigController::class, 'edit'])->name('payment_config.edit');
-        Route::post('/payment-config/{id?}', [PaymentConfigController::class, 'updateOrCreate'])->name('payment_config.store');
-        Route::post('/payment-config-delete/{id}', [PaymentConfigController::class, 'destroy'])->name('payment_config.delete');
+    //feedback.index
+    Route::get('/patients-consumers', [PatientsConsumersController::class, 'index'])->name('patients-consumers.index');
+    Route::post('/patients-consumers/{id}', [PatientsConsumersController::class, 'destroy'])->name('patients-consumers.delete');
+    Route::get('/patients-consumers/{id}', [PatientsConsumersController::class, 'show'])->name('patients-consumers.show');
 
+    //feedback.index
+    Route::get('/book-an-appointment', [BookAppointmentController::class, 'index'])->name('book-an-appointment.index');
+    Route::post('/book-an-appointment/{id}', [BookAppointmentController::class, 'destroy'])->name('book-an-appointment.delete');
+    Route::get('/book-an-appointment/{id}', [BookAppointmentController::class, 'show'])->name('book-an-appointment.show');
 
+    Route::get('/head-office', [HeadOfficeController::class, 'index'])->name('head-office.index');
+    Route::post('/head-office/{id}', [HeadOfficeController::class, 'destroy'])->name('head-office.delete');
+    Route::get('/head-office/{id}', [HeadOfficeController::class, 'show'])->name('head-office.show');
 
-        // Role Routes
-        Route::get('/role', [RoleController::class, 'index'])->name('role.index');
-        Route::post('/role', [RoleController::class, 'store'])->name('role.store');
-        Route::get('/role-create', [RoleController::class, 'create'])->name('role.create');
-        Route::post('/role-delete/{id}', [RoleController::class, 'destroy'])->name('role.delete');
-        Route::get('/role-edit/{id}', [RoleController::class, 'edit'])->name('role.edit');
-        Route::put('/role-update/{id}', [RoleController::class, 'update'])->name('role.update');
-        Route::get('/role-update/{id}', function () {
-            return redirect()->back();
-        })->name('role.update');
+    Route::get('/anandlab-franchise', [AnandFranchiseController::class, 'index'])->name('anandlab-franchise.index');
+    Route::post('/anandlab-franchise/{id}', [AnandFranchiseController::class, 'destroy'])->name('anandlab-franchise.delete');
+    Route::get('/anandlab-franchise/{id}', [AnandFranchiseController::class, 'show'])->name('anandlab-franchise.show');
 
-        //home-collection
-        Route::get('/home-collection', [BookHomeCollectionController::class, 'index'])->name('home-collection.index');
-        Route::post('/home-collection/{id}', [BookHomeCollectionController::class, 'destroy'])->name('home-collection.delete');
-        Route::get('/home-collection/{id}', [BookHomeCollectionController::class, 'show'])->name('home-collection.show');
-        //patients-consumers
-        Route::get('/feedback', [FeedBackController::class, 'index'])->name('feedback.index');
-        Route::post('/feedback/{id}', [FeedBackController::class, 'destroy'])->name('feedback.delete');
-        Route::get('/feedback/{id}', [FeedBackController::class, 'show'])->name('feedback.show');
-
-        Route::get('/faq', [FrequentlyAskedQuestionsController::class, 'index'])->name('faq.index');
-        Route::post('/faq/{id}', [FrequentlyAskedQuestionsController::class, 'destroy'])->name('faq.delete');
-        Route::get('/faq/{id}', [FrequentlyAskedQuestionsController::class, 'show'])->name('faq.show');
-
-        Route::get('/hospital-lab-management', [HospitalLabManagementController::class, 'index'])->name('hospital-lab-management.index');
-        Route::post('/hospital-lab-management/{id}', [HospitalLabManagementController::class, 'destroy'])->name('hospital-lab-management.delete');
-        Route::get('/hospital-lab-management/{id}', [HospitalLabManagementController::class, 'show'])->name('hospital-lab-management.show');
-
-        Route::get('/clinical-lab-management', [ClinicalLabManagementController::class, 'index'])->name('clinical-lab-management.index');
-        Route::post('/clinical-lab-management/{id}', [ClinicalLabManagementController::class, 'destroy'])->name('clinical-lab-management.delete');
-        Route::get('/clinical-lab-management/{id}', [ClinicalLabManagementController::class, 'show'])->name('clinical-lab-management.show');
-
-        Route::get('/franchising-opportunities', [FranchisingOpportunitiesController::class, 'index'])->name('franchising-opportunities.index');
-        Route::post('/franchising-opportunities/{id}', [FranchisingOpportunitiesController::class, 'destroy'])->name('franchising-opportunities.delete');
-        Route::get('/franchising-opportunities/{id}', [FranchisingOpportunitiesController::class, 'show'])->name('franchising-opportunities.show');
-
-        Route::get('/research', [ResearchController::class, 'index'])->name('research.index');
-        Route::post('/research/{id}', [ResearchController::class, 'destroy'])->name('research.delete');
-        Route::get('/research/{id}', [ResearchController::class, 'show'])->name('research.show');
-
-        //feedback.index
-        Route::get('/patients-consumers', [PatientsConsumersController::class, 'index'])->name('patients-consumers.index');
-        Route::post('/patients-consumers/{id}', [PatientsConsumersController::class, 'destroy'])->name('patients-consumers.delete');
-        Route::get('/patients-consumers/{id}', [PatientsConsumersController::class, 'show'])->name('patients-consumers.show');
-
-        //feedback.index
-        Route::get('/book-an-appointment', [BookAppointmentController::class, 'index'])->name('book-an-appointment.index');
-        Route::post('/book-an-appointment/{id}', [BookAppointmentController::class, 'destroy'])->name('book-an-appointment.delete');
-        Route::get('/book-an-appointment/{id}', [BookAppointmentController::class, 'show'])->name('book-an-appointment.show');
-
-        Route::get('/head-office', [HeadOfficeController::class, 'index'])->name('head-office.index');
-        Route::post('/head-office/{id}', [HeadOfficeController::class, 'destroy'])->name('head-office.delete');
-        Route::get('/head-office/{id}', [HeadOfficeController::class, 'show'])->name('head-office.show');
-
-        Route::get('/anandlab-franchise', [AnandFranchiseController::class, 'index'])->name('anandlab-franchise.index');
-        Route::post('/anandlab-franchise/{id}', [AnandFranchiseController::class, 'destroy'])->name('anandlab-franchise.delete');
-        Route::get('/anandlab-franchise/{id}', [AnandFranchiseController::class, 'show'])->name('anandlab-franchise.show');
-
-        Route::get('/covidtesting-employees', [CovidTestingEmployeesController::class, 'index'])->name('covidtesting-employees.index');
-        Route::post('/covidtesting-employees/{id}', [CovidTestingEmployeesController::class, 'destroy'])->name('covidtesting-employees.delete');
-        Route::get('/covidtesting-employees/{id}', [CovidTestingEmployeesController::class, 'show'])->name('covidtesting-employees.show');
-
-
-
-        // Master
-        Route::get('master/branch', [BranchController::class, 'index'])->name('master.index');
-
-        // Branch  Master
-        Route::post('master/branch', [BranchController::class, 'syncRequest'])->name('branch.sync');
-        Route::get('master/branch/{id}', [BranchController::class, 'show'])->name('branch.show');
-
-        // City Master
-        Route::get('master/city', [CityController::class, 'index'])->name('city.index');
-        Route::post('master/city', [CityController::class, 'syncRequest'])->name('city.sync');
-
-        // Test Master
-        Route::get('master/test', [TestController::class, 'index'])->name('test.index');
-        Route::get('master/test/{id}', [TestController::class, 'show'])->name('test.show');
-        Route::get('master/test/edit/{id}', [TestController::class, 'edit'])->name('test.edit');
-        Route::post('master/test/edit/{id}', [TestController::class, 'update'])->name('test.edit');
-        Route::post('master/test', [TestController::class, 'syncRequest'])->name('test.sync');
-
-        // Banner Master
-        Route::get('master/banner', [BannerController::class, 'index'])->name('banner.index');
-        Route::get('master/banner/create', [BannerController::class, 'create'])->name('banner.create');
-        Route::get('master/banner/{id}', [BannerController::class, 'edit'])->name('banner.edit');
-        Route::post('master/banner/{id?}', [BannerController::class, 'store'])->name('banner.store');
-        Route::post('master/banner/delete/{id?}', [BannerController::class, 'delete'])->name('banner.delete');
-
-        Route::resource('news-and-events',NewsAndEventsController::class);
-    });
+    Route::get('/covidtesting-employees', [CovidTestingEmployeesController::class, 'index'])->name('covidtesting-employees.index');
+    Route::post('/covidtesting-employees/{id}', [CovidTestingEmployeesController::class, 'destroy'])->name('covidtesting-employees.delete');
+    Route::get('/covidtesting-employees/{id}', [CovidTestingEmployeesController::class, 'show'])->name('covidtesting-employees.show');
 });

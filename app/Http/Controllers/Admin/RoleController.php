@@ -17,12 +17,12 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+
 
     public function index(Request $request)
     {
         if($request->ajax()) {
-             
+
             $data = Sentinel::getRoleRepository()->select([
                 'id',
                 'slug',
@@ -33,10 +33,10 @@ class RoleController extends Controller
                 return DataTables::eloquent($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
-                    $action = button('edit',route('role.edit', $data->id)).button('delete',route('role.delete', $data->id)); 
+                    $action = button('edit',route('role.edit', $data->id)).button('delete',route('role.delete', $data->id));
                     return $action;
                 })
-                
+
             ->make(true);
         }
         return view('admin.settings.role.index');
@@ -48,7 +48,7 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    { 
+    {
         $permissions = config('permission');
         return view('admin.settings.role.create',compact('permissions'));
     }
@@ -61,40 +61,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'name'     => 'required|unique:roles|max:255', 
-        ];
-
-        $customMessages = [
-            'name.required'    => trans('auth.role_name_required'),
-            'name.unique'      => trans('auth.role_already_exists'),
-        ];
-        
-
-        $this->validate($request, $rules, $customMessages);
-        
-        $permissions = [
-             
-            // dashboard 
-            'user.view.dashboard'    =>  $request -> user_view_dashboard   == 'true' ? true : false,
-            'user.add.dashboard'     =>  $request -> user_add_dashboard    == 'true' ? true : false,
-            'user.edit.dashboard'    =>  $request -> user_edit_dashboard   == 'true' ? true : false,
-            'user.delete.dashboard'  =>  $request -> user_delete_dashboard == 'true' ? true : false,
-
-            
-            // settings
-            'user.view.settings'    =>  $request -> user_view_settings   == 'true' ? true : false,
-            'user.add.settings'     =>  $request -> user_add_settings   == 'true' ? true : false,
-            'user.edit.settings'    =>  $request -> user_edit_settings   == 'true' ? true : false,
-            'user.delete.settings'  =>  $request -> user_delete_settings   == 'true' ? true : false,
-        ];
-
-        Sentinel::getRoleRepository()->createModel()->create([
-            'name'         =>  $request->name,
-            'slug'         =>  Str::slug($request->name),
-            'permissions'  =>  $permissions,
-        ]);
-  
+        DD($request->all());
         Flash::success(__('auth.role_creation_successful'));
         return redirect()->route('role.index');
     }
@@ -133,27 +100,27 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         $dataDb = Sentinel::findRoleById($id);
-        
+
         if (empty($dataDb)) {
-            Flash::error( __('global.denied')); 
+            Flash::error( __('global.denied'));
             return redirect()->back();
         }
- 
+
 
         $permissions = [
-             
-            // Withdrawal 
+
+            // Withdrawal
             'user.view.dashboard'    =>  $request -> user_view_dashboard   == 'true' ? true : false,
             'user.add.dashboard'     =>  $request -> user_add_dashboard    == 'true' ? true : false,
             'user.edit.dashboard'    =>  $request -> user_edit_dashboard   == 'true' ? true : false,
             'user.delete.dashboard'  =>  $request -> user_delete_dashboard == 'true' ? true : false,
 
-            // Search or Add 
+            // Search or Add
             'user.view.settings'    =>  $request -> user_view_settings   == 'true' ? true : false,
             'user.add.settings'     =>  $request -> user_add_settings   == 'true' ? true : false,
             'user.edit.settings'    =>  $request -> user_edit_settings   == 'true' ? true : false,
             'user.delete.settings'  =>  $request -> user_delete_settings   == 'true' ? true : false,
- 
+
         ];
 
         Sentinel::findRoleById($id)->update(['permissions'  =>  null]);
@@ -163,7 +130,7 @@ class RoleController extends Controller
             'slug'         =>  Str::slug($request->name),
             'permissions'  =>  $permissions,
         ]);
-       
+
         Flash::success( __('auth.role_update_successful'));
 
         return redirect()->route('role.index');
@@ -192,5 +159,5 @@ class RoleController extends Controller
         Flash::success(__('auth.role_delete_successful'));
 
         return redirect()->route('role.index');
-    } 
+    }
 }
