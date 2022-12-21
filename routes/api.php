@@ -20,7 +20,8 @@ Route::post('test-list/{type?}', [ApiController::class,'testLists']);
 Route::post('bannerContactForm', [ApiController::class,'bannerContactForm']);
 Route::post('newsAndEvents', [ApiController::class,'newsAndEvents']);
 Route::post('register', [ApiController::class,'register']);
-
+Route::get('create-order', [ApiController::class,'createOrder']);
+Route::get('update-billing-details/{id}', [ApiController::class,'update_billing_address']);
 
 // Route::get('/patients-consumers/{id}', [PatientsConsumersController::class, 'index'])->name('patients-consumers');
 Route::post('/patients-consumers', [PatientsConsumersController::class, 'store'])->name('patients-consumers');
