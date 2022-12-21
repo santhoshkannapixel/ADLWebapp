@@ -102,13 +102,16 @@ class ApiController extends Controller
         ]);
 
         return response([
-            "key" => PaymentConfig::where('gateWayName','RAZOR_PAY')->first()->payKeyId ?? config('payment.KeyID'),
-            "title" => "Pay Online",
-            "image" => asset('/public/images/logo/favicon.png'),
-            "name" => $customer->name,
-            "email" => $customer->email,
-            "contact" => $customer->CustomerDetails['phone_number'] ?? null,
-            "order_id" => $Order['id']
+            "status" => true,
+            "data" => [
+                "key" => PaymentConfig::where('gateWayName','RAZOR_PAY')->first()->payKeyId ?? config('payment.KeyID'),
+                "title" => "Pay Online",
+                "image" => asset('/public/images/logo/favicon.png'),
+                "name" => $customer->name,
+                "email" => $customer->email,
+                "contact" => $customer->CustomerDetails['phone_number'] ?? null,
+                "order_id" => $Order['id']
+            ]
         ]);
     }
 }
