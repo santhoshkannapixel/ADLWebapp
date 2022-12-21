@@ -92,6 +92,9 @@ class ApiController extends Controller
     }
     public function update_billing_address(Request $request)
     {
+        return response([
+            "data" => $request->all()
+        ]);
         $customer = User::with('CustomerDetails')->find($request->id);
         $customer->CustomerDetails()->updateOrCreate($request->all());
 
@@ -100,7 +103,7 @@ class ApiController extends Controller
             'amount'   => $request->amount ?? 15 * 100,
             'currency' => 'INR'
         ]);
-  
+
         return response([
             "key" => PaymentConfig::where('gateWayName','RAZOR_PAY')->first()->payKeyId,
             "title" => "Pay Online",
