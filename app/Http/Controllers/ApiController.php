@@ -90,30 +90,24 @@ class ApiController extends Controller
             "data"      =>  $User
         ]);
     }
-    public function update_billing_address(Request $request,$id)
+    public function update_billing_address(Request $request)
     {
-        $User = User::with('CustomerDetails')->find($id);
-        CustomerDetails::updateOrCreate(['user_id',$id],$request->all());
-        return response([
-            "data" => $User
+        $customer = User::with('CustomerDetails')->find($request->id);
+        $customer->CustomerDetails()->updateOrCreate($request->all());
+
+        $Order = $api->order->create([
+            'amount'   => $request->amount ?? 15 * 100,
+            'currency' => 'INR'
         ]);
 
-
-        // $Order = $api->order->create([
-        //     'amount'   => $request->amount ?? 15 * 100,
-        //     'currency' => 'INR'
-        // ]);
-
-        // $Order['id']
-        $customer  =  User::find($request->id);
         return response([
             "key" => PaymentConfig::where('gateWayName','RAZOR_PAY')->first()->payKeyId,
             "title" => "Pay Online",
             "image" => asset('/public/images/logo/favicon.png'),
             "name" => $customer->name,
             "email" => $customer->email,
-            "contact" => $customer->mobile,
-            // "order_id" => $Order['id']
+            "contact" => $customer->CustomerDetails->phone_number ?? null,
+            "order_id" => $Order['id']
         ]);
     }
 }
