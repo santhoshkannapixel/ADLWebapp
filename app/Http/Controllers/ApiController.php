@@ -91,7 +91,7 @@ class ApiController extends Controller
     }
     public function update_billing_address(Request $request,$id)
     {
-        $User = User::find($id);
+        $User = User::with('CustomerDetails')->find($id);
         $User->CustomerDetails()->updateOrCreate(['user_id',$id],$request->all());
         return response([
             "data" => $User
