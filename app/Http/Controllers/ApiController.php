@@ -96,10 +96,10 @@ class ApiController extends Controller
         unset($customerInfo['amount']);
         $customer = User::with('CustomerDetails')->find($request->id);
         $customer->CustomerDetails()->updateOrCreate($customerInfo);
-
+        
         $api = new Api(config('payment.KeyID'), config('payment.KeySecret'));
         $Order = $api->order->create([
-            'amount'   => (int) $request->amount ?? 15 * 100,
+            'amount'   => (int) $request->amount * 100,
             'currency' => 'INR'
         ]);
 
