@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banners;
+use App\Models\CustomerDetails;
 use App\Models\NewsEvent;
 use App\Models\PaymentConfig;
 use App\Models\SubTests;
@@ -92,14 +93,11 @@ class ApiController extends Controller
     public function update_billing_address(Request $request,$id)
     {
         $User = User::with('CustomerDetails')->find($id);
-        $User->CustomerDetails()->updateOrCreate(['user_id',$id],$request->all());
+        CustomerDetails::updateOrCreate(['user_id',$id],$request->all());
         return response([
             "data" => $User
         ]);
-    }
-    public function createOrder(Request $request)
-    {
-        // $api = new Api(config('payment.KeyID'), config('payment.KeySecret'));
+
 
         // $Order = $api->order->create([
         //     'amount'   => $request->amount ?? 15 * 100,
