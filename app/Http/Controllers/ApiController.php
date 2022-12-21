@@ -92,8 +92,10 @@ class ApiController extends Controller
     }
     public function update_billing_address(Request $request)
     {
+        $customerInfo = $request->all();
+        unset($customerInfo['amount']);
         $customer = User::with('CustomerDetails')->find($request->id);
-        $customer->CustomerDetails()->updateOrCreate($request->all());
+        $customer->CustomerDetails()->updateOrCreate($customerInfo);
 
         $api = new Api(config('payment.KeyID'), config('payment.KeySecret'));
         $Order = $api->order->create([
