@@ -99,7 +99,7 @@ class ApiController extends Controller
 
         $api = new Api(config('payment.KeyID'), config('payment.KeySecret'));
         $Order = $api->order->create([
-            'amount'   => $request->amount ?? 15 * 100,
+            'amount'   => (int) $request->amount ?? 15 * 100,
             'currency' => 'INR'
         ]);
 
