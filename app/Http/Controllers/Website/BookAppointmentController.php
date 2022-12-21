@@ -17,6 +17,7 @@ class BookAppointmentController extends Controller
             'location_id'                   => 'required',
             'test_id'                       => 'required',
             'mobile'                        => 'required|numeric|digits:10',
+            'file'                        => 'required|mimes:png,jpg,jpeg,csv,xlx,xls,pdf,docx|max:2048',
         ]);
         if($validator->fails()){
             return filedCall($validator->messages()); 

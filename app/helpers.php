@@ -23,7 +23,7 @@ if (!function_exists('filedCall')) {
 if (!function_exists('successCall')) {
     function successCall()
     {
-        return response()->json(['Status'=>200,'Errors'=>true,'Message'=>'Created Success']);
+        return response()->json(['Status'=>200,'Errors'=>false,'Message'=>'Created Successfully']);
     }
 }
 if (!function_exists('auth_id')) {
