@@ -95,7 +95,8 @@ class ApiController extends Controller
         $customerInfo = $request->all();
         unset($customerInfo['amount']);
         $customer = User::with('CustomerDetails')->find($request->id);
-        $customer->CustomerDetails()->updateOrCreate($customerInfo);
+        $customer->CustomerDetails()->delete();
+        $customer->CustomerDetails()->create($customerInfo);
 
         $api = new Api(config('payment.KeyID'), config('payment.KeySecret'));
         $Order = $api->order->create([
