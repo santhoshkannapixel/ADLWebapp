@@ -95,11 +95,12 @@ class ApiController extends Controller
         $customer = User::with('CustomerDetails')->find($request->id);
         $customer->CustomerDetails()->updateOrCreate($request->all());
 
+        $api = new Api(config('payment.KeyID'), config('payment.KeySecret'));
         $Order = $api->order->create([
             'amount'   => $request->amount ?? 15 * 100,
             'currency' => 'INR'
         ]);
-
+  
         return response([
             "key" => PaymentConfig::where('gateWayName','RAZOR_PAY')->first()->payKeyId,
             "title" => "Pay Online",
