@@ -1,7 +1,7 @@
 <div class="row mb-3">
     <label class="col-2 text-end col-form-label">Gateway Name</label>
     <div class="col-10">
-        {!! Form::text('gateWayName', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
+        {!! Form::text('gateWayName', 'RAZOR_PAY', ['class' => 'form-control', 'autocomplete' => 'off','disabled']) !!}
     </div>
 </div>
 <div class="row mb-3">
@@ -12,7 +12,7 @@
 </div>
 <div class="row mb-3" >
     <label class="col-2 text-end col-form-label">Payment SecretKey</label>
-    <div class="col-10"> 
+    <div class="col-10">
         {!! Form::text('paySecretKey', null, ['class' => 'form-control', 'autocomplete' => 'off']) !!}
     </div>
-</div> 
+</div>

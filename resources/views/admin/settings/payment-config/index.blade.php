@@ -1,12 +1,12 @@
 @extends('admin.settings.layout')
 
-@section('admin_settings_content') 
+@section('admin_settings_content')
     <div class="card custom table-card">
         <div class="card-header">
             <div class="card-title">
-                Payment Configuration 
-            </div> 
-            <a href="{{ route('payment_config.create') }}" class="btn btn-primary"><i class="fa fa-plus me-2"></i> Add New</a>
+                Payment Configuration
+            </div>
+            {{-- <a href="{{ route('payment_config.create') }}" class="btn btn-primary"><i class="fa fa-plus me-2"></i> Add New</a> --}}
         </div>
         <div class="card-body">
             <table class="table" id="data-table">
@@ -24,7 +24,7 @@
         </div>
     </div>
 @endsection
- 
+
 @section('scripts')
 
     <script type="text/javascript">
