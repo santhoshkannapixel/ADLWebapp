@@ -107,7 +107,7 @@ class ApiController extends Controller
             "image" => asset('/public/images/logo/favicon.png'),
             "name" => $customer->name,
             "email" => $customer->email,
-            "contact" => $customer->CustomerDetails->phone_number ?? null,
+            "contact" => $customer->CustomerDetails['phone_number'] ?? null,
             "order_id" => $Order['id']
         ]);
     }
