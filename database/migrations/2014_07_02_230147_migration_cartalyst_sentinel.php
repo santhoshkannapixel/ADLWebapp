@@ -68,7 +68,7 @@ class MigrationCartalystSentinel extends Migration
             $table->string('slug');
             $table->string('name');
             $table->integer('user_id')->nullable();
-            $table->longText('permissions')->nullable();
+                $table->longText('permissions')->nullable();
             $table->timestamps();
             $table->engine = 'InnoDB';
             $table->unique('slug');
