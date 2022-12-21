@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Banners;
 use App\Models\NewsEvent;
+use App\Models\PaymentConfig;
 use App\Models\SubTests;
 use App\Models\Tests;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Razorpay\Api\Api;
 
 class ApiController extends Controller
 {
@@ -85,6 +87,32 @@ class ApiController extends Controller
         return response()->json([
             "status"    =>  true,
             "data"      =>  $User
+        ]);
+    }
+    public function update_billing_address(Request $request,$id)
+    {
+        $User = User::find($id);
+        $User->CustomerDetails()->create($request->all());
+    }
+    public function createOrder(Request $request)
+    {
+        // $api = new Api(config('payment.KeyID'), config('payment.KeySecret'));
+
+        // $Order = $api->order->create([
+        //     'amount'   => $request->amount ?? 15 * 100,
+        //     'currency' => 'INR'
+        // ]);
+
+        // $Order['id']
+        $customer  =  User::find($request->id);
+        return response([
+            "key" => PaymentConfig::where('gateWayName','RAZOR_PAY')->first()->payKeyId,
+            "title" => "Pay Online",
+            "image" => asset('/public/images/logo/favicon.png'),
+            "name" => $customer->name,
+            "email" => $customer->email,
+            "contact" => $customer->mobile,
+            // "order_id" => $Order['id']
         ]);
     }
 }
