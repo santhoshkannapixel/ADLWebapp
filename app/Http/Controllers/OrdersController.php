@@ -26,18 +26,19 @@ class OrdersController extends Controller
                 })
                 ->addColumn('payment_status',function ($data) {
                     if($data->payment_status == 1) {
-                        return '<span class="btn-sm bg-success text-white rounded">
-                            <span class="fa fa-check-circle me-1"></span> Success
-                        </span>';
+                        return '<span class="badge-success"><span class="fa fa-check-circle me-1"></span> Success</span>';
                     }
-                    return '<span class="btn-sm bg-danger text-white rounded">
-                        <span class="fa fa-check-ban me-1"></span> Failed
-                    </span>';
+                    return '<span class="badge-danger"><span class="fa fa-ban me-1"></span> Failed</span>';
+                })
+                ->addColumn('order_status',function ($data) {
+                    if($data->order_status == null) {
+                        return '<span class="badge-secondary"><span class="fa fa-clock-o me-1"></span> Pending</span>';
+                    }
                 })
                 ->addColumn('action', function ($data) {
                     return button('show',route('orders.show', $data->id));
                 })
-                ->rawColumns(['customer','action','payment_status'])
+                ->rawColumns(['customer','action','payment_status','order_status'])
                 ->make(true);
         }
         return view('admin.orders.index');
