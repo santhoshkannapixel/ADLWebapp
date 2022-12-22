@@ -26,9 +26,10 @@
                 <div class="card-body">
                     <h6 class="header-title mb-3"><b>Billing Information</b></h6>
                     <table class="table">
+                        {{ $order->Customer }}
                         <tr>
                             <th>First Name</th>
-                            <td>{{ $order->Customer->first_name }}</td>
+                            <td>{{ $order->Customer['first_name'] }}</td>
                         </tr>
                         <tr>
                             <th>Last Name</th>
