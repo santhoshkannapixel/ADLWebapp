@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\PaymentConfigController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsAndEventsController;
 use App\Http\Controllers\Admin\NewsLetterController;
+use App\Http\Controllers\OrdersController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -36,7 +37,6 @@ Route::middleware(['auth_users'])->group(function () {
     // ================================================= //
         Route::group(['prefix' => 'dashboard'], function () {
             Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
-            Route::get('/red', [DashboardController::class, 'red'])->name('dashboard.red');
         });
         Route::group(['prefix' => 'settings'], function () {
             Route::get('/', [SettingsController::class, 'index'])->name('admin.settings');
@@ -109,7 +109,17 @@ Route::middleware(['auth_users'])->group(function () {
             Route::get('edit/{id}', [NewsAndEventsController::class, 'edit'])->name('news-and-events.edit');
             Route::delete('delete/{id?}', [NewsAndEventsController::class, 'destroy'])->name('news-and-events.destroy');
         });
+
+        Route::group(['prefix' => 'orders'], function () {
+            Route::get('/', [OrdersController::class, 'index'])->name('orders.index');
+            Route::get('/show/{id}', [OrdersController::class, 'show'])->name('orders.show');
+        });
+
     // ================================================= //
+
+
+
+
 
     Route::get('patients', [EnquiryController::class, 'index'])->name('admin.patients');
     Route::get('doctors', [DoctorsController::class, 'index'])->name('admin.doctors');

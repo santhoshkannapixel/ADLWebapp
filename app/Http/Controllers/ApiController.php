@@ -127,8 +127,10 @@ class ApiController extends Controller
 
         if($result['status'] == false) {
             $message = "Payment Failed";
+            $status = 0;
         } else {
             $message = "Payment Success";
+            $status = 1;
         }
 
         $Order = Orders::create([
@@ -137,7 +139,7 @@ class ApiController extends Controller
             'user_id' => $request->user['id'],
             'appoinment' => $request->appoinment,
             'datetime' => $request->datetime,
-            'status' => $message,
+            'status' => $status,
             "order_response"    =>  $result['order_response'],
         ]);
         if(count($request->products)) {
@@ -146,9 +148,8 @@ class ApiController extends Controller
             }
         }
         return response()->json([
-            "status"    =>  $result['status'],
-            "order_response"    =>  $result['order_response'],
-            "message"    =>  $message
+            "status" => $result['status'],
+            "message" => $message
         ]);
     }
 
