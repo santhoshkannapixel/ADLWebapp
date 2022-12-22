@@ -25,6 +25,7 @@
             <div class="card border shadow-sm mb-3">
                 <div class="card-body">
                     <h6 class="header-title mb-3"><b>Billing Information</b></h6>
+                    {{ $order->Customer }}
                     <table class="table">
                         <tr>
                             <th>First Name</th>
