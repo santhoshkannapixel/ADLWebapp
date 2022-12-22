@@ -27,11 +27,6 @@ class Orders extends Model
 
     public function User()
     {
-       return $this->hasOne(User::class, 'id', 'user_id');
-    }
-
-    public function Customer()
-    {
-       return $this->hasOne(CustomerDetails::class, 'id', 'user_id');
+       return $this->hasOne(User::class, 'user_id', 'user_id');
     }
 }
