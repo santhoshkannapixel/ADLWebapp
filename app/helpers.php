@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Support\Facades\Storage;
 use Razorpay\Api\Api;
@@ -12,6 +13,18 @@ if (!function_exists('fetchOrder')) {
     }
 }
 
+if (!function_exists('dateFormat')) {
+    function dateFormat($date)
+    {
+        return Carbon::parse($date)->format('d-m-Y');
+    }
+}
+if (!function_exists('dateTimeFormat')) {
+    function dateTimeFormat($date)
+    {
+        return Carbon::parse($date)->format('d-m-Y H:i A');
+    }
+}
 if (!function_exists('asset_url')) {
     function asset_url($value)
     {
@@ -35,6 +48,7 @@ if (!function_exists('successCall')) {
         return response()->json(['Status'=>200,'Errors'=>false,'Message'=>'Created Successfully']);
     }
 }
+
 if (!function_exists('auth_id')) {
     function auth_id()
     {
