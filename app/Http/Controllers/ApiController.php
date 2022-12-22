@@ -156,7 +156,7 @@ class ApiController extends Controller
     public function CheckValidOrder($response)
     {
         $api    = new Api(config('payment.KeyID'), config('payment.KeySecret'));
-        if($response['status'] == 'SUCCESS') {
+        if($response['status'] == 'PAID') {
             $order_response = $api->order->fetch($response['data']['razorpay_order_id']);
             $payment_id =   $response['data']['razorpay_payment_id'];
             $order_id   =   $response['data']['razorpay_order_id'];
