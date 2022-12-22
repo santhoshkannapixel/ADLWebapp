@@ -26,38 +26,37 @@
                 <div class="card-body">
                     <h6 class="header-title mb-3"><b>Billing Information</b></h6>
                     <table class="table">
-                        {{ $order->Customer }}
                         <tr>
                             <th>First Name</th>
                             <td>{{ $order->Customer['first_name'] }}</td>
                         </tr>
                         <tr>
                             <th>Last Name</th>
-                            <td>{{ $order->Customer->last_name }}</td>
+                            <td>{{ $order->Customer['last_name'] }}</td>
                         </tr>
                         <tr>
                             <th>Email</th>
-                            <td>{{ $order->Customer->email }}</td>
+                            <td>{{ $order->Customer['email'] }}</td>
                         </tr>
                         <tr>
                             <th>Phone Number</th>
-                            <td>{{ $order->Customer->phone_number }}</td>
+                            <td>{{ $order->Customer['phone_number'] }}</td>
                         </tr>
                         <tr>
                             <th>Address</th>
-                            <td>{{ $order->Customer->address }}</td>
+                            <td>{{ $order->Customer['address'] }}</td>
                         </tr>
                         <tr>
                             <th>City / Town</th>
-                            <td>{{ $order->Customer->city_town }}</td>
+                            <td>{{ $order->Customer['city_town'] }}</td>
                         </tr>
                         <tr>
                             <th>State</th>
-                            <td>{{ $order->Customer->state }}</td>
+                            <td>{{ $order->Customer['state'] }}</td>
                         </tr>
                         <tr>
                             <th>Pin Code</th>
-                            <td>{{ $order->Customer->pin_code }}</td>
+                            <td>{{ $order->Customer['pin_code'] }}</td>
                         </tr>
                     </table>
                 </div>
