@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banners;
-use App\Models\CustomerDetails;
 use App\Models\NewsEvent;
 use App\Models\Orders;
 use App\Models\PaymentConfig;
@@ -12,6 +11,7 @@ use App\Models\Tests;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Razorpay\Api\Api;
 use Razorpay\Api\Errors\SignatureVerificationError;
@@ -138,6 +138,7 @@ class ApiController extends Controller
             'appoinment' => $request->appoinment,
             'datetime' => $request->datetime,
             'status' => $message,
+            "order_response"    =>  $result['order_response'],
         ]);
         if(count($request->products)) {
             foreach ($request->products as $key => $product) {
@@ -179,11 +180,12 @@ class ApiController extends Controller
                 $status = false;
             }
         }
+
         return [
             "status" => $status,
             "payment_id" => $payment_id,
             "order_id" => $order_id,
-            "order_response" =>$order_response
+            "order_response" => serialize($order_response)
         ];
     }
 }

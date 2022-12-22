@@ -16,6 +16,7 @@ class Orders extends Model
         'appoinment',
         'datetime',
         'status',
+        'order_response'
     ];
 
     public function Tests()
