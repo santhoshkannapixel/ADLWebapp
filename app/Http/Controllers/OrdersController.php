@@ -26,7 +26,7 @@ class OrdersController extends Controller
                 })
                 ->addColumn('payment_status',function ($data) {
                     if($data->payment_status == 1) {
-                        return '<span class="badge-success"><span class="fa fa-check-circle me-1"></span> Success</span>';
+                        return '<span class="badge-success"><span class="fa fa-check-circle me-1"></span> Paid</span>';
                     }
                     return '<span class="badge-danger"><span class="fa fa-ban me-1"></span> Failed</span>';
                 })

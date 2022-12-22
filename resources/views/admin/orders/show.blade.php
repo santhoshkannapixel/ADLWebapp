@@ -121,7 +121,11 @@
             </div>
             <div class="card border shadow-sm">
                 <div class="card-body text-end">
-                    <b>Total Price</b> : {{ $total_price }}
+                    <span class="me-2 badge-{{ $order->payment_status == 1 ? 'success' : 'danger' }}">
+                        <i class="fa {{ $order->payment_status == 1 ? 'fa-check-circle' : 'fa-ban' }}"></i>
+                        {{ $order->payment_status == 1 ? 'Payment Success' : 'Payment Failed' }}
+                    </span>
+                    <b>Total Price</b> : ₹ {{ $total_price }}
                 </div>
             </div>
         </div>
