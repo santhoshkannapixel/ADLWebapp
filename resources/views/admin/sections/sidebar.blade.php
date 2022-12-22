@@ -9,7 +9,7 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link text-white">
+            <a href="{{ route('orders.index') }}" class="nav-link text-white {{ Route::is('orders.index') ? "active" : "" }}">
             <i class="fa fa-shopping-cart"></i>Orders
             </a>
         </li>
