@@ -124,7 +124,7 @@ class ApiController extends Controller
     public function save_payment_order(Request $request)
     {
         $result =  $this->CheckValidOrder($request->razorpay_response);
-        
+
         if($result['status'] == false) {
             $message = "Payment Failed";
         } else {
@@ -132,8 +132,8 @@ class ApiController extends Controller
         }
 
         $Order = Orders::create([
-            'payment_id' => $request->razorpay_response['razorpay_payment_id'],
-            'razorpay_order_id' => $request->razorpay_response['razorpay_order_id'],
+            'payment_id' => $result['payment_id'],
+            'razorpay_order_id' => $result['order_id'],
             'user_id' => $request->user['id'],
             'appoinment' => $request->appoinment,
             'datetime' => $request->datetime,
