@@ -120,12 +120,16 @@
                 </div>
             </div>
             <div class="card border shadow-sm">
-                <div class="card-body text-end">
-                    <span class="me-2 badge-{{ $order->payment_status == 1 ? 'success' : 'danger' }}">
-                        <i class="fa {{ $order->payment_status == 1 ? 'fa-check-circle' : 'fa-ban' }}"></i>
-                        {{ $order->payment_status == 1 ? 'Payment Success' : 'Payment Failed' }}
-                    </span>
-                    <b>Total Price</b> : ₹ {{ $total_price }}
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <span style="font-size: 16px" class="me-2  badge-{{ $order->payment_status == 1 ? 'success' : 'danger' }}">
+                            <i class="fa {{ $order->payment_status == 1 ? 'fa-check-circle' : 'fa-ban' }}"></i>
+                            {{ $order->payment_status == 1 ? 'Payment Success' : 'Payment Failed' }}
+                        </span>
+                    </div>
+                    <div>
+                        Total Price  : <b>₹ {{ $total_price }}</b>
+                    </div>
                 </div>
             </div>
         </div>
