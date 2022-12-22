@@ -124,7 +124,7 @@ class ApiController extends Controller
     public function save_payment_order(Request $request)
     {
         $result =  $this->CheckValidOrder($request->razorpay_response);
-
+        
         if($result['status'] == false) {
             $message = "Payment Failed";
         } else {
@@ -151,13 +151,13 @@ class ApiController extends Controller
         ]);
     }
 
-    public function CheckValidOrder($data)
+    public function CheckValidOrder($response)
     {
         $api    = new Api(config('payment.KeyID'), config('payment.KeySecret'));
-        if(!is_null($data['razorpay_order_id'])) {
-            $order_response = $api->order->fetch($data['razorpay_order_id']);
-            $payment_id =   $data['razorpay_payment_id'];
-            $order_id   =   $data['razorpay_order_id'];
+        if($response['status'] == 'SUCCESS') {
+            $order_response = $api->order->fetch($response['data']['razorpay_order_id']);
+            $payment_id =   $response['data']['razorpay_payment_id'];
+            $order_id   =   $response['data']['razorpay_order_id'];
             if( isset($order_response['status']) && $order_response['status'] == 'paid' ) {
                 $status = true;
             }
@@ -165,16 +165,16 @@ class ApiController extends Controller
                 $api->utility->verifyPaymentSignature([
                     'razorpay_order_id' => $order_id,
                     'razorpay_payment_id' => $payment_id,
-                    'razorpay_signature' => $data['razorpay_signature']
+                    'razorpay_signature' => $response['data']['razorpay_signature']
                 ]);
             } catch(SignatureVerificationError $e) {
                 $error = 'Razorpay Error : ' . $e->getMessage();
                 $status = false;
             }
         } else {
-            if(isset($data['error'])) {
-                $payment_id =   $data['error']['metadata']['payment_id'];
-                $order_id   =   $data['error']['metadata']['order_id'];
+            if(isset($response['data']['error'])) {
+                $payment_id =   $response['data']['error']['metadata']['payment_id'];
+                $order_id   =   $response['data']['error']['metadata']['order_id'];
                 $order_response =   $api->order->fetch($order_id);
                 $status = false;
             }
