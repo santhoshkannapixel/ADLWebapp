@@ -5,15 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Banners;
 use App\Models\CustomerDetails;
 use App\Models\NewsEvent;
+use App\Models\Orders;
 use App\Models\PaymentConfig;
 use App\Models\SubTests;
 use App\Models\Tests;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Razorpay\Api\Api;
+use Razorpay\Api\Errors\SignatureVerificationError;
 
 class ApiController extends Controller
 {
@@ -122,10 +123,67 @@ class ApiController extends Controller
 
     public function save_payment_order(Request $request)
     {
-        Log::info($request->all());
-        return response()->json([
-            "status"    =>  true,
-            "data"      =>  $request->all()
+        $result =  $this->CheckValidOrder($request->razorpay_response);
+
+        if($result['status'] == false) {
+            $message = "Payment Failed";
+        } else {
+            $message = "Payment Success";
+        }
+
+        $Order = Orders::create([
+            'payment_id' => $request->razorpay_response['razorpay_payment_id'],
+            'razorpay_order_id' => $request->razorpay_response['razorpay_order_id'],
+            'user_id' => $request->user['id'],
+            'appoinment' => $request->appoinment,
+            'datetime' => $request->datetime,
+            'status' => $message,
         ]);
+        if(count($request->products)) {
+            foreach ($request->products as $key => $product) {
+                $Order->Tests()->create($product);
+            }
+        }
+        return response()->json([
+            "status"    =>  $result['status'],
+            "order_response"    =>  $result['order_response'],
+            "message"    =>  $message
+        ]);
+    }
+
+    public function CheckValidOrder($data)
+    {
+        $api    = new Api(config('payment.KeyID'), config('payment.KeySecret'));
+        if(!is_null($data['razorpay_order_id'])) {
+            $order_response = $api->order->fetch($data['razorpay_order_id']);
+            $payment_id =   $data['razorpay_payment_id'];
+            $order_id   =   $data['razorpay_order_id'];
+            if( isset($order_response['status']) && $order_response['status'] == 'paid' ) {
+                $status = true;
+            }
+            try {
+                $api->utility->verifyPaymentSignature([
+                    'razorpay_order_id' => $order_id,
+                    'razorpay_payment_id' => $payment_id,
+                    'razorpay_signature' => $data['razorpay_signature']
+                ]);
+            } catch(SignatureVerificationError $e) {
+                $error = 'Razorpay Error : ' . $e->getMessage();
+                $status = false;
+            }
+        } else {
+            if(isset($data['error'])) {
+                $payment_id =   $data['error']['metadata']['payment_id'];
+                $order_id   =   $data['error']['metadata']['order_id'];
+                $order_response =   $api->order->fetch($order_id);
+                $status = false;
+            }
+        }
+        return [
+            "status" => $status,
+            "payment_id" => $payment_id,
+            "order_id" => $order_id,
+            "order_response" =>$order_response
+        ];
     }
 }

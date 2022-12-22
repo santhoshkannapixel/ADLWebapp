@@ -2,6 +2,15 @@
 
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Support\Facades\Storage;
+use Razorpay\Api\Api;
+
+if (!function_exists('fetchOrder')) {
+    function fetchOrder($id)
+    {
+        $api = new Api(config('payment.KeyID'), config('payment.KeySecret'));
+        return  $api->order->fetch($id);
+    }
+}
 
 if (!function_exists('asset_url')) {
     function asset_url($value)
