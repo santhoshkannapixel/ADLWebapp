@@ -11,6 +11,7 @@ use App\Models\Tests;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Razorpay\Api\Api;
 
@@ -116,6 +117,15 @@ class ApiController extends Controller
                 "order_id" => $Order['id'],
                 "user" => $customer
             ]
+        ]);
+    }
+
+    public function save_payment_order(Request $request)
+    {
+        Log::info($request->all());
+        return response()->json([
+            "status"    =>  true,
+            "data"      =>  $request->all()
         ]);
     }
 }
