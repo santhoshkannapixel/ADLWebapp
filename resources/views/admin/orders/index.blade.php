@@ -23,6 +23,7 @@
                         <th>Is Appoinment</th>
                         <th>Date & Time</th>
                         <th>Payment Status</th>
+                        <th>Order Status</th>
                         <th width="100px">Action</th>
                     </tr>
                 </thead>
@@ -46,7 +47,8 @@
                     {data: 'customer', name: 'customer'},
                     {data: 'appoinment', name: 'appoinment'},
                     {data: 'datetime', name: 'datetime'},
-                    {data: 'status', name: 'status'},
+                    {data: 'payment_status', name: 'payment_status'},
+                    {data: 'order_status', name: 'order_status'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });

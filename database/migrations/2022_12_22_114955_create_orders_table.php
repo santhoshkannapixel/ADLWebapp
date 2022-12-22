@@ -20,7 +20,8 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id')->nullable();
             $table->boolean('appoinment')->nullable();
             $table->string('datetime')->nullable();
-            $table->string('status')->nullable();
+            $table->string('payment_status')->nullable();
+            $table->string('order_status')->nullable();
             $table->longText('order_response')->nullable();
             $table->timestamps();
         });

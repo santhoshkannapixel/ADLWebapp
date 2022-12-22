@@ -15,7 +15,8 @@ class Orders extends Model
         'user_id',
         'appoinment',
         'datetime',
-        'status',
+        'payment_status',
+        'order_status',
         'order_response'
     ];
 

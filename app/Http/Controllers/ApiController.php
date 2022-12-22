@@ -139,7 +139,7 @@ class ApiController extends Controller
             'user_id' => $request->user['id'],
             'appoinment' => $request->appoinment,
             'datetime' => $request->datetime,
-            'status' => $status,
+            'payment_status' => $status,
             "order_response"    =>  $result['order_response'],
         ]);
         if(count($request->products)) {

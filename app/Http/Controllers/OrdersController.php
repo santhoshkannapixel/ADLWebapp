@@ -23,8 +23,8 @@ class OrdersController extends Controller
                 ->addColumn('datetime',function ($data) {
                     return Carbon::parse($data->datetime)->format('d-m-Y H:i A');
                 })
-                ->addColumn('status',function ($data) {
-                    if($data->status == 1) {
+                ->addColumn('payment_status',function ($data) {
+                    if($data->payment_status == 1) {
                         return '<span class="btn-sm bg-success text-white rounded">
                             <span class="fa fa-check-circle me-1"></span> Success
                         </span>';
@@ -36,7 +36,7 @@ class OrdersController extends Controller
                 ->addColumn('action', function ($data) {
                     return button('show',route('orders.show', $data->id));
                 })
-                ->rawColumns(['customer','action','status'])
+                ->rawColumns(['customer','action','payment_status'])
                 ->make(true);
         }
         return view('admin.orders.index');
