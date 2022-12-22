@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CustomerDetails;
 use App\Models\Orders;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -44,7 +45,8 @@ class OrdersController extends Controller
 
     public function show($id)
     {
-        $order = Orders::with('User','Tests','Customer')->find($id);
-        return view('admin.orders.show',compact('order'));
+        $order = Orders::with('User','Tests')->find($id);
+        $customer = CustomerDetails::where('user_id', 1)->first();
+        return view('admin.orders.show',compact('order','customer'));
     }
 }
