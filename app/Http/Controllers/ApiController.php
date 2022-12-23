@@ -210,4 +210,13 @@ class ApiController extends Controller
             "order_response" => serialize($order_response)
         ];
     }
+
+    public function customer_info($id)
+    {
+        $customer = User::with('CustomerDetails')->find($id);
+        return [
+            "status" => true,
+            "data" => $customer
+        ];
+    }
 }
