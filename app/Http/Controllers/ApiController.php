@@ -86,18 +86,19 @@ class ApiController extends Controller
             if(Hash::check($request->password, $User->password)){
                 return response()->json([
                     "status"    =>  true,
-                    "data"      =>  $User
+                    "data"      =>  $User,
+                    "message" => "Login Success !"
                 ]);
             } else {
                 return response()->json([
                     "status"    =>  false,
-                    "data"      =>  'Password or Email id Wrong !'
+                    "message"  =>  'Password or Email id Wrong !'
                 ]);
             }
         }
         return response()->json([
             "status"    =>  false,
-            "data"      =>  'User Not Found !'
+            "message"      =>  'User Not Found !'
         ]);
     }
     public function register(Request $request)
