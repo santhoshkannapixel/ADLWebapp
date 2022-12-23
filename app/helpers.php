@@ -13,10 +13,27 @@ if (!function_exists('fetchOrder')) {
     }
 }
 
+if (!function_exists('OrderId')) {
+    function OrderId($id)
+    {
+        $prefix = '#ADL';
+        if(strlen($id) == 1) {
+          return  $prefix."00".$id;
+        }
+        return  $prefix."0".$id;
+    }
+}
 if (!function_exists('dateFormat')) {
     function dateFormat($date)
     {
         return Carbon::parse($date)->format('d-m-Y');
+    }
+}
+
+if (!function_exists('textFormat')) {
+    function textFormat($text)
+    {
+        return ucfirst(str_replace('_', ' ', $text));
     }
 }
 if (!function_exists('dateTimeFormat')) {

@@ -24,6 +24,45 @@
         @if (!is_null($customer))
             <div class="col-md-4">
                 <div class="card border shadow-sm mb-3">
+                    <div class="card-header d-flex align-items-center justify-content-between py-3">
+                        <label><b>Order Status</b></label>
+                        <div>
+                            @if ($order->order_status == "0" || $order->order_status ==  null)
+                                <span style="font-size: 16px" class="badge-secondary">
+                                    <i class="fa fa-clock-o"></i>
+                                    Order Pending
+                                </span>
+                            @endif
+                            @if ($order->order_status == "1")
+                                <span style="font-size: 16px" class="badge-success">
+                                    <i class="fa fa-check"></i>
+                                    Order Accepted
+                                </span>
+                            @endif
+                            @if ($order->order_status == "2")
+                                <span style="font-size: 16px" class="badge-danger">
+                                    <i class="fa fa-ban"></i>
+                                    Order Denied
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('orders.change-order-status',$order->id) }}" method="POST">
+                            @csrf
+                            <div class="input-group">
+                                <select name="order_status" class="form-select">
+                                    <option value="">-- set status --</option>
+                                    <option {{ $order->order_status  == "0" ||  $order->order_status  == null  ? 'selected' : ''}} value="0">Pending</option>
+                                    <option {{ $order->order_status == "1" ? 'selected' : '' }} value="1">Accepted</option>
+                                    <option {{ $order->order_status == "2" ? 'selected' : '' }} value="2">Denied</option>
+                                </select>
+                                <button type="submit" class="btn btn-sm btn-primary px-3">Change</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card border shadow-sm mb-3">
                     <div class="card-body">
                         <h6 class="header-title mb-3"><b>Billing Information</b></h6>
                         <table class="table">
@@ -119,7 +158,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card border shadow-sm">
+            <div class="card border shadow-sm mb-3">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
                         <span style="font-size: 16px" class="me-2  badge-{{ $order->payment_status == 1 ? 'success' : 'danger' }}">
@@ -130,6 +169,24 @@
                     <div>
                         Total Price  : <b>₹ {{ $total_price }}</b>
                     </div>
+                </div>
+            </div>
+            <div class="card border shadow-sm">
+                <div class="card-body">
+                    <h6 class="header-title mb-3"><b>Razorpay Information</b></h6>
+                    <table class="table">
+                        @foreach (unserialize($order->order_response)->toArray() as $key =>  $item)
+                            <tr>
+                                @if (!is_null($item) && $key !== 'notes' && $key !== 'created_at')
+                                    <th>{{ textFormat($key) }}</th>
+                                    <td>{{ $item }}</td>
+                                    @elseif ($key == 'created_at')
+                                        <th>{{ textFormat($key) }}</th>
+                                        <td>{{ dateFormat($item) }}</td>
+                                @endif
+                            </tr>
+                        @endforeach
+                    </table>
                 </div>
             </div>
         </div>

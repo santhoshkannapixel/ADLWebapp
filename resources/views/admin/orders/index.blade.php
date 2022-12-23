@@ -17,14 +17,15 @@
                 <thead>
                     <tr>
                         <th width="5%">No</th>
-                        <th>Payment Id</th>
-                        <th>Order Id</th>
+                        <th>#Order ID</th>
                         <th>Customer</th>
+                        <th>Phone Number</th>
+                        <th>Email</th>
                         <th>Is Appoinment</th>
-                        <th>Date & Time</th>
+                        <th>Order Date</th>
                         <th>Payment Status</th>
                         <th>Order Status</th>
-                        <th width="100px">Action</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -42,11 +43,12 @@
                 ajax: "{{ route('orders.index') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'id',orderable: false, searchable: false},
-                    {data: 'payment_id', name: 'payment_id'},
-                    {data: 'razorpay_order_id', name: 'razorpay_order_id'},
+                    {data: 'id', name: 'id'},
                     {data: 'customer', name: 'customer'},
+                    {data: 'phone_number', name: 'phone_number'},
+                    {data: 'email', name: 'email'},
                     {data: 'appoinment', name: 'appoinment'},
-                    {data: 'datetime', name: 'datetime'},
+                    {data: 'created_at', name: 'created_at'},
                     {data: 'payment_status', name: 'payment_status'},
                     {data: 'order_status', name: 'order_status'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
