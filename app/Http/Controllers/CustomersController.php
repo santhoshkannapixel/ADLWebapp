@@ -17,7 +17,7 @@ class CustomersController extends Controller
                     return $data->CustomerDetails->phone_number ?? null;
                 })
                 ->addColumn('action', function ($data) {
-                    return button('show',route('orders.show', $data->id));
+                    return button('show','#');
                 })
                 ->make(true);
         }
