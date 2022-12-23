@@ -8,7 +8,7 @@
     <div class="card custom table-card">
         <div class="card-header">
             <div class="card-title">
-                Lab Test Orders
+                Customers
             </div>
             <a class="btn btn-primary" href="{{ route('news-and-events.create') }}"><i class="fa fa-plus"></i> Add </a>
         </div>
