@@ -10,9 +10,7 @@ use App\Models\SubTests;
 use App\Models\Tests;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Razorpay\Api\Api;
 use Razorpay\Api\Errors\SignatureVerificationError;
@@ -84,17 +82,22 @@ class ApiController extends Controller
     public function login(Request $request)
     {
         $User = User::where('email',$request->email)->first();
-
-        if(Hash::check($request->password, $User->password)){
-            return response()->json([
-                "status"    =>  true,
-                "data"      =>  $User
-            ]);
+        if(!is_null($User)) {
+            if(Hash::check($request->password, $User->password)){
+                return response()->json([
+                    "status"    =>  true,
+                    "data"      =>  $User
+                ]);
+            } else {
+                return response()->json([
+                    "status"    =>  false,
+                    "data"      =>  'Password or Email id Wrong !'
+                ]);
+            }
         }
-
         return response()->json([
             "status"    =>  false,
-            "data"      =>  'Password or Email id Wrong !'
+            "data"      =>  'User Not Found !'
         ]);
     }
     public function register(Request $request)
