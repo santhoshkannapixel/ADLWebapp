@@ -14,7 +14,7 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link text-white">
+            <a href="{{ route('customers.index') }}" class="nav-link text-white {{ Route::is('customers.index','customers.show') ? "active" : "" }}" >
                 <i class="fa fa-users"></i>Customers
             </a>
         </li>

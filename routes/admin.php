@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\PaymentConfigController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsAndEventsController;
 use App\Http\Controllers\Admin\NewsLetterController;
+use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\OrdersController;
 use Illuminate\Support\Facades\Route;
 
@@ -114,6 +115,9 @@ Route::middleware(['auth_users'])->group(function () {
             Route::get('/', [OrdersController::class, 'index'])->name('orders.index');
             Route::get('/show/{id}', [OrdersController::class, 'show'])->name('orders.show');
             Route::post('/change-order-status/{id}', [OrdersController::class, 'change_order_status'])->name('orders.change-order-status');
+        });
+        Route::group(['prefix' => 'customers'], function () {
+            Route::get('/', [CustomersController::class, 'index'])->name('customers.index');
         });
 
     // ================================================= //
