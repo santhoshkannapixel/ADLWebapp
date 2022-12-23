@@ -38,7 +38,6 @@
                 ajax: "{{ route('customers.index') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'id',orderable: false, searchable: false},
-                    {data: 'id', name: 'id'},
                     {data: 'name', name: 'name'},
                     {data: 'email', name: 'email'},
                     {data: 'phone_number', name: 'phone_number'},
