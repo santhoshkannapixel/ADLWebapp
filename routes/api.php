@@ -19,6 +19,7 @@ Route::get('test/{id}', [ApiController::class,'testDetails']);
 Route::post('test-list/{type?}', [ApiController::class,'testLists']);
 Route::post('bannerContactForm', [ApiController::class,'bannerContactForm']);
 Route::post('newsAndEvents', [ApiController::class,'newsAndEvents']);
+Route::post('login', [ApiController::class,'login']);
 Route::post('register', [ApiController::class,'register']);
 Route::get('create-order', [ApiController::class,'createOrder']);
 Route::post('update-billing-details', [ApiController::class,'update_billing_address']);
