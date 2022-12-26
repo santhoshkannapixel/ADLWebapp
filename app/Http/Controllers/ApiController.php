@@ -23,13 +23,13 @@ class ApiController extends Controller
         $banner = [];
         foreach($data as $item ) {
             $banner[] = [
-                'Title' => $data->Title,
-                'Content' => $data->Content,
-                'Url' => $data->Url,
-                'DesktopImage' => asset_url($data->DesktopImage),
-                'MobileImage' => asset_url($data->MobileImage),
-                'OrderBy' => $data->OrderBy,
-                'Status' => $data->Status
+                'Title' => $item->Title,
+                'Content' => $item->Content,
+                'Url' => $item->Url,
+                'DesktopImage' => asset_url($item->DesktopImage),
+                'MobileImage' => asset_url($item->MobileImage),
+                'OrderBy' => $item->OrderBy,
+                'Status' => $item->Status
             ];
         }
         return response()->json([
