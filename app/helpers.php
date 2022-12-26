@@ -1,18 +1,21 @@
 <?php
 
+use App\Models\ApiConfig;
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Support\Facades\Storage;
 use Razorpay\Api\Api;
 
-if(! function_exists('auth_user_role')) {
-    function auth_user_role() {
+if (!function_exists('auth_user_role')) {
+    function auth_user_role()
+    {
         return Sentinel::getUser()->roles[0];
     }
 }
 
-if(! function_exists('auth_user')) {
-    function auth_user() {
+if (!function_exists('auth_user')) {
+    function auth_user()
+    {
         return Sentinel::getUser();
     }
 }
@@ -30,10 +33,10 @@ if (!function_exists('OrderId')) {
     function OrderId($id)
     {
         $prefix = '#ADL';
-        if(strlen($id) == 1) {
-          return  $prefix."00".$id;
+        if (strlen($id) == 1) {
+            return  $prefix . "00" . $id;
         }
-        return  $prefix."0".$id;
+        return  $prefix . "0" . $id;
     }
 }
 if (!function_exists('dateFormat')) {
@@ -69,13 +72,13 @@ if (!function_exists('asset_url')) {
 if (!function_exists('filedCall')) {
     function filedCall($data)
     {
-        return response()->json(['Status'=>200,'Error'=>true,'Message'=>$data]);
+        return response()->json(['Status' => 200, 'Error' => true, 'Message' => $data]);
     }
 }
 if (!function_exists('successCall')) {
     function successCall()
     {
-        return response()->json(['Status'=>200,'Errors'=>false,'Message'=>'Created Successfully']);
+        return response()->json(['Status' => 200, 'Errors' => false, 'Message' => 'Created Successfully']);
     }
 }
 
@@ -122,19 +125,33 @@ if (!function_exists('button')) {
     }
 }
 if (!function_exists('toggleButton')) {
-function toggleButton($type, $url, $data)
-{
-    if ($type == 'status') {
-        if ($data->status == '1') {
-            $checked = 'checked="checked"';
-        } else {
+    function toggleButton($type, $url, $data)
+    {
+        if ($type == 'status') {
+            if ($data->status == '1') {
+                $checked = 'checked="checked"';
+            } else {
 
-            $checked = '';
-        }
-        return '<label class="switch">
+                $checked = '';
+            }
+            return '<label class="switch">
             <input data-id="' . $url . '" type="checkbox" id="status"  onclick="statuschange(' . $data->status . ',' . $data->id . ')"  ' . $checked . '>
             <div class="slider round"></div>
             </label>';
+        }
     }
-}
+
+    if(!function_exists('getApiMaster')) {
+        function getApiMaster($type) {
+            $data = ApiConfig::where('apiType', (string) $type)->get()->toArray();
+            $result = [];
+            if(!is_null($data)) {
+                foreach($data as $api) { 
+                    $result[] = $api['apiUrl']."?CorporateID=".$api['corporateID']."&passCode=".$api['passCode'];
+                }
+            }
+            return $result;
+        }
+    }
+
 }

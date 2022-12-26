@@ -30,22 +30,24 @@ class CityController extends Controller
 
         return view('admin.master.city.index', compact('last_sync'));
     }
-    
+
     public function syncRequest()
     {
-        $response      = Http::get(config('auth.GetCityMasterBangaloreAPI'));
-        $response_data = json_decode($response->body())[0]->Data;
-
-        foreach ($response_data as $data) {
-            Cities::updateOrCreate([
-                "CityID"    =>  $data->CityID ?? null,
-                "CityName"  =>  $data->CityName ?? null,
-                "AreaId"    =>  $data->AreaId ?? null,
-                "AreaName"  =>  $data->AreaName ?? null,
-                "Pincode"   =>  $data->Pincode ?? null,
-                "State"     =>  $data->State ?? null,
-            ]);
+        foreach(getApiMaster('GetCityMaster') as $api) {
+            $response      = Http::get($api);
+            $response_data = json_decode($response->body())[0]->Data;
+            foreach ($response_data as $data) {
+                Cities::updateOrCreate([
+                    "CityID"    =>  $data->CityID ?? null,
+                    "CityName"  =>  $data->CityName ?? null,
+                    "AreaId"    =>  $data->AreaId ?? null,
+                    "AreaName"  =>  $data->AreaName ?? null,
+                    "Pincode"   =>  $data->Pincode ?? null,
+                    "State"     =>  $data->State ?? null,
+                ]);
+            }
         }
+
 
         Flash::success( __('masters.sync_success'));
 

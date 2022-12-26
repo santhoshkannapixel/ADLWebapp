@@ -20,7 +20,7 @@ class TestController extends Controller
             $data = Tests::select([
                 "id",
                 "TestId",
-                "TestName", 
+                "TestName",
                 "ApplicableGender",
                 "IsPackage",
                 "Classifications",
@@ -55,7 +55,7 @@ class TestController extends Controller
                     $type    =  $data->HomeCollection == 'N' ? 'ban' : 'check-circle';
                     $status  =  '<span class="fa-20 t-center fa fa-'.$type.' text-'.$flag.'"></span>';
                     return $status;
-                }) 
+                })
                 ->addColumn('Test_Schedule', function ($data) {
                     $TestSchedule  =  '<small>'.str_replace(',',' ' , $data->TestSchedule).'</small>';
                     return $TestSchedule;
@@ -74,15 +74,14 @@ class TestController extends Controller
 
     public function syncRequest()
     {
-        $response[] = Http::get(config('auth.GetTestMasterBangaloreAPI'));
-        $response[] = Http::get(config('auth.GetTestMasterMangaloreAPI'));
-        $response[] = Http::get(config('auth.GetTestMasterRestofBangalore'));
-    
-        foreach($response as $res)  {
-            if(!is_null(json_decode($res->body())[0]->Data)) {
-                foreach (json_decode($res->body())[0]->Data as $data) {
-                    try {
-                        $test = Tests::updateOrCreate(["TestId" => $data->TestId],[
+        foreach(getApiMaster('GetTestMaster') as $api)  {
+            $response = Http::get($api);
+            $response_data = json_decode($response->body())[0]->Data;
+
+            if(!is_null($response_data)) {
+                foreach ($response_data as $data) {
+                    // try {
+                        $test = Tests::updateOrCreate([
                             "TestId"                            =>  $data->TestId ?? null,
                             "DosCode"                           =>  $data->DosCode ?? null,
                             "TestName"                          =>  $data->TestName ?? null,
@@ -101,8 +100,8 @@ class TestController extends Controller
                             "TestSchedule"                      =>  $data->TestSchedule ?? null,
                             "TestPrice"                         =>  $data->TestPrice ?? null,
                         ]);
-                      
-                        if(!is_null($data->SubTestList)) {
+
+                        if($data->IsPackage == "Yes") {
                             foreach ($data->SubTestList as  $subTest) {
                                 $test->SubTestList()->create([
                                     "SubTestId"         =>  $subTest->SubTestId,
@@ -112,15 +111,15 @@ class TestController extends Controller
                             }
                         }
                         Flash::success( __('masters.sync_success'));
-                    } catch (\Throwable $th) {
-                       Log::error($th->getMessage());
-                       Flash::error($th->getMessage());
-                    }
+                    // } catch (\Throwable $th) {
+                    //    Log::error($th->getMessage());
+                    //    Flash::error($th->getMessage());
+                    // }
                 }
             }
-        } 
+        }
         return redirect()->back();
-    } 
+    }
 
     public function show($id)
     {
