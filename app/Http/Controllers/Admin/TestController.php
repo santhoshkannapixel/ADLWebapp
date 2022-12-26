@@ -75,7 +75,7 @@ class TestController extends Controller
     public function syncRequest()
     {
         foreach(getApiMaster('GetTestMaster') as $api)  {
-            $response = Http::get($api);
+            $response = Http::get($api['http']);
             $response_data = json_decode($response->body())[0]->Data;
 
             if(!is_null($response_data)) {
@@ -101,7 +101,12 @@ class TestController extends Controller
                             "TestPrice"                         =>  $data->TestPrice ?? null,
                         ]);
 
-                        if($data->IsPackage == "Yes") {
+                        $test->TestPrice()->create([
+                            "TestPrice" => $test->TestPrice,
+                            "TestLocation" =>$api['location']
+                        ]);
+
+                        if(isset($data->SubTestList)) {
                             foreach ($data->SubTestList as  $subTest) {
                                 $test->SubTestList()->create([
                                     "SubTestId"         =>  $subTest->SubTestId,

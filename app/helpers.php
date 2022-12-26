@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\ApiConfig;
+use App\Models\PaymentConfig;
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Support\Facades\Storage;
@@ -146,11 +147,20 @@ if (!function_exists('toggleButton')) {
             $data = ApiConfig::where('apiType', (string) $type)->get()->toArray();
             $result = [];
             if(!is_null($data)) {
-                foreach($data as $api) { 
-                    $result[] = $api['apiUrl']."?CorporateID=".$api['corporateID']."&passCode=".$api['passCode'];
+                foreach($data as $api) {
+                    $result[] = [
+                        "location" =>  $api['location_slug'],
+                        "http" => $api['apiUrl']."?CorporateID=".$api['corporateID']."&passCode=".$api['passCode']
+                    ];
                 }
             }
             return $result;
+        }
+    }
+
+    if(!function_exists('PaymentApiConfig')) {
+        function PaymentApiConfig() {
+            return PaymentConfig::find(1);
         }
     }
 

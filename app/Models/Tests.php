@@ -9,7 +9,7 @@ use Mockery\Matcher\Subset;
 class Tests extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         "TestId",
         "DosCode",
@@ -34,5 +34,9 @@ class Tests extends Model
     public function SubTestList()
     {
        return $this->hasMany(SubTests::class, 'TestID', 'id');
+    }
+    public function TestPrice()
+    {
+       return $this->hasMany(TestPrice::class, 'TestId', 'id');
     }
 }

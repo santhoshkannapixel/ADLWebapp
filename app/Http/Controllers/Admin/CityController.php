@@ -34,7 +34,7 @@ class CityController extends Controller
     public function syncRequest()
     {
         foreach(getApiMaster('GetCityMaster') as $api) {
-            $response      = Http::get($api);
+            $response      = Http::get($api['http']);
             $response_data = json_decode($response->body())[0]->Data;
             foreach ($response_data as $data) {
                 Cities::updateOrCreate([

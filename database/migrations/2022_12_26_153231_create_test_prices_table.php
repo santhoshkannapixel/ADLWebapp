@@ -17,7 +17,7 @@ class CreateTestPricesTable extends Migration
             $table->id();
             $table->integer('TestId');
             $table->float('TestPrice');
-            $table->float('price');
+            $table->string('TestLocation');
             $table->timestamps();
         });
     }

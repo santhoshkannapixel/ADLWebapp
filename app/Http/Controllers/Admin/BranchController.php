@@ -51,7 +51,7 @@ class BranchController extends Controller
     public function syncRequest()
     {
         foreach(getApiMaster('GetBranchMaster') as $api) {
-            $response      = Http::get($api);
+            $response      = Http::get($api['http']);
             $response_data = json_decode($response->body())[0]->Data;
             foreach ($response_data as $data) {
                 Branch::updateOrCreate([

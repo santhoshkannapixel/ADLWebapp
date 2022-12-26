@@ -122,7 +122,7 @@ class ApiController extends Controller
         $customer->CustomerDetails()->delete();
         $customer->CustomerDetails()->create($customerInfo);
 
-        $api = new Api(config('payment.KeyID'), config('payment.KeySecret'));
+        $api = new Api(PaymentApiConfig()->payKeyId,PaymentApiConfig()->paySecretKey);
         $Order = $api->order->create([
             'amount'   => (int) $request->amount * 100,
             'currency' => 'INR'
@@ -177,7 +177,7 @@ class ApiController extends Controller
 
     public function CheckValidOrder($response)
     {
-        $api    = new Api(config('payment.KeyID'), config('payment.KeySecret'));
+        $api    = new Api(PaymentApiConfig()->payKeyId,PaymentApiConfig()->paySecretKey);
         if($response['status'] == 'PAID') {
             $order_response = $api->order->fetch($response['data']['razorpay_order_id']);
             $payment_id =   $response['data']['razorpay_payment_id'];
