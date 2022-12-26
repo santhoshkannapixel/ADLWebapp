@@ -15,6 +15,7 @@ Route::get('create-order', [ApiController::class,'createOrder']);
 Route::post('update-billing-details', [ApiController::class,'update_billing_address']);
 Route::post('save-payment-order', [ApiController::class,'save_payment_order']);
 Route::get('customer/{id}', [ApiController::class,'customer_info']);
+Route::post('packages',[ApiController::class,'packages']);
 
 Route::post('/patients-consumers', [PatientsConsumersController::class, 'store'])->name('patients-consumers');
 Route::post('/feedback', [FeedBackController::class, 'store'])->name('feedback');

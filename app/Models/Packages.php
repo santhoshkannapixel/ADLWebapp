@@ -4,12 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Mockery\Matcher\Subset;
 
-class Tests extends Model
+class Packages extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         "TestId",
         "DosCode",
@@ -30,9 +28,14 @@ class Tests extends Model
         "TestPrice",
         "TestImages"
     ];
-    
-    public function TestPrice()
+
+    public function SubTestList()
     {
-       return $this->hasMany(TestPrice::class, 'TestId', 'id');
+       return $this->hasMany(SubTests::class, 'TestID', 'id');
+    }
+
+    public function PackagesPrice()
+    {
+       return $this->hasMany(PackagesPrice::class, 'TestId', 'id');
     }
 }

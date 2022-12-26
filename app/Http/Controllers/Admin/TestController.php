@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Packages;
 use App\Models\Tests;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -81,38 +82,62 @@ class TestController extends Controller
             if(!is_null($response_data)) {
                 foreach ($response_data as $data) {
                     // try {
-                        $test = Tests::updateOrCreate([
-                            "TestId"                            =>  $data->TestId ?? null,
-                            "DosCode"                           =>  $data->DosCode ?? null,
-                            "TestName"                          =>  $data->TestName ?? null,
-                            "AliasName1"                        =>  $data->AliasName1 ?? null,
-                            "AliasName2"                        =>  $data->AliasName2 ?? null,
-                            "ApplicableGender"                  =>  $data->ApplicableGender ?? null,
-                            "IsPackage"                         =>  $data->IsPackage ?? null,
-                            "Classifications"                   =>  $data->Classifications ?? null,
-                            "TransportCriteria"                 =>  $data->TransportCriteria ?? null,
-                            "SpecialInstructionsForPatient"     =>  $data->SpecialInstructionsForPatient ?? null,
-                            "SpecialInstructionsForCorporates"  =>  $data->SpecialInstructionsForCorporates ?? null,
-                            "SpecialInstructionsForDoctors"     =>  $data->SpecialInstructionsForDoctors ?? null,
-                            "BasicInstruction"                  =>  $data->BasicInstruction ?? null,
-                            "DriveThrough"                      =>  $data->DriveThrough ?? null,
-                            "HomeCollection"                    =>  $data->HomeCollection ?? null,
-                            "TestSchedule"                      =>  $data->TestSchedule ?? null,
-                            "TestPrice"                         =>  $data->TestPrice ?? null,
-                        ]);
-
-                        $test->TestPrice()->create([
-                            "TestPrice" => $test->TestPrice,
-                            "TestLocation" =>$api['location']
-                        ]);
-
-                        if(isset($data->SubTestList)) {
-                            foreach ($data->SubTestList as  $subTest) {
-                                $test->SubTestList()->create([
-                                    "SubTestId"         =>  $subTest->SubTestId,
-                                    "SubTestDOSCode"    =>  $subTest->SubTestDOSCode,
-                                    "SubTestName"       =>  $subTest->SubTestName,
-                                ]);
+                        if($data->IsPackage == "No") {
+                            $test = Tests::updateOrCreate([
+                                "TestId"                            =>  $data->TestId ?? null,
+                                "DosCode"                           =>  $data->DosCode ?? null,
+                                "TestName"                          =>  $data->TestName ?? null,
+                                "AliasName1"                        =>  $data->AliasName1 ?? null,
+                                "AliasName2"                        =>  $data->AliasName2 ?? null,
+                                "ApplicableGender"                  =>  $data->ApplicableGender ?? null,
+                                "IsPackage"                         =>  $data->IsPackage ?? null,
+                                "Classifications"                   =>  $data->Classifications ?? null,
+                                "TransportCriteria"                 =>  $data->TransportCriteria ?? null,
+                                "SpecialInstructionsForPatient"     =>  $data->SpecialInstructionsForPatient ?? null,
+                                "SpecialInstructionsForCorporates"  =>  $data->SpecialInstructionsForCorporates ?? null,
+                                "SpecialInstructionsForDoctors"     =>  $data->SpecialInstructionsForDoctors ?? null,
+                                "BasicInstruction"                  =>  $data->BasicInstruction ?? null,
+                                "DriveThrough"                      =>  $data->DriveThrough ?? null,
+                                "HomeCollection"                    =>  $data->HomeCollection ?? null,
+                                "TestSchedule"                      =>  $data->TestSchedule ?? null,
+                                "TestPrice"                         =>  $data->TestPrice ?? null,
+                            ]);
+                            $test->TestPrice()->create([
+                                "TestPrice" => $test->TestPrice,
+                                "TestLocation" =>$api['location']
+                            ]);
+                        } else {
+                            $Packages = Packages::updateOrCreate([
+                                "TestId"                            =>  $data->TestId ?? null,
+                                "DosCode"                           =>  $data->DosCode ?? null,
+                                "TestName"                          =>  $data->TestName ?? null,
+                                "AliasName1"                        =>  $data->AliasName1 ?? null,
+                                "AliasName2"                        =>  $data->AliasName2 ?? null,
+                                "ApplicableGender"                  =>  $data->ApplicableGender ?? null,
+                                "IsPackage"                         =>  $data->IsPackage ?? null,
+                                "Classifications"                   =>  $data->Classifications ?? null,
+                                "TransportCriteria"                 =>  $data->TransportCriteria ?? null,
+                                "SpecialInstructionsForPatient"     =>  $data->SpecialInstructionsForPatient ?? null,
+                                "SpecialInstructionsForCorporates"  =>  $data->SpecialInstructionsForCorporates ?? null,
+                                "SpecialInstructionsForDoctors"     =>  $data->SpecialInstructionsForDoctors ?? null,
+                                "BasicInstruction"                  =>  $data->BasicInstruction ?? null,
+                                "DriveThrough"                      =>  $data->DriveThrough ?? null,
+                                "HomeCollection"                    =>  $data->HomeCollection ?? null,
+                                "TestSchedule"                      =>  $data->TestSchedule ?? null,
+                                "TestPrice"                         =>  $data->TestPrice ?? null,
+                            ]);
+                            $Packages->PackagesPrice()->create([
+                                "TestPrice" => $Packages->TestPrice,
+                                "TestLocation" =>$api['location']
+                            ]);
+                            if(isset($data->SubTestList)) {
+                                foreach ($data->SubTestList as  $subTest) {
+                                    $Packages->SubTestList()->create([
+                                        "SubTestId"         =>  $subTest->SubTestId,
+                                        "SubTestDOSCode"    =>  $subTest->SubTestDOSCode,
+                                        "SubTestName"       =>  $subTest->SubTestName,
+                                    ]);
+                                }
                             }
                         }
                         Flash::success( __('masters.sync_success'));

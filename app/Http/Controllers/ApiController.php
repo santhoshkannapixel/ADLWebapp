@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Banners;
 use App\Models\NewsEvent;
 use App\Models\Orders;
+use App\Models\Packages;
 use App\Models\PaymentConfig;
 use App\Models\SubTests;
 use App\Models\Tests;
@@ -230,6 +231,13 @@ class ApiController extends Controller
         return [
             "status" => true,
             "data" => $customer
+        ];
+    }
+    public function packages(Request $request)
+    {
+        return [
+            "status" => true,
+            "data" => Packages::all()
         ];
     }
 }
