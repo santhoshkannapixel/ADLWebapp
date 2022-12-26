@@ -116,6 +116,7 @@ Route::middleware(['auth_users'])->group(function () {
         });
         Route::group(['prefix' => 'customers'], function () {
             Route::get('/', [CustomersController::class, 'index'])->name('customers.index');
+            Route::get('/show/{id}', [CustomersController::class, 'show'])->name('customers.show');
         });
 
     // ================================================= //

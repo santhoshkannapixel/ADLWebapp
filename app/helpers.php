@@ -4,11 +4,19 @@ use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Support\Facades\Storage;
 use Razorpay\Api\Api;
+
 if(! function_exists('auth_user_role')) {
     function auth_user_role() {
         return Sentinel::getUser()->roles[0];
     }
 }
+
+if(! function_exists('auth_user')) {
+    function auth_user() {
+        return Sentinel::getUser();
+    }
+}
+
 
 if (!function_exists('fetchOrder')) {
     function fetchOrder($id)

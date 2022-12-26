@@ -17,10 +17,15 @@ class CustomersController extends Controller
                     return $data->CustomerDetails->phone_number ?? null;
                 })
                 ->addColumn('action', function ($data) {
-                    return button('show','#');
+                    return button('show',route('customers.show',$data->id));
                 })
                 ->make(true);
         }
         return view('admin.customers.index');
+    }
+    public function show($id)
+    {
+        $customer = User::with('CustomerDetails')->where('role_id',0)->where('id',$id)->first();
+        return view('admin.customers.show',compact('customer'));
     }
 }
