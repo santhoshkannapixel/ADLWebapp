@@ -15,10 +15,10 @@ class CreateApiConfigsTable extends Migration
     {
         Schema::create('api_configs', function (Blueprint $table) {
             $table->id();
-            $table->string('CorporateID');
+            $table->text('apiUrl');
+            $table->string('corporateID');
             $table->string('passCode');
-            $table->string('BaseUrl');
-            $table->string('SiteId');
+            $table->string('apiType');
             $table->string('created_by');
             $table->timestamps();
         });

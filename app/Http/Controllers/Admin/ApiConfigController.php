@@ -36,11 +36,11 @@ class ApiConfigController extends Controller
     public function store(Request $request)
     {
         ApiConfig::create([
-            'CorporateID'  =>  $request->CorporateID,
+            'corporateID'  =>  $request->corporateID,
             'passCode'     =>  $request->passCode,
-            'BaseUrl'      =>  $request->BaseUrl,
-            'SiteId'       =>  $request->SiteId,
-            'created_by'   =>  auth_id(),
+            'apiUrl'      =>  $request->apiUrl,
+            'apiType'      =>  $request->apiType,
+            'created_by'   =>  auth_user()->name,
         ]);
 
         Flash::success( __('action.saved', ['type' => 'Api Config']));
@@ -51,11 +51,11 @@ class ApiConfigController extends Controller
     public function update(Request $request , $id)
     {
         ApiConfig::find($id)->update([
-            'CorporateID'  =>  $request->CorporateID,
+            'corporateID'  =>  $request->corporateID,
             'passCode'     =>  $request->passCode,
-            'BaseUrl'      =>  $request->BaseUrl,
-            'SiteId'       =>  $request->SiteId,
-            'created_by'   =>  auth_id(),
+            'apiUrl'      =>  $request->apiUrl,
+            'apiType'      =>  $request->apiType,
+            'created_by'   =>  auth_user()->name,
         ]);
 
         Flash::success( __('action.saved', ['type' => 'Api Config']));
@@ -69,11 +69,8 @@ class ApiConfigController extends Controller
     }
     public function destroy($id)
     {
-        $apiConfig  = ApiConfig::findOrFail($id);
-        $apiConfig->delete();
-
+        ApiConfig::findOrFail($id)->delete();
         Flash::success( __('action.deleted', ['type' => 'Api Config']));
-
         return redirect()->route('api_config.index');
     }
 }

@@ -14,8 +14,6 @@ return [
     'GetCityMasterMangaloreAPI'    => "https://reports.anandlab.com/v3/labapi.asmx/GetCityMaster?CorporateID=1140&passCode=LMLOR34815",
     'GetCityMasterRestofBangalore' => "https://reports.anandlab.com/v3/labapi.asmx/GetCityMaster?CorporateID=3360&passCode=MEVIS7618",
 
-
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults

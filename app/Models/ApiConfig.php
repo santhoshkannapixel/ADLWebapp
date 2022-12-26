@@ -9,11 +9,11 @@ class ApiConfig extends Model
 {
     use HasFactory;
 
-    protected $fillable =   [ 
-        'CorporateID',
+    protected $fillable =   [
+        'apiUrl',
+        'corporateID',
         'passCode',
-        'BaseUrl',
-        'SiteId',
-        'created_by',
+        'apiType',
+        'created_by'
     ];
 }
