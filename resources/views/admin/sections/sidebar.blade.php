@@ -19,8 +19,8 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('admin.patients') }}" class="nav-link text-white {{ Route::is([
-                    'admin.patients',
+            <a href="{{ route('patients.index') }}" class="nav-link text-white {{ Route::is([
+                    'patients.index',
                     'home-collection.index',
                     'home-collection.show',
                     'patients-consumers.index',
@@ -34,8 +34,8 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('admin.doctors') }}" class="nav-link text-white {{ Route::is([
-                    'admin.doctors',
+            <a href="{{ route('doctors.index') }}" class="nav-link text-white {{ Route::is([
+                    'doctors.index',
                     'hospital-lab-management.index',
                     'hospital-lab-management.show',
                     'clinical-lab-management.index',
@@ -49,8 +49,8 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('admin.health-checkup') }}" class="nav-link text-white {{ Route::is([
-                    'admin.health-checkup',
+            <a href="{{ route('health-checkup.index') }}" class="nav-link text-white {{ Route::is([
+                    'health-checkup.index',
                     'book-an-appointment.index',
                     'book-an-appointment.show',
                 ]) ? "active" : "" }}">
@@ -58,15 +58,14 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('admin.reach-us') }}" class="nav-link text-white {{ Route::is([
-                    'admin.reach-us',
+            <a href="{{ route('reach-us.index') }}" class="nav-link text-white {{ Route::is([
+                    'reach-us.index',
                     'head-office.index',
                     'head-office.show',
                     'anandlab-franchise.index',
                     'anandlab-franchise.show',
                     'covidtesting-employees.index',
-                    'covidtesting-employees.show',
-
+                    'covidtesting-employees.show'
                 ]) ? "active" : "" }}">
                 <i class="fa fa-calendar-check-o"></i>Reach Us
             </a>
@@ -82,8 +81,8 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('admin.settings') }}" class="nav-link text-white {{ Route::is([
-                    'admin.settings',
+            <a href="{{ route('settings.index') }}" class="nav-link text-white {{ Route::is([
+                    'settings.index',
                     'user.index',
                     'user.create',
                     'user.edit',

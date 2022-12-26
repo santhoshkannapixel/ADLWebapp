@@ -22,8 +22,7 @@ class AuthMiddleware
         if (Sentinel::check()== FALSE) {
             return redirect()->route('login');
         }
-
-    if(auth_user_role()->slug != 'admin' && isset(auth_user_role()->permissions)) {
+        if(auth_user_role()->slug != 'admin' && isset(auth_user_role()->permissions)) {
             foreach(auth_user_role()->permissions as $access => $val) {
                 if(formatRoute(request()->route()->getName()) == formatRoute($access)) {
                     if($val == 1) {

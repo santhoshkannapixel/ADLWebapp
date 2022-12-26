@@ -13,9 +13,6 @@ class AuthController extends Controller
 {
     public function index(Request $request)
     {
-        if(Sentinel::check()) {
-            return redirect()->route('dashboard.index');
-        }
         return view('admin.auth.login');
     }
 

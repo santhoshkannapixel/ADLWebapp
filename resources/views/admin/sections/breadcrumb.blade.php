@@ -5,7 +5,7 @@
     </span>
     <div class="fw-bold">
         {{ Route::is('dashboard.index') ? "Dashboard" : '' }}
-        {{ Route::is('admin.settings') ? "Settings" : '' }}
+        {{ Route::is('settings.index') ? "Settings" : '' }}
         {{ Route::is('user.create') ? "New User" : "" }}
         {{ Route::is('user.index') ? "Users List" : "" }}
         {{ Route::is('user.edit') ? "Edit User" : "" }}
@@ -84,7 +84,7 @@
             <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
             <li class="breadcrumb-item active" aria-current="page">
                 {{ Route::is('dashboard.index') ? " Home" : '' }}
-                {{ Route::is('admin.settings') ? "Settings / Settings" : '' }}
+                {{ Route::is('settings.index') ? "Settings / Settings" : '' }}
                 {{ Route::is('user.create') ? "Settings / New User" : "" }}
                 {{ Route::is('user.index') ? "Settings / Users List" : "" }}
                 {{ Route::is('user.edit') ? "Settings / Edit User" : "" }}

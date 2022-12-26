@@ -11,7 +11,7 @@
             <a class="btn btn-primary" href="{{ route('news-and-events.index') }}"><i class="fa fa-list"></i> News & Event List </a>
         </div>
         <div class="card-body">
-            {!! Form::model($data, ['route' => ['news-and-events.update',$data->id],"class" => "py-4", 'method'=> 'put']) !!}
+            {!! Form::model($data, ['route' => ['news-and-events.update',$data->id],"class" => "py-4", 'method'=> 'POST']) !!}
                 @csrf
                 @include('admin.news-and-events.form')
                 <div class="row ">

@@ -11,14 +11,12 @@ use App\Http\Controllers\Admin\PatientsConsumersController;
 use App\Http\Controllers\Admin\FeedBackController;
 use App\Http\Controllers\Admin\FrequentlyAskedQuestionsController;
 use App\Http\Controllers\Admin\FranchisingOpportunitiesController;
-use App\Http\Controllers\Admin\CovidTestingEmployeesController;
 use App\Http\Controllers\Admin\BookAppointmentController;
 use App\Http\Controllers\Admin\HeadOfficeController;
 use App\Http\Controllers\Admin\ReachUsController;
 use App\Http\Controllers\Admin\DoctorsController;
 use App\Http\Controllers\Admin\HospitalLabManagementController;
 use App\Http\Controllers\Admin\ClinicalLabManagementController;
-use App\Http\Controllers\Admin\AnandFranchiseController;
 use App\Http\Controllers\Admin\HealthCheckupController;
 use App\Http\Controllers\Admin\TestController;
 use App\Http\Controllers\Admin\UserController;
@@ -39,8 +37,8 @@ Route::middleware(['auth_users'])->group(function () {
         Route::group(['prefix' => 'dashboard'], function () {
             Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
         });
-        Route::group(['prefix' => 'settings'], function () {
-            Route::get('/', [SettingsController::class, 'index'])->name('admin.settings');
+        // Route::group(['prefix' => 'settings'], function () {
+            Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
             Route::group(['prefix' => 'user'], function () {
                 Route::get('/', [UserController::class, 'index'])->name('user.index');
                 Route::get('create', [UserController::class, 'create'])->name('user.create');
@@ -73,7 +71,7 @@ Route::middleware(['auth_users'])->group(function () {
                 Route::post('/edit/{id?}', [PaymentConfigController::class, 'update'])->name('payment_config.update');
                 Route::delete('/payment-config-delete/{id}', [PaymentConfigController::class, 'destroy'])->name('payment_config.delete');
             });
-        });
+        // });
         Route::group(['prefix' => 'master'], function () {
             Route::group(['prefix' => 'branch'], function () {
                 Route::get('/', [BranchController::class, 'index'])->name('master.index');
@@ -123,18 +121,15 @@ Route::middleware(['auth_users'])->group(function () {
     // ================================================= //
 
 
+    Route::get('patients', [EnquiryController::class, 'index'])->name('patients.index');
+    Route::get('doctors', [DoctorsController::class, 'index'])->name('doctors.index');
+    Route::get('health-checkup', [HealthCheckupController::class, 'index'])->name('health-checkup.index');
+    Route::get('reach-us', [ReachUsController::class, 'index'])->name('reach-us.index');
 
-
-
-    Route::get('patients', [EnquiryController::class, 'index'])->name('admin.patients');
-    Route::get('doctors', [DoctorsController::class, 'index'])->name('admin.doctors');
-    Route::get('health-checkup', [HealthCheckupController::class, 'index'])->name('admin.health-checkup');
-    Route::get('reach-us', [ReachUsController::class, 'index'])->name('admin.reach-us');
-    //home-collection
     Route::get('/home-collection', [BookHomeCollectionController::class, 'index'])->name('home-collection.index');
     Route::post('/home-collection/{id}', [BookHomeCollectionController::class, 'destroy'])->name('home-collection.delete');
     Route::get('/home-collection/{id}', [BookHomeCollectionController::class, 'show'])->name('home-collection.show');
-    //patients-consumers
+
     Route::get('/feedback', [FeedBackController::class, 'index'])->name('feedback.index');
     Route::post('/feedback/{id}', [FeedBackController::class, 'destroy'])->name('feedback.delete');
     Route::get('/feedback/{id}', [FeedBackController::class, 'show'])->name('feedback.show');
@@ -159,12 +154,10 @@ Route::middleware(['auth_users'])->group(function () {
     Route::post('/research/{id}', [ResearchController::class, 'destroy'])->name('research.delete');
     Route::get('/research/{id}', [ResearchController::class, 'show'])->name('research.show');
 
-    //feedback.index
     Route::get('/patients-consumers', [PatientsConsumersController::class, 'index'])->name('patients-consumers.index');
     Route::post('/patients-consumers/{id}', [PatientsConsumersController::class, 'destroy'])->name('patients-consumers.delete');
     Route::get('/patients-consumers/{id}', [PatientsConsumersController::class, 'show'])->name('patients-consumers.show');
 
-    //feedback.index
     Route::get('/book-an-appointment', [BookAppointmentController::class, 'index'])->name('book-an-appointment.index');
     Route::post('/book-an-appointment/{id}', [BookAppointmentController::class, 'destroy'])->name('book-an-appointment.delete');
     Route::get('/book-an-appointment/{id}', [BookAppointmentController::class, 'show'])->name('book-an-appointment.show');
@@ -172,12 +165,4 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/head-office', [HeadOfficeController::class, 'index'])->name('head-office.index');
     Route::post('/head-office/{id}', [HeadOfficeController::class, 'destroy'])->name('head-office.delete');
     Route::get('/head-office/{id}', [HeadOfficeController::class, 'show'])->name('head-office.show');
-
-    // Route::get('/anandlab-franchise', [AnandFranchiseController::class, 'index'])->name('anandlab-franchise.index');
-    // Route::post('/anandlab-franchise/{id}', [AnandFranchiseController::class, 'destroy'])->name('anandlab-franchise.delete');
-    // Route::get('/anandlab-franchise/{id}', [AnandFranchiseController::class, 'show'])->name('anandlab-franchise.show');
-
-    // Route::get('/covidtesting-employees', [CovidTestingEmployeesController::class, 'index'])->name('covidtesting-employees.index');
-    // Route::post('/covidtesting-employees/{id}', [CovidTestingEmployeesController::class, 'destroy'])->name('covidtesting-employees.delete');
-    // Route::get('/covidtesting-employees/{id}', [CovidTestingEmployeesController::class, 'show'])->name('covidtesting-employees.show');
 });
