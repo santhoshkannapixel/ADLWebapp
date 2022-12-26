@@ -67,6 +67,9 @@ if (!function_exists('asset_url')) {
                 return url('/storage/app/' . $value);
             }
         }
+        if(strpos($value,'http')) {
+            return $value;
+        }
         return asset('public/images/no-image.jpg');
     }
 }
