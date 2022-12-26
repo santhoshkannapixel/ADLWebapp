@@ -38,7 +38,7 @@ class UserController extends Controller
                 return $status;
             })
             ->addColumn('action', function($data){
-                $action = button('edit',route('user.edit', $data->id)).button('delete',route('user.delete', $data->id)); 
+                $action = button('edit',route('user.edit', $data->id)).button('delete',route('user.delete', $data->id));
                 return $action;
             })
             ->rawColumns(array(
@@ -47,7 +47,7 @@ class UserController extends Controller
             ))
             ->make(true);
         }
- 
+
         return view('admin.settings.users.index', compact('users','roles'));
     }
 
@@ -59,17 +59,16 @@ class UserController extends Controller
     }
 
     public function store(Request $request)
-    {  
-        dd("!11");
+    {
         $request->validate([
             'email'     => 'required|unique:users|max:255',
             'role_id'   => 'required',
             'name'      => 'required',
             'password'  => 'required',
         ]);
- 
+
         try {
- 
+
             //  Create a User Record
             $user   =  User::create([
                 'name'      =>  $request->name,
@@ -80,12 +79,12 @@ class UserController extends Controller
             // find a Users
             $user_activation = Sentinel::findById($user->id);
 
-            //  Create Activation Record for User 
+            //  Create Activation Record for User
             $activation      = Activation::create($user_activation);
 
-            // To Complete a Activation 
+            // To Complete a Activation
             Activation::complete($user_activation, $activation->code);
- 
+
             //Attach the user to the role
             $role = Sentinel::findRoleById($request->role_id);
             $role->users()->attach($user);
@@ -97,7 +96,7 @@ class UserController extends Controller
             Log::error('User registration email sent failure.');
         }
         return redirect()->route('user.index');
-    } 
+    }
 
     public function destroy(Request $request , $id)
     {
@@ -108,7 +107,7 @@ class UserController extends Controller
 
             return redirect()->route('user.index');
         }
-        
+
 
         $data->delete();
 
@@ -135,7 +134,7 @@ class UserController extends Controller
 
     public function update(Request $request , $id)
     {
-   
+
         try {
             $user = User::find($id);
 
@@ -152,7 +151,7 @@ class UserController extends Controller
             RoleUsers::where("user_id",$id)->update([
                 "role_id"  => $request->role_id,
             ]);
-        
+
             Flash::success( __('auth.update_successful'));
             return redirect()->route('user.index');
 
@@ -161,4 +160,4 @@ class UserController extends Controller
             return redirect()->route('user.index');
         }
     }
-} 
+}

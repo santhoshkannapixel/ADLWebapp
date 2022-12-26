@@ -18,10 +18,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            UserSeeder::class,
+            UserAndRolesSeeder::class,
             NewsAndEventSeeder::class
         ]);
-        
+
         Enquiries::factory()->count(45)->create();
 
         $syncBranch = new BranchController(); $syncBranch->syncRequest();

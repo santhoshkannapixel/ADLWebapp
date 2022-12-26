@@ -9,6 +9,8 @@ if(!function_exists('getAllRoutes')) {
         $routes = [];
         foreach (Route::getRoutes() as $value) {
             $unset = array(
+                'login',
+                'logut',
                 'ignition.healthCheck',
                 'ignition.healthCheck',
                 'ignition.scripts',

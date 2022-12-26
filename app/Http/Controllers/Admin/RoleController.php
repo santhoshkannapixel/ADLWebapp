@@ -62,6 +62,10 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            "name" => 'required'
+        ]);
+
         unset($request['_token']);
         $permissions = $request->all();
         unset($permissions['name']);
