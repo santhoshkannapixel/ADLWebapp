@@ -20,6 +20,18 @@ class ApiController extends Controller
     public function banners()
     {
         $data = Banners::latest()->get();
+        $banner = [];
+        foreach($data as $item ) {
+            $banner[] = [
+                'Title' => $data->Title,
+                'Content' => $data->Content,
+                'Url' => $data->Url,
+                'DesktopImage' => asset_url($data->DesktopImage),
+                'MobileImage' => asset_url($data->MobileImage),
+                'OrderBy' => $data->OrderBy,
+                'Status' => $data->Status
+            ];
+        }
         return response()->json([
             "status"    =>  true,
             "data"      =>  $data
