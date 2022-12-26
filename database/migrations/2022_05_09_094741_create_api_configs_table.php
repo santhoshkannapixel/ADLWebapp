@@ -18,6 +18,8 @@ class CreateApiConfigsTable extends Migration
             $table->text('apiUrl');
             $table->string('corporateID');
             $table->string('passCode');
+            $table->string('location');
+            $table->string('location_slug');
             $table->string('apiType');
             $table->string('created_by');
             $table->timestamps();

@@ -13,6 +13,8 @@ class ApiConfig extends Model
         'apiUrl',
         'corporateID',
         'passCode',
+        'location',
+        'location_slug',
         'apiType',
         'created_by'
     ];

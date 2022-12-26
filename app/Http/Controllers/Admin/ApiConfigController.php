@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ApiConfig;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Laracasts\Flash\Flash;
 
 class ApiConfigController extends Controller
@@ -12,18 +13,11 @@ class ApiConfigController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()) {
-
             $data = ApiConfig::all();
-
-            return datatables()->of($data)
-            ->addColumn('action', function($data){
+            return datatables()->of($data)->addColumn('action', function($data){
                 $action = button('edit',route('api_config.edit', $data->id)).button('delete',route('api_config.delete', $data->id));
                 return $action;
-            })
-            ->rawColumns(array(
-                'action'
-            ))
-            ->addIndexColumn()->make(true);
+            })->rawColumns(['action'])->addIndexColumn()->make(true);
         }
         return view('admin.settings.api-config.index');
     }
@@ -36,6 +30,8 @@ class ApiConfigController extends Controller
     public function store(Request $request)
     {
         ApiConfig::create([
+            'location' => $request->location,
+            'location_slug' => Str::slug($request->location),
             'corporateID'  =>  $request->corporateID,
             'passCode'     =>  $request->passCode,
             'apiUrl'      =>  $request->apiUrl,
@@ -51,6 +47,8 @@ class ApiConfigController extends Controller
     public function update(Request $request , $id)
     {
         ApiConfig::find($id)->update([
+            'location' => $request->location,
+            'location_slug' => Str::slug($request->location),
             'corporateID'  =>  $request->corporateID,
             'passCode'     =>  $request->passCode,
             'apiUrl'      =>  $request->apiUrl,

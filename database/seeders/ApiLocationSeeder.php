@@ -19,7 +19,9 @@ class ApiLocationSeeder extends Seeder
             'corporateID' => '514',
             'passCode' => 'neuberg123',
             'apiType' => 'GetTestMaster',
-            'created_by' => 'Admin'
+            'location' => 'Bangalore',
+            'location_slug' => 'bangalore',
+            'created_by' => 'Admin',
         ]);
 
         ApiConfig::create([
@@ -27,6 +29,8 @@ class ApiLocationSeeder extends Seeder
             'corporateID' => '1140',
             'passCode' => 'LMLOR34815',
             'apiType' => 'GetTestMaster',
+            'location' => 'Mangalore',
+            'location_slug' => 'mangalore',
             'created_by' => 'Admin'
         ]);
 
@@ -35,6 +39,8 @@ class ApiLocationSeeder extends Seeder
             'corporateID' => '3360',
             'passCode' => 'MEVIS7618',
             'apiType' => 'GetTestMaster',
+            'location' => 'Rest of Bangalore',
+            'location_slug' => 'rest-of-bangalore',
             'created_by' => 'Admin'
         ]);
         // ==================
@@ -43,6 +49,8 @@ class ApiLocationSeeder extends Seeder
             'corporateID' => '3360',
             'passCode' => 'MEVIS7618',
             'apiType' => 'GetBranchMaster',
+            'location' => 'Bangalore',
+            'location_slug' => 'bangalore',
             'created_by' => 'Admin'
         ]);
 
@@ -51,6 +59,8 @@ class ApiLocationSeeder extends Seeder
             'corporateID' => '1140',
             'passCode' => 'LMLOR34815',
             'apiType' => 'GetBranchMaster',
+            'location' => 'Mangalore',
+            'location_slug' => 'mangalore',
             'created_by' => 'Admin'
         ]);
 
@@ -59,6 +69,8 @@ class ApiLocationSeeder extends Seeder
             'corporateID' => '3360',
             'passCode' => 'MEVIS7618',
             'apiType' => 'GetBranchMaster',
+            'location' => 'Rest of Bangalore',
+            'location_slug' => 'rest-of-bangalore',
             'created_by' => 'Admin'
         ]);
         // /================
@@ -67,6 +79,8 @@ class ApiLocationSeeder extends Seeder
             'corporateID' => '3360',
             'passCode' => 'MEVIS7618',
             'apiType' => 'GetCityMaster',
+            'location' => 'Bangalore',
+            'location_slug' => 'bangalore',
             'created_by' => 'Admin'
         ]);
 
@@ -75,6 +89,8 @@ class ApiLocationSeeder extends Seeder
             'corporateID' => '1140',
             'passCode' => 'LMLOR34815',
             'apiType' => 'GetCityMaster',
+            'location' => 'Mangalore',
+            'location_slug' => 'mangalore',
             'created_by' => 'Admin'
         ]);
 
@@ -83,6 +99,8 @@ class ApiLocationSeeder extends Seeder
             'corporateID' => '3360',
             'passCode' => 'MEVIS7618',
             'apiType' => 'GetCityMaster',
+            'location' => 'Rest of Bangalore',
+            'location_slug' => 'rest-of-bangalore',
             'created_by' => 'Admin'
         ]);
     }

@@ -13,11 +13,11 @@
                 <thead>
                     <tr>
                         <th>S.No</th>
+                        <th>Location</th>
                         <th>API Type</th>
                         <th>Corporate ID</th>
                         <th>Pass Code</th>
                         <th>Api URL</th>
-                        <th>Created BY</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -40,11 +40,11 @@
                 ajax: "{{ route('api_config.index') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'id',orderable: false, searchable: false},
+                    {data: 'location', name: 'location'},
                     {data: 'apiType', name: 'apiType'},
                     {data: 'corporateID', CorporateID: 'corporateID'},
                     {data: 'passCode', name: 'passCode'},
                     {data: 'apiUrl', name: 'apiUrl'},
-                    {data: 'created_by', name: 'crebyed_at'},
                     {data: 'action', name: 'action',orderable: false, searchable: false},
                 ],
             });
