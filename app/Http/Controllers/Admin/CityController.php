@@ -34,17 +34,21 @@ class CityController extends Controller
     public function syncRequest()
     {
         foreach(getApiMaster('GetCityMaster') as $api) {
-            $response      = Http::get($api['http']);
-            $response_data = json_decode($response->body())[0]->Data;
-            foreach ($response_data as $data) {
-                Cities::updateOrCreate([
-                    "CityID"    =>  $data->CityID ?? null,
-                    "CityName"  =>  $data->CityName ?? null,
-                    "AreaId"    =>  $data->AreaId ?? null,
-                    "AreaName"  =>  $data->AreaName ?? null,
-                    "Pincode"   =>  $data->Pincode ?? null,
-                    "State"     =>  $data->State ?? null,
-                ]);
+            try {
+                $response      = Http::get($api['http']);
+                $response_data = json_decode($response->body())[0]->Data;
+                foreach ($response_data as $data) {
+                    Cities::updateOrCreate([
+                        "CityID"    =>  $data->CityID ?? null,
+                        "CityName"  =>  $data->CityName ?? null,
+                        "AreaId"    =>  $data->AreaId ?? null,
+                        "AreaName"  =>  $data->AreaName ?? null,
+                        "Pincode"   =>  $data->Pincode ?? null,
+                        "State"     =>  $data->State ?? null,
+                    ]);
+                }
+            } catch (\Throwable $th) {
+                //throw $th;
             }
         }
 
