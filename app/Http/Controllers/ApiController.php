@@ -133,7 +133,7 @@ class ApiController extends Controller
         $customerInfo = $request->all();
         unset($customerInfo['amount']);
         $customer = User::with('CustomerDetails')->find($request->id);
-        if(!is_null($customer->CustomerDetails())) {
+        if(!is_null($customer->CustomerDetails() ?? null)) {
             $customer->CustomerDetails()->delete();
         }
         $customer->CustomerDetails()->create($customerInfo);
