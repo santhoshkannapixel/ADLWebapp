@@ -133,15 +133,7 @@ class ApiController extends Controller
         $customerInfo = $request->all();
         unset($customerInfo['amount']);
         $customer = User::with('CustomerDetails')->find($request->id);
-
-        try {
-            $customer->CustomerDetails()->delete();
-        } catch (\Throwable $th) {
-            //throw $th;
-        }
-
         $customer->CustomerDetails()->create($customerInfo);
-
         $api = new Api(PaymentApiConfig()->payKeyId,PaymentApiConfig()->paySecretKey);
         $Order = $api->order->create([
             'amount'   => (int) $request->amount * 100,
