@@ -12,8 +12,12 @@ use App\Models\FranchisingOpportunities;
 use App\Models\FrequentlyAskedQuestions;
 use App\Models\HeadOffice;
 use App\Models\HospitalLabManagement;
+use App\Models\Orders;
+use App\Models\Packages;
 use App\Models\PatientsConsumers;
 use App\Models\Research;
+use App\Models\Tests;
+use App\Models\User;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
 
@@ -120,5 +124,13 @@ class DashboardController extends Controller
             return datatables()->of($data)->addIndexColumn()->make(true);
         }
         return view('admin.index');
+    }
+    public function dashboardData(Request $request)
+    {
+        $data['test'] = Tests::count();
+        $data['package'] = Packages::count();
+        $data['order'] = Orders::count();
+        $data['customer'] = User::where('role_id',0)->count();
+        return response()->json(['data'=>$data]);
     }
 }

@@ -11,7 +11,7 @@
         <div class="col-3 p-1">
             <div class="card h-100 shadow">
                 <div class="card-body">
-                    <div class="h4 text-gradient">15840</div>
+                    <div class="h4 text-gradient"> <span id="total_test"></span> </div>
                     <div class="x-between y-center">
                         <b class="text-secondary">Total Tests</b>
                         <i class="text-primary fa fa-flask fa-2x"></i>
@@ -22,7 +22,7 @@
         <div class="col-3 p-1">
             <div class="card h-100 shadow">
                 <div class="card-body">
-                    <div class="h4 text-gradient">647</div>
+                    <div class="h4 text-gradient"><span id="total_package"></span></div>
                     <div class="x-between y-center">
                         <b class="text-secondary">Total Packages</b>
                         <i class="text-primary bi bi-box fa-2x"></i>
@@ -33,7 +33,7 @@
         <div class="col-3 p-1">
             <div class="card h-100 shadow">
                 <div class="card-body">
-                    <div class="h4 text-gradient">19</div>
+                    <div class="h4 text-gradient"><span id="total_order"></span></div>
                     <div class="x-between y-center">
                         <b class="text-secondary">Total Orders</b>
                         <i class="text-primary fa fa-shopping-cart fa-2x"></i>
@@ -44,7 +44,7 @@
         <div class="col-3 p-1">
             <div class="card h-100 shadow">
                 <div class="card-body">
-                    <div class="h4 text-gradient">324</div>
+                    <div class="h4 text-gradient"><span id="total_customer"></span></div>
                     <div class="x-between y-center">
                         <span>Total Customers</span>
                         <i class="text-primary bi bi-person-lines-fill fa-2x"></i>
@@ -139,8 +139,16 @@
                 format:'yyyy-mm-dd',
                 autoclose:true
             });
-
-
+            $.ajax({
+                type:'GET',
+                url: "{{ route('dashboard.data') }}",
+                success: function(data){
+                    $('#total_test').html(data.data.test);
+                    $('#total_package').html(data.data.package);
+                    $('#total_order').html(data.data.order);
+                    $('#total_customer').html(data.data.customer);
+                }
+            });
             function load_data(from_date = '', to_date = '',search_data = '')    {
                 $('#data-table').DataTable({
                     lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
