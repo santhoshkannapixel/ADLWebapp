@@ -236,7 +236,7 @@ class ApiController extends Controller
     }
     public function packages(Request $request)
     {
-        $Packages =   Packages::select('*')->latest();
+        $Packages =   Packages::with('SubTestList','PackagesPrice')->select('*')->latest();
 
         foreach ($request->all() as $key => $value) {
             if(!empty($value)) {
