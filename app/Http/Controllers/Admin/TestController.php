@@ -19,18 +19,34 @@ class TestController extends Controller
     {
         if ($request->ajax()) {
 
-            $data = Tests::select([
-                "id",
-                "TestId",
-                "TestName",
-                "ApplicableGender",
-                "IsPackage",
-                "Classifications",
-                "DriveThrough",
-                "HomeCollection",
-                "TestSchedule",
-                "TestPrice"
-            ]);
+            if($request->isPackage == 'No') {
+                $data = Tests::select([
+                    "id",
+                    "TestId",
+                    "TestName",
+                    "ApplicableGender",
+                    "IsPackage",
+                    "Classifications",
+                    "DriveThrough",
+                    "HomeCollection",
+                    "TestSchedule",
+                    "TestPrice"
+                ]);
+            } else {
+                $data = Packages::select([
+                    "id",
+                    "TestId",
+                    "TestName",
+                    "ApplicableGender",
+                    "IsPackage",
+                    "Classifications",
+                    "DriveThrough",
+                    "HomeCollection",
+                    "TestSchedule",
+                    "TestPrice"
+                ]);
+            }
+
 
             return DataTables::eloquent($data)
                 ->addIndexColumn()
