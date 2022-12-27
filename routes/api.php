@@ -1,15 +1,15 @@
 <?php
 
-use App\Http\Controllers\Admin\BookAppointmentController;
-use App\Http\Controllers\Admin\ClinicalLabManagementController;
-use App\Http\Controllers\Admin\FeedBackController;
-use App\Http\Controllers\Admin\FranchisingOpportunitiesController;
-use App\Http\Controllers\Admin\FrequentlyAskedQuestionsController;
-use App\Http\Controllers\Admin\HeadOfficeController;
-use App\Http\Controllers\Admin\HospitalLabManagementController;
-use App\Http\Controllers\Admin\NewsLetterController;
-use App\Http\Controllers\Admin\PatientsConsumersController;
-use App\Http\Controllers\Admin\ResearchController;
+use App\Http\Controllers\Website\BookAppointmentController;
+use App\Http\Controllers\Website\ClinicalLabManagementController;
+use App\Http\Controllers\Website\FeedBackController;
+use App\Http\Controllers\Website\FranchisingOpportunitiesController;
+use App\Http\Controllers\Website\FrequentlyAskedQuestionsController;
+use App\Http\Controllers\Website\HeadOfficeController;
+use App\Http\Controllers\Website\HospitalLabManagementController;
+use App\Http\Controllers\Website\NewsLetterController;
+use App\Http\Controllers\Website\PatientsConsumersController;
+use App\Http\Controllers\Website\ResearchController;
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
 
