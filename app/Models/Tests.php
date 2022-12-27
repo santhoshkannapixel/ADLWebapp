@@ -18,6 +18,8 @@ class Tests extends Model
         "AliasName2",
         "ApplicableGender",
         "IsPackage",
+        "Createdon",
+        "Modifiedon",
         "Classifications",
         "TransportCriteria",
         "SpecialInstructionsForPatient",
@@ -26,11 +28,14 @@ class Tests extends Model
         "BasicInstruction",
         "DriveThrough",
         "HomeCollection",
+        "OrganName",
+        "HealthCondition",
+        "CteateDate",
+        "ModifiedDate",
         "TestSchedule",
         "TestPrice",
-        "TestImages"
     ];
-    
+
     public function TestPrice()
     {
        return $this->hasMany(TestPrice::class, 'TestId', 'id');

@@ -12,6 +12,7 @@ use App\Models\Tests;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Razorpay\Api\Api;
 use Razorpay\Api\Errors\SignatureVerificationError;
@@ -235,9 +236,18 @@ class ApiController extends Controller
     }
     public function packages(Request $request)
     {
+        $Packages =   Packages::select('*')->latest();
+
+        foreach ($request->all() as $key => $value) {
+            if(!empty($value)) {
+                $Packages->where($key,'LIKE',"%$value%");
+            }
+        }
+
         return [
             "status" => true,
-            "data" => Packages::all()
+            "count" => count($Packages->get()),
+            "data" => $Packages->get(),
         ];
     }
 }

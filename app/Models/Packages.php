@@ -16,6 +16,8 @@ class Packages extends Model
         "AliasName2",
         "ApplicableGender",
         "IsPackage",
+        "Createdon",
+        "Modifiedon",
         "Classifications",
         "TransportCriteria",
         "SpecialInstructionsForPatient",
@@ -24,9 +26,12 @@ class Packages extends Model
         "BasicInstruction",
         "DriveThrough",
         "HomeCollection",
+        "OrganName",
+        "HealthCondition",
+        "CteateDate",
+        "ModifiedDate",
         "TestSchedule",
         "TestPrice",
-        "TestImages"
     ];
 
     public function SubTestList()
