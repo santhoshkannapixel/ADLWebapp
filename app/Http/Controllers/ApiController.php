@@ -133,9 +133,13 @@ class ApiController extends Controller
         $customerInfo = $request->all();
         unset($customerInfo['amount']);
         $customer = User::with('CustomerDetails')->find($request->id);
-        if(!is_null($customer->CustomerDetails() ?? null)) {
+
+        try {
             $customer->CustomerDetails()->delete();
+        } catch (\Throwable $th) {
+            //throw $th;
         }
+
         $customer->CustomerDetails()->create($customerInfo);
 
         $api = new Api(PaymentApiConfig()->payKeyId,PaymentApiConfig()->paySecretKey);
