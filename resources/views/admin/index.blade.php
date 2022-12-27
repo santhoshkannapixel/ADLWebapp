@@ -93,6 +93,20 @@
             </div>
             <div class="btn-group input-daterange m-0">
                 <button type="button" name="refresh" id="refresh" class="btn btn-warning form-control-sm"><i class="fa fa-repeat" aria-hidden="true"></i></button>
+                <select name="search_data" id="search_data" class="form-select selectpicker">
+                    <option value="">-- Search Enquiry  --</option>
+                    <option value="BOOK_HOME_COLLECTION_LIST">BOOK HOME COLLECTION LIST</option>
+                    <option value="PATIENTS_CONSUMERS_LIST">PATIENTS CONSUMERS LIST</option>
+                    <option value="FEEDBACK_LIST">FEEDBACK LIST</option>
+                    <option value="FREQUENTLY_ASKED_QUESTIONS_LIST">FREQUENTLY ASKED QUESTIONS LIST</option>
+                    <option value="HOSPITAL_LAB_MANAGEMENT">HOSPITAL LAB MANAGEMENT</option>
+                    <option value="CLINICAL_LAB_MANAGEMENT">CLINICION LAB MANAGEMENT</option>
+                    <option value="FRANCHISING_OPPORTUNITIES">FRANCHISING OPPORTUNITIES</option>
+                    <option value="RESEARCH">RESEARCH</option>
+                    <option value="BOOK_AN_APPOINTMENT">BOOK AN APPOINTMENT</option>
+                    <option value="HEAD_OFFICE">HEAD OFFICE</option>
+                </select>
+                
                 <input type="text" name="from_date" id="from_date" class="btn form-control form-control-sm text-start" placeholder="From Date" readonly />
                 <input type="text" name="to_date" id="to_date" class="btn form-control form-control-sm text-start" placeholder="To Date" readonly />
                 <button type="button" name="filter" id="filter" class="btn btn-primary form-control-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
@@ -119,8 +133,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript">
-
-        $(document).ready(function(){
+        $(document).ready(function(){           
             $('.input-daterange').datepicker({
                 todayBtn:'linked',
                 format:'yyyy-mm-dd',
@@ -128,14 +141,14 @@
             });
 
 
-            function load_data(from_date = '', to_date = '')    {
+            function load_data(from_date = '', to_date = '',search_data = '')    {
                 $('#data-table').DataTable({
                     lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                     processing: true,
                     serverSide: true,
                     ajax: {
                         url: "{{ route('dashboard.index') }}",
-                        data:{from_date:from_date, to_date:to_date}
+                        data:{from_date:from_date, to_date:to_date,search_data:search_data}
                     },
                     columns: [
                         {data: 'DT_RowIndex', name: 'id',orderable: false, searchable: false},
@@ -150,10 +163,10 @@
             $('#filter').click(function(){
                 var from_date   =   $('#from_date').val();
                 var to_date     =   $('#to_date').val();
-
+                var search_data =   $('#search_data').val();
                 if(from_date != '' &&  to_date != '')        {
                     $('#data-table').DataTable().destroy();
-                    load_data(from_date, to_date);
+                    load_data(from_date, to_date,search_data);
                 }else{
 
                     toastr.error("Both Date is required")
@@ -161,6 +174,7 @@
             });
 
             $('#refresh').click(function(){
+                $('#search_data').val('');
                 $('#from_date').val('');
                 $('#to_date').val('');
                 $('#data-table').DataTable().destroy();
