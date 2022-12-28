@@ -290,10 +290,10 @@ class ApiController extends Controller
     {
         $request->validate([
             'old_password' => ['required', new MatchOldPassword($id)],
-            'new_passowrd' => ['required'],
-            'confirm_password' => ['same:new_passowrd'],
+            'new_password' => ['required'],
+            'confirm_password' => ['same:new_password'],
         ]);
-        User::find($id)->update(['password'=> Hash::make($request->new_passowrd)]);
+        User::find($id)->update(['password'=> Hash::make($request->new_password)]);
         return [
             "status" => true,
             "message" =>  "Reset Password Success !"
