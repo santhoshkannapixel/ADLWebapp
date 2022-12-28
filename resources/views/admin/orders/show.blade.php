@@ -46,9 +46,9 @@
                                 </span>
                             @endif
                             @if ($order->order_status == "3")
-                                <span style="font-size: 16px" class="badge-danger">
+                                <span style="font-size: 16px" class="badge-warning">
                                     <i class="fa fa-ban"></i>
-                                    Cancel Order Request
+                                    Cancel Request
                                 </span>
                             @endif
                         </div>

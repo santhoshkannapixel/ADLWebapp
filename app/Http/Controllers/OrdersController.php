@@ -54,7 +54,7 @@ class OrdersController extends Controller
                         return '<span class="badge-danger"><span class="fa fa-ban me-1"></span> Denied</span>';
                     }
                     if($data->order_status == "3") {
-                        return '<span class="badge-warning"><span class="fa fa-ban me-1"></span> Cancel Order Request</span>';
+                        return '<span class="badge-warning"><span class="fa fa-ban me-1"></span> Cancel Request</span>';
                     }
                 })
                 ->addColumn('action', function ($data) {
