@@ -270,4 +270,12 @@ class ApiController extends Controller
             "data" => $Packages->get(),
         ];
     }
+
+    public function getOrders($id)
+    {
+        return [
+            "status" => true,
+            "data" =>  Orders::where('user_id',$id)->first()
+        ];
+    }
 }
