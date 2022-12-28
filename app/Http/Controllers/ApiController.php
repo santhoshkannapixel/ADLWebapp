@@ -137,6 +137,15 @@ class ApiController extends Controller
             "data"      =>  $User
         ]);
     }
+    public function update_customer(Request $request,$id)
+    {
+        $customer = User::with('CustomerDetails')->find($id);
+        $customer->CustomerDetails()->update($request->all());
+        return response()->json([
+            "status" => true,
+            "message" => 'Your Information Updated !'
+        ]);
+    }
     public function update_billing_address(Request $request)
     {
         $customerInfo = $request->all();
