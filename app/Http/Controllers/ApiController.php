@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banners;
+use App\Models\BookHomeCollection;
 use App\Models\NewsEvent;
 use App\Models\Orders;
 use App\Models\Packages;
@@ -61,7 +62,15 @@ class ApiController extends Controller
     }
     public function bannerContactForm(Request $request)
     {
-        Storage::put('contact', $request->file('reportFile'));
+        $file = Storage::put('contact', $request->file('reportFile'));
+        BookHomeCollection::create([
+            "name" => $request->name,
+            "mobile" => $request->mobile,
+            "location" => $request->location,
+            "file" => $file,
+            "test_name" => $request->test_name,
+            "comments" => $request->comments,
+        ]);
         return response()->json([
             "status"    =>  true,
             "message"   =>  "Form Submit Success !"

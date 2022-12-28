@@ -15,6 +15,6 @@ class BookHomeCollection extends Model
         "location",
         "file",
         "test_name",
-        "test_type",
+        "comments",
     ];
 }
