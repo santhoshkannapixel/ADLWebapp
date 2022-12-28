@@ -92,6 +92,11 @@
                 All Enquiries
             </div>
             <div class="btn-group input-daterange m-0">
+                <form method="POST" name="dashboard_export" action="{{ route('dashboard.export') }}" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="export_enquiry" id="export_enquiry" value="">
+                    <button type="submit" id="dashboardExport" class="btn btn-primary" >Export</button>
+                </form>
                 <button type="button" name="refresh" id="refresh" class="btn btn-warning form-control-sm"><i class="fa fa-repeat" aria-hidden="true"></i></button>
                 <select name="search_data" id="search_data" class="form-select selectpicker">
                     <option value="">-- Search Enquiry  --</option>
@@ -167,11 +172,23 @@
                     ],
                 });
             } load_data();
-
+            $('#dashboardExport').click(function(){
+                var search_data =   $('#search_data').val();
+                if(search_data == '')
+                {
+                    toastr.error("Please Select Enquiry")
+                    return false;
+                }
+                else{
+                    $('#export_enquiry').val(search_data);
+                }
+              
+            });
             $('#filter').click(function(){
                 var from_date   =   $('#from_date').val();
                 var to_date     =   $('#to_date').val();
                 var search_data =   $('#search_data').val();
+                $('#export_enquiry').val(search_data);
                 if(from_date != '' &&  to_date != '')        {
                     $('#data-table').DataTable().destroy();
                     load_data(from_date, to_date,search_data);

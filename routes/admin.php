@@ -36,6 +36,7 @@ Route::middleware(['auth_users'])->group(function () {
     // ================================================= //
         Route::group(['prefix' => 'dashboard'], function () {
             Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
+            Route::post('/export', [DashboardController::class, 'exportData'])->name('dashboard.export');
         });
         Route::get('/', [DashboardController::class, 'dashboardData'])->name('dashboard.data');
         // Route::group(['prefix' => 'settings'], function () {

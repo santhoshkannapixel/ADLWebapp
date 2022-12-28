@@ -2,6 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BookAppointmentExport;
+use App\Exports\BookHomeCollectionExport;
+use App\Exports\ClinicalLabManagementExport;
+use App\Exports\FeedBackExport;
+use App\Exports\FranchisingOpportunitiesExport;
+use App\Exports\FrequentlyAskedQuestionsExport;
+use App\Exports\HeadOfficeExport;
+use App\Exports\HospitalLabManagementExport;
+use App\Exports\PatientsConsumersExport;
+use App\Exports\ResearchExport;
 use App\Models\BookAppointment;
 use App\Models\BookHomeCollection;
 use App\Models\ClinicalLabManagement;
@@ -19,6 +29,7 @@ use App\Models\Research;
 use App\Models\Tests;
 use App\Models\User;
 use Yajra\DataTables\Facades\DataTables;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -127,10 +138,51 @@ class DashboardController extends Controller
     }
     public function dashboardData(Request $request)
     {
+        
         $data['test'] = Tests::count();
         $data['package'] = Packages::count();
         $data['order'] = Orders::count();
         $data['customer'] = User::where('role_id',0)->count();
         return response()->json(['data'=>$data]);
+    }
+    public function exportData(Request $request)
+    {
+        $export_data = $request->export_enquiry;
+        if(!empty($export_data))
+        {
+            switch($export_data)
+            {
+                case 'BOOK_HOME_COLLECTION_LIST':
+                    return Excel::download(new BookHomeCollectionExport, 'book_home_collection.xlsx');
+                    break;
+                case 'PATIENTS_CONSUMERS_LIST':
+                    return Excel::download(new PatientsConsumersExport, 'patients_consumers.xlsx');
+                    break;
+                case 'FEEDBACK_LIST':
+                    return Excel::download(new FeedBackExport, 'feedback.xlsx');
+                    break;
+                case 'FREQUENTLY_ASKED_QUESTIONS_LIST':
+                    return Excel::download(new FrequentlyAskedQuestionsExport, 'faq.xlsx');
+                    break;
+                case 'HOSPITAL_LAB_MANAGEMENT':
+                    return Excel::download(new HospitalLabManagementExport, 'hospital_lab_management.xlsx');
+                    break;
+                case 'CLINICAL_LAB_MANAGEMENT':
+                    return Excel::download(new ClinicalLabManagementExport, 'clinical_lab_management.xlsx');
+                    break;
+                case 'FRANCHISING_OPPORTUNITIES':
+                    return Excel::download(new FranchisingOpportunitiesExport, 'franchising_opportunities.xlsx');
+                    break;
+                case 'RESEARCH':
+                    return Excel::download(new ResearchExport, 'research.xlsx');
+                    break;
+                case 'BOOK_AN_APPOINTMENT':
+                    return Excel::download(new BookAppointmentExport, 'book_appointment.xlsx');
+                    break;
+                case 'HEAD_OFFICE':
+                    return Excel::download(new HeadOfficeExport, 'head_office.xlsx');
+                    break;
+            }
+        }
     }
 }
