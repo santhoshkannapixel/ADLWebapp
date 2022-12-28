@@ -157,7 +157,8 @@ class ApiController extends Controller
         ]);
         return response()->json([
             "status" => true,
-            "message" => 'Your Information Updated !'
+            "message" => 'Your Information Updated !',
+            "data" => $customer
         ]);
     }
     public function update_billing_address(Request $request)
