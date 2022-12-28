@@ -198,6 +198,11 @@ class ApiController extends Controller
             'payment_status' => $status,
             "order_response"    =>  $result['order_response'],
         ]);
+
+        $Order->update([
+            'order_id' => OrderId($Order->id),
+        ]);
+
         if(count($request->products)) {
             foreach ($request->products as $key => $product) {
                 $Order->Tests()->create($product);

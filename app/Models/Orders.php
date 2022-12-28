@@ -10,6 +10,7 @@ class Orders extends Model
     use HasFactory;
 
     protected $fillable = [
+        'order_id',
         'payment_id',
         'razorpay_order_id',
         'user_id',
@@ -28,5 +29,5 @@ class Orders extends Model
     public function User()
     {
        return $this->hasOne(User::class, 'id', 'user_id');
-    } 
+    }
 }

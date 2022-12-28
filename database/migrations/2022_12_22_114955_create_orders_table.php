@@ -15,6 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('order_id')->nullable();
             $table->string('payment_id')->nullable();
             $table->string('razorpay_order_id')->nullable();
             $table->integer('user_id')->nullable();

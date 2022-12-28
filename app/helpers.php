@@ -33,8 +33,14 @@ if (!function_exists('fetchOrder')) {
 if (!function_exists('OrderId')) {
     function OrderId($id)
     {
-        $prefix = '#ADL';
+        $prefix = 'ADL/'.date("Y").'/';
         if (strlen($id) == 1) {
+            return  $prefix . "0000" . $id;
+        }
+        if (strlen($id) == 2) {
+            return  $prefix . "000" . $id;
+        }
+        if (strlen($id) == 3) {
             return  $prefix . "00" . $id;
         }
         return  $prefix . "0" . $id;
