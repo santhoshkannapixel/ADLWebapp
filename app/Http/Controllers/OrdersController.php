@@ -69,7 +69,7 @@ class OrdersController extends Controller
     public function show($id)
     {
         $order = Orders::with('User','Tests')->find($id);
-        $customer = CustomerDetails::where('user_id', 1)->first();
+        $customer = CustomerDetails::where('user_id', $order->User->id)->first();
         return view('admin.orders.show',compact('order','customer'));
     }
 
