@@ -11,6 +11,7 @@ use App\Models\PaymentConfig;
 use App\Models\SubTests;
 use App\Models\Tests;
 use App\Models\User;
+use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -197,6 +198,7 @@ class ApiController extends Controller
             'datetime' => $request->datetime,
             'payment_status' => $status,
             "order_response"    =>  $result['order_response'],
+            "order_amount" => $request->total_price
         ]);
 
         $Order->update([
@@ -281,6 +283,20 @@ class ApiController extends Controller
         return [
             "status" => true,
             "data" =>  Orders::with('Tests')->where('user_id',$id)->get()
+        ];
+    }
+
+    public function change_my_password(Request $request,$id)
+    {
+        $request->validate([
+            'old_password' => ['required', new MatchOldPassword($id)],
+            'new_passowrd' => ['required'],
+            'confirm_password' => ['same:new_passowrd'],
+        ]);
+        User::find($id)->update(['password'=> Hash::make($request->new_passowrd)]);
+        return [
+            "status" => true,
+            "message" =>  "Reset Password Success !"
         ];
     }
 }

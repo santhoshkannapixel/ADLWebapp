@@ -18,7 +18,8 @@ class Orders extends Model
         'datetime',
         'payment_status',
         'order_status',
-        'order_response'
+        'order_response',
+        'order_amount'
     ];
 
     public function Tests()
