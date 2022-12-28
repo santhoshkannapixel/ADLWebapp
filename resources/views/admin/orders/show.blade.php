@@ -21,7 +21,6 @@
         </div>
     </div>
     <div class="row g-3">
-        {{ $customer }}
         @if (!is_null($customer))
             <div class="col-md-4">
                 <div class="card border shadow-sm mb-3">
