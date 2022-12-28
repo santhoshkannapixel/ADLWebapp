@@ -80,17 +80,20 @@ class ApiController extends Controller
     public function testLists(Request $request,$type=null)
     {
         if(is_null($type)) {
-            $IsPackage = 'No';
+            $data   =   Tests::with('SubTestList')
+                        ->where('TestName', 'like', '%'.$request->search.'%')
+                        ->skip(0)
+                        ->take($request->tack)
+                        ->orderBy('TestPrice', ($request->sort == 'low' ? "DESC" : null) === null ? "DESC" : 'ASC'  )
+                        ->get();
         } else {
-            $IsPackage = 'Yes';
+            $data   =   Packages::with('SubTestList')
+                        ->where('TestName', 'like', '%'.$request->search.'%')
+                        ->skip(0)
+                        ->take($request->tack)
+                        ->orderBy('TestPrice', ($request->sort == 'low' ? "DESC" : null) === null ? "DESC" : 'ASC'  )
+                        ->get();
         }
-        $data   =   Tests::with('SubTestList')
-                            ->where('TestName', 'like', '%'.$request->search.'%')
-                            ->where('IsPackage', $IsPackage)
-                            ->skip(0)
-                            ->take($request->tack)
-                            ->orderBy('TestPrice', ($request->sort == 'low' ? "DESC" : null) === null ? "DESC" : 'ASC'  )
-                            ->get();
         return response()->json([
             "status"    =>  true,
             "data"      =>  $data
