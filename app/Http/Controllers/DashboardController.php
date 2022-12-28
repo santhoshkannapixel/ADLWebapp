@@ -143,6 +143,9 @@ class DashboardController extends Controller
         $data['package'] = Packages::count();
         $data['order'] = Orders::count();
         $data['customer'] = User::where('role_id',0)->count();
+        $data['received_payment'] = Orders::where('payment_status',1)->count();
+        $data['pending_order'] = Orders::where('order_status',[0,null])->count();
+        $data['failed_payment'] = Orders::where('payment_status',0)->count();
         return response()->json(['data'=>$data]);
     }
     public function exportData(Request $request)

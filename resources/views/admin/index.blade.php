@@ -56,7 +56,7 @@
             <div class="card card-body shadow-sm">
                 <div class="x-between y-center">
                     <div>
-                        <div class="h4 text-success">452</div>
+                        <div class="h4 text-success"><span id="received_payment"></span> </div>
                         <div><b>Received Payments</b></div>
                     </div>
                     <i class="fa-2x bi bi-credit-card-fill text-success"></i>
@@ -67,8 +67,8 @@
             <div class="card card-body shadow-sm">
                 <div class="x-between y-center">
                     <div>
-                        <div class="h4 text-warning">18</div>
-                        <div><b>Pending Payments</b></div>
+                        <div class="h4 text-warning"><span id="pending_order"></span> </div>
+                        <div><b>Pending Order</b></div>
                     </div>
                     <i class="fa-2x bi bi-credit-card-fill text-warning"></i>
                 </div>
@@ -78,7 +78,7 @@
             <div class="card card-body shadow-sm">
                 <div class="x-between y-center">
                     <div>
-                        <div class="h4 text-danger">3</div>
+                        <div class="h4 text-danger"><span id="failed_payment"></span> </div>
                         <div><b>Failed Payments</b></div>
                     </div>
                     <i class="fa-2x bi bi-credit-card-fill text-danger"></i>
@@ -152,6 +152,9 @@
                     $('#total_package').html(data.data.package);
                     $('#total_order').html(data.data.order);
                     $('#total_customer').html(data.data.customer);
+                    $('#received_payment').html(data.data.received_payment);
+                    $('#pending_order').html(data.data.pending_order);
+                    $('#failed_payment').html(data.data.failed_payment);
                 }
             });
             function load_data(from_date = '', to_date = '',search_data = '')    {
