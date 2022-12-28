@@ -275,7 +275,7 @@ class ApiController extends Controller
     {
         return [
             "status" => true,
-            "data" =>  Orders::where('user_id',$id)->get()
+            "data" =>  Orders::with('Tests')->where('user_id',$id)->get()
         ];
     }
 }
