@@ -21,6 +21,7 @@
         </div>
     </div>
     <div class="row g-3">
+        {{ $customer }}
         @if (!is_null($customer))
             <div class="col-md-4">
                 <div class="card border shadow-sm mb-3">
@@ -43,6 +44,12 @@
                                 <span style="font-size: 16px" class="badge-danger">
                                     <i class="fa fa-ban"></i>
                                     Order Denied
+                                </span>
+                            @endif
+                            @if ($order->order_status == "3")
+                                <span style="font-size: 16px" class="badge-danger">
+                                    <i class="fa fa-ban"></i>
+                                    Cancel Order Request
                                 </span>
                             @endif
                         </div>
