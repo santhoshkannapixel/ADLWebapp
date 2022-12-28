@@ -125,11 +125,13 @@ class DashboardController extends Controller
                     }
                 }
                 else{
-                    $data = Enquiries::whereBetween('created_at', array($request->from_date, $request->to_date))->get();
+                    $data = PatientsConsumers::select('name as Name','email as Email','mobile as Mobile','created_at')
+                    ->whereBetween('created_at', array($request->from_date, $request->to_date))->get();
                 }
             }
             else   {
-                $data = Enquiries::all();
+                $data = PatientsConsumers::select('name as Name','email as Email','mobile as Mobile','created_at')
+                ->get();
             }
 
             return datatables()->of($data)->addIndexColumn()->make(true);
