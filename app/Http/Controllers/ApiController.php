@@ -80,8 +80,7 @@ class ApiController extends Controller
     public function testLists(Request $request,$type=null)
     {
         if(is_null($type)) {
-            $data   =   Tests::with('SubTestList')
-                        ->where('TestName', 'like', '%'.$request->search.'%')
+            $data   =   Tests::where('TestName', 'like', '%'.$request->search.'%')
                         ->skip(0)
                         ->take($request->tack)
                         ->orderBy('TestPrice', ($request->sort == 'low' ? "DESC" : null) === null ? "DESC" : 'ASC'  )
