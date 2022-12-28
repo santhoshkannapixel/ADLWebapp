@@ -29,6 +29,7 @@ Route::post('save-payment-order', [ApiController::class,'save_payment_order']);
 Route::get('customer/{id}', [ApiController::class,'customer_info']);
 Route::post('packages',[ApiController::class,'packages']);
 Route::post('change-my-password/{id}',[ApiController::class,'change_my_password']);
+Route::post('cancel-my-order/{id}',[ApiController::class,'cancel_order_reason']);
 
 Route::post('/patients-consumers', [PatientsConsumersController::class, 'store'])->name('patients-consumers');
 Route::post('/feedback', [FeedBackController::class, 'store'])->name('feedback');

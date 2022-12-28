@@ -313,4 +313,16 @@ class ApiController extends Controller
             "message" =>  "Reset Password Success !"
         ];
     }
+
+    public function cancel_order_reason(Request $request , $order_id)
+    {
+        Orders::find($order_id)->update([
+            'cancel_order_reason' => $request->cancel_order_reason,
+            'order_status' => "3"
+        ]);
+        return [
+            "status" => true,
+            "message" =>  "Cancle order requested !"
+        ];
+    }
 }

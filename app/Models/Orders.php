@@ -19,7 +19,8 @@ class Orders extends Model
         'payment_status',
         'order_status',
         'order_response',
-        'order_amount'
+        'order_amount',
+        'cancel_order_reason'
     ];
 
     public function Tests()
