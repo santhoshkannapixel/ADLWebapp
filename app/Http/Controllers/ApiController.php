@@ -127,6 +127,12 @@ class ApiController extends Controller
     }
     public function register(Request $request)
     {
+        if(!is_null(User::where('email',$request->email)->first())) {
+            return response()->json([
+                "status"    =>  false,
+                "message" =>  'Email Id Already exists !'
+            ]);
+        }
         $User = User::create([
             'name'     => $request->name,
             'email'    => $request->email,
