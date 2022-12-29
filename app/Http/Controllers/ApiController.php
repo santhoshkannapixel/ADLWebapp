@@ -87,7 +87,7 @@ class ApiController extends Controller
                         ->orderBy('TestPrice', ($request->sort == 'low' ? "DESC" : null) === null ? "DESC" : 'ASC'  )
                         ->get();
         } else {
-            $data   =   Packages::with('SubTestList','TestPrice')
+            $data   =   Packages::with('SubTestList','PackagesPrice')
                         ->where('TestName', 'like', '%'.$request->search.'%')
                         ->skip(0)
                         ->take($request->tack)
