@@ -337,7 +337,7 @@ class ApiController extends Controller
     }
     public function get_city_master()
     {
-        return  Cities::select('*')->groupBy('CityName')->pluck('id','CityName')->toArray();
+        return  Cities::select('*')->groupBy('CityName')->pluck('CityID','CityName')->toArray();
     }
     public function get_lab_location($city_id = null)
     {
