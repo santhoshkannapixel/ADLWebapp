@@ -16,7 +16,6 @@ use App\Models\User;
 use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Razorpay\Api\Api;
 use Razorpay\Api\Errors\SignatureVerificationError;
@@ -45,7 +44,7 @@ class ApiController extends Controller
     }
     public function topBookedTest()
     {
-        $data   = Tests::oldest()->limit(10)->get();
+        $data   = Tests::with('TestPrice')->oldest()->limit(10)->get();
         return response()->json([
             "status"    =>  true,
             "data"      =>  $data
@@ -53,7 +52,7 @@ class ApiController extends Controller
     }
     public function testDetails($id)
     {
-        $data    = Tests::find($id);
+        $data    = Tests::with('TestPrice')->find($id);
         $subData = SubTests::where("TestId", $data->id)->get();
         return response()->json([
             "status"    =>  true,
