@@ -31,7 +31,7 @@ Route::post('packages',[ApiController::class,'packages']);
 Route::post('change-my-password/{id}',[ApiController::class,'change_my_password']);
 Route::post('cancel-my-order/{id}',[ApiController::class,'cancel_order_reason']);
 Route::get('get-city-master',[ApiController::class,'get_city_master']);
-Route::get('get-lab-location',[ApiController::class,'get_lab_location']);
+Route::get('get-lab-location/{city_id?}',[ApiController::class,'get_lab_location']);
 
 
 Route::post('/patients-consumers', [PatientsConsumersController::class, 'store'])->name('patients-consumers');

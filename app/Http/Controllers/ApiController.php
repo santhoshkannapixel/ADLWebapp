@@ -339,10 +339,10 @@ class ApiController extends Controller
     {
         return  Cities::select('*')->groupBy('CityName')->pluck('id','CityName')->toArray();
     }
-    public function get_lab_location(Request $request)
+    public function get_lab_location($city_id = null)
     {
-        if($request->city_id) {
-            return Branch::where('BranchCityId', $request->city_id)->get()->groupBy('BranchCity');
+        if(!is_null($city_id)) {
+            return Branch::where('BranchCityId', $city_id)->get()->groupBy('BranchCity');
         }
         return Branch::all()->groupBy('BranchCity');
     }
