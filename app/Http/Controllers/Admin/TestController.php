@@ -8,7 +8,7 @@ use App\Models\Tests;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Laracasts\Flash\Flash;
 use PhpParser\Node\Stmt\TryCatch;
 use Yajra\DataTables\Facades\DataTables;
@@ -104,6 +104,7 @@ class TestController extends Controller
                             "TestId" => $data->TestId ?? null,
                             "DosCode" => $data->DosCode ?? null,
                             "TestName" => $data->TestName ?? null,
+                            "TestSlug" => Str::slug($data->TestName),
                             "AliasName1" => $data->AliasName1 ?? null,
                             "AliasName2" => $data->AliasName2 ?? null,
                             "ApplicableGender" => $data->ApplicableGender ?? null,
@@ -134,6 +135,7 @@ class TestController extends Controller
                             "TestId" => $data->TestId ?? null,
                             "DosCode" => $data->DosCode ?? null,
                             "TestName" => $data->TestName ?? null,
+                            "TestSlug" => Str::slug($data->TestName),
                             "AliasName1" => $data->AliasName1 ?? null,
                             "AliasName2" => $data->AliasName2 ?? null,
                             "ApplicableGender" => $data->ApplicableGender ?? null,

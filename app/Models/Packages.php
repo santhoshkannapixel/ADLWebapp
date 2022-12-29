@@ -10,6 +10,7 @@ class Packages extends Model
     use HasFactory;
     protected $fillable = [
         "TestId",
+        "TestSlug",
         "DosCode",
         "TestName",
         "AliasName1",

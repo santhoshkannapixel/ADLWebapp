@@ -12,6 +12,7 @@ class Tests extends Model
 
     protected $fillable = [
         "TestId",
+        "TestSlug",
         "DosCode",
         "TestName",
         "AliasName1",
