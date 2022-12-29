@@ -18,6 +18,7 @@ class CreatePackagesTable extends Migration
             $table->string("TestId")->nullable();
             $table->string("DosCode")->nullable();
             $table->string("TestName")->nullable();
+            $table->string("TestSlug")->nullable();
             $table->text("AliasName1")->nullable();
             $table->text("AliasName2")->nullable();
             $table->string("ApplicableGender")->nullable();
