@@ -1,13 +1,13 @@
 @extends('admin.master.layout')
 
 @section('admin_master_content')
-    
+
     <div class="card custom table-card">
         <div class="card-header">
             <div class="card-title">
                 Branch List
             </div>
-           
+
             <form action="{{ route('branch.sync') }}" method="POST">
                 @csrf
                 <small><b>Last Sync</b> :  {{ $last_sync }}</small>
@@ -16,9 +16,9 @@
                     Sync Data</button>
             </form>
         </div>
-        <div class="card-body"> 
+        <div class="card-body">
             <table class="table table-bordered table-centered m-0 tr-sm table-hover" id="data-table">
-                <thead> 
+                <thead>
                     <tr>
                         <th>S.No</th>
                         <th>Branch Code</th>
@@ -45,7 +45,7 @@
                 processing: true,
                 responsive: true,
                 serverSide: true,
-                ajax: "{{ route('master.index') }}",
+                ajax: "{{ route('branch.index') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'id',orderable: false, searchable: false},
                     {data:"BranchCode", name : "BranchCode"},
@@ -54,12 +54,12 @@
                     {data:"BrachContact", name : "BrachContact"},
                     {data:"BranchEmail", name : "BranchEmail"},
                     {data:"processing", name : "IsProcessingLocation"},
-                    {data:"State", name : "State"}, 
+                    {data:"State", name : "State"},
                     {data:"Pincode", name : "Pincode",},
                     {data:"action", name : "action",}
                 ],
             });
         });
-        
-    </script>  
+
+    </script>
 @endsection

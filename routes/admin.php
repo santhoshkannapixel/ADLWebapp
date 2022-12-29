@@ -76,7 +76,7 @@ Route::middleware(['auth_users'])->group(function () {
         // });
         Route::group(['prefix' => 'master'], function () {
             Route::group(['prefix' => 'branch'], function () {
-                Route::get('/', [BranchController::class, 'index'])->name('master.index');
+                Route::get('/', [BranchController::class, 'index'])->name('branch.index');
                 Route::post('/', [BranchController::class, 'syncRequest'])->name('branch.sync');
                 Route::get('show/{id}', [BranchController::class, 'show'])->name('branch.show');
             });

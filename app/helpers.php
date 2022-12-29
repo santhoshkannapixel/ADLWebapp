@@ -172,5 +172,11 @@ if (!function_exists('toggleButton')) {
             return PaymentConfig::find(1);
         }
     }
-
+    if(!function_exists('breadcrumbTitle')) {
+        function breadcrumbTitle() {
+            $text = request()->route()->getName();
+            $result =  ucfirst(str_replace(['.','-','_'],' ',$text));
+            return str_replace('show', 'Detail view', str_replace('index','',$result));
+        }
+    }
 }

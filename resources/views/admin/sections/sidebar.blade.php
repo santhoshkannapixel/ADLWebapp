@@ -76,7 +76,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('master.index') }}" class="nav-link text-white {{ Route::is(['master.index','branch.show','city.index', 'banner.edit', 'test.edit' , 'banner.create', 'banner.index','news-letter.index','news-letter.show']) ? "active" : "" }}">
+            <a href="{{ route('branch.index') }}" class="nav-link text-white {{ Route::is(['branch.index','branch.show','city.index', 'banner.edit', 'test.edit' , 'banner.create', 'banner.index','news-letter.index','news-letter.show']) ? "active" : "" }}">
                 <i class="fa fa-cog"></i>Master
             </a>
         </li>

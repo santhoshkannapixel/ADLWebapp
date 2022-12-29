@@ -9,7 +9,7 @@ if(!function_exists('getAllRoutes')) {
             if($value->getAction()['middleware'][1] ?? "_" == 'auth_users') {
                 $unset = array(
                     'settings.index',
-                    'master.index',
+                    'branch.index',
                     'login',
                     'logout',
                     'ignition.healthCheck',
