@@ -88,33 +88,39 @@
     </div>
     <div class="card custom table-card m-1 mt-2">
         <div class="card-header">
-            <div class="card-title">
-                All Enquiries
-            </div>
-            <div class="btn-group input-daterange m-0">
-                <form method="POST" name="dashboard_export" action="{{ route('dashboard.export') }}" enctype="multipart/form-data">
-                    {{ csrf_field() }}
-                    <input type="hidden" name="export_enquiry" id="export_enquiry" value="">
-                    <button type="submit" id="dashboardExport" class="btn btn-primary" >Export</button>
-                </form>
-                <button type="button" name="refresh" id="refresh" class="btn btn-warning form-control-sm"><i class="fa fa-repeat" aria-hidden="true"></i></button>
-                <select name="search_data" id="search_data" class="form-select selectpicker">
-                    <option value="">-- Search Enquiry  --</option>
-                    <option value="BOOK_HOME_COLLECTION_LIST">BOOK HOME COLLECTION LIST</option>
-                    <option value="PATIENTS_CONSUMERS_LIST">PATIENTS CONSUMERS LIST</option>
-                    <option value="FEEDBACK_LIST">FEEDBACK LIST</option>
-                    <option value="FREQUENTLY_ASKED_QUESTIONS_LIST">FREQUENTLY ASKED QUESTIONS LIST</option>
-                    <option value="HOSPITAL_LAB_MANAGEMENT">HOSPITAL LAB MANAGEMENT</option>
-                    <option value="CLINICAL_LAB_MANAGEMENT">CLINICION LAB MANAGEMENT</option>
-                    <option value="FRANCHISING_OPPORTUNITIES">FRANCHISING OPPORTUNITIES</option>
-                    <option value="RESEARCH">RESEARCH</option>
-                    <option value="BOOK_AN_APPOINTMENT">BOOK AN APPOINTMENT</option>
-                    <option value="HEAD_OFFICE">HEAD OFFICE</option>
-                </select>
-                
-                <input type="text" name="from_date" id="from_date" class="btn form-control form-control-sm text-start" placeholder="From Date" readonly />
-                <input type="text" name="to_date" id="to_date" class="btn form-control form-control-sm text-start" placeholder="To Date" readonly />
-                <button type="button" name="filter" id="filter" class="btn btn-primary form-control-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
+            <div class="row m-0 align-items-center w-100">
+                <div class="col-3 p-0">
+                    <div class="card-title">
+                        All Enquiries
+                    </div>
+                </div>
+                <div class="col p-0 text-end">
+                    <div class="input-group input-daterange m-0">
+                        <form method="POST" name="dashboard_export" action="{{ route('dashboard.export') }}" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="export_enquiry" id="export_enquiry" value="">
+                            <button type="submit" id="dashboardExport" class="btn btn-primary" >Export</button>
+                        </form>
+                        <button type="button" name="refresh" id="refresh" class="btn btn-warning form-control-sm"><i class="fa fa-repeat" aria-hidden="true"></i></button>
+                        <select name="search_data" id="search_data" class="form-select selectpicker">
+                            <option value="">-- Search Enquiry  --</option>
+                            <option value="BOOK_HOME_COLLECTION_LIST">BOOK HOME COLLECTION LIST</option>
+                            <option value="PATIENTS_CONSUMERS_LIST">PATIENTS CONSUMERS LIST</option>
+                            <option value="FEEDBACK_LIST">FEEDBACK LIST</option>
+                            <option value="FREQUENTLY_ASKED_QUESTIONS_LIST">FREQUENTLY ASKED QUESTIONS LIST</option>
+                            <option value="HOSPITAL_LAB_MANAGEMENT">HOSPITAL LAB MANAGEMENT</option>
+                            <option value="CLINICAL_LAB_MANAGEMENT">CLINICION LAB MANAGEMENT</option>
+                            <option value="FRANCHISING_OPPORTUNITIES">FRANCHISING OPPORTUNITIES</option>
+                            <option value="RESEARCH">RESEARCH</option>
+                            <option value="BOOK_AN_APPOINTMENT">BOOK AN APPOINTMENT</option>
+                            <option value="HEAD_OFFICE">HEAD OFFICE</option>
+                        </select>
+
+                        <input type="text" name="from_date" id="from_date" class="btn form-control form-control-sm text-start" placeholder="From Date" readonly />
+                        <input type="text" name="to_date" id="to_date" class="btn form-control form-control-sm text-start" placeholder="To Date" readonly />
+                        <button type="button" name="filter" id="filter" class="btn btn-primary form-control-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="card-body">
@@ -138,7 +144,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript">
-        $(document).ready(function(){           
+        $(document).ready(function(){
             $('.input-daterange').datepicker({
                 todayBtn:'linked',
                 format:'yyyy-mm-dd',
@@ -185,7 +191,7 @@
                 else{
                     $('#export_enquiry').val(search_data);
                 }
-              
+
             });
             $('#filter').click(function(){
                 var from_date   =   $('#from_date').val();

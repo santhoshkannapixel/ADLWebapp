@@ -99,7 +99,6 @@ class TestController extends Controller
             if (!is_null($response_data)) {
                 foreach ($response_data as $data) {
                     // try {
-                    Log::info($data->IsPackage);
                     if ($data->IsPackage == "No") {
                         $test = Tests::updateOrCreate([
                             "TestId" => $data->TestId ?? null,
