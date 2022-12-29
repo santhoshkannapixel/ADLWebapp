@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Banners;
 use App\Models\BookHomeCollection;
 use App\Models\Branch;
+use App\Models\Cities;
 use App\Models\NewsEvent;
 use App\Models\Orders;
 use App\Models\Packages;
@@ -334,7 +335,10 @@ class ApiController extends Controller
             "message" =>  "Cancle order requested !"
         ];
     }
-
+    public function get_city_master()
+    {
+        return  Cities::select('*')->groupBy('CityName')->pluck('id','CityName')->toArray();
+    }
     public function get_lab_location(Request $request)
     {
         if($request->city_id) {
