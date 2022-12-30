@@ -100,7 +100,7 @@ Route::middleware(['auth_users'])->group(function () {
             });
             Route::get('news-letter', [NewsLetterController::class, 'index'])->name('news-letter.index');
             Route::get('news-letter/{id}', [NewsLetterController::class, 'show'])->name('news-letter.show');
-            Route::post('news-letter/{id?}', [NewsLetterController::class, 'delete'])->name('news-letter.delete');
+            Route::delete('news-letter/{id?}', [NewsLetterController::class, 'delete'])->name('news-letter.delete');
         });
         Route::group(['prefix' => 'news-and-events'], function () {
             Route::get('/', [NewsAndEventsController::class, 'index'])->name('news-and-events.index');
@@ -130,42 +130,42 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('reach-us', [ReachUsController::class, 'index'])->name('reach-us.index');
 
     Route::get('/home-collection', [BookHomeCollectionController::class, 'index'])->name('home-collection.index');
-    Route::post('/home-collection/{id}', [BookHomeCollectionController::class, 'destroy'])->name('home-collection.delete');
+    Route::delete('/home-collection/{id}', [BookHomeCollectionController::class, 'destroy'])->name('home-collection.delete');
     Route::get('/home-collection/{id}', [BookHomeCollectionController::class, 'show'])->name('home-collection.show');
 
     Route::get('/feedback', [FeedBackController::class, 'index'])->name('feedback.index');
-    Route::post('/feedback/{id}', [FeedBackController::class, 'destroy'])->name('feedback.delete');
+    Route::delete('/feedback/{id}', [FeedBackController::class, 'destroy'])->name('feedback.delete');
     Route::get('/feedback/{id}', [FeedBackController::class, 'show'])->name('feedback.show');
 
     Route::get('/faq', [FrequentlyAskedQuestionsController::class, 'index'])->name('faq.index');
-    Route::post('/faq/{id}', [FrequentlyAskedQuestionsController::class, 'destroy'])->name('faq.delete');
+    Route::delete('/faq/{id}', [FrequentlyAskedQuestionsController::class, 'destroy'])->name('faq.delete');
     Route::get('/faq/{id}', [FrequentlyAskedQuestionsController::class, 'show'])->name('faq.show');
 
     Route::get('/hospital-lab-management', [HospitalLabManagementController::class, 'index'])->name('hospital-lab-management.index');
-    Route::post('/hospital-lab-management/{id}', [HospitalLabManagementController::class, 'destroy'])->name('hospital-lab-management.delete');
+    Route::delete('/hospital-lab-management/{id}', [HospitalLabManagementController::class, 'destroy'])->name('hospital-lab-management.delete');
     Route::get('/hospital-lab-management/{id}', [HospitalLabManagementController::class, 'show'])->name('hospital-lab-management.show');
 
     Route::get('/clinical-lab-management', [ClinicalLabManagementController::class, 'index'])->name('clinical-lab-management.index');
-    Route::post('/clinical-lab-management/{id}', [ClinicalLabManagementController::class, 'destroy'])->name('clinical-lab-management.delete');
+    Route::delete('/clinical-lab-management/{id}', [ClinicalLabManagementController::class, 'destroy'])->name('clinical-lab-management.delete');
     Route::get('/clinical-lab-management/{id}', [ClinicalLabManagementController::class, 'show'])->name('clinical-lab-management.show');
 
     Route::get('/franchising-opportunities', [FranchisingOpportunitiesController::class, 'index'])->name('franchising-opportunities.index');
-    Route::post('/franchising-opportunities/{id}', [FranchisingOpportunitiesController::class, 'destroy'])->name('franchising-opportunities.delete');
+    Route::delete('/franchising-opportunities/{id}', [FranchisingOpportunitiesController::class, 'destroy'])->name('franchising-opportunities.delete');
     Route::get('/franchising-opportunities/{id}', [FranchisingOpportunitiesController::class, 'show'])->name('franchising-opportunities.show');
 
     Route::get('/research', [ResearchController::class, 'index'])->name('research.index');
-    Route::post('/research/{id}', [ResearchController::class, 'destroy'])->name('research.delete');
+    Route::delete('/research/{id}', [ResearchController::class, 'destroy'])->name('research.delete');
     Route::get('/research/{id}', [ResearchController::class, 'show'])->name('research.show');
 
     Route::get('/patients-consumers', [PatientsConsumersController::class, 'index'])->name('patients-consumers.index');
-    Route::post('/patients-consumers/{id}', [PatientsConsumersController::class, 'destroy'])->name('patients-consumers.delete');
+    Route::delete('/patients-consumers/{id}', [PatientsConsumersController::class, 'destroy'])->name('patients-consumers.delete');
     Route::get('/patients-consumers/{id}', [PatientsConsumersController::class, 'show'])->name('patients-consumers.show');
 
     Route::get('/book-an-appointment', [BookAppointmentController::class, 'index'])->name('book-an-appointment.index');
-    Route::post('/book-an-appointment/{id}', [BookAppointmentController::class, 'destroy'])->name('book-an-appointment.delete');
+    Route::delete('/book-an-appointment/{id}', [BookAppointmentController::class, 'destroy'])->name('book-an-appointment.delete');
     Route::get('/book-an-appointment/{id}', [BookAppointmentController::class, 'show'])->name('book-an-appointment.show');
 
     Route::get('/head-office', [HeadOfficeController::class, 'index'])->name('head-office.index');
-    Route::post('/head-office/{id}', [HeadOfficeController::class, 'destroy'])->name('head-office.delete');
+    Route::delete('/head-office/{id}', [HeadOfficeController::class, 'destroy'])->name('head-office.delete');
     Route::get('/head-office/{id}', [HeadOfficeController::class, 'show'])->name('head-office.show');
 });

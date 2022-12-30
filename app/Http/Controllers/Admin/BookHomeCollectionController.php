@@ -24,9 +24,13 @@ class BookHomeCollectionController extends Controller
             return DataTables::eloquent($data)
                 ->addIndexColumn()
                 ->addColumn('download', function ($data) {
-                    return '<a href="' . url('/public') . '/admin/book_home_collection/' . $data->file . '" class="m-1  shadow-sm btn btn-sm text-primary btn-outline-light" title="Download" download> 
-                    <i class="bi bi-download"></i>
-                    </a>';
+                    if(!empty($data->file ))
+                    {
+                        return '<a href="' . asset_url($data->file) . '" class="m-1  shadow-sm btn btn-sm text-primary btn-outline-light" title="Download" download> 
+                        <i class="bi bi-download"></i>
+                        </a>';
+                    }
+                   
                 })
                 ->addColumn('action', function ($data) {
                     $user = Sentinel::getUser();
@@ -47,7 +51,7 @@ class BookHomeCollectionController extends Controller
         }
         return view('admin.enquiry.home-collection.index');
     }
-    public function destroy($id = null)
+    public function destroy($id)
     {
         $careers  = BookHomeCollection::find($id);
         $careers->delete();
@@ -56,9 +60,7 @@ class BookHomeCollectionController extends Controller
     }
     public function show($id)
     {
-        $data   =   BookHomeCollection::select(DB::raw("name as name,mobile as mobile,location as location,file as file,test_name as test_name,comments as comments,DATE_FORMAT(created_at,'%d/%m/%Y') as created_date,DATE_FORMAT(updated_at,'%d/%m/%Y') as updated_date,DATE_FORMAT(deleted_at,'%d/%m/%Y') as deleted_date"))->findOrFail($id);
-        // $data   =   BookHomeCollection::findOrFail($id);
-        // dd($data);
+        $data   =   BookHomeCollection::select(DB::raw("name as name,mobile as mobile,location as location,file as file,test_name as test_name,comments as comments,DATE_FORMAT(created_at,'%d/%m/%Y') as created_date,DATE_FORMAT(updated_at,'%d/%m/%Y') as updated_date"))->findOrFail($id);
         return view('admin.enquiry.home-collection.show', compact('data'));
     }
 }

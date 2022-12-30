@@ -21,9 +21,12 @@ class BookAppointmentController extends Controller
             return DataTables::eloquent($data)
                 ->addIndexColumn()
                 ->addColumn('download', function ($data) {
+                    if(!empty($data->file ))
+                    {
                     return '<a href="' . url('/storage/app/') .'/' . $data->file . '" class="m-1  shadow-sm btn btn-sm text-primary btn-outline-light" title="Download" download> 
                     <i class="bi bi-download"></i>
                     </a>';
+                    }
                 })
                 ->addColumn('action', function ($data) {
                     $user = Sentinel::getUser();
@@ -57,7 +60,7 @@ class BookAppointmentController extends Controller
         $data   =   BookAppointment::select(DB::raw("book_appointments.name as name,book_appointments.mobile as mobile,
         book_appointments.file as file,
         book_appointments.test_id as test_name,book_appointments.test_type as test_type,cities.AreaName as area_name,tests.TestName as test_name,DATE_FORMAT(book_appointments.created_at,'%d/%m/%Y') as created_date,
-        DATE_FORMAT(book_appointments.updated_at,'%d/%m/%Y') as updated_date,DATE_FORMAT(book_appointments.deleted_at,'%d/%m/%Y') as deleted_date"))
+        DATE_FORMAT(book_appointments.updated_at,'%d/%m/%Y') as updated_date"))
         ->join('cities','cities.AreaId','=','book_appointments.location_id')
         ->join('tests','tests.id','=','book_appointments.test_id')
         ->findOrFail($id);

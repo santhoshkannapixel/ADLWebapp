@@ -51,7 +51,8 @@ class PatientsConsumersController extends Controller
     public function show($id)
     {
         // $data   =   PatientsConsumers::findOrFail($id);
-        $data   =   PatientsConsumers::select(DB::raw("name as name,mobile as mobile,email as email,date as date,gender as gender,test_for_home_collection as test_for_home_collection,upload_prescription as upload_prescription,preferred_date_1 as preferred_date_1,preferred_date_2 as preferred_date_2,preferred_time as preferred_time,address as address,pincode as pincode,DATE_FORMAT(created_at,'%d/%m/%Y') as created_date,DATE_FORMAT(updated_at,'%d/%m/%Y') as updated_date,DATE_FORMAT(deleted_at,'%d/%m/%Y') as deleted_date"))->findOrFail($id);
+        $data   =   PatientsConsumers::select(DB::raw("name as name,mobile as mobile,email as email,date as date,gender as gender,test_for_home_collection as test_for_home_collection,upload_prescription as upload_prescription,preferred_date_1 as preferred_date_1,preferred_date_2 as preferred_date_2,preferred_time as preferred_time,address as address,pincode as pincode,DATE_FORMAT(created_at,'%d/%m/%Y') as created_date,DATE_FORMAT(updated_at,'%d/%m/%Y') 
+        as updated_date"))->findOrFail($id);
 
         return view('admin.enquiry.patients-consumers.show', compact('data'));
     }

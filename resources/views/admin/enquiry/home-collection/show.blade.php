@@ -16,7 +16,7 @@
         <div class="card-body"> 
             <table class="table m-0 h-100">
                 @foreach ($data->toArray() as $column => $value)
-                    @if ($column != 'id')
+                    @if ($column != 'id' && $column != 'file')
                         <tr>
                             <td width="25%">
                                 <strong class="fw-bold ft-cap">{{ Str::headline($column) }}</strong>
@@ -24,7 +24,22 @@
                             <td width="5%" class="text-center">:</td>
                             <td width="65%">{{ $value ?? "-" }}</td>
                         </tr>
+
                     @endif
+                    @if($column == 'file')
+                    <tr>
+                        <td width="25%">
+                            <strong class="fw-bold ft-cap">{{ Str::headline($column) }}</strong>
+                        </td>
+                        <td width="5%" class="text-center">:</td>
+                        <td width="65%">
+                            <a href="{{asset_url($data->file)}}" class="m-1  shadow-sm btn btn-sm text-primary btn-outline-light" title="Download" download> 
+                               <i class="bi bi-download"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    @endif
+                   
                 @endforeach 
             </table>  
         </div>

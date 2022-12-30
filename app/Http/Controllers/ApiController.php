@@ -73,7 +73,9 @@ class ApiController extends Controller
     }
     public function bannerContactForm(Request $request)
     {
+         
         $file = Storage::put('contact', $request->file('reportFile'));
+
         BookHomeCollection::create([
             "name" => $request->name,
             "mobile" => $request->mobile,

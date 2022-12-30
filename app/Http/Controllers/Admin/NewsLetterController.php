@@ -47,8 +47,7 @@ class NewsLetterController extends Controller
     }
     public function show($id)
     {
-        // $data   =   BookAppointment::findOrFail($id);
-        $data   =   NewsLetter::find($id);
+        $data   =   NewsLetter::select('id','email','created_at','updated_at')->find($id);
         return view('admin.master.news-letter.show', compact('data'));
     }
 }
