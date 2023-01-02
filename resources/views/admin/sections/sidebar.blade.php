@@ -76,7 +76,12 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('branch.index') }}" class="nav-link text-white {{ Route::is(['branch.index','branch.show','city.index', 'banner.edit', 'test.edit' , 'banner.create', 'banner.index','news-letter.index','news-letter.show']) ? "active" : "" }}">
+            <a href="{{ route('news-letter.index') }}" class="nav-link text-white {{ Route::is(['news-letter.index','news-letter.show']) ? "active" : "" }}">
+                <i class="fa fa-newspaper-o"></i>News Letter
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('branch.index') }}" class="nav-link text-white {{ Route::is(['branch.index','branch.show','city.index', 'banner.edit', 'test.edit' , 'banner.create', 'banner.index']) ? "active" : "" }}">
                 <i class="fa fa-cog"></i>Master
             </a>
         </li>

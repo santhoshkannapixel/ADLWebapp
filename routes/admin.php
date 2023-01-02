@@ -97,10 +97,7 @@ Route::middleware(['auth_users'])->group(function () {
                 Route::post('create/{id?}', [BannerController::class, 'store'])->name('banner.store');
                 Route::get('edit/{id}', [BannerController::class, 'edit'])->name('banner.edit');
                 Route::delete('delete/{id?}', [BannerController::class, 'delete'])->name('banner.delete');
-            });
-            Route::get('news-letter', [NewsLetterController::class, 'index'])->name('news-letter.index');
-            Route::get('news-letter/{id}', [NewsLetterController::class, 'show'])->name('news-letter.show');
-            Route::delete('news-letter/{id?}', [NewsLetterController::class, 'delete'])->name('news-letter.delete');
+            });          
         });
         Route::group(['prefix' => 'news-and-events'], function () {
             Route::get('/', [NewsAndEventsController::class, 'index'])->name('news-and-events.index');
@@ -109,6 +106,11 @@ Route::middleware(['auth_users'])->group(function () {
             Route::post('update/{id?}', [NewsAndEventsController::class, 'update'])->name('news-and-events.update');
             Route::get('edit/{id}', [NewsAndEventsController::class, 'edit'])->name('news-and-events.edit');
             Route::delete('delete/{id?}', [NewsAndEventsController::class, 'destroy'])->name('news-and-events.destroy');
+        });
+        Route::group(['prefix' => 'news-letter'],function(){
+            Route::get('/', [NewsLetterController::class, 'index'])->name('news-letter.index');
+            Route::get('/{id}', [NewsLetterController::class, 'show'])->name('news-letter.show');
+            Route::delete('/{id?}', [NewsLetterController::class, 'delete'])->name('news-letter.delete');
         });
 
         Route::group(['prefix' => 'orders'], function () {

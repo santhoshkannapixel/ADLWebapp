@@ -1,7 +1,9 @@
-@extends('admin.master.layout')
+@extends('layouts.admin')
 
-@section('admin_master_content')
-    
+@section('admin_title')
+Home
+@endsection
+@section('admin_content')
     <div class="card custom table-card">
         <div class="card-header">
             <div class="card-title">

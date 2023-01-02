@@ -35,19 +35,19 @@ class NewsLetterController extends Controller
             ->make(true);
         }
 
-        return view('admin.master.news-letter.index');
+        return view('admin.news-letter.index');
     }
    
     public function delete($id = null)
     {
         $careers  = NewsLetter::find($id);
         $careers->delete();
-        Flash::success(__('action.deleted', ['type' => 'Home Collection']));
+        Flash::success(__('action.deleted', ['type' => 'Subscriber Email']));
         return redirect()->back();
     }
     public function show($id)
     {
         $data   =   NewsLetter::select('id','email','created_at','updated_at')->find($id);
-        return view('admin.master.news-letter.show', compact('data'));
+        return view('admin.news-letter.show', compact('data'));
     }
 }
