@@ -18,7 +18,7 @@ class NewsLetterController extends Controller
             $data = NewsLetter::select([
                 'id',
                 'email',
-            ]);
+            ])->orderBy('id','desc');
 
             return DataTables::eloquent($data)
                 ->addIndexColumn()
