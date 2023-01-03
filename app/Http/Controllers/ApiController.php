@@ -6,8 +6,10 @@ use App\Models\Banners;
 use App\Models\BookHomeCollection;
 use App\Models\Branch;
 use App\Models\Cities;
+use App\Models\Conditions;
 use App\Models\NewsEvent;
 use App\Models\Orders;
+use App\Models\Organs;
 use App\Models\Packages;
 use App\Models\PaymentConfig;
 use App\Models\SubTests;
@@ -355,5 +357,13 @@ class ApiController extends Controller
             return Branch::where('BranchCityId', $city_id)->get()->groupBy('BranchCity');
         }
         return Branch::all()->groupBy('BranchCity');
+    }
+    public function get_organs()
+    {
+        return Organs::all();
+    }
+    public function get_conditions()
+    {
+        return Conditions::all();
     }
 }

@@ -16,17 +16,16 @@ class DatabaseSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {   
         $this->call([
             UserAndRolesSeeder::class,
             NewsAndEventSeeder::class,
             ApiLocationSeeder::class,
             PaymentSeeder::class,
-            BannerSeeder::class
+            BannerSeeder::class,
+            ApiSeeder::class,
+            OrganSeeder::class,
+            ConditionSeeder::class,
         ]);
-        Enquiries::factory()->count(20)->create();
-        $syncBranch = new BranchController(); $syncBranch->syncRequest();
-        $syncCity   = new CityController();   $syncCity->syncRequest();
-        $syncTest   = new TestController();   $syncTest->syncRequest();
     }
 }
