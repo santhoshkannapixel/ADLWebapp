@@ -94,10 +94,19 @@ class ApiController extends Controller
     public function testLists(Request $request,$type=null)
     {
         if(is_null($type)) {
-            $data   =   Tests::with('TestPrice')->where('TestName', 'like', '%'.$request->search.'%')
+            $data   =   Tests::with('TestPrice')
+                        ->when(!empty($request->TestName),function($query) use ($request)  {
+                            $query->where('TestName', 'like', '%'.$request->TestName.'%');
+                        })
+                        ->when(!empty($request->OrganName),function($query) use ($request)  {
+                            $query->where('OrganName',$request->OrganName);
+                        })
+                        ->when(!empty($request->HealthCondition),function($query) use ($request)  {
+                            $query->where('HealthCondition',$request->HealthCondition);
+                        })
                         ->skip(0)
-                        ->take($request->tack)
-                        ->orderBy('TestPrice', ($request->sort == 'low' ? "DESC" : null) === null ? "DESC" : 'ASC'  )
+                        ->take($request->Tack)
+                        ->orderBy('TestPrice', ($request->TestPrice == 'low' ? "DESC" : null) === null ? "DESC" : 'ASC'  )
                         ->get();
         } else {
             $data   =   Packages::with('SubTestList','PackagesPrice')
