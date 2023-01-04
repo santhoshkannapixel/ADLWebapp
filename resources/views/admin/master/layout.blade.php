@@ -28,6 +28,18 @@
                 Banner Master
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link {{ Route::is(['organ.index','organ.create','organ.edit']) ? "active" : "" }}" href="{{ route('organ.index') }}">
+                <i class="fa fa-picture-o me-2"></i>
+                Organs
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ Route::is(['condition.index','condition.create','condition.edit']) ? "active" : "" }}" href="{{ route('condition.index') }}">
+                <i class="fa fa-picture-o me-2"></i>
+                conditions
+            </a>
+        </li>
    </ul>
    <div class="my-4">
       @yield('admin_master_content')

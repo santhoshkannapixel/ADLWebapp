@@ -26,8 +26,10 @@ use App\Http\Controllers\Admin\PaymentConfigController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsAndEventsController;
 use App\Http\Controllers\Admin\NewsLetterController;
+use App\Http\Controllers\ConditionController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\OrganController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -118,11 +120,28 @@ Route::middleware(['auth_users'])->group(function () {
             Route::get('/show/{id}', [OrdersController::class, 'show'])->name('orders.show');
             Route::post('/change-order-status/{id}', [OrdersController::class, 'change_order_status'])->name('orders.change-order-status');
         });
+
         Route::group(['prefix' => 'customers'], function () {
             Route::get('/', [CustomersController::class, 'index'])->name('customers.index');
             Route::get('/show/{id}', [CustomersController::class, 'show'])->name('customers.show');
         });
 
+        Route::group(['prefix' => 'organs'], function () {
+            Route::get('/', [OrganController::class, 'index'])->name('organ.index');
+            Route::get('/create', [OrganController::class, 'create'])->name('organ.create'); 
+            Route::post('/create', [OrganController::class, 'store'])->name('organ.store'); 
+            Route::get('/edit/{id}', [OrganController::class, 'edit'])->name('organ.edit'); 
+            Route::post('/edit/{id}', [OrganController::class, 'update'])->name('organ.update'); 
+            Route::delete('/destroy/{id}', [OrganController::class, 'destroy'])->name('organ.destroy');  
+        });
+        Route::group(['prefix' => 'conditions'], function () {
+            Route::get('/', [ConditionController::class, 'index'])->name('condition.index');
+            Route::get('/create', [ConditionController::class, 'create'])->name('condition.create'); 
+            Route::post('/create', [ConditionController::class, 'store'])->name('condition.store'); 
+            Route::get('/edit/{id}', [ConditionController::class, 'edit'])->name('condition.edit'); 
+            Route::post('/edit/{id}', [ConditionController::class, 'update'])->name('condition.update'); 
+            Route::delete('/destroy/{id}', [ConditionController::class, 'destroy'])->name('condition.destroy');  
+        }); 
     // ================================================= //
 
 

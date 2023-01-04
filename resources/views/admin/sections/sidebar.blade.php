@@ -57,6 +57,7 @@
                 <i class="fa fa-medkit"></i>Health Checkup
             </a>
         </li>
+        
         <li>
             <a href="{{ route('reach-us.index') }}" class="nav-link text-white {{ Route::is([
                     'reach-us.index',
@@ -81,7 +82,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('branch.index') }}" class="nav-link text-white {{ Route::is(['branch.index','branch.show','city.index', 'banner.edit', 'test.edit' , 'banner.create', 'banner.index']) ? "active" : "" }}">
+            <a href="{{ route('branch.index') }}" class="nav-link text-white {{ Route::is(['branch.index','branch.show','city.index', 'banner.edit', 'test.edit' , 'banner.create', 'banner.index','organ.index','organ.update','organ.edit','organ.create','condition.index','condition.update','condition.edit','condition.create']) ? "active" : "" }}">
                 <i class="fa fa-cog"></i>Master
             </a>
         </li>
