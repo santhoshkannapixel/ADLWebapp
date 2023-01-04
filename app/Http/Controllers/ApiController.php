@@ -395,7 +395,7 @@ class ApiController extends Controller
                 $image = asset_url($row->image);
             }
             $result[] = [
-                "name" => str_replace('\r\n', "",$row->name),
+                "name" => str_replace('%0D%0A','',urlencode($row->name)),
                 "image" => $image,
             ];
         }
