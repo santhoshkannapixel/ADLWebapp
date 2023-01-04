@@ -19,7 +19,7 @@ class OrganSeeder extends Seeder
         foreach ($Tests as $key => $test) {
             if(!empty($test)) {
                 Organs::create([
-                    "name" => $test,
+                    "name" => str_replace('\r\n', "",$test),
                     "order_by" => $key
                 ]);
             } 
