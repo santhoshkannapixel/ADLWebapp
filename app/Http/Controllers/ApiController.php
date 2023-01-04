@@ -102,7 +102,7 @@ class ApiController extends Controller
                             $query->where('OrganName',$request->OrganName);
                         })
                         ->when(!empty($request->HealthCondition),function($query) use ($request)  {
-                            $query->where('HealthCondition',$request->HealthCondition);
+                            $query->where('HealthCondition', 'like', '%'.$request->HealthCondition.'%');
                         })
                         ->skip(0)
                         ->take($request->Tack)
