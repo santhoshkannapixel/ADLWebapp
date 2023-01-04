@@ -360,10 +360,36 @@ class ApiController extends Controller
     }
     public function get_organs()
     {
-        return Organs::all();
+        $data = Organs::orderBy('order_by')->get();
+        $result = [];
+        foreach ($data as $key => $row) {
+            if(is_null($row->image)) {
+                $image = "https://cdn-icons-png.flaticon.com/512/3655/3655592.png";
+            } else {
+                $image = asset_url($row->image);
+            }
+            $result[] = [
+                "name" => $row->name,
+                "image" => $image,
+            ];
+        }
+        return $result ;
     }
     public function get_conditions()
     {
-        return Conditions::all();
+        $data = Conditions::orderBy('order_by')->get();
+        $result = [];
+        foreach ($data as $key => $row) {
+            if(is_null($row->image)) {
+                $image = "https://cdn-icons-png.flaticon.com/512/3974/3974887.png";
+            } else {
+                $image = asset_url($row->image);
+            }
+            $result[] = [
+                "name" => $row->name,
+                "image" => $image,
+            ];
+        }
+        return $result ;
     }
 }
