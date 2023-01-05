@@ -19,7 +19,7 @@ class ConditionSeeder extends Seeder
         foreach ($Tests as $key => $test) {
             if(!empty($test)) {
                 Conditions::create([
-                    "name" => str_replace('\r\n', "",$test),
+                    "name" => $test,
                     "order_by" => $key
                 ]); 
             }
