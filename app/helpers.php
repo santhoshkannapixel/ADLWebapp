@@ -111,7 +111,7 @@ if (!function_exists('button')) {
     {
         if ($type == 'edit') {
             return '
-                <a href="' . $url . '" class="m-1  shadow-sm btn btn-sm text-primary btn-outline-light" title="Edit">
+                <a href="' . $url . '" title="' . $url . '" class="m-1  shadow-sm btn btn-sm text-primary btn-outline-light" title="Edit">
                     <i class="bi bi-pencil"></i>
                 </a>
             ';
@@ -130,7 +130,13 @@ if (!function_exists('button')) {
         }
 
         if ($type == 'show') {
-            return '<a href="' . $url . '" class="m-1 shadow-sm btn btn-sm text-success btn-outline-light"><i class="fa fa-eye"></i></a>';
+            return '<a href="' . $url . '" title="' . $url . '" class="m-1 shadow-sm btn btn-sm text-success btn-outline-light"><i class="fa fa-eye"></i></a>';
+        }
+        if ($type == 'phone') {
+            return '<a href="tel:' . $url . '" title="' . $url . '" class="m-1 shadow-sm btn btn-sm text-primary btn-outline-light"><i class="fa fa-phone"></i></a>';
+        }
+        if ($type == 'email') { 
+            return '<a  href="mailto:'.$url.'" title="' . $url . '" class="m-1 shadow-sm btn btn-sm text-warning btn-outline-light"><i class="fa fa-envelope"></i></a>';
         }
     }
 }

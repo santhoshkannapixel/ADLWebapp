@@ -13,13 +13,11 @@
             <a class="btn btn-primary" href="{{ route('news-and-events.create') }}"><i class="fa fa-plus"></i> Add </a>
         </div>
         <div class="card-body">
-            <table class="table table-bordered table-centered m-0 tr-sm table-hover" id="data-table">
+            <table class="table table-sm table-bordered table-centered m-0 tr-sm table-hover" id="data-table">
                 <thead>
                     <tr>
                         <th>#Order ID</th>
                         <th>Customer</th>
-                        <th>Phone Number</th>
-                        <th>Email</th>
                         <th>Is Appoinment</th>
                         <th>Order Date</th>
                         <th>Payment Status</th>
@@ -43,8 +41,6 @@
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'customer', name: 'customer'},
-                    {data: 'phone_number', name: 'phone_number'},
-                    {data: 'email', name: 'email'},
                     {data: 'appoinment', name: 'appoinment'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'payment_status', name: 'payment_status'},
