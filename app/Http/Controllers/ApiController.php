@@ -91,10 +91,9 @@ class ApiController extends Controller
             "message"   =>  "Form Submit Success !"
         ]);
     }
-    public function testLists(Request $request,$type=null)
+    public function testLists(Request $request)
     {
-        if(is_null($type)) {
-            $data   =   Tests::with('TestPrice')
+        $data   =   Tests::with('TestPrice')
                         ->when(!empty($request->TestName),function($query) use ($request)  {
                             $query->where('TestName', 'like', '%'.$request->TestName.'%');
                         })
@@ -108,14 +107,6 @@ class ApiController extends Controller
                         ->take($request->Tack)
                         ->orderBy('TestPrice', ($request->TestPrice == 'low' ? "DESC" : null) === null ? "DESC" : 'ASC'  )
                         ->get();
-        } else {
-            $data   =   Packages::with('SubTestList','PackagesPrice')
-                        ->where('TestName', 'like', '%'.$request->search.'%')
-                        ->skip(0)
-                        ->take($request->tack)
-                        ->orderBy('TestPrice', ($request->sort == 'low' ? "DESC" : null) === null ? "DESC" : 'ASC'  )
-                        ->get();
-        }
         return response()->json([
             "status"    =>  true,
             "data"      =>  $data
@@ -308,18 +299,25 @@ class ApiController extends Controller
     }
     public function packages(Request $request)
     {
-        $Packages =   Packages::with('SubTestList','PackagesPrice')->select('*')->latest();
-
-        foreach ($request->all() as $key => $value) {
-            if(!empty($value)) {
-                $Packages->where($key,'LIKE',"%$value%");
-            }
-        }
+        $Packages   =   Packages::with('SubTestList','TestPrice')
+                        ->when(!empty($request->ApplicableGender),function($query) use ($request)  {
+                            $query->whereIn('ApplicableGender', $request->ApplicableGender);
+                        })
+                        ->when(!empty($request->OrganName),function($query) use ($request)  {
+                            $query->whereIn('OrganName',$request->OrganName);
+                        })
+                        ->when(!empty($request->HealthCondition),function($query) use ($request)  {
+                            $query->whereIn('HealthCondition', $request->HealthCondition);
+                        })
+                        ->skip(0)
+                        ->take($request->Tack)
+                        ->orderBy('TestPrice', ($request->TestPrice == 'low' ? "DESC" : null) === null ? "DESC" : 'ASC'  )
+                        ->get();
 
         return [
             "status" => true,
             "count" => count($Packages->get()),
-            "data" => $Packages->get(),
+            "data" => $Packages,
         ];
     }
 
