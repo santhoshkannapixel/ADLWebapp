@@ -26,32 +26,7 @@
                 <div class="card border shadow-sm mb-3">
                     <div class="card-header d-flex align-items-center justify-content-between py-3">
                         <label><b>Order Status</b></label>
-                        <div>
-                            @if ($order->order_status == "0" || $order->order_status ==  null)
-                                <span style="font-size: 16px" class="badge-secondary">
-                                    <i class="fa fa-clock-o"></i>
-                                    Order Pending
-                                </span>
-                            @endif
-                            @if ($order->order_status == "1")
-                                <span style="font-size: 16px" class="badge-success">
-                                    <i class="fa fa-check"></i>
-                                    Order Accepted
-                                </span>
-                            @endif
-                            @if ($order->order_status == "2")
-                                <span style="font-size: 16px" class="badge-danger">
-                                    <i class="fa fa-ban"></i>
-                                    Order Denied
-                                </span>
-                            @endif
-                            @if ($order->order_status == "3")
-                                <span style="font-size: 16px" class="badge-warning">
-                                    <i class="fa fa-ban"></i>
-                                    Cancel Request
-                                </span>
-                            @endif
-                        </div>
+                        <div> {!! OrderStatus($order->order_status) !!} </div>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('orders.change-order-status',$order->id) }}" method="POST">

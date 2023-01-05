@@ -179,4 +179,21 @@ if (!function_exists('toggleButton')) {
             return str_replace('show', 'Detail view', str_replace('index','',$result));
         }
     }
+
+    if(!function_exists('OrderStatus')) {
+        function OrderStatus($status) {
+            if($status == null || $status == "0") {
+                return '<span class="badge-secondary"><span class="fa fa-clock-o me-1"></span> Pending</span>';
+            }
+            if($status == "1") {
+                return '<span class="badge-success"><span class="fa fa-check me-1"></span> Accepted</span>';
+            }
+            if($status == "2") {
+                return '<span class="badge-danger"><span class="fa fa-ban me-1"></span> Denied</span>';
+            }
+            if($status == "3") {
+                return '<span class="badge-warning"><span class="fa fa-ban me-1"></span> Cancel Requested</span>';
+            }
+        }
+    }
 }

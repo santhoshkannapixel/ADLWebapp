@@ -43,19 +43,8 @@ class OrdersController extends Controller
                     }
                     return '<span class="badge-danger"><span class="fa fa-ban me-1"></span> Failed</span>';
                 })
-                ->addColumn('order_status',function ($data) {
-                    if($data->order_status == null || $data->order_status == "0") {
-                        return '<span class="badge-secondary"><span class="fa fa-clock-o me-1"></span> Pending</span>';
-                    }
-                    if($data->order_status == "1") {
-                        return '<span class="badge-success"><span class="fa fa-check me-1"></span> Accepted</span>';
-                    }
-                    if($data->order_status == "2") {
-                        return '<span class="badge-danger"><span class="fa fa-ban me-1"></span> Denied</span>';
-                    }
-                    if($data->order_status == "3") {
-                        return '<span class="badge-warning"><span class="fa fa-ban me-1"></span> Cancel Requested</span>';
-                    }
+                ->addColumn('order_status',function ($data) { 
+                    return OrderStatus($data->order_status);
                 })
                 ->addColumn('action', function ($data) {
                     return button('show',route('orders.show', $data->id));
