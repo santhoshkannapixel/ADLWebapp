@@ -316,7 +316,7 @@ class ApiController extends Controller
 
         return [
             "status" => true,
-            "count" => count($Packages->get()),
+            "count" => count($Packages),
             "data" => $Packages,
         ];
     }
