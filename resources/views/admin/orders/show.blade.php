@@ -25,7 +25,12 @@
             <div class="col-md-4">
                 @if ($order->order_status == "3")
                     <div class="mb-3 alert alert-warning border border-warning shadow-sm" role="alert"> 
-                        <strong>{{ $customer['first_name'] }} wants to Cancel the booking!</strong> Are you accept the Cancel Order Request?
+                        <strong class="text-dark">{{ $customer['first_name'] }} wants to Cancel the booking!</strong> Are you accept the Cancel Order Request?
+                        @if($order->cancel_order_reason !== null) 
+                            <div class="my-2"> 
+                                <b>Reason for cancel : </b> {{ $order->cancel_order_reason }}
+                            </div>
+                        @endif
                         <div class="d-flex mt-2">
                             <form action="{{ route('orders.change-order-status',$order->id) }}" method="POST">
                                 @csrf
