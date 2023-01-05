@@ -194,6 +194,12 @@ if (!function_exists('toggleButton')) {
             if($status == "3") {
                 return '<span class="badge-warning"><span class="fa fa-ban me-1"></span> Cancel Requested</span>';
             }
+            if($status == "4") {
+                return '<span class="badge-warning"><span class="fa fa-times-circle me-1"></span> Order Cancelled </span>';
+            }
+            if($status == "5") {
+                return '<span class="badge-danger"><span class="fa fa-ban me-1"></span> Cancel Request Dined</span>';
+            }
         }
     }
 }

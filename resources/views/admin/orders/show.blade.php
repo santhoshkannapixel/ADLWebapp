@@ -23,6 +23,23 @@
     <div class="row g-3">
         @if (!is_null($customer))
             <div class="col-md-4">
+                @if ($order->order_status == "3")
+                    <div class="mb-3 alert alert-warning border border-warning shadow-sm" role="alert"> 
+                        <strong>{{ $customer['first_name'] }} wants to Cancel the booking!</strong> Are you accept the Cancel Order Request?
+                        <div class="d-flex mt-2">
+                            <form action="{{ route('orders.change-order-status',$order->id) }}" method="POST">
+                                @csrf
+                                <input type="hidden" value="4" name="order_status">
+                                <button type="submit" class="btn btn-sm btn-primary px-3">Accept</button> 
+                            </form>
+                            <form class="ms-2" action="{{ route('orders.change-order-status',$order->id) }}" method="POST">
+                                @csrf
+                                <input type="hidden" value="5" name="order_status">
+                                <button type="submit" class="btn btn-sm btn-danger px-3">Deny</button> 
+                            </form>
+                        </div>
+                    </div> 
+                @endif
                 <div class="card border shadow-sm mb-3">
                     <div class="card-header d-flex align-items-center justify-content-between py-3">
                         <label><b>Order Status</b></label>
