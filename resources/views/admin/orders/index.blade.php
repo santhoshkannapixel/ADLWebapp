@@ -16,7 +16,6 @@
             <table class="table table-bordered table-centered m-0 tr-sm table-hover" id="data-table">
                 <thead>
                     <tr>
-                        <th width="5%">No</th>
                         <th>#Order ID</th>
                         <th>Customer</th>
                         <th>Phone Number</th>
@@ -42,7 +41,6 @@
                 serverSide: true,
                 ajax: "{{ route('orders.index') }}",
                 columns: [
-                    {data: 'DT_RowIndex', name: 'id',orderable: false, searchable: false},
                     {data: 'id', name: 'id'},
                     {data: 'customer', name: 'customer'},
                     {data: 'phone_number', name: 'phone_number'},
