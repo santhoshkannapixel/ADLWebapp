@@ -299,7 +299,7 @@ class ApiController extends Controller
     }
     public function packages(Request $request)
     {
-        $Packages   =   Packages::with('SubTestList','TestPrice')
+        $Packages   =   Packages::with('SubTestList','PackagesPrice')
                         ->when(!empty($request->ApplicableGender),function($query) use ($request)  {
                             $query->whereIn('ApplicableGender', $request->ApplicableGender);
                         })
