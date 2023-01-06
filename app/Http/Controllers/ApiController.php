@@ -420,15 +420,21 @@ class ApiController extends Controller
     }
     public function reset_password(Request $request,$id)
     {
-        $request->validate([
-            'new_password' => ['required'],
-            'confirm_password' => ['same:new_password'],
-        ]);
-        $User = User::find($id)->update(['password'=> Hash::make($request->new_password)]);
+        return decrypt($id);
+        $request->validate(['new_password' => 'required']);
+        $User = User::find(decrypt($id));
+        if(!is_null($User)) {
+            $User->update(['password'=> Hash::make($request->new_password)]);
+            return [
+                "status"  => true,
+                "data"    => $User,
+                "message" => "Reset Password Success !"
+            ];
+        }
         return [
-            "status"  => true,
+            "status"  => false,
             "data"    => $User,
-            "message" => "Reset Password Success !"
+            "message" => "User Not Found!"
         ];
     }
 }
