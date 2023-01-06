@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ResetPasswordMail;
 use App\Models\Banners;
 use App\Models\BookHomeCollection;
 use App\Models\Branch;
@@ -18,6 +19,8 @@ use App\Models\User;
 use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str; 
 use Illuminate\Support\Facades\Storage;
 use Razorpay\Api\Api;
 use Razorpay\Api\Errors\SignatureVerificationError;
@@ -398,5 +401,17 @@ class ApiController extends Controller
             ];
         }
         return $result ;
+    }
+    public function forgot_password(Request $request)
+    { 
+        // $customer = User::where('email',$request->email)->get();
+        // $customer = [
+        //     "name" => "prabhu"
+        // ];
+        // Mail::to($request->email)->send(new ResetPasswordMail($customer));
+        return response([
+            "status" => true,
+            "message" => "Mail Send Success"
+        ]);
     }
 }
