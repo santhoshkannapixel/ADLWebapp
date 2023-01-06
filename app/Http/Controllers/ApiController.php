@@ -412,7 +412,7 @@ class ApiController extends Controller
         }
         return response([
             "status" => false,
-            "message" => "Invalid Email Address !"
+            "message" => "Email Verified Success !"
         ]);
     }
     public function reset_password(Request $request,$id)
