@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\ResetPasswordMail;
 use App\Models\Banners;
 use App\Models\BookHomeCollection;
 use App\Models\Branch;
@@ -404,14 +403,28 @@ class ApiController extends Controller
     }
     public function forgot_password(Request $request)
     { 
-        // $customer = User::where('email',$request->email)->get();
-        // $customer = [
-        //     "name" => "prabhu"
-        // ];
-        // Mail::to($request->email)->send(new ResetPasswordMail($customer));
+        $customer = User::where('email',$request->email)->first();
+        if(!is_null($customer)) {
+            return response([
+                "status" => true,
+                "customer" => $customer->id,
+            ]);
+        }
         return response([
-            "status" => true,
-            "message" => "Mail Send Success"
+            "status" => false,
+            "message" => "Invalid Email Address !"
         ]);
+    }
+    public function reset_password(Request $request,$id)
+    {
+        $request->validate([
+            'new_password' => ['required'],
+            'confirm_password' => ['same:new_password'],
+        ]);
+        User::find($id)->update(['password'=> Hash::make($request->new_password)]);
+        return [
+            "status" => true,
+            "message" =>  "Reset Password Success !"
+        ];
     }
 }

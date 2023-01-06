@@ -35,7 +35,8 @@ Route::get('get-lab-location/{city_id?}',[ApiController::class,'get_lab_location
 Route::get('get-organs',[ApiController::class,'get_organs']);
 Route::get('get-conditions',[ApiController::class,'get_conditions']);
 Route::post('forgot-password',[ApiController::class,'forgot_password']);
- 
+Route::post('reset-password',[ApiController::class,'reset_password']);
+
 
 Route::post('/patients-consumers', [PatientsConsumersController::class, 'store'])->name('patients-consumers');
 Route::post('/feedback', [FeedBackController::class, 'store'])->name('feedback');
