@@ -45,7 +45,7 @@ class FrequentlyAskedQuestionsController extends Controller
     {
         $careers  = FrequentlyAskedQuestions::find($id);
         $careers->delete();
-        Flash::success(__('action.deleted', ['type' => 'Home Collection']));
+        Flash::success(__('action.deleted', ['type' => 'Frequently Asked Questions']));
         return redirect()->back();
     }
     public function show($id)

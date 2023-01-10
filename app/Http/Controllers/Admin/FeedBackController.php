@@ -45,7 +45,7 @@ class FeedBackController extends Controller
     {
         $careers  = FeedBack::find($id);
         $careers->delete();
-        Flash::success(__('action.deleted', ['type' => 'Home Collection']));
+        Flash::success(__('action.deleted', ['type' => 'FeedBack']));
         return redirect()->back();
     }
     public function show($id)

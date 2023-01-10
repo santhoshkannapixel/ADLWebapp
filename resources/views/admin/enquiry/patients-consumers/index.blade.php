@@ -5,7 +5,7 @@
     <div class="card custom table-card"> 
         <div class="card-header">
             <div class="card-title">
-                Home Collection
+                Patients Consumers List
             </div>
             
         </div>
