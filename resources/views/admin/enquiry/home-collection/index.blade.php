@@ -37,18 +37,16 @@
         
             var table = $('#data-table').DataTable({
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                processing: true,
-                serverSide: true,
                 ajax: "{{ route('home-collection.index') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'id',orderable: false, searchable: false},
-                    {data: 'name', name: 'name'},
+                    {data: 'name', name: 'name' },
                     {data: 'mobile', name: 'mobile'},
                     {data: 'location', name: 'location'},
                     {data: 'test_name', name: 'test_name'},
                     {data: 'comments', name: 'comments'},
                     {data: 'created_at', name: 'created_at'},
-                    {data: 'download', name: 'download'},
+                    {data: 'download', name: 'download', orderable: false, searchable: false},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });

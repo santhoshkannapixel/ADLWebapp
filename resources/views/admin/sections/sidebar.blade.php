@@ -61,8 +61,8 @@
         <li>
             <a href="{{ route('reach-us.index') }}" class="nav-link text-white {{ Route::is([
                     'reach-us.index',
-                    'head-office.index',
-                    'head-office.show',
+                    'healthcheckup-for-employee.index',
+                    'healthcheckup-for-employee.show',
                     'anandlab-franchise.index',
                     'anandlab-franchise.show',
                     'covidtesting-employees.index',

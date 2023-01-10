@@ -26,8 +26,8 @@ class HeadOfficeController extends Controller
                     $user = Sentinel::getUser();
                     $show = '';
                     $delete = '';
-                    $show =  button('show', route('head-office.show', $data->id));
-                    $delete = button('delete', route('head-office.delete', $data->id));
+                    $show =  button('show', route('healthcheckup-for-employee.show', $data->id));
+                    $delete = button('delete', route('healthcheckup-for-employee.delete', $data->id));
 
                     return $show . $delete;
                 })

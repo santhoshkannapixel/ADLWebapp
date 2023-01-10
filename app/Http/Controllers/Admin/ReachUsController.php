@@ -9,6 +9,6 @@ class ReachUsController extends Controller
 {
     public function index()
     {
-        return redirect()->route('head-office.index');
+        return redirect()->route('healthcheckup-for-employee.index');
     }
 }

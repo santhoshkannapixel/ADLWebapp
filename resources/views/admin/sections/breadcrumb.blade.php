@@ -42,8 +42,8 @@
         {{ Route::is('book-an-appointment.index') ? "Book an Appointment" : "" }}
         {{ Route::is('book-an-appointment.show') ? "Book an Appointment" : "" }}
 
-        {{ Route::is('head-office.index') ? "Head Office" : "" }}
-        {{ Route::is('head-office.show') ? "Head Office" : "" }}
+        {{ Route::is('healthcheckup-for-employee.index') ? "Healthcheckup for employees" : "" }}
+        {{ Route::is('healthcheckup-for-employee.show') ? "Healthcheckup for employees" : "" }}
 
         {{ Route::is('anandlab-franchise.index') ? "Anand Franchise" : "" }}
         {{ Route::is('anandlab-franchise.show') ? "Show Anand Franchise" : "" }}

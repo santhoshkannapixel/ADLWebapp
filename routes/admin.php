@@ -186,7 +186,7 @@ Route::middleware(['auth_users'])->group(function () {
     Route::delete('/book-an-appointment/{id}', [BookAppointmentController::class, 'destroy'])->name('book-an-appointment.delete');
     Route::get('/book-an-appointment/{id}', [BookAppointmentController::class, 'show'])->name('book-an-appointment.show');
 
-    Route::get('/head-office', [HeadOfficeController::class, 'index'])->name('head-office.index');
-    Route::delete('/head-office/{id}', [HeadOfficeController::class, 'destroy'])->name('head-office.delete');
-    Route::get('/head-office/{id}', [HeadOfficeController::class, 'show'])->name('head-office.show');
+    Route::get('/healthcheckup-for-employee', [HeadOfficeController::class, 'index'])->name('healthcheckup-for-employee.index');
+    Route::delete('/healthcheckup-for-employee/{id}', [HeadOfficeController::class, 'destroy'])->name('healthcheckup-for-employee.delete');
+    Route::get('/healthcheckup-for-employee/{id}', [HeadOfficeController::class, 'show'])->name('healthcheckup-for-employee.show');
 });

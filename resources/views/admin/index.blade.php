@@ -113,7 +113,7 @@
                             <option value="FRANCHISING_OPPORTUNITIES">FRANCHISING OPPORTUNITIES</option>
                             <option value="RESEARCH">RESEARCH</option>
                             <option value="BOOK_AN_APPOINTMENT">BOOK AN APPOINTMENT</option>
-                            <option value="HEAD_OFFICE">HEAD OFFICE</option>
+                            <option value="HEAD_OFFICE">Healthcheckup for employees</option>
                         </select>
 
                         <input type="text" name="from_date" id="from_date" class="btn form-control form-control-sm text-start" placeholder="From Date" readonly />
