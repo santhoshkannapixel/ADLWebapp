@@ -149,14 +149,16 @@ class ApiController extends Controller
     {
         $User = User::where('email',$request->email)->first();
         if(!is_null($User)) {
+            $otp = rand(11111,99999);
             Http::post('https://reports.anandlab.com/v3/SMS.asmx/SendWebsiteOTP', [
-                'otp' => rand(11111,99999),
+                'otp'       => $otp,
                 'mobile_no' => $request->mobile,
-                'api_key' => 'FC033590-B038-4CCD-BC8F-13BE890BF9F0',
+                'api_key'   => 'FC033590-B038-4CCD-BC8F-13BE890BF9F0',
             ]);
             return response()->json([
-                "status"    =>  true,
-                "data"      =>  $User,
+                "status"  => true,
+                "otp"     => $otp,
+                "data"    => $User,
                 "message" => "Login Success !"
             ]);
         }
