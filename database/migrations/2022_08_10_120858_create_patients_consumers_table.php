@@ -18,7 +18,7 @@ class CreatePatientsConsumersTable extends Migration
             $table->string('name')->nullable();
             $table->string('email')->nullable();
             $table->string('mobile')->nullable();
-            $table->string('date')->nullable();
+            $table->string('dob')->nullable();
             $table->string('gender')->nullable();
             $table->string('test_for_home_collection')->nullable();
             $table->string('upload_prescription')->nullable();
