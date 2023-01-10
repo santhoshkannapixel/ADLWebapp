@@ -151,6 +151,7 @@ class ApiController extends Controller
             return response()->json([
                 "status"    =>  true,
                 "data"      =>  $User,
+                "otp"      =>  rand(11111,99999),
                 "message" => "Login Success !"
             ]);
         }
