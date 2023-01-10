@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\ReachUsController;
 use App\Http\Controllers\Admin\DoctorsController;
 use App\Http\Controllers\Admin\HospitalLabManagementController;
 use App\Http\Controllers\Admin\ClinicalLabManagementController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\HealthCheckupController;
 use App\Http\Controllers\Admin\TestController;
 use App\Http\Controllers\Admin\UserController;
@@ -42,6 +43,8 @@ Route::middleware(['auth_users'])->group(function () {
         });
         Route::get('/', [DashboardController::class, 'dashboardData'])->name('dashboard.data');
         // Route::group(['prefix' => 'settings'], function () {
+            Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile');
+            Route::post('/profile', [ProfileController::class, 'store'])->name('profile.store');
             Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
             Route::group(['prefix' => 'user'], function () {
                 Route::get('/', [UserController::class, 'index'])->name('user.index');

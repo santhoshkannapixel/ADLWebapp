@@ -118,9 +118,8 @@
             </small>
         </a>
         <ul class="dropdown-menu dropdown-menu-light text-small shadow" aria-labelledby="dropdownUser1" style="">
-            <li><a class="dropdown-item" href="#">New Orders...</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="{{ route('settings.index') }}">Settings</a></li>
+            <li><a class="dropdown-item" href="{{ route('admin.profile') }}">Profile</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#" onclick="return document.getElementById('logout_form').submit()">Sign out</a></li>
         </ul>

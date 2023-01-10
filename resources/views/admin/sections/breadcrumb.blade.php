@@ -76,6 +76,7 @@
         {{ Route::is('payment_config.index') ? "Payment Configuration" : '' }}
         {{ Route::is('payment_config.create') ? "Create Payment Configuration" : '' }}
         {{ Route::is('payment_config.edit') ? "Edit Payment Configuration" : '' }}
+        {{ Route::is('admin.profile') ? "Profile" : '' }}
     </div>
 </div>
 <div class="d-flex align-items-center">
@@ -93,8 +94,8 @@
         </a>
         <ul class="dropdown-menu dropdown-menu-dark bg-my-dark text-small shadow" aria-labelledby="dropdownUser1" style="">
             <li><a class="dropdown-item" href="#"><b>{{ Sentinel::getUser()->name }}</b> <small class="ms-2 badge bg-success text-white">{{ Sentinel::getUser()->roles[0]->name }}</small></a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="{{ route('settings.index') }}">Settings</a></li>
+            <li><a class="dropdown-item" href="{{ route('admin.profile') }}">Profile</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#" onclick="return document.getElementById('logout_form').submit()">Sign out</a></li>
         </ul>
