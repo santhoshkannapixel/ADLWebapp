@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str; 
 use Illuminate\Support\Facades\Storage;
 use Razorpay\Api\Api;
+use Illuminate\Support\Facades\Http;
 use Razorpay\Api\Errors\SignatureVerificationError;
 
 class ApiController extends Controller
@@ -148,10 +149,14 @@ class ApiController extends Controller
     {
         $User = User::where('email',$request->email)->first();
         if(!is_null($User)) {
+            Http::post('https://reports.anandlab.com/v3/SMS.asmx/SendWebsiteOTP', [
+                'otp' => rand(11111,99999),
+                'mobile_no' => $request->mobile,
+                'api_key' => 'FC033590-B038-4CCD-BC8F-13BE890BF9F0',
+            ]);
             return response()->json([
                 "status"    =>  true,
                 "data"      =>  $User,
-                "otp"      =>  rand(11111,99999),
                 "message" => "Login Success !"
             ]);
         }
