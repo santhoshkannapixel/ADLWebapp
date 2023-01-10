@@ -47,7 +47,7 @@ class NewsLetterController extends Controller
     }
     public function show($id)
     {
-        $data   =   NewsLetter::select('id','email','created_at','updated_at')->find($id);
+        $data   =   NewsLetter::select('id','email','created_at')->find($id);
         return view('admin.news-letter.show', compact('data'));
     }
 }

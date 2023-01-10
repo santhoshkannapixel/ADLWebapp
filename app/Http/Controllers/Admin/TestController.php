@@ -183,7 +183,9 @@ class TestController extends Controller
 
     public function show($id)
     {
-        $data   =   Tests::findOrFail($id);
+        $data   =   Tests::select('TestId','DosCode','TestName','TestSlug','AliasName1','AliasName2','ApplicableGender','IsPackage','Createdon'
+        ,'Modifiedon','Classifications','TransportCriteria','SpecialInstructionsForPatient','SpecialInstructionsForCorporates','SpecialInstructionsForDoctors',
+        'BasicInstruction','DriveThrough','HomeCollection','OrganName','HealthCondition','CteateDate','ModifiedDate','TestSchedule','TestPrice','created_at')->findOrFail($id);
         return view('admin.master.tests.show', compact('data'));
     }
 

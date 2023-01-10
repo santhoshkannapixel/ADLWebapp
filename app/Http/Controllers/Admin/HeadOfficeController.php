@@ -52,8 +52,7 @@ class HeadOfficeController extends Controller
     {
         // $data   =   HeadOffice::findOrFail($id);
         $data   =   HeadOffice::select(DB::raw("name as name,company_name as company_name,mobile as mobile,email as email,designation as 
-        designation,message as message,address as address,DATE_FORMAT(created_at,'%d/%m/%Y') as created_date,DATE_FORMAT(updated_at,'%d/%m/%Y') as 
-        updated_date"))->findOrFail($id);
+        designation,message as message,address as address,DATE_FORMAT(created_at,'%d/%m/%Y') as created_date"))->findOrFail($id);
 
         return view('admin.reach-us.head-office.show', compact('data'));
     }

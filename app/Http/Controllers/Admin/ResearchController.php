@@ -52,7 +52,7 @@ class ResearchController extends Controller
     {
         // $data   =   Research::findOrFail($id);
         $data   =   Research::select(DB::raw("name as name,city as city,mobile as mobile,email as email,message as message,
-        DATE_FORMAT(created_at,'%d/%m/%Y') as created_date,DATE_FORMAT(updated_at,'%d/%m/%Y') as updated_date"))->findOrFail($id);
+        DATE_FORMAT(created_at,'%d/%m/%Y') as created_date"))->findOrFail($id);
 
         return view('admin.doctors.research.show', compact('data'));
     }

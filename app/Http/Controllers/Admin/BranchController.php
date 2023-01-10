@@ -79,7 +79,8 @@ class BranchController extends Controller
 
     public function show($id)
     {
-        $data   =   Branch::findOrFail($id);
+        $data   =   Branch::select('BranchId','BranchCode','BranchName','BranchCityId','BranchCity','BranchAddress','BrachContact','BranchEmail'
+        ,'IsProcessingLocation','BranchTimings','State','Country','Pincode','created_at')->findOrFail($id);
 
         return view('admin.master.branch.show',compact('data'));
     }
