@@ -144,6 +144,21 @@ class ApiController extends Controller
             "message"      =>  'User Not Found !'
         ]);
     }
+    public function login_with_otp(Request $request)
+    {
+        $User = User::where('email',$request->email)->first();
+        if(!is_null($User)) {
+            return response()->json([
+                "status"    =>  true,
+                "data"      =>  $User,
+                "message" => "Login Success !"
+            ]);
+        }
+        return response()->json([
+            "status"    =>  false,
+            "message"   =>  'User Not Found !'
+        ]);
+    }
     public function register(Request $request)
     {
         if(!is_null(User::where('email',$request->email)->first())) {

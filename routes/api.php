@@ -20,6 +20,7 @@ Route::post('test-list/{type?}', [ApiController::class,'testLists']);
 Route::post('bannerContactForm', [ApiController::class,'bannerContactForm']);
 Route::post('newsAndEvents', [ApiController::class,'newsAndEvents']);
 Route::post('login', [ApiController::class,'login']);
+Route::post('login-with-otp', [ApiController::class,'login_with_otp']);
 Route::post('register', [ApiController::class,'register']);
 Route::get('create-order', [ApiController::class,'createOrder']);
 Route::get('get-orders/{id}', [ApiController::class,'getOrders']);
