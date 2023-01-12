@@ -53,3 +53,4 @@ Route::post('/book-an-appointment', [BookAppointmentController::class, 'store'])
 Route::post('/news-letter', [NewsLetterController::class, 'store'])->name('news-letter');
 Route::get('/current-opening', [CurrentOpeningController::class,'index'])->name('current-opening');
 Route::get('/job-details/{id}', [CareerController::class, 'getJobDetail'])->name('job-details');
+Route::post('/job-apply', [CareerController::class, 'jobApply'])->name('job-apply');
