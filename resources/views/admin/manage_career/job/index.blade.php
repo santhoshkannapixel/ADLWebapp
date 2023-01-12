@@ -37,7 +37,7 @@
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 // processing: true,
                 // responsive: true,
-                serverSide: true,
+                // serverSide: true,
                 ajax: "{{ route('job-post.index') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'id',orderable: false, searchable: false},
