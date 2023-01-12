@@ -65,6 +65,10 @@
         {{ Route::is('banner.create') ? "Create Banner" : '' }}
         {{ Route::is('banner.edit') ? "Edit Banner" : '' }}
 
+        {{ Route::is('department.index') ? "Department List" : '' }}
+        {{ Route::is('department.create') ? "Create Department" : '' }}
+        {{ Route::is('department.edit') ? "Edit Department" : '' }}
+
         {{ Route::is('news-letter.index') ? "News Letter List" : '' }}
         {{ Route::is('news-letter.show') ? "News Letter Show" : '' }}
 

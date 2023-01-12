@@ -22,6 +22,8 @@ use App\Http\Controllers\Admin\HealthCheckupController;
 use App\Http\Controllers\Admin\TestController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ApiConfigController;
+use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\Admin\JobPostController;
 use App\Http\Controllers\Admin\ResearchController;
 use App\Http\Controllers\Admin\PaymentConfigController;
 use App\Http\Controllers\DashboardController;
@@ -192,4 +194,23 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/healthcheckup-for-employee', [HeadOfficeController::class, 'index'])->name('healthcheckup-for-employee.index');
     Route::delete('/healthcheckup-for-employee/{id}', [HeadOfficeController::class, 'destroy'])->name('healthcheckup-for-employee.delete');
     Route::get('/healthcheckup-for-employee/{id}', [HeadOfficeController::class, 'show'])->name('healthcheckup-for-employee.show');
+
+    Route::group(['prefix' => 'career/job-post'], function () {
+        Route::get('/', [JobPostController::class, 'index'])->name('job-post.index');
+        Route::get('/create', [JobPostController::class, 'create'])->name('job-post.create'); 
+        Route::post('/create', [JobPostController::class, 'store'])->name('job-post.store'); 
+        Route::get('/edit/{id}', [JobPostController::class, 'edit'])->name('job-post.edit'); 
+        Route::post('/edit/{id}', [JobPostController::class, 'update'])->name('job-post.update'); 
+        Route::delete('/destroy/{id}', [JobPostController::class, 'destroy'])->name('job-post.destroy');  
+    }); 
+        Route::group(['prefix' => 'department'], function () {
+        Route::get('/', [DepartmentController::class, 'index'])->name('department.index');
+        Route::get('/create', [DepartmentController::class, 'create'])->name('department.create'); 
+        Route::post('/create', [DepartmentController::class, 'store'])->name('department.store'); 
+        Route::get('/edit/{id}', [DepartmentController::class, 'edit'])->name('department.edit'); 
+        Route::post('/edit/{id}', [DepartmentController::class, 'update'])->name('department.update'); 
+        Route::delete('/destroy/{id}', [DepartmentController::class, 'destroy'])->name('department.destroy');  
+    }); 
+
+    
 });
