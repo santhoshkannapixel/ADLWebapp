@@ -73,6 +73,9 @@
         {{ Route::is('job-post.create') ? "Create Job Post" : '' }}
         {{ Route::is('job-post.edit') ? "Edit Job Post" : '' }}
 
+        {{ Route::is('careers.index') ? "Career List" : '' }}
+        {{ Route::is('careers.view') ? "view Career" : '' }}
+    
         {{ Route::is('news-letter.index') ? "News Letter List" : '' }}
         {{ Route::is('news-letter.show') ? "News Letter Show" : '' }}
 

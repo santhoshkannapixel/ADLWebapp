@@ -16,6 +16,12 @@
                 Job Post
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link {{ Route::is(['careers.index','careers.view']) ? "active" : "" }}" href="{{ route('careers.index') }}">
+                <i class="fa-cog fa me-2"></i>
+                Career Enquiry
+            </a>
+        </li>
        
    </ul>
    <div class="my-4">

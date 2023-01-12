@@ -10,6 +10,7 @@ class JobPost extends Model
 {
     use HasFactory,SoftDeletes;
     protected $fillable = [
+        'id',
         'title',
         'code',
         'location',

@@ -87,7 +87,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('department.index') }}" class="nav-link text-white {{ Route::is(['department.index', 'department.edit', 'department.create','job-post.index','job-post.create','job-post.edit']) ? "active" : "" }}">
+            <a href="{{ route('department.index') }}" class="nav-link text-white {{ Route::is(['department.index', 'department.edit', 'department.create','job-post.index','job-post.create','job-post.edit','careers.index','careers.view']) ? "active" : "" }}">
                 <i class="fa fa-cog"></i>Manage Careers
             </a>
         </li>

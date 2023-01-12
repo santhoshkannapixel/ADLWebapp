@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\HealthCheckupController;
 use App\Http\Controllers\Admin\TestController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ApiConfigController;
+use App\Http\Controllers\Admin\CareerController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\JobPostController;
 use App\Http\Controllers\Admin\ResearchController;
@@ -211,6 +212,11 @@ Route::middleware(['auth_users'])->group(function () {
         Route::post('/edit/{id}', [DepartmentController::class, 'update'])->name('department.update'); 
         Route::delete('/destroy/{id}', [DepartmentController::class, 'delete'])->name('department.destroy');  
     }); 
+    Route::get('careers', [CareerController::class, 'index'])->name('careers.index');
+    Route::delete('careers/delete/{id?}', [CareerController::class, 'delete'])->name('careers.delete'); 
+    Route::get('careers/status/{id}', [CareerController::class, 'status'])->name('careers.status');
+    Route::get('careers/resume/{id}', [CareerController::class, 'download'])->name('resume.download');
+    Route::get('careers/view/{id}', [CareerController::class, 'view'])->name('careers.view');
 
     
 });
