@@ -38,9 +38,7 @@
             var table = $('#data-table').DataTable({
                 "pageLength": 50,
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                processing: true,
-                responsive: true,
-                serverSide: true,
+               
                 ajax: "{{ route('careers.index') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'id',orderable: false, searchable: false},
