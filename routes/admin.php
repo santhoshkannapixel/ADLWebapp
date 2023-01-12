@@ -201,7 +201,7 @@ Route::middleware(['auth_users'])->group(function () {
         Route::post('/create', [JobPostController::class, 'store'])->name('job-post.store'); 
         Route::get('/edit/{id}', [JobPostController::class, 'edit'])->name('job-post.edit'); 
         Route::post('/edit/{id}', [JobPostController::class, 'update'])->name('job-post.update'); 
-        Route::delete('/destroy/{id}', [JobPostController::class, 'destroy'])->name('job-post.destroy');  
+        Route::delete('/destroy/{id}', [JobPostController::class, 'delete'])->name('job-post.destroy');  
     }); 
         Route::group(['prefix' => 'department'], function () {
         Route::get('/', [DepartmentController::class, 'index'])->name('department.index');
@@ -209,7 +209,7 @@ Route::middleware(['auth_users'])->group(function () {
         Route::post('/create', [DepartmentController::class, 'store'])->name('department.store'); 
         Route::get('/edit/{id}', [DepartmentController::class, 'edit'])->name('department.edit'); 
         Route::post('/edit/{id}', [DepartmentController::class, 'update'])->name('department.update'); 
-        Route::delete('/destroy/{id}', [DepartmentController::class, 'destroy'])->name('department.destroy');  
+        Route::delete('/destroy/{id}', [DepartmentController::class, 'delete'])->name('department.destroy');  
     }); 
 
     

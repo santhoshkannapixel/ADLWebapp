@@ -73,7 +73,7 @@ class DepartmentController extends Controller
         }
         return redirect()->route('department.index');
     }
-    public function destroy($id)
+    public function delete($id)
     {
         if(Department::find($id)->delete()) {
             Flash::success(__('action.deleted',['type' => 'Department']));

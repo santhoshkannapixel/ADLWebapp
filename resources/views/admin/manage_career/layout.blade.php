@@ -10,12 +10,12 @@
                 Department
             </a>
         </li>
-        {{-- <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link {{ Route::is(['job-post.index','job-post.create','job-post.edit']) ? "active" : "" }}" href="{{ route('job-post.index') }}">
                 <i class="fa-cog fa me-2"></i>
                 Job Post
             </a>
-        </li> --}}
+        </li>
        
    </ul>
    <div class="my-4">

@@ -69,6 +69,10 @@
         {{ Route::is('department.create') ? "Create Department" : '' }}
         {{ Route::is('department.edit') ? "Edit Department" : '' }}
 
+        {{ Route::is('job-post.index') ? "Job Post List" : '' }}
+        {{ Route::is('job-post.create') ? "Create Job Post" : '' }}
+        {{ Route::is('job-post.edit') ? "Edit Job Post" : '' }}
+
         {{ Route::is('news-letter.index') ? "News Letter List" : '' }}
         {{ Route::is('news-letter.show') ? "News Letter Show" : '' }}
 
