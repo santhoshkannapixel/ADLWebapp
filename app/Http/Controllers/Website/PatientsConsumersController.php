@@ -28,6 +28,12 @@ class PatientsConsumersController extends Controller
         if($validator->fails()){
             return filedCall($validator->messages()); 
         }
+        $filePath = 'storage/app/upload_prescription';
+        $path = public_path($filePath); 
+        if(!file_exists($path))
+        {
+            mkdir($path, 0777, true);
+        }
         $file = Storage::put('upload_prescription', $request->file('upload_prescription'));
         $data = new PatientsConsumers;
         $data->name                     = $request->name ;
