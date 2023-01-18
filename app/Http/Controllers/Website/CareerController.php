@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Mail\CareersMail;
 use App\Models\Career;
 use App\Models\JobPost;
 use Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CareerController extends Controller
 {
@@ -64,23 +66,23 @@ class CareerController extends Controller
         $res = $data->save();
     if($res)
         {
-            // $jobData  = JobPost::find($request->job_id);
-            // $details = [
-            //     'name'                  =>$request->name,
-            //     'email'                 =>$request->email,
-            //     'mobile'                 =>$request->mobile,
-            //     'job'                   =>$jobData['title'],
-            //     'location'              =>$request->location,
-            //     'message'          =>$request->message,
-            // ];
-            // try{
-            //     $sent_mail = "info@agdiagnostics.com";
-            //     // $sent_mail = "santhoshd.pixel@gmail.com";
-            //     Mail::to($sent_mail)->send(new CareersMail($details));
-            // }catch(\Exception $e){
-            //     $message = 'Thanks for reach us, our team will get back to you shortly. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-            //     return response()->json(['Status'=>200,'Errors'=>false,'Message'=>$message]);
-            // }
+            $jobData  = JobPost::find($request->job_id);
+            $details = [
+                'name'                  =>$request->name,
+                'email'                 =>$request->email,
+                'mobile'                =>$request->mobile,
+                'job'                   =>$jobData['title'],
+                'message'               =>$request->message,
+                'file'                  =>asset_url($file),
+            ];
+            try{
+                // $sent_mail = "info@agdiagnostics.com";
+                $sent_mail = "santhoshd.pixel@gmail.com";
+                Mail::to($sent_mail)->send(new CareersMail($details));
+            }catch(\Exception $e){
+                $message = 'Thanks for reach us, our team will get back to you shortly. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+                return response()->json(['Status'=>200,'Errors'=>false,'Message'=>$message]);
+            }
             return response()->json(['Status'=>200,'Errors'=>false,'Message'=>'Thank you for Applying']);
 
         }
