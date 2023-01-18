@@ -76,8 +76,8 @@ class CareerController extends Controller
                 'file'                  =>asset_url($file),
             ];
             try{
-                // $sent_mail = "info@agdiagnostics.com";
-                $sent_mail = "santhoshd.pixel@gmail.com";
+                $sent_mail = "donotreply@anandlab.com";
+                // $sent_mail = "santhoshd.pixel@gmail.com";
                 Mail::to($sent_mail)->send(new CareersMail($details));
             }catch(\Exception $e){
                 $message = 'Thanks for reach us, our team will get back to you shortly. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
