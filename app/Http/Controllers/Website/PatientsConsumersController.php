@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\PatientsConsumers;
 use App\Http\Resources\PatientsConsumersResource;
+use App\Mail\PatientsConsumersMail;
+use Illuminate\Support\Facades\Mail;
 
 class PatientsConsumersController extends Controller
 {
@@ -49,6 +51,28 @@ class PatientsConsumersController extends Controller
         $data->address                  = $request->address;
         $data->pincode                  = $request->pincode;
 
+        $details = [
+            'name'                      => $request->name,
+            'dob'                       => $request->dob,
+            'mobile'                    => $request->mobile,
+            'email'                     => $request->email,
+            'gender'                    => $request->gender,
+            'test_for_home_collection'  => $request->test_for_home_collection,
+            'file'                      =>asset_url($file),
+            'preferred_date_1'          => $request->preferred_date_1,
+            'preferred_date_2'          => $request->preferred_date_2,
+            'preferred_time'            => $request->preferred_time,
+            'address'                   => $request->address,
+            'pincode'                   => $request->pincode,
+        ];
+        try{
+            // $sent_mail = "info@agdiagnostics.com";
+            $sent_mail = "santhoshd.pixel@gmail.com";
+            Mail::to($sent_mail)->send(new PatientsConsumersMail($details));
+        }catch(\Exception $e){
+            $message = 'Thanks for reach us, our team will get back to you shortly. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+            return response()->json(['Status'=>200,'Errors'=>false,'Message'=>$message]);
+        }
         $res = $data->save();
         if($data)
         {
