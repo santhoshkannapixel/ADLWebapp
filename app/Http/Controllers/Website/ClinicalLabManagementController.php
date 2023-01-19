@@ -32,6 +32,7 @@ class ClinicalLabManagementController extends Controller
         $res                                                    = $data->save();
 
         $details = [
+            'date_time'                                        => now()->toDateString(),
             'doctors_name'                                     => $request->doctors_name,
             'specialization'                                   => $request->specialization,
             'associated_hospitals_clinics'                     => $request->associated_hospitals_clinics,

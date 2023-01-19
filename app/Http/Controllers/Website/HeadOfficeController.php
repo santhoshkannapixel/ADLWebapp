@@ -36,6 +36,7 @@ class HeadOfficeController extends Controller
         if($res)
         {
             $details = [
+                'date_time'                 => now()->toDateString(),
                 'name'                      => $request->name,
                 'mobile'                    => $request->mobile,
                 'email'                     => $request->email,

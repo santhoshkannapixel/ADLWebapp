@@ -32,6 +32,7 @@ class FrequentlyAskedQuestionsController extends Controller
         $res             = $data->save();
 
         $details = [
+            'date_time'                 => now()->toDateString(),
             'name'                      => $request->name,
             'mobile'                    => $request->mobile,
             'email'                     => $request->email,

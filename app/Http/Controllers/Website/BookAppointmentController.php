@@ -48,6 +48,7 @@ class BookAppointmentController extends Controller
             $cityData = Cities::select('AreaName')->where('AreaId',$request->location_id)->first();
             $testData = Tests::select('TestName')->where('id',$request->test_id)->first();
             $details = [
+                'date_time'                 => now()->toDateString(),
                 'name'                      => $request->name,
                 'mobile'                    => $request->mobile,
                 'location'                  => $cityData['AreaName'],

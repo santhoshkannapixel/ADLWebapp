@@ -35,6 +35,7 @@ class HospitalLabManagementController extends Controller
         $res                            = $data->save();
 
         $details = [
+            'date_time'                 => now()->toDateString(),
             'hospital_name'            => $request->hospital_name,
             'hospital_address'         => $request->hospital_address,
             'name'                     => $request->name,

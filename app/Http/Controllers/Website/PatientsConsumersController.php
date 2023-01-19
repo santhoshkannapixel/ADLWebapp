@@ -52,6 +52,7 @@ class PatientsConsumersController extends Controller
         $data->pincode                  = $request->pincode;
 
         $details = [
+            'date_time'                 => now()->toDateString(),
             'name'                      => $request->name,
             'dob'                       => $request->dob,
             'mobile'                    => $request->mobile,

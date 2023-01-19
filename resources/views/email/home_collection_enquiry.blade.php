@@ -65,7 +65,7 @@
                                         class="full-width" style="border-spacing: 0;">
                                         <tbody>
                                             <tr>
-                                                <td valign="middle" bgcolor="00a0e0" style="border-collapse: collapse;">
+                                                <td valign="middle" bgcolor="663883" style="border-collapse: collapse;">
                                                     <!-- start top navigation -->
                                                     <table width="800" align="center" border="0" cellspacing="0"
                                                         cellpadding="0" class="full-width" style="border-spacing: 0;">
@@ -74,54 +74,24 @@
                                                                 <td valign="middle" style="border-collapse: collapse;">
                                                                     <table border="0" align="left" cellpadding="0"
                                                                         cellspacing="0" class="container2"
-                                                                        style="border-spacing: 0;">
+                                                                        style="border-spacing: 0; width:100%;">
                                                                         <tbody>
                                                                             <!--start event date -->
                                                                             <tr>
                                                                                 <td valign="middle" align="center"
                                                                                     style="border-collapse: collapse;">
-                                                                                    <table align="right" border="0"
+                                                                                    <table align="center" border="0"
                                                                                         cellpadding="0" cellspacing="0"
                                                                                         class="clear-align"
                                                                                         style="border-spacing: 0;">
                                                                                         <tbody>
                                                                                             <tr>
                                                                                                 <td
-                                                                                                    style="padding:15px;border-collapse:collapse; height: 70px; line-height: 70px">
+                                                                                                    style="padding:15px;border-collapse:collapse; height: 70px; text-align:center;">
                                                                                                     <a href="#"
                                                                                                         style="color: #fff; text-decoration: none !important;"
                                                                                                         target="_blank">
-                                                                                                        <img title="Logo" src="<?php echo asset('/public'.$details['site_logo'])?>" ></a>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                    <!--end content nav -->
-
-                                                                    <!--start content nav -->
-                                                                    <table border="0" align="right"
-                                                                        cellpadding="0" cellspacing="0"
-                                                                        class="container2" style="border-spacing: 0;">
-                                                                        <tbody>
-                                                                            <!--start event date -->
-                                                                            <tr>
-                                                                                <td valign="middle" align="center"
-                                                                                    style="border-collapse: collapse;">
-                                                                                    <table align="right"
-                                                                                        border="0" cellpadding="0"
-                                                                                        cellspacing="0"
-                                                                                        class="clear-align"
-                                                                                        style="border-spacing: 0;">
-                                                                                        <tbody>
-                                                                                            <tr>
-                                                                                                <td
-                                                                                                    style="font-size: 13px;line-height: 22px;color: #FFF;padding: 15px;font-weight: normal;text-align: center;font-family: Tahoma, Helvetica, Arial, sans-serif;border-collapse: collapse;">
-                                                                                                    <span
-                                                                                                        style="display: inline-block; height: 70px; line-height: 70px;">{!! $details['date_time'] !!}</span>
+                                                                                                        <img title="Logo" style="max-width: 300px;" src="http://adladmin.pixel-studios.net/public/images/logo/logo-dark.png" ></a>
                                                                                                 </td>
                                                                                             </tr>
                                                                                         </tbody>
@@ -153,18 +123,21 @@
             <tr>
                 <td align="center" valign="top" class="fix-box" style="border-collapse: collapse;">
                     <!-- start layout-7 container -->
+
                     <table width="100%" align="center" border="0" cellspacing="0" cellpadding="0"
                         class="full-width" style="border-spacing: 0;">
                         <tbody>
                             <tr>
                                 <td valign="top" style="border-collapse: collapse;">
+
                                     <table width="800" align="center" border="0" cellspacing="0"
                                         cellpadding="0" class="container" bgcolor="#ffffff"
                                         style="background-color: #ffffff;border-spacing: 0;">
                                         <!--start space height -->
                                         <tbody>
                                             <tr>
-                                                <td height="30" style="border-collapse: collapse;"></td>
+                                                <td height="30" style="border-collapse: collapse;">
+                                                    <h2 style="background: #fff; text-align: center; margin-bottom:0px; font-size: 24px;">Home Collection Enquiry</h2></td>
                                             </tr>
                                             <!--end space height -->
                                             <tr>
@@ -179,31 +152,27 @@
                                                                         bgcolor="#f8f8f8">
                                                                         <tr>
                                                                             <td class="column" align="left">
-                                                                                <table>
+                                                                                <table cellpadding="10" cellspacing="10">
                                                                                     <tbody>
                                                                                         <tr>
-                                                                                            <td><strong>Name</strong>:</td>
-                                                                                            <td>{!! $details['name'] !!}</td>
+                                                                                            <td style="padding-left:10px"><strong>Name</strong>:</td>
+                                                                                            <td style="padding-left:10px">{!! $details['name'] !!}</td>
                                                                                         </tr>
                                                                                         <tr>
-                                                                                            <td><strong>Mobile</strong>:</td>
-                                                                                            <td>{!! $details['name'] !!}</td>
+                                                                                            <td style="padding-left:10px"><strong>Mobile</strong>:</td>
+                                                                                            <td style="padding-left:10px">{!! $details['mobile'] !!}</td>
                                                                                         </tr>
                                                                                         <tr>
-                                                                                            <td><strong>Mobile</strong>:</td>
-                                                                                            <td>{!! $details['mobile'] !!}</td>
+                                                                                            <td style="padding-left:10px"><strong>Location</strong>:</td>
+                                                                                            <td style="padding-left:10px">{!! $details['location'] !!}</td>
                                                                                         </tr>
                                                                                         <tr>
-                                                                                            <td><strong>Location</strong>:</td>
-                                                                                            <td>{!! $details['location'] !!}</td>
+                                                                                            <td style="padding-left:10px"><strong>Test Name</strong>:</td>
+                                                                                            <td style="padding-left:10px">{!! $details['test_name'] !!}</td>
                                                                                         </tr>
                                                                                         <tr>
-                                                                                            <td><strong>Test Name</strong>:</td>
-                                                                                            <td>{!! $details['test_name'] !!}</td>
-                                                                                        </tr>
-                                                                                        <tr>
-                                                                                            <td><strong>Comments</strong>:</td>
-                                                                                            <td>{!! $details['comments'] !!}</td>
+                                                                                            <td style="padding-left:10px"><strong>Comments</strong>:</td>
+                                                                                            <td style="padding-left:10px">{!! $details['comments'] !!}</td>
                                                                                         </tr>
                                                                                     </tbody>
                                                                                 </table>
@@ -355,37 +324,7 @@
                                                 </td>
                                             </tr>
                                             <!-- end space height -->
-                                            <tr>
-                                                <td align="center" valign="top" style="border-collapse: collapse;">
-                                                    <table width="800" align="center" border="0"
-                                                        cellspacing="0" cellpadding="0" class="container"
-                                                        style="border-spacing: 0;">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td valign="top" align="center"
-                                                                    style="border-collapse: collapse;">
-                                                                    <table width="560" align="center"
-                                                                        border="0" cellspacing="0"
-                                                                        cellpadding="0" class="container"
-                                                                        style="border-spacing: 0;">
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <!-- start COPY RIGHT content -->
-                                                                                <td valign="top" align="center"
-                                                                                    style="font-size: 11px;line-height: 22px;font-family: Arial,Tahoma, Helvetica, sans-serif;color: #919191;font-weight: normal;border-collapse: collapse;">
-                                                                                    Email is sent from
-                                                                                    ADL.
-                                                                                </td>
-                                                                                <!-- end COPY RIGHT content -->
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
+                                           
                                             <!--  END FOOTER COPY RIGHT -->
                                             <!-- start space height -->
                                             <tr>

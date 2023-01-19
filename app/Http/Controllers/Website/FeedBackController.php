@@ -38,6 +38,8 @@ class FeedBackController extends Controller
                 'email'                     => $request->email,
                 'location'                  => $request->location,
                 'message'                   => $request->message,
+                'date_time'             => now()->toDateString(),
+
             ];
             try{
                 $sent_mail = "donotreply@anandlab.com";

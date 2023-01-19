@@ -30,6 +30,7 @@ class ResearchController extends Controller
         $data->message                  = $request->message;
         $res                            = $data->save();
         $details = [
+            'date_time'                 => now()->toDateString(),
             'name'                      => $request->name,
             'mobile'                    => $request->mobile,
             'email'                     => $request->email,

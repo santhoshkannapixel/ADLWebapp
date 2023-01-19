@@ -68,6 +68,7 @@ class CareerController extends Controller
         {
             $jobData  = JobPost::find($request->job_id);
             $details = [
+                'date_time'                 => now()->toDateString(),
                 'name'                  =>$request->name,
                 'email'                 =>$request->email,
                 'mobile'                =>$request->mobile,
