@@ -91,12 +91,14 @@ class ApiController extends Controller
             "comments" => $request->comments,
         ]);
             $details = [
+                'site_logo'             =>asset('/images/logo/logo.png'),
                 'name'                  =>$request->name,
                 'mobile'                =>$request->mobile,
                 'location'              =>$request->location,
                 'file'                  =>asset_url($file),
                 'test_name'             =>$request->test_name,
                 'comments'              =>$request->comments,
+                'date_time'             => now()->toDateString(),
             ];
             try{
                 $sent_mail = "donotreply@anandlab.com";
