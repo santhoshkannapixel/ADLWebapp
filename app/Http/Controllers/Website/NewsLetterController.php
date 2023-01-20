@@ -25,7 +25,8 @@ class NewsLetterController extends Controller
             $news = new NewsLetter();
             $news->email                                             = $request->email;
             $res = $news->save();
-            $mail = 'santhoshd.pixel@gmail.com';
+            // $mail = 'santhoshd.pixel@gmail.com';
+            $mail = 'donotreply@anandlab.com';
            
             $details = [
                 'email' => $request->email,
