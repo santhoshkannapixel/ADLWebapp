@@ -207,19 +207,16 @@ class ApiController extends Controller
     public function update_customer(Request $request,$id)
     {
         $customer = User::with('CustomerDetails')->find($id);
-        $customer->update([
-            'name' => $request->name,
-            'email' => $request->primary_email
-        ]);
+        $customer->update([ 'name' => $request->name ]);
         $customer->CustomerDetails()->update([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
+            'first_name'   => $request->first_name,
+            'last_name'    => $request->last_name,
+            'email'        => $request->secondary_email,
             'phone_number' => $request->phone_number,
-            'address' => $request->address,
-            'city_town' => $request->city_town,
-            'state' => $request->state,
-            'pin_code' => $request->pin_code,
+            'address'      => $request->address,
+            'city_town'    => $request->city_town,
+            'state'        => $request->state,
+            'pin_code'     => $request->pin_code,
         ]);
         return response()->json([
             "status" => true,
