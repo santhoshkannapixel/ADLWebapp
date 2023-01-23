@@ -11,6 +11,8 @@ use App\Http\Controllers\Website\NewsLetterController;
 use App\Http\Controllers\Website\PatientsConsumersController;
 use App\Http\Controllers\Website\ResearchController;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\Website\CareerController;
+use App\Http\Controllers\Website\CurrentOpeningController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('banners', [ApiController::class,'banners']);
@@ -49,3 +51,6 @@ Route::post('/research', [ResearchController::class, 'store'])->name('research')
 Route::post('/healthcheckup-for-employees', [HeadOfficeController::class, 'store'])->name('healthcheckup-for-employees');
 Route::post('/book-an-appointment', [BookAppointmentController::class, 'store'])->name('book-an-appointment');
 Route::post('/news-letter', [NewsLetterController::class, 'store'])->name('news-letter');
+Route::get('/current-opening', [CurrentOpeningController::class,'index'])->name('current-opening');
+Route::get('/job-details/{id}', [CareerController::class, 'getJobDetail'])->name('job-details');
+Route::post('/job-apply', [CareerController::class, 'jobApply'])->name('job-apply');

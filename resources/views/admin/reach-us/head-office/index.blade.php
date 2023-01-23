@@ -5,7 +5,7 @@
     <div class="card custom table-card"> 
         <div class="card-header">
             <div class="card-title">
-                Head Office
+                Healthcheckup for employees
             </div>
             
         </div>
@@ -36,9 +36,7 @@
         
             var table = $('#data-table').DataTable({
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('head-office.index') }}",
+                ajax: "{{ route('healthcheckup-for-employee.index') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'id',orderable: false, searchable: false},
                     {data: 'name', name: 'name'},

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Mail\HeadOfficeMail;
 use App\Models\HeadOffice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Validator;
 
 class HeadOfficeController extends Controller
@@ -33,6 +35,24 @@ class HeadOfficeController extends Controller
         $res                            = $data->save();
         if($res)
         {
+            $details = [
+                'date_time'                 => now()->toDateString(),
+                'name'                      => $request->name,
+                'mobile'                    => $request->mobile,
+                'email'                     => $request->email,
+                'company_name'              => $request->company_name,
+                'address'                   => $request->address,
+                'designation'               => $request->designation,
+                'message'                   => $request->message,
+            ];
+            try{
+                $sent_mail = "donotreply@anandlab.com";
+                // $sent_mail = "santhoshd.pixel@gmail.com";
+                Mail::to($sent_mail)->send(new HeadOfficeMail($details));
+            }catch(\Exception $e){
+                $message = 'Thanks for reach us, our team will get back to you shortly. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+                return response()->json(['Status'=>200,'Errors'=>false,'Message'=>$message]);
+            }
             return successCall();
         }
 

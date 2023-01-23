@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Mail\BookAppointmentMail;
 use App\Models\BookAppointment;
+use App\Models\Cities;
+use App\Models\Tests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Validator;
 
@@ -41,6 +45,25 @@ class BookAppointmentController extends Controller
         $res = $data->save();
         if($res)
         {
+            $cityData = Cities::select('AreaName')->where('AreaId',$request->location_id)->first();
+            $testData = Tests::select('TestName')->where('id',$request->test_id)->first();
+            $details = [
+                'date_time'                 => now()->toDateString(),
+                'name'                      => $request->name,
+                'mobile'                    => $request->mobile,
+                'location'                  => $cityData['AreaName'],
+                'test'                      => $testData['TestName'],
+                'test_type'                 => $request->test_type,
+                'file'                      => asset_url($file),
+            ];
+            try{
+                $sent_mail = "donotreply@anandlab.com";
+                // $sent_mail = "santhoshd.pixel@gmail.com";
+                Mail::to($sent_mail)->send(new BookAppointmentMail($details));
+            }catch(\Exception $e){
+                $message = 'Thanks for reach us, our team will get back to you shortly. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+                return response()->json(['Status'=>200,'Errors'=>false,'Message'=>$message]);
+            }
                 return successCall();
         }
 

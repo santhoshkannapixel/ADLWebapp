@@ -45,14 +45,14 @@ class FeedBackController extends Controller
     {
         $careers  = FeedBack::find($id);
         $careers->delete();
-        Flash::success(__('action.deleted', ['type' => 'Home Collection']));
+        Flash::success(__('action.deleted', ['type' => 'FeedBack']));
         return redirect()->back();
     }
     public function show($id)
     {
         // $data   =   FeedBack::findOrFail($id);
         $data   =   FeedBack::select(DB::raw("name as name,mobile as mobile,email as email,location as location,message as message,
-        DATE_FORMAT(created_at,'%d/%m/%Y') as created_date,DATE_FORMAT(updated_at,'%d/%m/%Y') as updated_date"))->findOrFail($id);
+        DATE_FORMAT(created_at,'%d/%m/%Y') as created_date"))->findOrFail($id);
         return view('admin.enquiry.feedback.show', compact('data'));
     }
 }

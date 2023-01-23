@@ -52,8 +52,7 @@ class HospitalLabManagementController extends Controller
     {
         // $data   =   HospitalLabManagement::findOrFail($id);
         $data   =   HospitalLabManagement::select(DB::raw("hospital_name as hospital_name,hospital_address as hospital_address,name as name,
-        mobile as mobile,email as email,designation as designation,message as message,DATE_FORMAT(created_at,'%d/%m/%Y') as created_date,
-        DATE_FORMAT(updated_at,'%d/%m/%Y') as updated_date"))->findOrFail($id);
+        mobile as mobile,email as email,designation as designation,message as message,DATE_FORMAT(created_at,'%d/%m/%Y') as created_date"))->findOrFail($id);
 
         return view('admin.doctors.hospital-lab-management.show', compact('data'));
     }

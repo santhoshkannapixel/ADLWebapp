@@ -42,8 +42,8 @@
         {{ Route::is('book-an-appointment.index') ? "Book an Appointment" : "" }}
         {{ Route::is('book-an-appointment.show') ? "Book an Appointment" : "" }}
 
-        {{ Route::is('head-office.index') ? "Head Office" : "" }}
-        {{ Route::is('head-office.show') ? "Head Office" : "" }}
+        {{ Route::is('healthcheckup-for-employee.index') ? "Healthcheckup for employees" : "" }}
+        {{ Route::is('healthcheckup-for-employee.show') ? "Healthcheckup for employees" : "" }}
 
         {{ Route::is('anandlab-franchise.index') ? "Anand Franchise" : "" }}
         {{ Route::is('anandlab-franchise.show') ? "Show Anand Franchise" : "" }}
@@ -65,6 +65,17 @@
         {{ Route::is('banner.create') ? "Create Banner" : '' }}
         {{ Route::is('banner.edit') ? "Edit Banner" : '' }}
 
+        {{ Route::is('department.index') ? "Department List" : '' }}
+        {{ Route::is('department.create') ? "Create Department" : '' }}
+        {{ Route::is('department.edit') ? "Edit Department" : '' }}
+
+        {{ Route::is('job-post.index') ? "Job Post List" : '' }}
+        {{ Route::is('job-post.create') ? "Create Job Post" : '' }}
+        {{ Route::is('job-post.edit') ? "Edit Job Post" : '' }}
+
+        {{ Route::is('careers.index') ? "Career List" : '' }}
+        {{ Route::is('careers.view') ? "view Career" : '' }}
+    
         {{ Route::is('news-letter.index') ? "News Letter List" : '' }}
         {{ Route::is('news-letter.show') ? "News Letter Show" : '' }}
 
@@ -76,6 +87,7 @@
         {{ Route::is('payment_config.index') ? "Payment Configuration" : '' }}
         {{ Route::is('payment_config.create') ? "Create Payment Configuration" : '' }}
         {{ Route::is('payment_config.edit') ? "Edit Payment Configuration" : '' }}
+        {{ Route::is('admin.profile') ? "Profile" : '' }}
     </div>
 </div>
 <div class="d-flex align-items-center">
@@ -93,8 +105,8 @@
         </a>
         <ul class="dropdown-menu dropdown-menu-dark bg-my-dark text-small shadow" aria-labelledby="dropdownUser1" style="">
             <li><a class="dropdown-item" href="#"><b>{{ Sentinel::getUser()->name }}</b> <small class="ms-2 badge bg-success text-white">{{ Sentinel::getUser()->roles[0]->name }}</small></a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="{{ route('settings.index') }}">Settings</a></li>
+            <li><a class="dropdown-item" href="{{ route('admin.profile') }}">Profile</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#" onclick="return document.getElementById('logout_form').submit()">Sign out</a></li>
         </ul>

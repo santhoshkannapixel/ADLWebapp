@@ -52,7 +52,7 @@ class FranchisingOpportunitiesController extends Controller
     {
         // $data   =   FranchisingOpportunities::findOrFail($id);
         $data   =   FranchisingOpportunities::select(DB::raw("name as name,city as city,mobile as mobile,email as email,message as message,
-        DATE_FORMAT(created_at,'%d/%m/%Y') as created_date,DATE_FORMAT(updated_at,'%d/%m/%Y') as updated_date"))->findOrFail($id);
+        DATE_FORMAT(created_at,'%d/%m/%Y') as created_date"))->findOrFail($id);
 
         return view('admin.doctors.franchising-opportunities.show', compact('data'));
     }

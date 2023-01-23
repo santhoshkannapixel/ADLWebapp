@@ -37,8 +37,6 @@
         
             var table = $('#data-table').DataTable({
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                processing: true,
-                serverSide: true,
                 ajax: "{{ route('hospital-lab-management.index') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'id',orderable: false, searchable: false},

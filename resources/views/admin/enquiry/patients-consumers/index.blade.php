@@ -5,7 +5,7 @@
     <div class="card custom table-card"> 
         <div class="card-header">
             <div class="card-title">
-                Home Collection
+                Patients Consumers List
             </div>
             
         </div>
@@ -14,11 +14,11 @@
                 <thead>
                     <tr>
                         <th width="10%">No</th>
-                        <th>Date</th>
                         <th>Name</th>
                         <th>Mobile</th>
                         <th>Email</th>
                         <th>Gender</th>
+                        <th>Prescription</th>
                         <th>Created At</th>
                         <th width="100px">Action</th>
                     </tr>
@@ -35,16 +35,14 @@
         
             var table = $('#data-table').DataTable({
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                processing: true,
-                serverSide: true,
                 ajax: "{{ route('patients-consumers.index') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'id',orderable: false, searchable: false},
-                    {data: 'date', name: 'date'},
                     {data: 'name', name: 'name'},
                     {data: 'mobile', name: 'mobile'},
                     {data: 'email', name: 'email'},
                     {data: 'gender', name: 'gender'},
+                    {data: 'download', name: 'download', orderable: false, searchable: false},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]

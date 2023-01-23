@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ResearchMail;
 use App\Models\Research;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Validator;
 
 class ResearchController extends Controller
@@ -27,6 +29,22 @@ class ResearchController extends Controller
         $data->city                     = $request->city;
         $data->message                  = $request->message;
         $res                            = $data->save();
+        $details = [
+            'date_time'                 => now()->toDateString(),
+            'name'                      => $request->name,
+            'mobile'                    => $request->mobile,
+            'email'                     => $request->email,
+            'city'                  => $request->city,
+            'message'                   => $request->message,
+        ];
+        try{
+            $sent_mail = "donotreply@anandlab.com";
+            // $sent_mail = "santhoshd.pixel@gmail.com";
+            Mail::to($sent_mail)->send(new ResearchMail($details));
+        }catch(\Exception $e){
+            $message = 'Thanks for reach us, our team will get back to you shortly. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+            return response()->json(['Status'=>200,'Errors'=>false,'Message'=>$message]);
+        }
         if($res)
         {
             return successCall();

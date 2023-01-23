@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Mail\FeedBackMail;
 use Validator;
 use Illuminate\Http\Request;
 use App\Models\FeedBack;
+use Illuminate\Support\Facades\Mail;
 
 class FeedBackController extends Controller
 {
@@ -30,7 +32,24 @@ class FeedBackController extends Controller
         $res             = $data->save();
         if($res)
         {
-                return successCall();
+            $details = [
+                'name'                      => $request->name,
+                'mobile'                    => $request->mobile,
+                'email'                     => $request->email,
+                'location'                  => $request->location,
+                'message'                   => $request->message,
+                'date_time'             => now()->toDateString(),
+
+            ];
+            try{
+                $sent_mail = "donotreply@anandlab.com";
+                // $sent_mail = "santhoshd.pixel@gmail.com";
+                Mail::to($sent_mail)->send(new FeedBackMail($details));
+            }catch(\Exception $e){
+                $message = 'Thanks for reach us, our team will get back to you shortly. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+                return response()->json(['Status'=>200,'Errors'=>false,'Message'=>$message]);
+            }
+            return successCall();
         }
 
     }

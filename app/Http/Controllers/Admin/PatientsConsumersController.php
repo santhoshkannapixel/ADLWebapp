@@ -21,7 +21,14 @@ class PatientsConsumersController extends Controller
 
             return DataTables::eloquent($data)
                 ->addIndexColumn()
-
+                ->addColumn('download', function ($data) {
+                    if(!empty($data->upload_prescription ))
+                    {
+                        return '<a href="' . asset_url($data->upload_prescription) . '" class="m-1  shadow-sm btn btn-sm text-primary btn-outline-light" title="Download" download> 
+                        <i class="bi bi-download"></i>
+                        </a>';
+                    }
+                })
                 ->addColumn('action', function ($data) {
                     $user = Sentinel::getUser();
                     $show = '';
@@ -36,7 +43,7 @@ class PatientsConsumersController extends Controller
                     return date('d M Y', strtotime($data['created_at']));
                 })
 
-                ->rawColumns(['action'])
+                ->rawColumns(['action','download'])
                 ->make(true);
         }
         return view('admin.enquiry.patients-consumers.index');
@@ -45,14 +52,15 @@ class PatientsConsumersController extends Controller
     {
         $careers  = PatientsConsumers::find($id);
         $careers->delete();
-        Flash::success(__('action.deleted', ['type' => 'Home Collection']));
+        Flash::success(__('action.deleted', ['type' => 'Patients Consumer']));
         return redirect()->back();
     }
     public function show($id)
     {
-        // $data   =   PatientsConsumers::findOrFail($id);
-        $data   =   PatientsConsumers::select(DB::raw("name as name,mobile as mobile,email as email,date as date,gender as gender,test_for_home_collection as test_for_home_collection,upload_prescription as upload_prescription,preferred_date_1 as preferred_date_1,preferred_date_2 as preferred_date_2,preferred_time as preferred_time,address as address,pincode as pincode,DATE_FORMAT(created_at,'%d/%m/%Y') as created_date,DATE_FORMAT(updated_at,'%d/%m/%Y') 
-        as updated_date"))->findOrFail($id);
+        $data   =   PatientsConsumers::select(DB::raw("name as name,mobile as mobile,email as email,dob as dob,gender as gender,
+        test_for_home_collection as test_for_home_collection,upload_prescription as upload_prescription,preferred_date_1 as preferred_date_1,
+        preferred_date_2 as preferred_date_2,preferred_time as preferred_time,address as address,pincode as pincode,
+        DATE_FORMAT(created_at,'%d/%m/%Y') as created_date"))->findOrFail($id);
 
         return view('admin.enquiry.patients-consumers.show', compact('data'));
     }

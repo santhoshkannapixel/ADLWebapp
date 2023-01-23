@@ -17,10 +17,14 @@ use App\Http\Controllers\Admin\ReachUsController;
 use App\Http\Controllers\Admin\DoctorsController;
 use App\Http\Controllers\Admin\HospitalLabManagementController;
 use App\Http\Controllers\Admin\ClinicalLabManagementController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\HealthCheckupController;
 use App\Http\Controllers\Admin\TestController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ApiConfigController;
+use App\Http\Controllers\Admin\CareerController;
+use App\Http\Controllers\Admin\DepartmentController;
+use App\Http\Controllers\Admin\JobPostController;
 use App\Http\Controllers\Admin\ResearchController;
 use App\Http\Controllers\Admin\PaymentConfigController;
 use App\Http\Controllers\DashboardController;
@@ -42,6 +46,8 @@ Route::middleware(['auth_users'])->group(function () {
         });
         Route::get('/', [DashboardController::class, 'dashboardData'])->name('dashboard.data');
         // Route::group(['prefix' => 'settings'], function () {
+            Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile');
+            Route::post('/profile', [ProfileController::class, 'store'])->name('profile.store');
             Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
             Route::group(['prefix' => 'user'], function () {
                 Route::get('/', [UserController::class, 'index'])->name('user.index');
@@ -186,7 +192,31 @@ Route::middleware(['auth_users'])->group(function () {
     Route::delete('/book-an-appointment/{id}', [BookAppointmentController::class, 'destroy'])->name('book-an-appointment.delete');
     Route::get('/book-an-appointment/{id}', [BookAppointmentController::class, 'show'])->name('book-an-appointment.show');
 
-    Route::get('/head-office', [HeadOfficeController::class, 'index'])->name('head-office.index');
-    Route::delete('/head-office/{id}', [HeadOfficeController::class, 'destroy'])->name('head-office.delete');
-    Route::get('/head-office/{id}', [HeadOfficeController::class, 'show'])->name('head-office.show');
+    Route::get('/healthcheckup-for-employee', [HeadOfficeController::class, 'index'])->name('healthcheckup-for-employee.index');
+    Route::delete('/healthcheckup-for-employee/{id}', [HeadOfficeController::class, 'destroy'])->name('healthcheckup-for-employee.delete');
+    Route::get('/healthcheckup-for-employee/{id}', [HeadOfficeController::class, 'show'])->name('healthcheckup-for-employee.show');
+
+    Route::group(['prefix' => 'career/job-post'], function () {
+        Route::get('/', [JobPostController::class, 'index'])->name('job-post.index');
+        Route::get('/create', [JobPostController::class, 'create'])->name('job-post.create'); 
+        Route::post('/create', [JobPostController::class, 'store'])->name('job-post.store'); 
+        Route::get('/edit/{id}', [JobPostController::class, 'edit'])->name('job-post.edit'); 
+        Route::post('/edit/{id}', [JobPostController::class, 'update'])->name('job-post.update'); 
+        Route::delete('/destroy/{id}', [JobPostController::class, 'delete'])->name('job-post.destroy');  
+    }); 
+        Route::group(['prefix' => 'department'], function () {
+        Route::get('/', [DepartmentController::class, 'index'])->name('department.index');
+        Route::get('/create', [DepartmentController::class, 'create'])->name('department.create'); 
+        Route::post('/create', [DepartmentController::class, 'store'])->name('department.store'); 
+        Route::get('/edit/{id}', [DepartmentController::class, 'edit'])->name('department.edit'); 
+        Route::post('/edit/{id}', [DepartmentController::class, 'update'])->name('department.update'); 
+        Route::delete('/destroy/{id}', [DepartmentController::class, 'delete'])->name('department.destroy');  
+    }); 
+    Route::get('careers', [CareerController::class, 'index'])->name('careers.index');
+    Route::delete('careers/delete/{id?}', [CareerController::class, 'delete'])->name('careers.delete'); 
+    Route::get('careers/status/{id}', [CareerController::class, 'status'])->name('careers.status');
+    Route::get('careers/resume/{id}', [CareerController::class, 'download'])->name('resume.download');
+    Route::get('careers/view/{id}', [CareerController::class, 'view'])->name('careers.view');
+
+    
 });

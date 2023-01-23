@@ -5,9 +5,9 @@
 @section('admin_content')
    <ul class="nav nav-gradient w-100">
       <li class="nav-item">
-         <a class="nav-link {{ Route::is(['head-office.index','head-office.show']) ? "active" : "" }}" href="{{ route('head-office.index') }}">
+         <a class="nav-link {{ Route::is(['healthcheckup-for-employee.index','healthcheckup-for-employee.show']) ? "active" : "" }}" href="{{ route('healthcheckup-for-employee.index') }}">
             <i class="fa-users fa me-2"></i>
-           Head Office
+            Healthcheckup for employees
          </a>
       </li>
       {{-- <li class="nav-item">

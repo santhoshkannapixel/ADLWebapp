@@ -59,8 +59,7 @@ class BookAppointmentController extends Controller
         // $data   =   BookAppointment::findOrFail($id);
         $data   =   BookAppointment::select(DB::raw("book_appointments.name as name,book_appointments.mobile as mobile,
         book_appointments.file as file,
-        book_appointments.test_id as test_name,book_appointments.test_type as test_type,cities.AreaName as area_name,tests.TestName as test_name,DATE_FORMAT(book_appointments.created_at,'%d/%m/%Y') as created_date,
-        DATE_FORMAT(book_appointments.updated_at,'%d/%m/%Y') as updated_date"))
+        book_appointments.test_id as test_name,book_appointments.test_type as test_type,cities.AreaName as area_name,tests.TestName as test_name,DATE_FORMAT(book_appointments.created_at,'%d/%m/%Y') as created_date"))
         ->join('cities','cities.AreaId','=','book_appointments.location_id')
         ->join('tests','tests.id','=','book_appointments.test_id')
         ->findOrFail($id);

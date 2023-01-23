@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\HomeCollectionMail;
 use App\Mail\ResetPasswordMail;
 use App\Models\Banners;
 use App\Models\BookHomeCollection;
@@ -81,7 +82,6 @@ class ApiController extends Controller
     {
          
         $file = Storage::put('contact', $request->file('reportFile'));
-
         BookHomeCollection::create([
             "name" => $request->name,
             "mobile" => $request->mobile,
@@ -90,6 +90,24 @@ class ApiController extends Controller
             "test_name" => $request->test_name,
             "comments" => $request->comments,
         ]);
+            $details = [
+                'site_logo'             =>asset('/images/logo/logo.png'),
+                'name'                  =>$request->name,
+                'mobile'                =>$request->mobile,
+                'location'              =>$request->location,
+                'file'                  =>asset_url($file),
+                'test_name'             =>$request->test_name,
+                'comments'              =>$request->comments,
+                'date_time'             => now()->toDateString(),
+            ];
+            try{
+                $sent_mail = "donotreply@anandlab.com";
+                // $sent_mail = "santhoshd.pixel@gmail.com"; 
+                Mail::to($sent_mail)->send(new HomeCollectionMail($details));
+            }catch(\Exception $e){
+                $message = 'Thanks for reach us, our team will get back to you shortly. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+                return response()->json(['Status'=>200,'Errors'=>false,'Message'=>$message]);
+            }
         return response()->json([
             "status"    =>  true,
             "message"   =>  "Form Submit Success !"

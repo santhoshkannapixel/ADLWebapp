@@ -60,7 +60,8 @@ class BookHomeCollectionController extends Controller
     }
     public function show($id)
     {
-        $data   =   BookHomeCollection::select(DB::raw("name as name,mobile as mobile,location as location,file as file,test_name as test_name,comments as comments,DATE_FORMAT(created_at,'%d/%m/%Y') as created_date,DATE_FORMAT(updated_at,'%d/%m/%Y') as updated_date"))->findOrFail($id);
+        $data   =   BookHomeCollection::select(DB::raw("name as name,mobile as mobile,location as location,file as file,
+        test_name as test_name,comments as comments,DATE_FORMAT(created_at,'%d/%m/%Y') as created_date"))->findOrFail($id);
         return view('admin.enquiry.home-collection.show', compact('data'));
     }
 }

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ClinicalLabManagementMail;
 use App\Models\ClinicalLabManagement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Validator;
 
 class ClinicalLabManagementController extends Controller
@@ -28,6 +30,25 @@ class ClinicalLabManagementController extends Controller
         $data->mobile                                           = $request->mobile;
         $data->message                                          = $request->message;
         $res                                                    = $data->save();
+
+        $details = [
+            'date_time'                                        => now()->toDateString(),
+            'doctors_name'                                     => $request->doctors_name,
+            'specialization'                                   => $request->specialization,
+            'associated_hospitals_clinics'                     => $request->associated_hospitals_clinics,
+            'email'                                            => $request->email,
+            'mobile'                                           => $request->mobile,
+            'message'                                          => $request->message,
+        ];
+        try{
+            $sent_mail = "donotreply@anandlab.com";
+            // $sent_mail = "santhoshd.pixel@gmail.com";
+            Mail::to($sent_mail)->send(new ClinicalLabManagementMail($details));
+        }catch(\Exception $e){
+            $message = 'Thanks for reach us, our team will get back to you shortly. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+            return response()->json(['Status'=>200,'Errors'=>false,'Message'=>$message]);
+        }
+
         if($res)
         {
                 return successCall();

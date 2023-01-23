@@ -61,8 +61,8 @@
         <li>
             <a href="{{ route('reach-us.index') }}" class="nav-link text-white {{ Route::is([
                     'reach-us.index',
-                    'head-office.index',
-                    'head-office.show',
+                    'healthcheckup-for-employee.index',
+                    'healthcheckup-for-employee.show',
                     'anandlab-franchise.index',
                     'anandlab-franchise.show',
                     'covidtesting-employees.index',
@@ -86,6 +86,16 @@
                 <i class="fa fa-cog"></i>Master
             </a>
         </li>
+        <li>
+            <a href="{{ route('department.index') }}" class="nav-link text-white {{ Route::is(['department.index', 'department.edit', 'department.create','job-post.index','job-post.create','job-post.edit','careers.index','careers.view']) ? "active" : "" }}">
+                <i class="fa fa-cog"></i>Manage Careers
+            </a>
+        </li>
+        {{-- <li>
+            <a href="{{ route('job-post.index') }}" class="nav-link text-white {{ Route::is(['job-post.index', 'job-post.edit' , 'job-post.create']) ? "active" : "" }}">
+                <i class="fa fa-cog"></i>Manage Careers
+            </a>
+        </li> --}}
         <li>
             <a href="{{ route('settings.index') }}" class="nav-link text-white {{ Route::is([
                     'settings.index',
@@ -118,9 +128,8 @@
             </small>
         </a>
         <ul class="dropdown-menu dropdown-menu-light text-small shadow" aria-labelledby="dropdownUser1" style="">
-            <li><a class="dropdown-item" href="#">New Orders...</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="{{ route('settings.index') }}">Settings</a></li>
+            <li><a class="dropdown-item" href="{{ route('admin.profile') }}">Profile</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#" onclick="return document.getElementById('logout_form').submit()">Sign out</a></li>
         </ul>
