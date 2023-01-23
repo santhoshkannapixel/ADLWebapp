@@ -207,33 +207,20 @@ class ApiController extends Controller
     }
     public function update_customer(Request $request,$id)
     {
-        User::with('CustomerDetails')->find($id)->update([ 
+        $customer = User::with('CustomerDetails')->find($id);
+        $customer->update([ 
             'name' => $request->name 
         ]);
-        $CustomerDetails = CustomerDetails::where('user_id',$id)->first();
-        if(is_null($CustomerDetails)) {
-            CustomerDetails::create([
-                'first_name'   => $request->first_name,
-                'last_name'    => $request->last_name,
-                'email'        => $request->email,
-                'phone_number' => $request->phone_number,
-                'address'      => $request->address,
-                'city_town'    => $request->city_town,
-                'state'        => $request->state,
-                'pin_code'     => $request->pin_code,
-            ]);
-        } else {
-            $CustomerDetails->update([
-                'first_name'   => $request->first_name,
-                'last_name'    => $request->last_name,
-                'email'        => $request->email,
-                'phone_number' => $request->phone_number,
-                'address'      => $request->address,
-                'city_town'    => $request->city_town,
-                'state'        => $request->state,
-                'pin_code'     => $request->pin_code,
-            ]);
-        } 
+        $customer->CustomerDetails()->updateOrCreate(['user_id',$id],[
+            'first_name'   => $request->first_name,
+            'last_name'    => $request->last_name,
+            'email'        => $request->email,
+            'phone_number' => $request->phone_number,
+            'address'      => $request->address,
+            'city_town'    => $request->city_town,
+            'state'        => $request->state,
+            'pin_code'     => $request->pin_code,
+        ]);
         return response()->json([
             "status"  => true,
             "message" => 'Your Information Updated !',
