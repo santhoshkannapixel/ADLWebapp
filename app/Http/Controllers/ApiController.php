@@ -7,6 +7,7 @@ use App\Mail\ResetPasswordMail;
 use App\Models\Banners;
 use App\Models\BookHomeCollection;
 use App\Models\Branch;
+use App\Models\Cart;
 use App\Models\Cities;
 use App\Models\Conditions;
 use App\Models\CustomerDetails;
@@ -477,5 +478,34 @@ class ApiController extends Controller
             "data"    => $User,
             "message" => "User Not Found!"
         ];
+    }
+    public function cart_items(Request $request)
+    {
+        return Cart::where([
+            'user_id' => $request->user_id,
+            'test_id' => $request->test_id,
+        ])->get();
+    }
+    public function add_to_cart(Request $request)
+    {
+        $cart = Cart::create([
+            'user_id'   => $request->user_id,
+            'test_id'   => $request->test_id,
+            'test_type' => $request->test_type,
+        ]);
+        return [
+            "status"  => false,
+            "data"    => $cart,
+            "message" => "User Not Found!"
+        ];
+    }
+
+    public function remove_to_cart(Request $request)
+    {
+        Cart::create([
+            'user_id'   => $request->user_id,
+            'test_id'   => $request->test_id,
+            'test_type' => $request->test_type,
+        ]);
     }
 }
