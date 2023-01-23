@@ -41,6 +41,7 @@ Route::post('forgot-password',[ApiController::class,'forgot_password']);
 Route::post('reset-password/{id}',[ApiController::class,'reset_password']);
 Route::post('cart-items',[ApiController::class,'cart_items']);
 Route::post('add-to-cart',[ApiController::class,'add_to_cart']);
+Route::post('remove-to-cart',[ApiController::class,'remove_to_cart']);
 
 
 
