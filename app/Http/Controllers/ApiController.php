@@ -211,7 +211,7 @@ class ApiController extends Controller
         $customer->update([ 
             'name' => $request->name 
         ]);
-        $customer->CustomerDetails()->updateOrCreate(['user_id',$id],[
+        $customer->CustomerDetails()->updateOrCreate([
             'first_name'   => $request->first_name,
             'last_name'    => $request->last_name,
             'email'        => $request->email,
