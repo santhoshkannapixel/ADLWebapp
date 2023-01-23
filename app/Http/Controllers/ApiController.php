@@ -215,7 +215,7 @@ class ApiController extends Controller
             CustomerDetails::create([
                 'first_name'   => $request->first_name,
                 'last_name'    => $request->last_name,
-                'email'        => $request->secondary_email,
+                'email'        => $request->email,
                 'phone_number' => $request->phone_number,
                 'address'      => $request->address,
                 'city_town'    => $request->city_town,
@@ -226,7 +226,7 @@ class ApiController extends Controller
             $CustomerDetails->update([
                 'first_name'   => $request->first_name,
                 'last_name'    => $request->last_name,
-                'email'        => $request->secondary_email,
+                'email'        => $request->email,
                 'phone_number' => $request->phone_number,
                 'address'      => $request->address,
                 'city_town'    => $request->city_town,
