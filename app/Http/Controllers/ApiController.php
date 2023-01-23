@@ -9,6 +9,7 @@ use App\Models\BookHomeCollection;
 use App\Models\Branch;
 use App\Models\Cities;
 use App\Models\Conditions;
+use App\Models\CustomerDetails;
 use App\Models\NewsEvent;
 use App\Models\Orders;
 use App\Models\Organs;
@@ -206,10 +207,12 @@ class ApiController extends Controller
     }
     public function update_customer(Request $request,$id)
     {
-        $customer = User::with('CustomerDetails')->find($id);
-        $customer->update([ 'name' => $request->name ]);
-        if(is_null($customer->CustomerDetails())) {
-            $customer->CustomerDetails()->create([
+        User::with('CustomerDetails')->find($id)->update([ 
+            'name' => $request->name 
+        ]);
+        $CustomerDetails = CustomerDetails::where('user_id',$id)->fiest();
+        if(is_null($CustomerDetails)) {
+            CustomerDetails::create([
                 'first_name'   => $request->first_name,
                 'last_name'    => $request->last_name,
                 'email'        => $request->secondary_email,
@@ -220,7 +223,7 @@ class ApiController extends Controller
                 'pin_code'     => $request->pin_code,
             ]);
         } else {
-            $customer->CustomerDetails()->update([
+            $CustomerDetails->update([
                 'first_name'   => $request->first_name,
                 'last_name'    => $request->last_name,
                 'email'        => $request->secondary_email,
@@ -232,9 +235,9 @@ class ApiController extends Controller
             ]);
         }
         return response()->json([
-            "status" => true,
+            "status"  => true,
             "message" => 'Your Information Updated !',
-            "data" => $customer
+            "data"    => $CustomerDetails
         ]);
     }
     public function update_billing_address(Request $request)
