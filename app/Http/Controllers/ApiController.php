@@ -479,12 +479,19 @@ class ApiController extends Controller
             "message" => "User Not Found!"
         ];
     }
-    public function cart_items(Request $request)
+    public function cart_items($user_id)
     {
-        return Cart::where([
-            'user_id' => $request->user_id,
-            'test_id' => $request->test_id,
-        ])->get();
+        $cart     = Cart::with('Tests','Packages')->where(['user_id' => $user_id])->get();
+        $tests    = [];
+        $packages = [];
+        foreach($cart as $item) {
+            if($item->test_type == 'TEST') {
+                $tests[]  = $item->tests;
+            } else {
+                $packages[]  = $item->packages;
+            }
+        }
+        return array_merge($tests,$packages);
     }
     public function add_to_cart(Request $request)
     {

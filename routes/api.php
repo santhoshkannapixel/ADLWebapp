@@ -39,10 +39,9 @@ Route::get('get-organs',[ApiController::class,'get_organs']);
 Route::get('get-conditions',[ApiController::class,'get_conditions']);
 Route::post('forgot-password',[ApiController::class,'forgot_password']);
 Route::post('reset-password/{id}',[ApiController::class,'reset_password']);
-Route::post('cart-items',[ApiController::class,'cart_items']);
+Route::post('cart-items/{user_id}',[ApiController::class,'cart_items']);
 Route::post('add-to-cart',[ApiController::class,'add_to_cart']);
 Route::post('remove-to-cart',[ApiController::class,'remove_to_cart']);
-
 
 
 Route::post('/patients-consumers', [PatientsConsumersController::class, 'store'])->name('patients-consumers');

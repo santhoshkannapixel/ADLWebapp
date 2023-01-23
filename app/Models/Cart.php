@@ -14,4 +14,13 @@ class Cart extends Model
         'test_id',
         'test_type',
     ];
+
+    public function Tests()
+    {
+        return $this->hasOne(Tests::class,'id','test_id');
+    }
+    public function Packages()
+    {
+        return $this->hasOne(Packages::class,'id','test_id');
+    }
 }
