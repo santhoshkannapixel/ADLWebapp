@@ -233,12 +233,11 @@ class ApiController extends Controller
                 'state'        => $request->state,
                 'pin_code'     => $request->pin_code,
             ]);
-        }
-        $CustomerDetails = CustomerDetails::where('user_id',$id)->first();
+        } 
         return response()->json([
             "status"  => true,
             "message" => 'Your Information Updated !',
-            "data"    => $CustomerDetails
+            "data"    => CustomerDetails::where('user_id',$id)->get()
         ]);
     }
     public function update_billing_address(Request $request)
