@@ -160,7 +160,7 @@ class ApiController extends Controller
         }
         return response()->json([
             "status"    =>  false,
-            "message"      =>  'User Not Found !'
+            "message"   =>  'User Not Found !'
         ]);
     }
     public function login_with_otp(Request $request)
