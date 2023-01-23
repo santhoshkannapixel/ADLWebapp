@@ -197,7 +197,7 @@ class ApiController extends Controller
         $User = User::create([
             'name'     => $request->name,
             'email'    => $request->email,
-            'role_id'    => 0,
+            'role_id'  => 0,
             'password' => Hash::make($request->password),
         ]);
         return response()->json([
@@ -246,14 +246,14 @@ class ApiController extends Controller
         return response([
             "status" => true,
             "data" => [
-                "key" => PaymentConfig::where('gateWayName','RAZOR_PAY')->first()->payKeyId ?? config('payment.KeyID'),
-                "title" => "Pay Online",
-                "image" => asset('/public/images/logo/favicon.png'),
-                "name" => $customer->name,
-                "email" => $customer->email,
-                "contact" => $customer->CustomerDetails['phone_number'] ?? null,
+                "key"      => PaymentConfig::where('gateWayName','RAZOR_PAY')->first()->payKeyId ?? config('payment.KeyID'),
+                "title"    => "Pay Online",
+                "image"    => asset('/public/images/logo/favicon.png'),
+                "name"     => $customer->name,
+                "email"    => $customer->email,
+                "contact"  => $customer->CustomerDetails['phone_number'] ?? null,
                 "order_id" => $Order['id'],
-                "user" => $customer
+                "user"     => $customer
             ]
         ]);
     }
@@ -271,14 +271,14 @@ class ApiController extends Controller
         }
 
         $Order = Orders::create([
-            'payment_id' => $result['payment_id'],
+            'payment_id'        => $result['payment_id'],
             'razorpay_order_id' => $result['order_id'],
-            'user_id' => $request->user['id'],
-            'appoinment' => $request->appoinment,
-            'datetime' => $request->datetime,
-            'payment_status' => $status,
-            "order_response"    =>  $result['order_response'],
-            "order_amount" => $request->total_price
+            'user_id'           => $request->user['id'],
+            'appoinment'        => $request->appoinment,
+            'datetime'          => $request->datetime,
+            'payment_status'    => $status,
+            "order_response"    => $result['order_response'],
+            "order_amount"      => $request->total_price
         ]);
 
         $Order->update([
@@ -308,9 +308,9 @@ class ApiController extends Controller
             }
             try {
                 $api->utility->verifyPaymentSignature([
-                    'razorpay_order_id' => $order_id,
+                    'razorpay_order_id'   => $order_id,
                     'razorpay_payment_id' => $payment_id,
-                    'razorpay_signature' => $response['data']['razorpay_signature']
+                    'razorpay_signature'  => $response['data']['razorpay_signature']
                 ]);
             } catch(SignatureVerificationError $e) {
                 $error = 'Razorpay Error : ' . $e->getMessage();
@@ -318,17 +318,17 @@ class ApiController extends Controller
             }
         } else {
             if(isset($response['data']['error'])) {
-                $payment_id =   $response['data']['error']['metadata']['payment_id'];
-                $order_id   =   $response['data']['error']['metadata']['order_id'];
-                $order_response =   $api->order->fetch($order_id);
-                $status = false;
+                $payment_id     = $response['data']['error']['metadata']['payment_id'];
+                $order_id       = $response['data']['error']['metadata']['order_id'];
+                $order_response = $api->order->fetch($order_id);
+                $status         = false;
             }
         }
 
         return [
-            "status" => $status,
-            "payment_id" => $payment_id,
-            "order_id" => $order_id,
+            "status"         => $status,
+            "payment_id"     => $payment_id,
+            "order_id"       => $order_id,
             "order_response" => serialize($order_response)
         ];
     }
@@ -338,7 +338,7 @@ class ApiController extends Controller
         $customer = User::with('CustomerDetails')->find($id);
         return [
             "status" => true,
-            "data" => $customer
+            "data"   => $customer
         ];
     }
     public function packages(Request $request)
@@ -360,8 +360,8 @@ class ApiController extends Controller
 
         return [
             "status" => true,
-            "count" => count($Packages),
-            "data" => $Packages,
+            "count"  => count($Packages),
+            "data"   => $Packages,
         ];
     }
 
@@ -369,15 +369,15 @@ class ApiController extends Controller
     {
         return [
             "status" => true,
-            "data" =>  Orders::with('Tests')->where('payment_status',1)->where('user_id',$id)->get()
+            "data"   => Orders::with('Tests')->where('payment_status',1)->where('user_id',$id)->get()
         ];
     }
 
     public function change_my_password(Request $request,$id)
     {
         $request->validate([
-            'old_password' => ['required', new MatchOldPassword($id)],
-            'new_password' => ['required'],
+            'old_password'     => ['required', new MatchOldPassword($id)],
+            'new_password'     => ['required'],
             'confirm_password' => ['same:new_password'],
         ]);
         User::find($id)->update(['password'=> Hash::make($request->new_password)]);
