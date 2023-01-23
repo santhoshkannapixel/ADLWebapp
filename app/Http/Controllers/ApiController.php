@@ -224,7 +224,7 @@ class ApiController extends Controller
         return response()->json([
             "status"  => true,
             "message" => 'Your Information Updated !',
-            "data"    => CustomerDetails::where('user_id',$id)->get()
+            "data"    => $customer
         ]);
     }
     public function update_billing_address(Request $request)
