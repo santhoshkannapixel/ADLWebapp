@@ -210,7 +210,7 @@ class ApiController extends Controller
         User::with('CustomerDetails')->find($id)->update([ 
             'name' => $request->name 
         ]);
-        $CustomerDetails = CustomerDetails::where('user_id',$id)->fiest();
+        $CustomerDetails = CustomerDetails::where('user_id',$id)->first();
         if(is_null($CustomerDetails)) {
             CustomerDetails::create([
                 'first_name'   => $request->first_name,
