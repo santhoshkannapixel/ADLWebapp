@@ -149,9 +149,10 @@ class ApiController extends Controller
         if(!is_null($User)) {
             if(Hash::check($request->password, $User->password)){
                 return response()->json([
-                    "status"    =>  true,
-                    "data"      =>  $User,
-                    "message" => "Login Success !"
+                    "status"     => true,
+                    "data"       => $User,
+                    "cart_items" => $this->cart_items($User->id),
+                    "message"    => "Login Success !"
                 ]);
             } else {
                 return response()->json([
