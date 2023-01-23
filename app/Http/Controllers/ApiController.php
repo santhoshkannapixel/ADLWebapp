@@ -234,6 +234,7 @@ class ApiController extends Controller
                 'pin_code'     => $request->pin_code,
             ]);
         }
+        $CustomerDetails = CustomerDetails::where('user_id',$id)->first();
         return response()->json([
             "status"  => true,
             "message" => 'Your Information Updated !',
