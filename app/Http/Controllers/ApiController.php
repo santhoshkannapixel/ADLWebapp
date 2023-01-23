@@ -125,7 +125,7 @@ class ApiController extends Controller
     }
     public function login(Request $request)
     {
-        $User = User::where('email',$request->email)->first();
+        $User = User::with('CustomerDetails')->where('email',$request->email)->first();
         if(!is_null($User)) {
             if(Hash::check($request->password, $User->password)){
                 return response()->json([
@@ -147,7 +147,7 @@ class ApiController extends Controller
     }
     public function login_with_otp(Request $request)
     {
-        $User = User::where('email',$request->email)->first();
+        $User = User::with('CustomerDetails')->where('email',$request->email)->first();
         if(!is_null($User)) {
             $otp = rand(11111,99999);
             Http::post('https://reports.anandlab.com/v3/SMS.asmx/SendWebsiteOTP', [
