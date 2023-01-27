@@ -19,7 +19,7 @@ class NewsAndEventsController extends Controller
     {
         if($request->ajax()) {
             $data = NewsEvent::select('*');
-            return DataTables::eloquent($data)->addIndexColumn()
+            return DataTables::of($data)->addIndexColumn()
                 ->addColumn('action', function ($data) {
                     return button('edit',route('news-and-events.edit', $data->id)).button('delete',route('news-and-events.destroy', $data->id));
                 })->make(true);
