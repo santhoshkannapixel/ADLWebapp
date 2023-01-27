@@ -33,7 +33,7 @@ class ApiController extends Controller
 {
     public function banners()
     {
-        $data = Banners::latest()->get();
+        $data = Banners::latest()->orderBy('OrderBy')->get();
         $banner = [];
         foreach($data as $item ) {
             $banner[] = [
