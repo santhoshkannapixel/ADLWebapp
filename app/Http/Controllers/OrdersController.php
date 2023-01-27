@@ -15,7 +15,7 @@ class OrdersController extends Controller
     {
         if($request->ajax()) {
             $data = Orders::with('User','User.CustomerDetails','Tests')->select('*');
-            return DataTables::eloquent($data)->addIndexColumn()
+            return DataTables::of($data)->addIndexColumn()
                 ->addColumn('created_at',function ($data) {
                     return dateFormat($data->created_at);
                 })
