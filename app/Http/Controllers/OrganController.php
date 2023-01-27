@@ -14,7 +14,7 @@ class OrganController extends Controller
     {
         if($request->ajax()) {
             $data = Organs::select('*');
-            return DataTables::eloquent($data)->addIndexColumn()
+            return DataTables::of($data)->addIndexColumn()
             ->addColumn('image', function ($data) {
                 return '
                     <img src="'.asset_url($data->image).'" height="40"/>

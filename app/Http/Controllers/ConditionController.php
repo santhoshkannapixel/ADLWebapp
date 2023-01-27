@@ -14,7 +14,7 @@ class ConditionController extends Controller
     {
         if($request->ajax()) {
             $data = Conditions::select('*');
-            return DataTables::eloquent($data)->addIndexColumn()
+            return DataTables::of($data)->addIndexColumn()
             ->addColumn('image', function ($data) {
                 return '
                     <img src="'.asset_url($data->image).'" height="40"/>
