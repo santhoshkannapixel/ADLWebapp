@@ -12,7 +12,7 @@ class CustomersController extends Controller
     {
         if($request->ajax()) {
             $data = User::with('CustomerDetails')->where('role_id',0)->select('*');
-            return DataTables::eloquent($data)->addIndexColumn()
+            return DataTables::of($data)->addIndexColumn()
                 ->addColumn('phone_number', function ($data) {
                     return $data->CustomerDetails->phone_number ?? null;
                 })
