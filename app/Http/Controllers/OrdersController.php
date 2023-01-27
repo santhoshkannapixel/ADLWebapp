@@ -13,7 +13,7 @@ class OrdersController extends Controller
 {
     public function index(Request $request)
     {
-        if($request->ajax()) {
+        if($request->ajax()) { 
             $data = Orders::with('User','User.CustomerDetails','Tests')->select('*');
             return DataTables::of($data)->addIndexColumn()
                 ->addColumn('created_at',function ($data) {
