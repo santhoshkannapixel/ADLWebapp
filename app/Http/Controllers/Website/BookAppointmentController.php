@@ -18,8 +18,8 @@ class BookAppointmentController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'name'                          => 'required',
-            'location_id'                   => 'required',
-            'test_id'                       => 'required',
+            'location_id'                   => 'required|numeric',
+            'test_id'                       => 'required|numeric',
             'mobile'                        => 'required|numeric|digits:10',
             'file'                        => 'required|mimes:png,jpg,jpeg,csv,xlx,xls,pdf,docx|max:2048',
         ]);
