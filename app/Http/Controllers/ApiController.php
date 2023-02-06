@@ -187,11 +187,17 @@ class ApiController extends Controller
         ]);
     }
     public function register(Request $request)
-    {
-        if (!is_null(User::where('email', $request->email)->first())) {
+    { 
+        if (!is_null(User::where('email', $request->email)->first()) ) {
             return response()->json([
                 "status"    =>  false,
                 "message" =>  'Email Id Already exists !'
+            ]);
+        }
+        if (!is_null(User::where('mobile', $request->mobile)->first()) ) {
+            return response()->json([
+                "status"    =>  false,
+                "message" =>  'Mobile Number Already been tacken !'
             ]);
         }
         $User = User::create([
