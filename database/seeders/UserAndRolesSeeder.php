@@ -17,6 +17,7 @@ class UserAndRolesSeeder extends Seeder
         $Admin->users()->attach(Sentinel::registerAndActivate([
             'email' => 'admin@gmail.com',
             'name'  => 'Alexia',
+            'mobile'  => '',
             'password' => 12345678,
         ]));
         #========Create Employees======
@@ -114,6 +115,7 @@ class UserAndRolesSeeder extends Seeder
         $Employee->users()->attach(Sentinel::registerAndActivate([
             'email' => 'user@gmail.com',
             'name'  => 'Alexia',
+            'mobile'  => '',
             'password' => 12345678,
         ]));
     }

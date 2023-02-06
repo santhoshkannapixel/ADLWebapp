@@ -199,6 +199,7 @@ class ApiController extends Controller
         $User = User::create([
             'name'     => $request->name,
             'email'    => $request->email,
+            'mobile'    => $request->mobile,
             'role_id'  => 0,
             'password' => Hash::make($request->password),
         ]);
