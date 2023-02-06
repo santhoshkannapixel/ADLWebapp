@@ -91,11 +91,11 @@
                 <i class="fa fa-cog"></i>Manage Careers
             </a>
         </li>
-        {{-- <li>
-            <a href="{{ route('job-post.index') }}" class="nav-link text-white {{ Route::is(['job-post.index', 'job-post.edit' , 'job-post.create']) ? "active" : "" }}">
-                <i class="fa fa-cog"></i>Manage Careers
+        <li>
+            <a href="{{ route('contact-us.index') }}" class="nav-link text-white {{ Route::is(['contact-us.index' , 'contact-us.view']) ? "active" : "" }}">
+                <i class="fa fa-cog"></i>Manage Contact
             </a>
-        </li> --}}
+        </li>
         <li>
             <a href="{{ route('settings.index') }}" class="nav-link text-white {{ Route::is([
                     'settings.index',

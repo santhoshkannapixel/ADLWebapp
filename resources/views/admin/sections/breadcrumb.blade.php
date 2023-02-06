@@ -75,6 +75,9 @@
 
         {{ Route::is('careers.index') ? "Career List" : '' }}
         {{ Route::is('careers.view') ? "view Career" : '' }}
+
+        {{ Route::is('contact-us.index') ? "Contact us List" : '' }}
+        {{ Route::is('contact-us.view') ? "view Contact us" : '' }}
     
         {{ Route::is('news-letter.index') ? "News Letter List" : '' }}
         {{ Route::is('news-letter.show') ? "News Letter Show" : '' }}

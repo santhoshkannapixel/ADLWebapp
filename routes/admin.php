@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\TestController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ApiConfigController;
 use App\Http\Controllers\Admin\CareerController;
+use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\JobPostController;
 use App\Http\Controllers\Admin\ResearchController;
@@ -217,6 +218,10 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('careers/status/{id}', [CareerController::class, 'status'])->name('careers.status');
     Route::get('careers/resume/{id}', [CareerController::class, 'download'])->name('resume.download');
     Route::get('careers/view/{id}', [CareerController::class, 'view'])->name('careers.view');
+
+    Route::get('contact-us', [ContactUsController::class, 'index'])->name('contact-us.index');
+    Route::delete('contact-us/delete/{id?}', [ContactUsController::class, 'delete'])->name('contact-us.delete'); 
+    Route::get('contact-us/view/{id}', [ContactUsController::class, 'view'])->name('contact-us.view');
 
     
 });
