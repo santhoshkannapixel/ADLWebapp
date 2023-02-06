@@ -10,7 +10,6 @@ use App\Models\Branch;
 use App\Models\Cart;
 use App\Models\Cities;
 use App\Models\Conditions;
-use App\Models\CustomerDetails;
 use App\Models\NewsEvent;
 use App\Models\Orders;
 use App\Models\Organs;
@@ -23,7 +22,7 @@ use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str; 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Razorpay\Api\Api;
 use Illuminate\Support\Facades\Http;
@@ -35,7 +34,7 @@ class ApiController extends Controller
     {
         $data = Banners::orderBy('OrderBy')->get();
         $banner = [];
-        foreach($data as $item ) {
+        foreach ($data as $item) {
             $banner[] = [
                 'Title' => $item->Title,
                 'Content' => $item->Content,
@@ -59,15 +58,15 @@ class ApiController extends Controller
             "data"      =>  $data
         ]);
     }
-    public function testDetails($id,$type)
+    public function testDetails($id, $type)
     {
-        if($type == 'test') {
-            $data    = Tests::with('TestPrice')->where('TestSlug',$id)->first();
+        if ($type == 'test') {
+            $data    = Tests::with('TestPrice')->where('TestSlug', $id)->first();
         } else {
-            $data    = Packages::with('PackagesPrice')->where('TestSlug',$id)->first();
+            $data    = Packages::with('PackagesPrice')->where('TestSlug', $id)->first();
             $subData = SubTests::where("TestId", $data->id)->get();
         }
-        if($data === null) {
+        if ($data === null) {
             return response()->json([
                 "status"    =>  false,
             ]);
@@ -82,34 +81,33 @@ class ApiController extends Controller
     }
     public function bannerContactForm(Request $request)
     {
-         
         $file = Storage::put('contact', $request->file('reportFile'));
         BookHomeCollection::create([
-            "name" => $request->name,
-            "mobile" => $request->mobile,
-            "location" => $request->location,
-            "file" => $file,
+            "name"      => $request->name,
+            "mobile"    => $request->mobile,
+            "location"  => $request->location,
+            "file"      => $file,
             "test_name" => $request->test_name,
-            "comments" => $request->comments,
+            "comments"  => $request->comments,
         ]);
-            $details = [
-                'site_logo'             =>asset('/images/logo/logo.png'),
-                'name'                  =>$request->name,
-                'mobile'                =>$request->mobile,
-                'location'              =>$request->location,
-                'file'                  =>asset_url($file),
-                'test_name'             =>$request->test_name,
-                'comments'              =>$request->comments,
-                'date_time'             => now()->toDateString(),
-            ];
-            try{
-                $sent_mail = "donotreply@anandlab.com";
-                // $sent_mail = "santhoshd.pixel@gmail.com"; 
-                Mail::to($sent_mail)->send(new HomeCollectionMail($details));
-            }catch(\Exception $e){
-                $message = 'Thanks for reach us, our team will get back to you shortly. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-                return response()->json(['Status'=>200,'Errors'=>false,'Message'=>$message]);
-            }
+        $details = [
+            'site_logo'             => asset('/images/logo/logo.png'),
+            'name'                  => $request->name,
+            'mobile'                => $request->mobile,
+            'location'              => $request->location,
+            'file'                  => asset_url($file),
+            'test_name'             => $request->test_name,
+            'comments'              => $request->comments,
+            'date_time'             => now()->toDateString(),
+        ];
+        try {
+            $sent_mail = "donotreply@anandlab.com";
+            // $sent_mail = "santhoshd.pixel@gmail.com"; 
+            Mail::to($sent_mail)->send(new HomeCollectionMail($details));
+        } catch (\Exception $e) {
+            $message = 'Thanks for reach us, our team will get back to you shortly. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
+            return response()->json(['Status' => 200, 'Errors' => false, 'Message' => $message]);
+        }
         return response()->json([
             "status"    =>  true,
             "message"   =>  "Form Submit Success !"
@@ -118,19 +116,19 @@ class ApiController extends Controller
     public function testLists(Request $request)
     {
         $data   =   Tests::with('TestPrice')
-                        ->when(!empty($request->TestName),function($query) use ($request)  {
-                            $query->where('TestName', 'like', '%'.$request->TestName.'%');
-                        })
-                        ->when(!empty($request->OrganName),function($query) use ($request)  {
-                            $query->where('OrganName',$request->OrganName);
-                        })
-                        ->when(!empty($request->HealthCondition),function($query) use ($request)  {
-                            $query->where('HealthCondition', 'like', '%'.$request->HealthCondition.'%');
-                        })
-                        ->skip(0)
-                        ->take($request->Tack)
-                        ->orderBy('TestPrice', ($request->TestPrice == 'low' ? "DESC" : null) === null ? "DESC" : 'ASC'  )
-                        ->get();
+            ->when(!empty($request->TestName), function ($query) use ($request) {
+                $query->where('TestName', 'like', '%' . $request->TestName . '%');
+            })
+            ->when(!empty($request->OrganName), function ($query) use ($request) {
+                $query->where('OrganName', $request->OrganName);
+            })
+            ->when(!empty($request->HealthCondition), function ($query) use ($request) {
+                $query->where('HealthCondition', 'like', '%' . $request->HealthCondition . '%');
+            })
+            ->skip(0)
+            ->take($request->Tack)
+            ->orderBy('TestPrice', ($request->TestPrice == 'low' ? "DESC" : null) === null ? "DESC" : 'ASC')
+            ->get();
         return response()->json([
             "status"    =>  true,
             "data"      =>  $data
@@ -145,9 +143,9 @@ class ApiController extends Controller
     }
     public function login(Request $request)
     {
-        $User = User::with('CustomerDetails')->where('email',$request->email)->first();
-        if(!is_null($User)) {
-            if(Hash::check($request->password, $User->password)){
+        $User = User::with('CustomerDetails')->where('email', $request->email)->first();
+        if (!is_null($User)) {
+            if (Hash::check($request->password, $User->password)) {
                 return response()->json([
                     "status"     => true,
                     "data"       => $User,
@@ -168,18 +166,18 @@ class ApiController extends Controller
     }
     public function login_with_otp(Request $request)
     {
-        $User = User::with('CustomerDetails')->where('email',$request->email)->first();
-        if(!is_null($User)) {
-            $otp = rand(11111,99999);
+        $user = User::with('CustomerDetails')->where('email', $request->email)->first();
+        if (!is_null($user)) {
+            $otp = rand(11111, 99999);
             Http::post('https://reports.anandlab.com/v3/SMS.asmx/SendWebsiteOTP', [
                 'otp'       => $otp,
-                'mobile_no' => $request->mobile,
+                'mobile_no' => $user->mobile,
                 'api_key'   => 'FC033590-B038-4CCD-BC8F-13BE890BF9F0',
             ]);
             return response()->json([
                 "status"  => true,
                 "otp"     => $otp,
-                "data"    => $User,
+                "data"    => $user,
                 "message" => "Login Success !"
             ]);
         }
@@ -190,7 +188,7 @@ class ApiController extends Controller
     }
     public function register(Request $request)
     {
-        if(!is_null(User::where('email',$request->email)->first())) {
+        if (!is_null(User::where('email', $request->email)->first())) {
             return response()->json([
                 "status"    =>  false,
                 "message" =>  'Email Id Already exists !'
@@ -208,11 +206,11 @@ class ApiController extends Controller
             "data"      =>  $User
         ]);
     }
-    public function update_customer(Request $request,$id)
+    public function update_customer(Request $request, $id)
     {
         $customer = User::with('CustomerDetails')->find($id);
-        $customer->update([ 
-            'name' => $request->name 
+        $customer->update([
+            'name' => $request->name
         ]);
         $customer->CustomerDetails()->updateOrCreate([
             'first_name'   => $request->first_name,
@@ -235,12 +233,12 @@ class ApiController extends Controller
         $customerInfo = $request->all();
         unset($customerInfo['amount']);
         $customer = User::with('CustomerDetails')->find($request->id);
-        if(!is_null($customer->CustomerDetails() ?? null)) {
+        if (!is_null($customer->CustomerDetails() ?? null)) {
             $customer->CustomerDetails()->delete();
         }
         $customer->CustomerDetails()->create($customerInfo);
 
-        $api = new Api(PaymentApiConfig()->payKeyId,PaymentApiConfig()->paySecretKey);
+        $api = new Api(PaymentApiConfig()->payKeyId, PaymentApiConfig()->paySecretKey);
         $Order = $api->order->create([
             'amount'   => (int) $request->amount * 100,
             'currency' => 'INR'
@@ -249,7 +247,7 @@ class ApiController extends Controller
         return response([
             "status" => true,
             "data" => [
-                "key"      => PaymentConfig::where('gateWayName','RAZOR_PAY')->first()->payKeyId ?? config('payment.KeyID'),
+                "key"      => PaymentConfig::where('gateWayName', 'RAZOR_PAY')->first()->payKeyId ?? config('payment.KeyID'),
                 "title"    => "Pay Online",
                 "image"    => asset('/public/images/logo/favicon.png'),
                 "name"     => $customer->name,
@@ -265,7 +263,7 @@ class ApiController extends Controller
     {
         $result =  $this->CheckValidOrder($request->razorpay_response);
 
-        if($result['status'] == false) {
+        if ($result['status'] == false) {
             $message = "Payment Failed";
             $status = 0;
         } else {
@@ -288,7 +286,7 @@ class ApiController extends Controller
             'order_id' => OrderId($Order->id),
         ]);
 
-        if(count($request->products)) {
+        if (count($request->products)) {
             foreach ($request->products as $key => $product) {
                 $Order->Tests()->create($product);
             }
@@ -301,12 +299,12 @@ class ApiController extends Controller
 
     public function CheckValidOrder($response)
     {
-        $api    = new Api(PaymentApiConfig()->payKeyId,PaymentApiConfig()->paySecretKey);
-        if($response['status'] == 'PAID') {
+        $api    = new Api(PaymentApiConfig()->payKeyId, PaymentApiConfig()->paySecretKey);
+        if ($response['status'] == 'PAID') {
             $order_response = $api->order->fetch($response['data']['razorpay_order_id']);
             $payment_id =   $response['data']['razorpay_payment_id'];
             $order_id   =   $response['data']['razorpay_order_id'];
-            if( isset($order_response['status']) && $order_response['status'] == 'paid' ) {
+            if (isset($order_response['status']) && $order_response['status'] == 'paid') {
                 $status = true;
             }
             try {
@@ -315,12 +313,12 @@ class ApiController extends Controller
                     'razorpay_payment_id' => $payment_id,
                     'razorpay_signature'  => $response['data']['razorpay_signature']
                 ]);
-            } catch(SignatureVerificationError $e) {
+            } catch (SignatureVerificationError $e) {
                 $error = 'Razorpay Error : ' . $e->getMessage();
                 $status = false;
             }
         } else {
-            if(isset($response['data']['error'])) {
+            if (isset($response['data']['error'])) {
                 $payment_id     = $response['data']['error']['metadata']['payment_id'];
                 $order_id       = $response['data']['error']['metadata']['order_id'];
                 $order_response = $api->order->fetch($order_id);
@@ -346,20 +344,20 @@ class ApiController extends Controller
     }
     public function packages(Request $request)
     {
-        $Packages   =   Packages::with('SubTestList','PackagesPrice')
-                        ->when(!empty($request->ApplicableGender),function($query) use ($request)  {
-                            $query->whereIn('ApplicableGender', $request->ApplicableGender);
-                        })
-                        ->when(!empty($request->OrganName),function($query) use ($request)  {
-                            $query->whereIn('OrganName',$request->OrganName);
-                        })
-                        ->when(!empty($request->HealthCondition),function($query) use ($request)  {
-                            $query->whereIn('HealthCondition', $request->HealthCondition);
-                        })
-                        ->skip(0)
-                        ->take($request->Tack)
-                        ->orderBy('TestPrice', ($request->TestPrice == 'low' ? "DESC" : null) === null ? "DESC" : 'ASC'  )
-                        ->get();
+        $Packages   =   Packages::with('SubTestList', 'PackagesPrice')
+            ->when(!empty($request->ApplicableGender), function ($query) use ($request) {
+                $query->whereIn('ApplicableGender', $request->ApplicableGender);
+            })
+            ->when(!empty($request->OrganName), function ($query) use ($request) {
+                $query->whereIn('OrganName', $request->OrganName);
+            })
+            ->when(!empty($request->HealthCondition), function ($query) use ($request) {
+                $query->whereIn('HealthCondition', $request->HealthCondition);
+            })
+            ->skip(0)
+            ->take($request->Tack)
+            ->orderBy('TestPrice', ($request->TestPrice == 'low' ? "DESC" : null) === null ? "DESC" : 'ASC')
+            ->get();
 
         return [
             "status" => true,
@@ -372,25 +370,25 @@ class ApiController extends Controller
     {
         return [
             "status" => true,
-            "data"   => Orders::with('Tests')->where('payment_status',1)->where('user_id',$id)->get()
+            "data"   => Orders::with('Tests')->where('payment_status', 1)->where('user_id', $id)->get()
         ];
     }
 
-    public function change_my_password(Request $request,$id)
+    public function change_my_password(Request $request, $id)
     {
         $request->validate([
             'old_password'     => ['required', new MatchOldPassword($id)],
             'new_password'     => ['required'],
             'confirm_password' => ['same:new_password'],
         ]);
-        User::find($id)->update(['password'=> Hash::make($request->new_password)]);
+        User::find($id)->update(['password' => Hash::make($request->new_password)]);
         return [
             "status" => true,
             "message" =>  "Reset Password Success !"
         ];
     }
 
-    public function cancel_order_reason(Request $request , $order_id)
+    public function cancel_order_reason(Request $request, $order_id)
     {
         Orders::find($order_id)->update([
             'cancel_order_reason' => $request->cancel_order_reason,
@@ -403,11 +401,11 @@ class ApiController extends Controller
     }
     public function get_city_master()
     {
-        return  Cities::select('*')->groupBy('CityName')->pluck('CityID','CityName')->toArray();
+        return  Cities::select('*')->groupBy('CityName')->pluck('CityID', 'CityName')->toArray();
     }
     public function get_lab_location($city_id = null)
     {
-        if(!is_null($city_id)) {
+        if (!is_null($city_id)) {
             return Branch::where('BranchCityId', $city_id)->get()->groupBy('BranchCity');
         }
         return Branch::all()->groupBy('BranchCity');
@@ -417,7 +415,7 @@ class ApiController extends Controller
         $data = Organs::orderBy('order_by')->get();
         $result = [];
         foreach ($data as $key => $row) {
-            if(is_null($row->image)) {
+            if (is_null($row->image)) {
                 $image = "https://cdn-icons-png.flaticon.com/512/3655/3655592.png";
             } else {
                 $image = asset_url($row->image);
@@ -427,14 +425,14 @@ class ApiController extends Controller
                 "image" => $image,
             ];
         }
-        return $result ;
+        return $result;
     }
     public function get_conditions()
     {
         $data = Conditions::orderBy('order_by')->get();
         $result = [];
         foreach ($data as $key => $row) {
-            if(is_null($row->image)) {
+            if (is_null($row->image)) {
                 $image = "https://cdn-icons-png.flaticon.com/512/3974/3974887.png";
             } else {
                 $image = asset_url($row->image);
@@ -444,12 +442,12 @@ class ApiController extends Controller
                 "image" => $image,
             ];
         }
-        return $result ;
+        return $result;
     }
     public function forgot_password(Request $request)
-    { 
-        $customer = User::where('email',$request->email)->first();
-        if(!is_null($customer)) { 
+    {
+        $customer = User::where('email', $request->email)->first();
+        if (!is_null($customer)) {
             Mail::to($customer->email)->send(new ResetPasswordMail($customer));
             return response([
                 "status" => true,
@@ -462,13 +460,13 @@ class ApiController extends Controller
             "message" => "Invalid Email Address !"
         ]);
     }
-    public function reset_password(Request $request,$id)
+    public function reset_password(Request $request, $id)
     {
         return decrypt($id);
         $request->validate(['new_password' => 'required']);
         $User = User::find(decrypt($id));
-        if(!is_null($User)) {
-            $User->update(['password'=> Hash::make($request->new_password)]);
+        if (!is_null($User)) {
+            $User->update(['password' => Hash::make($request->new_password)]);
             return [
                 "status"  => true,
                 "data"    => $User,
@@ -483,17 +481,17 @@ class ApiController extends Controller
     }
     public function cart_items($user_id)
     {
-        $cart     = Cart::with('Tests','Packages')->where(['user_id' => $user_id])->get();
+        $cart     = Cart::with('Tests', 'Packages')->where(['user_id' => $user_id])->get();
         $tests    = [];
         $packages = [];
-        foreach($cart as $item) {
-            if($item->test_type == 'TEST') {
+        foreach ($cart as $item) {
+            if ($item->test_type == 'TEST') {
                 $tests[]  = $item->tests;
             } else {
                 $packages[]  = $item->packages;
             }
         }
-        return array_merge($tests,$packages);
+        return array_merge($tests, $packages);
     }
     public function add_to_cart(Request $request)
     {
