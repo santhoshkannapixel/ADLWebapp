@@ -469,7 +469,6 @@ class ApiController extends Controller
     }
     public function reset_password(Request $request, $id)
     {
-        return decrypt($id);
         $request->validate(['new_password' => 'required']);
         $User = User::find(decrypt($id));
         if (!is_null($User)) {
