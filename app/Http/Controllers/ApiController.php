@@ -453,13 +453,12 @@ class ApiController extends Controller
     public function forgot_password(Request $request)
     {
         $customer = User::where('email', $request->email)->first();
-        $customer['origin'] = $request->origin;
         if (!is_null($customer)) {
-            Mail::to($customer->email)->send(new ResetPasswordMail($customer));
+            Mail::to($customer->email)->send(new ResetPasswordMail($customer,$request->origin));
             return response([
-                "status" => true,
+                "status"   => true,
                 "customer" => $customer->id,
-                "message" => "Email Verified Success !"
+                "message"  => "Email Verified Success !"
             ]);
         }
         return response([

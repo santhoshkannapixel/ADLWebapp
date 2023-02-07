@@ -2,8 +2,7 @@
 
 namespace App\Mail;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Bus\Queueable; 
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -17,10 +16,12 @@ class ResetPasswordMail extends Mailable
      * @return void
      */
     public $customer;
+    public $orgin;
 
-    public function __construct($customer)
+    public function __construct($customer,$orgin)
     {
         $this->customer = $customer;
+        $this->orgin = $orgin;
     }
 
     /**
