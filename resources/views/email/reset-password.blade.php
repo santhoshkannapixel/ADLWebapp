@@ -11,7 +11,7 @@
                 </center>
             </b>
         </p>
-        <a href="{{ env('WEBSITE')."/reset-password"."/".encrypt($customer['id'])}}" style="background: #6f42c1 !important" class="shadow-sm border my-4 btn btn-lg btn-primary rounded-pill"> 
+        <a href="{{ $customer['origin']."/reset-password"."/".encrypt($customer['id'])}}" style="background: #5c2d91 !important" class="shadow-sm border my-4 btn btn-lg btn-primary rounded-pill"> 
             <small><b>Set a new password</b></small>
         </a>
         <div class="text-center">
