@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Laracasts\Flash\Flash;
-use PhpParser\Node\Stmt\TryCatch;
 use Yajra\DataTables\Facades\DataTables;
 
 class TestController extends Controller
@@ -18,36 +17,10 @@ class TestController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-
-            if($request->isPackage == 'No') {
-                $data = Tests::select([
-                    "id",
-                    "TestId",
-                    "TestName",
-                    "ApplicableGender",
-                    "IsPackage",
-                    "Classifications",
-                    "DriveThrough",
-                    "HomeCollection",
-                    "TestSchedule",
-                    "TestPrice"
-                ]);
-            } else {
-                $data = Packages::select([
-                    "id",
-                    "TestId",
-                    "TestName",
-                    "ApplicableGender",
-                    "IsPackage",
-                    "Classifications",
-                    "DriveThrough",
-                    "HomeCollection",
-                    "TestSchedule",
-                    "TestPrice"
-                ]);
-            }
-
-
+            $data = Tests::select('*');
+            $data->when(isset($request->isPackage),function($q) use ($request) {
+                $q->where('isPackage',$request->isPackage);
+            });
             return DataTables::eloquent($data)
                 ->addIndexColumn()
                 ->addColumn('Is_Package', function ($data) {
@@ -78,8 +51,12 @@ class TestController extends Controller
                     $TestSchedule  =  '<small>' . str_replace(',', ' ', $data->TestSchedule) . '</small>';
                     return $TestSchedule;
                 })
-                ->addColumn('action', function ($data) {
-                    return button('show', route('test.show', $data->id)) . button('edit', route('test.edit', $data->id));
+                ->addColumn('action', function ($data) use ($request){
+                    if($request->isPackage == 'No') {
+                        return button('show', route('test.show',$data->id)). button('edit', route('test.edit', ["id" => $data->id , "type" => 'TEST']));
+                    } else {
+                        return button('show', route('test.show',$data->id)). button('edit', route('test.edit', ["id" => $data->id , "type" => 'PACKAGES']));
+                    }
                 })
                 ->rawColumns(['action', 'Is_Package', 'Test_Schedule', 'Drive_Through', 'Home_Collection', 'Applicable_Gender'])
                 ->make(true);
@@ -98,79 +75,89 @@ class TestController extends Controller
 
             if (!is_null($response_data)) {
                 foreach ($response_data as $data) {
-                    // try {
-                    if ($data->IsPackage == "No") {
-                        $test = Tests::updateOrCreate([
-                            "TestId" => $data->TestId ?? null,
-                            "DosCode" => $data->DosCode ?? null,
-                            "TestName" => $data->TestName ?? null,
-                            "TestSlug" => Str::slug($data->TestName),
-                            "AliasName1" => $data->AliasName1 ?? null,
-                            "AliasName2" => $data->AliasName2 ?? null,
-                            "ApplicableGender" => $data->ApplicableGender ?? null,
-                            "IsPackage" => $data->IsPackage ?? null,
-                            "Createdon" => $data->Createdon ?? null,
-                            "Modifiedon" => $data->Modifiedon ?? null,
-                            "Classifications" => $data->Classifications ?? null,
-                            "TransportCriteria" => $data->TransportCriteria ?? null,
-                            "SpecialInstructionsForPatient" => $data->SpecialInstructionsForPatient ?? null,
-                            "SpecialInstructionsForCorporates" => $data->SpecialInstructionsForCorporates ?? null,
-                            "SpecialInstructionsForDoctors" => $data->SpecialInstructionsForDoctors ?? null,
-                            "BasicInstruction" => $data->BasicInstruction ?? null,
-                            "DriveThrough" => $data->DriveThrough ?? null,
-                            "HomeCollection" => $data->HomeCollection ?? null,
-                            "OrganName" => str_replace('+',' ', str_replace('%0D%0A','',urlencode($data->OrganName))),
-                            "HealthCondition" => str_replace('+',' ', str_replace('%0D%0A','',urlencode($data->HealthCondition))),
-                            "CteateDate" => $data->CteateDate ?? null,
-                            "ModifiedDate" => $data->ModifiedDate ?? null,
-                            "TestSchedule" => $data->TestSchedule ?? null,
-                            "TestPrice" => $data->TestPrice ?? null,
-                        ]);
-                        $test->TestPrice()->create([
-                            "TestPrice" => $test->TestPrice,
-                            "TestLocation" => $api['location']
-                        ]);
-                    } else {
-                        $Packages = Packages::updateOrCreate([
-                            "TestId" => $data->TestId ?? null,
-                            "DosCode" => $data->DosCode ?? null,
-                            "TestName" => $data->TestName ?? null,
-                            "TestSlug" => Str::slug($data->TestName),
-                            "AliasName1" => $data->AliasName1 ?? null,
-                            "AliasName2" => $data->AliasName2 ?? null,
-                            "ApplicableGender" => $data->ApplicableGender ?? null,
-                            "IsPackage" => $data->IsPackage ?? null,
-                            "Createdon" => $data->Createdon ?? null,
-                            "Modifiedon" => $data->Modifiedon ?? null,
-                            "Classifications" => $data->Classifications ?? null,
-                            "TransportCriteria" => $data->TransportCriteria ?? null,
-                            "SpecialInstructionsForPatient" => $data->SpecialInstructionsForPatient ?? null,
-                            "SpecialInstructionsForCorporates" => $data->SpecialInstructionsForCorporates ?? null,
-                            "SpecialInstructionsForDoctors" => $data->SpecialInstructionsForDoctors ?? null,
-                            "BasicInstruction" => $data->BasicInstruction ?? null,
-                            "DriveThrough" => $data->DriveThrough ?? null,
-                            "HomeCollection" => $data->HomeCollection ?? null,
-                            "OrganName" => $data->OrganName ?? null,
-                            "HealthCondition" => $data->HealthCondition ?? null,
-                            "CteateDate" => $data->CteateDate ?? null,
-                            "ModifiedDate" => $data->ModifiedDate ?? null,
-                            "TestSchedule" => $data->TestSchedule ?? null,
-                            "TestPrice" => $data->TestPrice ?? null,
-                        ]);
-                        $Packages->PackagesPrice()->create([
-                            "TestPrice" => $Packages->TestPrice,
-                            "TestLocation" => $api['location']
-                        ]);
-                        if (isset($data->SubTestList)) {
-                            foreach ($data->SubTestList as  $subTest) {
-                                $Packages->SubTestList()->create([
-                                    "SubTestId"         =>  $subTest->SubTestId,
-                                    "SubTestDOSCode"    =>  $subTest->SubTestDOSCode,
-                                    "SubTestName"       =>  $subTest->SubTestName,
-                                ]);
-                            }
+                    $test = Tests::updateOrCreate(["TestId"=>$data->TestId],[
+                        "TestId"                           => $data->TestId ?? null,
+                        "DosCode"                          => $data->DosCode ?? null,
+                        "TestName"                         => $data->TestName ?? null,
+                        "TestSlug"                         => Str::slug($data->TestName),
+                        "AliasName1"                       => $data->AliasName1 ?? null,
+                        "AliasName2"                       => $data->AliasName2 ?? null,
+                        "ApplicableGender"                 => $data->ApplicableGender ?? null,
+                        "IsPackage"                        => $data->IsPackage ?? null,
+                        "Createdon"                        => $data->Createdon ?? null,
+                        "Modifiedon"                       => $data->Modifiedon ?? null,
+                        "Classifications"                  => $data->Classifications ?? null,
+                        "TransportCriteria"                => $data->TransportCriteria ?? null,
+                        "SpecialInstructionsForPatient"    => $data->SpecialInstructionsForPatient ?? null,
+                        "SpecialInstructionsForCorporates" => $data->SpecialInstructionsForCorporates ?? null,
+                        "SpecialInstructionsForDoctors"    => $data->SpecialInstructionsForDoctors ?? null,
+                        "BasicInstruction"                 => $data->BasicInstruction ?? null,
+                        "DriveThrough"                     => $data->DriveThrough ?? null,
+                        "HomeCollection"                   => $data->HomeCollection ?? null,
+                        "OrganName"                        => str_replace('+',' ', str_replace('%0D%0A','',urlencode($data->OrganName))),
+                        "HealthCondition"                  => str_replace('+',' ', str_replace('%0D%0A','',urlencode($data->HealthCondition))),
+                        "CteateDate"                       => $data->CteateDate ?? null,
+                        "ModifiedDate"                     => $data->ModifiedDate ?? null,
+                        "TestSchedule"                     => $data->TestSchedule ?? null,
+                    ]);
+                    if (isset($data->SubTestList)) {
+                        foreach ($data->SubTestList as  $subTest) { 
+                            $test->SubTests()->create([
+                                "SubTestId"      => $subTest->SubTestId,
+                                "SubTestDOSCode" => $subTest->SubTestDOSCode,
+                                "SubTestName"    => $subTest->SubTestName
+                            ]);
                         }
                     }
+                    $test->TestPrice()->create([
+                        "TestPrice"    => $test->TestPrice,
+                        "TestLocation" => $api['location']
+                    ]); 
+                    // try {
+                    // if ($data->IsPackage == "No") {
+                        
+                    // } 
+                    // else {
+                    //     $Packages = Packages::updateOrCreate([
+                    //         "TestId" => $data->TestId ?? null,
+                    //         "DosCode" => $data->DosCode ?? null,
+                    //         "TestName" => $data->TestName ?? null,
+                    //         "TestSlug" => Str::slug($data->TestName),
+                    //         "AliasName1" => $data->AliasName1 ?? null,
+                    //         "AliasName2" => $data->AliasName2 ?? null,
+                    //         "ApplicableGender" => $data->ApplicableGender ?? null,
+                    //         "IsPackage" => $data->IsPackage ?? null,
+                    //         "Createdon" => $data->Createdon ?? null,
+                    //         "Modifiedon" => $data->Modifiedon ?? null,
+                    //         "Classifications" => $data->Classifications ?? null,
+                    //         "TransportCriteria" => $data->TransportCriteria ?? null,
+                    //         "SpecialInstructionsForPatient" => $data->SpecialInstructionsForPatient ?? null,
+                    //         "SpecialInstructionsForCorporates" => $data->SpecialInstructionsForCorporates ?? null,
+                    //         "SpecialInstructionsForDoctors" => $data->SpecialInstructionsForDoctors ?? null,
+                    //         "BasicInstruction" => $data->BasicInstruction ?? null,
+                    //         "DriveThrough" => $data->DriveThrough ?? null,
+                    //         "HomeCollection" => $data->HomeCollection ?? null,
+                    //         "OrganName" => $data->OrganName ?? null,
+                    //         "HealthCondition" => $data->HealthCondition ?? null,
+                    //         "CteateDate" => $data->CteateDate ?? null,
+                    //         "ModifiedDate" => $data->ModifiedDate ?? null,
+                    //         "TestSchedule" => $data->TestSchedule ?? null,
+                    //         "TestPrice" => $data->TestPrice ?? null,
+                    //     ]);
+                    //     $Packages->PackagesPrice()->create([
+                    //         "TestPrice" => $Packages->TestPrice,
+                    //         "TestLocation" => $api['location']
+                    //     ]);
+                    //     if (isset($data->SubTestList)) {
+                    //         foreach ($data->SubTestList as  $subTest) {
+                    //             $Packages->SubTestList()->create([
+                    //                 "SubTestId"         =>  $subTest->SubTestId,
+                    //                 "SubTestDOSCode"    =>  $subTest->SubTestDOSCode,
+                    //                 "SubTestName"       =>  $subTest->SubTestName,
+                    //             ]);
+                    //         }
+                    //     }
+                    // }
                     // } catch (\Throwable $th) {
                     //     //throw $th;
                     // }
@@ -183,9 +170,7 @@ class TestController extends Controller
 
     public function show($id)
     {
-        $data   =   Tests::select('TestId','DosCode','TestName','TestSlug','AliasName1','AliasName2','ApplicableGender','IsPackage','Createdon'
-        ,'Modifiedon','Classifications','TransportCriteria','SpecialInstructionsForPatient','SpecialInstructionsForCorporates','SpecialInstructionsForDoctors',
-        'BasicInstruction','DriveThrough','HomeCollection','OrganName','HealthCondition','CteateDate','ModifiedDate','TestSchedule','TestPrice','created_at')->findOrFail($id);
+        $data   =   Tests::findOrFail($id); 
         return view('admin.master.tests.show', compact('data'));
     }
 
@@ -200,7 +185,6 @@ class TestController extends Controller
         $data   =   Tests::findOrFail($id);
         $data->TestImages  = $request->TestImages;
         $data->save();
-
         Flash::success(__('masters.sync_success'));
         return redirect()->back();
     }

@@ -40,7 +40,6 @@
                         <th>Drive Through</th>
                         <th>Home Collection</th>
                         <th>Test Schedule</th>
-                        <th>Test Price</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -103,10 +102,6 @@
                         {
                             data: "Test_Schedule",
                             name: "TestSchedule"
-                        },
-                        {
-                            data: "TestPrice",
-                            name: "TestPrice"
                         },
                         {
                             data: "action",

@@ -37,8 +37,7 @@ class CreateTestsTable extends Migration
             $table->string("HealthCondition")->nullable();
             $table->string("CteateDate")->nullable();
             $table->string("ModifiedDate")->nullable();
-            $table->string("TestSchedule")->nullable();
-            $table->float("TestPrice")->nullable();
+            $table->string("TestSchedule")->nullable(); 
             $table->timestamps();
         });
     }

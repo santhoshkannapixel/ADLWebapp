@@ -9,6 +9,7 @@ class SubTests extends Model
 {
     use HasFactory;
     protected $fillable = [
+        "TestId",
         "SubTestId",
         "SubTestDOSCode",
         "SubTestName",

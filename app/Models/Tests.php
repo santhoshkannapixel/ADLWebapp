@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Mockery\Matcher\Subset;
 
 class Tests extends Model
 {
@@ -34,11 +33,15 @@ class Tests extends Model
         "CteateDate",
         "ModifiedDate",
         "TestSchedule",
-        "TestPrice",
     ];
 
     public function TestPrice()
     {
        return $this->hasMany(TestPrice::class, 'TestId', 'id');
+    }
+
+    public function SubTests()
+    {
+       return $this->hasMany(SubTests::class, 'TestID', 'id');
     }
 }
