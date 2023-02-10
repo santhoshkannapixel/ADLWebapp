@@ -115,8 +115,7 @@ class ApiController extends Controller
     }
     public function testLists(Request $request)
     {
-        $data   =   Tests::with('TestPrice')
-            ->when(!empty($request->TestName), function ($query) use ($request) {
+        $data   =   Tests::when(!empty($request->TestName), function ($query) use ($request) {
                 $query->where('TestName', 'like', '%' . $request->TestName . '%');
             })
             ->when(!empty($request->OrganName), function ($query) use ($request) {
@@ -127,7 +126,11 @@ class ApiController extends Controller
             })
             ->skip(0)
             ->take($request->Tack)
-            ->orderBy('TestPrice', $request->orderBy)
+            ->join('test_prices', function($join) {
+                $join->on('test_prices.TestId', '=', 'tests.id');
+            })
+            ->where('test_prices.TestLocation', '=', $request->TestLocation)
+            ->orderBy('test_prices.TestPrice', $request->orderBy)
             ->get();
         return response()->json([
             "status"    =>  true,
