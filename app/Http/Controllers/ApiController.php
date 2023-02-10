@@ -58,9 +58,13 @@ class ApiController extends Controller
             "data"      =>  $data
         ]);
     }
-    public function testDetails($slug)
+    public function testDetails(Request $request, $slug)
     {
-        $data    = Tests::with('TestPrice')->where('TestSlug', $slug)->first();
+        $data   = Tests::where('TestSlug', $slug)->join('test_prices', function($join) {
+            $join->on('test_prices.TestId', '=', 'tests.id');
+        })
+        ->where('test_prices.TestLocation', '=', $request->TestLocation)
+        ->first();
         $subData = SubTests::where("TestId", $data->id)->get();
         if ($data === null) {
             return response()->json([
