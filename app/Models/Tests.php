@@ -10,6 +10,7 @@ class Tests extends Model
     use HasFactory;
 
     protected $fillable = [
+        "image",
         "TestId",
         "TestSlug",
         "DosCode",

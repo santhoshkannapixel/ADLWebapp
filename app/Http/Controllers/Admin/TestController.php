@@ -8,6 +8,7 @@ use App\Models\Tests;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Laracasts\Flash\Flash;
 use Yajra\DataTables\Facades\DataTables;
@@ -53,9 +54,9 @@ class TestController extends Controller
                 })
                 ->addColumn('action', function ($data) use ($request){
                     if($request->isPackage == 'No') {
-                        return button('show', route('test.show',$data->id)). button('edit', route('test.edit', ["id" => $data->id , "type" => 'TEST']));
+                        return button('show', route('test.show',$data->id)). button('edit', route('test.edit', $data->id));
                     } else {
-                        return button('show', route('test.show',$data->id)). button('edit', route('test.edit', ["id" => $data->id , "type" => 'PACKAGES']));
+                        return button('show', route('test.show',$data->id)). button('edit', route('test.edit',$data->id));
                     }
                 })
                 ->rawColumns(['action', 'Is_Package', 'Test_Schedule', 'Drive_Through', 'Home_Collection', 'Applicable_Gender'])
@@ -183,7 +184,14 @@ class TestController extends Controller
     public function update(Request $request, $id)
     {
         $data   =   Tests::findOrFail($id);
-        $data->TestImages  = $request->TestImages;
+     
+        if($request->image) {
+            if(Storage::exists($request->image)) {
+                Storage::delete($request->image);
+            }
+            $Image = Storage::put('TestImage',$request->image);
+            $data->image = $Image;
+        }
         $data->save();
         Flash::success(__('masters.sync_success'));
         return redirect()->back();
