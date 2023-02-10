@@ -346,7 +346,7 @@ class ApiController extends Controller
     }
     public function packages(Request $request)
     {
-        $Packages = Tests::with('SubTests', 'TestPrice')->where('IsPackage',"Yes")
+        $Tests = Tests::with('SubTests')->where('IsPackage',"Yes")
             ->when(!empty($request->ApplicableGender), function ($query) use ($request) {
                 $query->whereIn('ApplicableGender', $request->ApplicableGender);
             })
@@ -356,17 +356,19 @@ class ApiController extends Controller
             ->when(!empty($request->HealthCondition), function ($query) use ($request) {
                 $query->whereIn('HealthCondition', $request->HealthCondition);
             })
+            ->join('test_prices', function($join) {
+                $join->on('test_prices.TestId', '=', 'tests.id');
+            })
+            ->where('test_prices.TestLocation', '=', $request->TestLocation)
+            ->orderBy('test_prices.TestPrice', $request->orderBy)
             ->skip(0)
             ->take($request->Tack)
-            ->WhereHas('TestPrice', function ($q) use ($request) {
-                $q->orderBy('TestPrice', ($request->TestPrice == 'low' ? "DESC" : null) === null ? "DESC" : 'ASC');
-            })
             ->get();
 
         return [
             "status" => true,
-            "count"  => count($Packages),
-            "data"   => $Packages,
+            "count"  => count($Tests),
+            "data"   => $Tests,
         ];
     }
 
