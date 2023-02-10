@@ -110,7 +110,7 @@ class TestController extends Controller
                         }
                     }
                     $test->TestPrice()->create([
-                        "TestPrice"    => $test->TestPrice,
+                        "TestPrice"    => $data->TestPrice,
                         "TestLocation" => $api['location']
                     ]); 
                     // try {
