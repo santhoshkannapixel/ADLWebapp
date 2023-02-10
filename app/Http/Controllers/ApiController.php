@@ -127,7 +127,7 @@ class ApiController extends Controller
             })
             ->skip(0)
             ->take($request->Tack)
-            ->orderBy('TestPrice', ($request->TestPrice == 'low' ? "DESC" : null) === null ? "DESC" : 'ASC')
+            ->orderBy('TestPrice', $request->orderBy)
             ->get();
         return response()->json([
             "status"    =>  true,
