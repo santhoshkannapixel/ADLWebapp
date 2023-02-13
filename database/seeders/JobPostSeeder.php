@@ -49,6 +49,6 @@ class JobPostSeeder extends Seeder
                 'status'            => 1,
             ]
         ];
-        JobPost::inset($JobPost);
+        JobPost::insert($JobPost);
     }
 }
