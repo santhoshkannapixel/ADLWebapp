@@ -63,10 +63,8 @@ class ApiController extends Controller
         $data   = Tests::where('TestSlug', $slug)->join('test_prices', function($join) {
             $join->on('test_prices.TestId', '=', 'tests.id');
         })
-        // 
         ->where('test_prices.TestLocation', '=', $request->TestLocation)
         ->first();
-        $data['image'] = asset_url($data->image);
         $subData = SubTests::where("TestId", $data->id)->get();
         if ($data === null) {
             return response()->json([

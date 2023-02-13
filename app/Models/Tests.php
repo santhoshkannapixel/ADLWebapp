@@ -36,6 +36,11 @@ class Tests extends Model
         "TestSchedule",
     ];
 
+    public function getImageAttribute($value)
+    {
+        return asset_url($value);
+    }
+
     public function TestPrice()
     {
        return $this->hasMany(TestPrice::class, 'TestId', 'id');
