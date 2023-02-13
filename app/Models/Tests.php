@@ -38,7 +38,10 @@ class Tests extends Model
 
     public function getImageAttribute($value)
     {
-        return url('/storage/app/' . $value);
+        if(!is_null($value)) {
+            return url('/storage/app/' . $value);
+        }
+        return null;
     }
 
     public function TestPrice()
