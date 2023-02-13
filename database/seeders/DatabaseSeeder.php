@@ -2,10 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Http\Controllers\Admin\BranchController;
-use App\Http\Controllers\Admin\CityController;
-use App\Http\Controllers\Admin\TestController;
-use App\Models\Enquiries;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -26,6 +22,8 @@ class DatabaseSeeder extends Seeder
             ApiSeeder::class,
             OrganSeeder::class,
             ConditionSeeder::class,
+            DepartmentSeeder::class,
+            JobPostSeeder::class
         ]);
     }
 }
