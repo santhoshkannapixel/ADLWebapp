@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             OrganSeeder::class,
             ConditionSeeder::class,
             DepartmentSeeder::class,
-            JobPostSeeder::class
+            JobPostSeeder::class,
         ]);
     }
 }
