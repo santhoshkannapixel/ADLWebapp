@@ -38,7 +38,7 @@ class Tests extends Model
 
     public function getImageAttribute($value)
     {
-        return asset_url($value);
+        return url('/storage/app/' . $value);
     }
 
     public function TestPrice()
