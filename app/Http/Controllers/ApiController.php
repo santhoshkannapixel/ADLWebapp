@@ -493,17 +493,7 @@ class ApiController extends Controller
     }
     public function cart_items($user_id)
     {
-        $cart     = Cart::with('Tests', 'Packages')->where(['user_id' => $user_id])->get();
-        $tests    = [];
-        $packages = [];
-        foreach ($cart as $item) {
-            if ($item->test_type == 'TEST') {
-                $tests[]  = $item->tests;
-            } else {
-                $packages[]  = $item->packages;
-            }
-        }
-        return array_merge($tests, $packages);
+        return Cart::with('Tests', 'Packages')->where(['user_id' => $user_id])->get();
     }
     public function add_to_cart(Request $request)
     {
