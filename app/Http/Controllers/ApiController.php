@@ -493,7 +493,17 @@ class ApiController extends Controller
     }
     public function cart_items($user_id)
     {
-        return Cart::with('Tests', 'Packages')->where(['user_id' => $user_id])->get();
+        return Cart::where('user_id',$user_id)
+        ->join('tests','tests.id','=','carts.test_id')
+        ->join('test_prices','test_prices.TestId','=','tests.id')
+        ->get();
+        // return Cart::with('Tests', 'Packages')->where(['user_id' => $user_id])->get();
+        // $data  = Tests::where('TestSlug', $slug)
+        // ->join('test_prices', function($join) {
+        //     $join->on('test_prices.TestId', '=', 'tests.id');
+        // })
+        // ->where('test_prices.TestLocation', '=', $request->TestLocation)
+        // ->first();
     }
     public function add_to_cart(Request $request)
     {
