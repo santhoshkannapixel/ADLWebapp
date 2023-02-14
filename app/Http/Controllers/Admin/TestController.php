@@ -103,14 +103,14 @@ class TestController extends Controller
                     ]);
                     if (isset($data->SubTestList)) {
                         foreach ($data->SubTestList as  $subTest) { 
-                            $test->SubTests()->create([
+                            $test->SubTests()->updateOrcreate([
                                 "SubTestId"      => $subTest->SubTestId,
                                 "SubTestDOSCode" => $subTest->SubTestDOSCode,
                                 "SubTestName"    => $subTest->SubTestName
                             ]);
                         }
                     }
-                    $test->TestPrice()->create([
+                    $test->TestPrice()->updateOrcreate([
                         "TestPrice"    => $data->TestPrice,
                         "TestLocation" => $api['location']
                     ]); 
