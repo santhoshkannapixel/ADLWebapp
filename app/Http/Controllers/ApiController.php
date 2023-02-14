@@ -65,18 +65,18 @@ class ApiController extends Controller
         })
         ->where('test_prices.TestLocation', '=', $request->TestLocation)
         ->first();
-        $subData = SubTests::where("TestId", $data->id)->get();
-        if ($data === null) {
+        if(!is_null($data)) {
+            $subData = SubTests::where("TestId", $data->id)->get();
             return response()->json([
-                "status"    =>  false,
+                "status"    =>  true,
+                "data"      =>  [
+                    "test"      => $data,
+                    "sub_test"  => $subData ?? [],
+                ]
             ]);
         }
         return response()->json([
-            "status"    =>  true,
-            "data"      =>  [
-                "test"      => $data,
-                "sub_test"  => $subData ?? [],
-            ]
+            "status"    =>  false,
         ]);
     }
     public function bannerContactForm(Request $request)
