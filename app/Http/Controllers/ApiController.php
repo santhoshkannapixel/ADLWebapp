@@ -10,6 +10,7 @@ use App\Models\Branch;
 use App\Models\Cart;
 use App\Models\Cities;
 use App\Models\Conditions;
+use App\Models\CustomerDetails;
 use App\Models\NewsEvent;
 use App\Models\Orders;
 use App\Models\Organs;
@@ -152,7 +153,7 @@ class ApiController extends Controller
                 return response()->json([
                     "status"     => true,
                     "data"       => $User,
-                    "cart_items" => $this->cart_items($User->id),
+                    "cart_items" => $this->cart_items($request,$User->id),
                     "message"    => "Login Success !"
                 ]);
             } else {
@@ -217,11 +218,13 @@ class ApiController extends Controller
     }
     public function update_customer(Request $request, $id)
     {
-        $customer = User::with('CustomerDetails')->find($id);
+        $customer = User::find($id);
         $customer->update([
-            'name' => $request->name
+            'name' => $request->name,
+            'mobile' => $request->mobile,
         ]);
-        $customer->CustomerDetails()->updateOrCreate([
+        $CustomerDetails = CustomerDetails::where('user_id',$customer->id)->first();
+        $CustomerDetails->update([
             'first_name'   => $request->first_name,
             'last_name'    => $request->last_name,
             'email'        => $request->email,
@@ -234,7 +237,7 @@ class ApiController extends Controller
         return response()->json([
             "status"  => true,
             "message" => 'Your Information Updated !',
-            "data"    => $customer
+            "data"    => User::with('CustomerDetails')->find($id)
         ]);
     }
     public function update_billing_address(Request $request)
