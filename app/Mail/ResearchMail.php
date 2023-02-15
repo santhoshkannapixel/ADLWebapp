@@ -29,6 +29,6 @@ class ResearchMail extends Mailable
     public function build()
     {
         $this->from('example@example.com')->with('details', $this->details)
-        ->subject('Research Enquiry')->view('email.research');
+        ->subject('Anand Lab : Research Enquiry')->view('email.research');
     }
 }

@@ -30,6 +30,6 @@ class CareersMail extends Mailable
     {
         $this->from('example@example.com')->with('details', $this->details)
         ->attach($this->details['file'])
-        ->subject('Career Enquiry')->view('email.career_enquiry');
+        ->subject('Anand Lab : Career Enquiry')->view('email.career_enquiry');
     }
 }

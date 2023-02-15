@@ -29,6 +29,6 @@ class HeadOfficeMail extends Mailable
     public function build()
     {
         $this->from('example@example.com')->with('details', $this->details)
-        ->subject('Head Office Enquiry')->view('email.head_office');
+        ->subject('Anand Lab : Head Office Enquiry')->view('email.head_office');
     }
 }

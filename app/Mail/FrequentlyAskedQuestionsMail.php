@@ -29,6 +29,6 @@ class FrequentlyAskedQuestionsMail extends Mailable
     public function build()
     {
         $this->from('example@example.com')->with('details', $this->details)
-        ->subject('Frequently Asked Questions Enquiry')->view('email.faq');
+        ->subject('Anand Lab : Frequently Asked Questions Enquiry')->view('email.faq');
     }
 }

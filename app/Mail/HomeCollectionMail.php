@@ -29,7 +29,7 @@ class HomeCollectionMail extends Mailable
     public function build()
     {
         $this->from('example@example.com')->with('details', $this->details)
-        ->subject('Home Collection Enquiry')->attach($this->details['file'])
+        ->subject('Anand Lab : Home Collection Enquiry')->attach($this->details['file'])
        ->view('email.home_collection_enquiry');
     }
 }

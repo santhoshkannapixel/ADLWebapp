@@ -29,6 +29,6 @@ class FeedBackMail extends Mailable
     public function build()
     {
         $this->from('example@example.com')->with('details', $this->details)
-        ->subject('Feedback Enquiry')->view('email.feedback');
+        ->subject('Anand Lab : Feedback Enquiry')->view('email.feedback');
     }
 }

@@ -29,6 +29,6 @@ class FranchisingOpportunitiesMail extends Mailable
     public function build()
     {
         $this->from('example@example.com')->with('details', $this->details)
-        ->subject('Franchising Opportunities Enquiry')->view('email.franchising_opportunities');
+        ->subject('Anand Lab : Franchising Opportunities Enquiry')->view('email.franchising_opportunities');
     }
 }

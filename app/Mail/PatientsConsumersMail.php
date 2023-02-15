@@ -29,7 +29,7 @@ class PatientsConsumersMail extends Mailable
     public function build()
     {
         $this->from('example@example.com')->with('details', $this->details)
-        ->subject('Patients Consumers Enquiry')->attach($this->details['file'])
+        ->subject('Anand Lab : Patients Consumers Enquiry')->attach($this->details['file'])
        ->view('email.patients_consumers_enquiry');
     }
 }

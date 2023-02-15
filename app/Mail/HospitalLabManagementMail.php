@@ -29,6 +29,6 @@ class HospitalLabManagementMail extends Mailable
     public function build()
     {
         $this->from('example@example.com')->with('details', $this->details)
-        ->subject('Hospital Lab Management Enquiry')->view('email.hospital_lab_management');
+        ->subject('Anand Lab : Hospital Lab Management Enquiry')->view('email.hospital_lab_management');
     }
 }
