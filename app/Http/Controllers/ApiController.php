@@ -201,7 +201,7 @@ class ApiController extends Controller
         if (!is_null(User::where('mobile', $request->mobile)->first()) ) {
             return response()->json([
                 "status"    =>  false,
-                "message" =>  'Mobile Number Already been tacken !'
+                "message" =>  'Mobile Number Already been taken !'
             ]);
         }
         $User = User::create([
