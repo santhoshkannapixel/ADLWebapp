@@ -516,7 +516,7 @@ class ApiController extends Controller
 
     public function remove_to_cart($id)
     {
-        Cart::findOrFail($id)->delete();
+        Cart::find($id)->delete();
         return [
             "status"  => true,
             "message" => "Removed"
