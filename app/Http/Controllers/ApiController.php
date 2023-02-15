@@ -219,9 +219,10 @@ class ApiController extends Controller
     {
         $customer = User::with('CustomerDetails')->find($id);
         $customer->update([
-            'name' => $request->name
+            'name' => $request->name,
+            'mobile' => $request->mobile,
         ]);
-        $customer->CustomerDetails()->updateOrCreate([
+        $customer->CustomerDetails()->update([
             'first_name'   => $request->first_name,
             'last_name'    => $request->last_name,
             'email'        => $request->email,
