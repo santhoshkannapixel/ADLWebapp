@@ -10,6 +10,7 @@ use App\Models\Branch;
 use App\Models\Cart;
 use App\Models\Cities;
 use App\Models\Conditions;
+use App\Models\CustomerDetails;
 use App\Models\NewsEvent;
 use App\Models\Orders;
 use App\Models\Organs;
@@ -222,7 +223,8 @@ class ApiController extends Controller
             'name' => $request->name,
             'mobile' => $request->mobile,
         ]);
-        $customer->CustomerDetails()->update([
+        $CustomerDetails = CustomerDetails::where('user_id',$customer->id)->first();
+        $CustomerDetails->update([
             'first_name'   => $request->first_name,
             'last_name'    => $request->last_name,
             'email'        => $request->email,
