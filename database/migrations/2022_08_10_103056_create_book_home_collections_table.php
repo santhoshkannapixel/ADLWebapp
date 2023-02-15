@@ -19,8 +19,8 @@ class CreateBookHomeCollectionsTable extends Migration
             $table->string('mobile');
             $table->string('location');
             $table->string('file');
-            $table->string('test_name');
-            $table->string('comments');
+            $table->string('test_name')->nullable();
+            $table->string('comments')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
