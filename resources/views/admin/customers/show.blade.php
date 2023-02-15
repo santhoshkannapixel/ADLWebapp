@@ -20,11 +20,11 @@
                     </tr>
                     <tr>
                         <th>First Name</th>
-                        <td>{{ $customer->CustomerDetails->first_name ?? '' }}</td>
+                        <td>{{ $customer->CustomerDetails->first_name ?? '-' }}</td>
                     </tr>
                     <tr>
                         <th>Last Name</th>
-                        <td>{{ $customer->CustomerDetails->last_name ?? '' }}</td>
+                        <td>{{ $customer->CustomerDetails->last_name ?? '-' }}</td>
                     </tr>
                     <tr>
                         <th>Email</th>
@@ -32,23 +32,23 @@
                     </tr>
                     <tr>
                         <th>Phone Number</th>
-                        <td>{{ $customer->CustomerDetails->phone_number ?? '' }}</td>
+                        <td>{{ $customer->CustomerDetails->phone_number ?? '-' }}</td>
                     </tr>
                     <tr>
                         <th>Addrees</th>
-                        <td>{{ $customer->CustomerDetails->address ?? ''}}</td>
+                        <td>{{ $customer->CustomerDetails->address ?? '-'}}</td>
                     </tr>
                     <tr>
                         <th>City / Town</th>
-                        <td>{{ $customer->CustomerDetails->city_town ?? '' }}</td>
+                        <td>{{ $customer->CustomerDetails->city_town ?? '-' }}</td>
                     </tr>
                     <tr>
                         <th>State</th>
-                        <td>{{ $customer->CustomerDetails->state ?? '' }}</td>
+                        <td>{{ $customer->CustomerDetails->state ?? '-' }}</td>
                     </tr>
                     <tr>
                         <th>Pincode</th>
-                        <td>{{ $customer->CustomerDetails->pin_code ?? '' }}</td>
+                        <td>{{ $customer->CustomerDetails->pin_code ?? '-' }}</td>
                     </tr>
                 </tbody>
             </table>
