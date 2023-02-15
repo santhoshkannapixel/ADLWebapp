@@ -507,24 +507,16 @@ class ApiController extends Controller
     }
     public function add_to_cart(Request $request)
     {
-        Cart::create([
-            'user_id'   => $request->user_id,
-            'test_id'   => $request->test_id,
-            'test_type' => $request->test_type,
-        ]);
+        Cart::create(['user_id' => $request->user_id,'test_id' => $request->test_id]);
         return [
             "status"  => true,
             "message" => "Added"
         ];
     }
 
-    public function remove_to_cart(Request $request)
+    public function remove_to_cart($id)
     {
-        Cart::where([
-            'user_id'   => $request->user_id,
-            'test_id'   => $request->test_id,
-            'test_type' => $request->test_type,
-        ])->delete();
+        Cart::fibdOrFail($id)->delete();
         return [
             "status"  => true,
             "message" => "Removed"
