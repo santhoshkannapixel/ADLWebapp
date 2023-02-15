@@ -152,7 +152,7 @@ class ApiController extends Controller
                 return response()->json([
                     "status"     => true,
                     "data"       => $User,
-                    "cart_items" => $this->cart_items($User->id),
+                    "cart_items" => $this->cart_items($request,$User->id),
                     "message"    => "Login Success !"
                 ]);
             } else {
