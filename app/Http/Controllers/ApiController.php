@@ -491,19 +491,15 @@ class ApiController extends Controller
             "message" => "User Not Found!"
         ];
     }
-    public function cart_items($user_id)
+    public function cart_items(Request $request, $user_id)
     {
         return Cart::where('user_id',$user_id)
-        ->join('tests','tests.id','=','carts.test_id')
-        ->join('test_prices','test_prices.TestId','=','tests.id')
-        ->get();
-        // return Cart::with('Tests', 'Packages')->where(['user_id' => $user_id])->get();
-        // $data  = Tests::where('TestSlug', $slug)
-        // ->join('test_prices', function($join) {
-        //     $join->on('test_prices.TestId', '=', 'tests.id');
-        // })
-        // ->where('test_prices.TestLocation', '=', $request->TestLocation)
-        // ->first();
+            ->join('tests','tests.id','=','carts.test_id')
+            ->join('test_prices',function($join) use ($request) {
+                $join->on('test_prices.TestId','=','tests.id')->where('TestLocation',$request->location ?? 'bangalore');
+            })
+            ->select('carts.id as cart_id','tests.*','test_prices.*')
+            ->get();
     }
     public function add_to_cart(Request $request)
     {
