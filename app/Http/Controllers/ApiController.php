@@ -116,6 +116,8 @@ class ApiController extends Controller
     }
     public function testLists(Request $request)
     {
+        $orderBy = 'asc';
+        $$take = 8;
         $data   =   Tests::when(!empty($request->TestName), function ($query) use ($request) {
                 $query->where('TestName', 'like', '%' . $request->TestName . '%');
             })
@@ -126,12 +128,12 @@ class ApiController extends Controller
                 $query->where('HealthCondition', 'like', '%' . $request->HealthCondition . '%');
             })
             ->skip(0)
-            ->take($request->Tack)
+            ->take($take)
             ->join('test_prices', function($join) {
                 $join->on('test_prices.TestId', '=', 'tests.id');
             })
-            ->where('test_prices.TestLocation', '=', $request->TestLocation)
-            ->orderBy('test_prices.TestPrice', $request->orderBy)
+            ->where('test_prices.TestLocation', '=', 'bangalore')
+            ->orderBy('test_prices.TestPrice', $request->orderBy ?? $orderBy)
             ->get();
         return response()->json([
             "status"    =>  true,
