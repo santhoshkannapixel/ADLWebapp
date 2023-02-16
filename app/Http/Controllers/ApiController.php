@@ -164,7 +164,8 @@ class ApiController extends Controller
             "status"    =>  true,
             "data"      =>  $data,
             "has_loading"=> $has_loading,
-            'page' => $page + 1
+            'page' => $page + 1,
+            "take" => $take
         ]);
     }
     public function newsAndEvents()
