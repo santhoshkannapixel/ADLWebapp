@@ -117,7 +117,7 @@ class ApiController extends Controller
     public function testLists(Request $request)
     {
         $orderBy = 'asc';
-        $$take = 8;
+        $take = 8;
         $data   =   Tests::when(!empty($request->TestName), function ($query) use ($request) {
                 $query->where('TestName', 'like', '%' . $request->TestName . '%');
             })
