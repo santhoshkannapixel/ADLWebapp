@@ -117,7 +117,7 @@ class ApiController extends Controller
     public function testLists(Request $request)
     {
         $orderBy = 'asc';
-        $page = $request->page ?? 0;
+        $page = $request->page;
         $take = 8 * $page ?? 1;
         $has_loading = 'yes';
         $OrganName = $request->OrganName ? str_replace('-', ' ', $request->OrganName ) : '';
@@ -164,7 +164,7 @@ class ApiController extends Controller
             "status"    =>  true,
             "data"      =>  $data,
             "has_loading"=> $has_loading,
-            'page' => $page + 1,
+            'page' => ($page ?? 0 ) + 1,
             "take" => $take
         ]);
     }
