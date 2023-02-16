@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('banners', [ApiController::class,'banners']);
 Route::get('topBookedTest', [ApiController::class,'topBookedTest']);
 Route::post('test/{slug}', [ApiController::class,'testDetails']);
-Route::post('test-list', [ApiController::class,'testLists']);
+Route::any('test-list', [ApiController::class,'testLists']);
 Route::post('bannerContactForm', [ApiController::class,'bannerContactForm']);
 Route::post('newsAndEvents', [ApiController::class,'newsAndEvents']);
 Route::post('login', [ApiController::class,'login']);
