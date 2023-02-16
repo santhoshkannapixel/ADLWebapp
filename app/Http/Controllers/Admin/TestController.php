@@ -24,11 +24,17 @@ class TestController extends Controller
             });
             return DataTables::eloquent($data)
                 ->addIndexColumn()
-                ->addColumn('Is_Package', function ($data) {
-                    $flag    =  $data->IsPackage == 'No' ? 'danger' : 'success';
-                    $type    =  $data->IsPackage == 'No' ? 'ban' : 'check-circle';
-                    $status  =  '<span class="fa-20 t-center fa fa-' . $type . ' text-' . $flag . '"></span>';
-                    return $status;
+                ->addColumn('is_home', function ($data) {
+                    if($data->is_home)
+                    {
+                        $is_home  = '<input type="checkbox" class="checkbox"  onclick="isHomeStatusChange('.$data->id.')" checked  name="is_home" >';
+                    }
+                    else{
+                        $is_home  = '<input type="checkbox" class="checkbox"  onclick="isHomeStatusChange('.$data->id.')"    name="is_home" >';
+                    }
+
+                    
+                    return $is_home;
                 })
                 ->addColumn('Applicable_Gender', function ($data) {
                     if ($data->ApplicableGender == 'M') return '<span class="t-center"><i class="text-primary fa fa-mars me-2"></i>Male</span>';
@@ -59,7 +65,7 @@ class TestController extends Controller
                         return button('show', route('test.show',$data->id)). button('edit', route('test.edit',$data->id));
                     }
                 })
-                ->rawColumns(['action', 'Is_Package', 'Test_Schedule', 'Drive_Through', 'Home_Collection', 'Applicable_Gender'])
+                ->rawColumns(['action', 'is_home', 'Test_Schedule', 'Drive_Through', 'Home_Collection', 'Applicable_Gender'])
                 ->make(true);
         }
 
@@ -184,7 +190,14 @@ class TestController extends Controller
     public function update(Request $request, $id)
     {
         $data   =   Tests::findOrFail($id);
-     
+        if($request->is_home == 'on')
+        {
+            $data->is_home = 1;
+        }
+        else{
+            $data->is_home = 0;
+        }
+        $data->sorting_order = $request->sorting_order ?? '';
         if($request->image) {
             if(Storage::exists($request->image)) {
                 Storage::delete($request->image);
@@ -193,7 +206,21 @@ class TestController extends Controller
             $data->image = $Image;
         }
         $data->save();
-        Flash::success(__('masters.sync_success'));
-        return redirect()->back();
+        Flash::success( __('action.saved', ['type' => 'Package Updated']));
+
+        return redirect()->route('test.index');
+    }
+    public function status(Request $request)
+    {
+        $data   =   Tests::findOrFail($request->id);
+        if($data->is_home == '1')
+        {
+            $data->is_home = '0';
+        }
+        else{
+            $data->is_home = 1;
+        }
+        $result = $data->update();
+        return response()->json(['status'=>$result]);
     }
 }

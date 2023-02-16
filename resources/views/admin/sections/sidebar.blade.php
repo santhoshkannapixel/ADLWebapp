@@ -82,7 +82,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('branch.index') }}" class="nav-link text-white {{ Route::is(['branch.index','branch.show','city.index', 'banner.edit', 'test.edit' , 'banner.create', 'banner.index','organ.index','organ.update','organ.edit','organ.create','condition.index','condition.update','condition.edit','condition.create']) ? "active" : "" }}">
+            <a href="{{ route('branch.index') }}" class="nav-link text-white {{ Route::is(['branch.index','branch.show','city.index', 'banner.edit', 'test.index','test.show','test.edit' , 'banner.create', 'banner.index','organ.index','organ.update','organ.edit','organ.create','condition.index','condition.update','condition.edit','condition.create']) ? "active" : "" }}">
                 <i class="fa fa-cog"></i>Master
             </a>
         </li>
@@ -104,9 +104,7 @@
                     'user.edit',
                     'role.index',
                     'role.create',
-                    'role.edit',
-                    'test.index',
-                    'test.show',
+                    'role.edit',               
                     'api_config.index',
                     'api_config.edit',
                     'api_config.create',

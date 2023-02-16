@@ -35,7 +35,7 @@
                         <th>Test Id</th>
                         <th>Test Name</th>
                         <th>Applicable Gender</th>
-                        <th>Is Package</th>
+                        <th>Is Home</th>
                         <th>Classifications</th>
                         <th>Drive Through</th>
                         <th>Home Collection</th>
@@ -84,8 +84,8 @@
                             name: "ApplicableGender"
                         },
                         {
-                            data: "IsPackage",
-                            name: "IsPackage"
+                            data: "is_home",
+                            name: "is_home"
                         },
                         {
                             data: "Classifications",
@@ -117,5 +117,44 @@
                 LoadData(data);
             }
         });
+        function isHomeStatusChange (id)
+        {
+            var  table = $('#data-table').DataTable();
+            swal({
+            text: "Do you want to change the status?",
+            icon: "warning",
+            buttons: {
+                cancel: {
+                    text: "Cancel",
+                    value: null,
+                    visible: true,
+                    className: "btn-light rounded-pill btn",
+                    closeModal: true,
+                },
+                confirm: {
+                    text: "Yes! Change",
+                    value: true,
+                    visible: true,
+                    className: "btn btn-danger rounded-pill",
+                    closeModal: true
+                }
+            },
+        }).then((isConfirm) => {
+            if (isConfirm) {
+                $.ajax({
+                url: "{{ route('test.is_home') }}",
+                type: "GET",
+                data: {
+                    id: id
+                },
+                success: function(res) {
+                    table.ajax.reload();
+                }
+            })
+            }
+        });
+            
+        }
+
     </script>
 @endsection

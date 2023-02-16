@@ -37,9 +37,21 @@
                     @endif
                 </div>
             </div>
+            <div class="row mb-3">
+                <label class="col-2 text-end col-form-label">Sorting Order</label>
+                <div class="col-3">
+                    <input type="number" class="form-control" name="sorting_order" value="{{ $data->sorting_order }}"  id="sorting_order">
+                </div>
+            </div>
+            <div class="row ">
+                <label class="col-2 text-end col-form-label">Is Home</label>
+                <div class="col-10">
+                    <input type="checkbox" class="checkbox" name="is_home" @if(isset($data->is_home) && $data->is_home == 1) checked @endif  id="is_home">
+                </div>
+            </div>
         </div>
         <div class="text-end card-footer">
-            <a href="{{ route('api_config.index') }}" class="btn btn-light bg-white me-2">back</a>
+            <a href="{{ route('test.index') }}" class="btn btn-light bg-white me-2">back</a>
             <button type="submit" class="btn btn-primary fw-bold">Save</button>
         </div>
     </div>

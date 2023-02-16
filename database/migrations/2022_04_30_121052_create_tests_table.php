@@ -38,6 +38,8 @@ class CreateTestsTable extends Migration
             $table->string("CteateDate")->nullable();
             $table->string("ModifiedDate")->nullable();
             $table->string("TestSchedule")->nullable(); 
+            $table->string("is_home")->nullable()->default(0); 
+            $table->string("sorting_order")->nullable(); 
             $table->timestamps();
         });
     }

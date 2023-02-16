@@ -451,3 +451,41 @@ table td {
     background-color: #0acf97;
     border-color: #0acf97;
 }
+/* test master module checkbox css START */
+input[class="checkbox"] {
+  position: relative;
+  width: 55px;
+  height: 30px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #f1333c;
+  border: 0;
+  outline: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+input[class="checkbox"]::before {
+  content: "";
+  width: 23px;
+  height: 22px;
+  border-radius: 100%;
+  background: #fff;
+  position: absolute;
+  border: 0;
+  top: 4px;
+  left: 5px;
+  transition: 0.5s;
+}
+
+input[class="checkbox"]:checked::before {
+  transform: translateX(100%);
+  background: #fff;
+}
+
+input[class="checkbox"]:checked {
+  background: #1fcc67;
+}
+
+/* test master module checkbox css END */

@@ -99,6 +99,7 @@ Route::middleware(['auth_users'])->group(function () {
                 Route::get('show/{id}', [TestController::class, 'show'])->name('test.show');
                 Route::get('edit/{id}', [TestController::class, 'edit'])->name('test.edit');
                 Route::post('edit/{id}', [TestController::class, 'update'])->name('test.edit');
+                Route::get('is_home', [TestController::class, 'status'])->name('test.is_home');
             });
             Route::group(['prefix' => 'banner'], function () {
                 Route::get('/', [BannerController::class, 'index'])->name('banner.index');
