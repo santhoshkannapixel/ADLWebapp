@@ -117,15 +117,36 @@ class ApiController extends Controller
     public function testLists(Request $request)
     {
         $orderBy = 'asc';
-        $take = 8;
+        $page = $request->page ?? 0;
+        $take = 8 * $page ?? 1;
+        $has_loading = 'yes';
+        $OrganName = $request->OrganName ? str_replace('-', ' ', $request->OrganName ) : '';
+        $HealthCondition = $request->HealthCondition ? str_replace('-', ' ', $request->HealthCondition ) : '';
+
+        $totalCount   =   Tests::when(!empty($request->TestName), function ($query) use ($request) {
+            $query->where('TestName', 'like', '%' . $request->TestName . '%');
+        })
+        ->when(!empty($OrganName), function ($query) use ($OrganName) {
+            $query->where('OrganName', $OrganName);
+        })
+        ->when(!empty($HealthCondition), function ($query) use ($HealthCondition) {
+            $query->where('HealthCondition', 'like', '%' . $HealthCondition . '%');
+        })
+        ->join('test_prices', function($join) {
+            $join->on('test_prices.TestId', '=', 'tests.id');
+        })
+        ->where('test_prices.TestLocation', '=', 'bangalore')
+        ->orderBy('test_prices.TestPrice', $request->orderBy ?? $orderBy)
+        ->count();
+
         $data   =   Tests::when(!empty($request->TestName), function ($query) use ($request) {
                 $query->where('TestName', 'like', '%' . $request->TestName . '%');
             })
-            ->when(!empty($request->OrganName), function ($query) use ($request) {
-                $query->where('OrganName', $request->OrganName);
+            ->when(!empty($OrganName), function ($query) use ($OrganName) {
+                $query->where('OrganName', $OrganName);
             })
-            ->when(!empty($request->HealthCondition), function ($query) use ($request) {
-                $query->where('HealthCondition', 'like', '%' . $request->HealthCondition . '%');
+            ->when(!empty($HealthCondition), function ($query) use ($HealthCondition) {
+                $query->where('HealthCondition', 'like', '%' . $HealthCondition . '%');
             })
             ->skip(0)
             ->take($take)
@@ -135,9 +156,15 @@ class ApiController extends Controller
             ->where('test_prices.TestLocation', '=', 'bangalore')
             ->orderBy('test_prices.TestPrice', $request->orderBy ?? $orderBy)
             ->get();
+
+        if( $totalCount <= $take ) {
+            $has_loading = 'no';
+        }
         return response()->json([
             "status"    =>  true,
-            "data"      =>  $data
+            "data"      =>  $data,
+            "has_loading"=> $has_loading,
+            'page' => $page + 1
         ]);
     }
     public function newsAndEvents()
