@@ -117,8 +117,8 @@ class ApiController extends Controller
     public function testLists(Request $request)
     {
         $orderBy = 'asc';
-        $page = $request->page;
-        $take = 8 * (($page ?? 1) + 1 );
+        $page = $request->page ?? 0;
+        $take = 8 * ($page + 1 );
         $has_loading = 'yes';
         $OrganName = $request->OrganName ? str_replace('-', ' ', $request->OrganName ) : '';
         $HealthCondition = $request->HealthCondition ? str_replace('-', ' ', $request->HealthCondition ) : '';
