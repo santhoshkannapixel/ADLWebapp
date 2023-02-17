@@ -391,22 +391,22 @@ class ApiController extends Controller
     public function packages(Request $request)
     {
         $Tests = Tests::with('SubTests')->where('IsPackage',"Yes")
-            ->when(!empty($request->ApplicableGender), function ($query) use ($request) {
-                $query->whereIn('ApplicableGender', $request->ApplicableGender);
+            ->when(!empty($request->gender), function ($query) use ($request) {
+                $query->whereIn('ApplicableGender', explode("_",$request->gender));
             })
-            ->when(!empty($request->OrganName), function ($query) use ($request) {
-                $query->whereIn('OrganName', $request->OrganName);
+            ->when(!empty($request->organs), function ($query) use ($request) {
+                $query->whereIn('OrganName', explode("_",$request->organs));
             })
             ->when(!empty($request->HealthCondition), function ($query) use ($request) {
-                $query->whereIn('HealthCondition', $request->HealthCondition);
+                $query->whereIn('HealthCondition', explode("_",$request->conditions));
             })
-            ->join('test_prices', function($join) {
+            ->join('test_prices', function($join) use ($request) {
                 $join->on('test_prices.TestId', '=', 'tests.id');
             })
-            ->where('test_prices.TestLocation', '=', $request->TestLocation)
-            ->orderBy('test_prices.TestPrice', $request->orderBy)
+            ->orderBy('test_prices.TestPrice', $request->price ?? "ASC")
+            ->where('test_prices.TestLocation', '=', $request->location ?? "bangalore")
             ->skip(0)
-            ->take($request->Tack)
+            ->take($request->limit ?? 10)
             ->get();
 
         return [
