@@ -404,16 +404,12 @@ class ApiController extends Controller
                 $join->on('test_prices.TestId', '=', 'tests.id');
             })
             ->orderBy('test_prices.TestPrice', $request->price ?? "ASC")
-            ->where('test_prices.TestLocation', '=', $request->location ?? "bangalore")
-            ->skip(0)
-            ->take($request->limit ?? 10)
-            ->get();
-
+            ->where('test_prices.TestLocation', '=', $request->location ?? "bangalore");
         return [
             "status"    => true,
-            "count"     => count($Tests),
-            "data"      => $Tests,
-            "next_data" => $request->limit ?? 10 < count($Tests) ? true : false
+            "count"     => count($Tests->get()),
+            "next_data" => count($Tests->get()) < $request->limit ?? 10 ? false : true,
+            "data"      => $Tests->take($request->limit ?? 10)->get(),
         ];
     }
 
