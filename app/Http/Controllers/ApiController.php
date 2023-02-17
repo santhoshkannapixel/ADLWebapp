@@ -410,9 +410,10 @@ class ApiController extends Controller
             ->get();
 
         return [
-            "status" => true,
-            "count"  => count($Tests),
-            "data"   => $Tests,
+            "status"    => true,
+            "count"     => count($Tests),
+            "data"      => $Tests,
+            "next_data" => $request->limit ?? 10 == count($Tests) ? false : true
         ];
     }
 
