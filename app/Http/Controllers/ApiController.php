@@ -51,9 +51,13 @@ class ApiController extends Controller
             "data"      =>  $data
         ]);
     }
-    public function topBookedTest()
-    {
-        $data   = Tests::with('TestPrice')->oldest()->limit(10)->get();
+    public function topBookedTest(Request $request)
+    { 
+        $data   = Tests::join('test_prices', function($join) {
+            $join->on('test_prices.TestId', '=', 'tests.id');
+        })->where('test_prices.TestLocation', '=', $request->TestLocation ?? 'bangalore')
+        ->limit(10) 
+        ->get();
         return response()->json([
             "status"    =>  true,
             "data"      =>  $data
