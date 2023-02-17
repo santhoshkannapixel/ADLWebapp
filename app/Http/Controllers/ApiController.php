@@ -397,7 +397,7 @@ class ApiController extends Controller
             ->when(!empty($request->organs), function ($query) use ($request) {
                 $query->whereIn('OrganName', explode("_",$request->organs));
             })
-            ->when(!empty($request->HealthCondition), function ($query) use ($request) {
+            ->when(!empty($request->conditions), function ($query) use ($request) {
                 $query->whereIn('HealthCondition', explode("_",$request->conditions));
             })
             ->join('test_prices', function($join) use ($request) {
