@@ -16,6 +16,7 @@ use App\Http\Controllers\Website\ContactUsController;
 use App\Http\Controllers\Website\CurrentOpeningController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('locations', [ApiController::class,'locations']);
 Route::get('banners', [ApiController::class,'banners']);
 Route::get('topBookedTest', [ApiController::class,'topBookedTest']);
 Route::post('test/{slug}', [ApiController::class,'testDetails']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\HomeCollectionMail;
 use App\Mail\ResetPasswordMail;
+use App\Models\ApiConfig;
 use App\Models\Banners;
 use App\Models\BookHomeCollection;
 use App\Models\Branch;
@@ -31,6 +32,16 @@ use Razorpay\Api\Errors\SignatureVerificationError;
 
 class ApiController extends Controller
 {
+    public function locations()
+    {
+        $data =  ApiConfig::where('apiType', 'GetTestMaster')->select([
+            'id', 'location', 'location_slug'
+        ])->get();
+        return response()->json([
+            "status"    =>  true,
+            "data"      =>  $data
+        ]);
+    }
     public function banners()
     {
         $data = Banners::orderBy('OrderBy')->get();
@@ -52,13 +63,13 @@ class ApiController extends Controller
         ]);
     }
     public function topBookedTest(Request $request)
-    { 
-        $data   = Tests::join('test_prices', function($join) {
+    {
+        $data   = Tests::join('test_prices', function ($join) {
             $join->on('test_prices.TestId', '=', 'tests.id');
         })->where('test_prices.TestLocation', '=', $request->TestLocation ?? 'bangalore')
-        ->where('is_home',1)
-        ->limit(10) 
-        ->get();
+            ->where('is_home', 1)
+            ->limit(10)
+            ->get();
         return response()->json([
             "status"    =>  true,
             "data"      =>  $data
@@ -66,12 +77,12 @@ class ApiController extends Controller
     }
     public function testDetails(Request $request, $slug)
     {
-        $data   = Tests::where('TestSlug', $slug)->join('test_prices', function($join) {
+        $data   = Tests::where('TestSlug', $slug)->join('test_prices', function ($join) {
             $join->on('test_prices.TestId', '=', 'tests.id');
         })
-        ->where('test_prices.TestLocation', '=', $request->TestLocation)
-        ->first();
-        if(!is_null($data)) {
+            ->where('test_prices.TestLocation', '=', $request->TestLocation)
+            ->first();
+        if (!is_null($data)) {
             $subData = SubTests::where("TestId", $data->id)->get();
             return response()->json([
                 "status"    =>  true,
@@ -123,30 +134,30 @@ class ApiController extends Controller
     {
         $orderBy = 'asc';
         $page = $request->page ?? 0;
-        $take = 8 * ($page + 1 );
+        $take = 8 * ($page + 1);
         $has_loading = 'yes';
-        $OrganName = $request->OrganName ? str_replace('-', ' ', $request->OrganName ) : '';
-        $HealthCondition = $request->HealthCondition ? str_replace('-', ' ', $request->HealthCondition ) : '';
+        $OrganName = $request->OrganName ? str_replace('-', ' ', $request->OrganName) : '';
+        $HealthCondition = $request->HealthCondition ? str_replace('-', ' ', $request->HealthCondition) : '';
 
         $totalCount   =   Tests::when(!empty($request->TestName), function ($query) use ($request) {
             $query->where('TestName', 'like', '%' . $request->TestName . '%');
         })
-        ->when(!empty($OrganName), function ($query) use ($OrganName) {
-            $query->where('OrganName', $OrganName);
-        })
-        ->when(!empty($HealthCondition), function ($query) use ($HealthCondition) {
-            $query->where('HealthCondition', 'like', '%' . $HealthCondition . '%');
-        })
-        ->join('test_prices', function($join) {
-            $join->on('test_prices.TestId', '=', 'tests.id');
-        })
-        ->where('test_prices.TestLocation', '=', 'bangalore')
-        ->orderBy('test_prices.TestPrice', $request->orderBy ?? $orderBy)
-        ->count();
+            ->when(!empty($OrganName), function ($query) use ($OrganName) {
+                $query->where('OrganName', $OrganName);
+            })
+            ->when(!empty($HealthCondition), function ($query) use ($HealthCondition) {
+                $query->where('HealthCondition', 'like', '%' . $HealthCondition . '%');
+            })
+            ->join('test_prices', function ($join) {
+                $join->on('test_prices.TestId', '=', 'tests.id');
+            })
+            ->where('test_prices.TestLocation', '=', 'bangalore')
+            ->orderBy('test_prices.TestPrice', $request->orderBy ?? $orderBy)
+            ->count();
 
         $data   =   Tests::when(!empty($request->TestName), function ($query) use ($request) {
-                $query->where('TestName', 'like', '%' . $request->TestName . '%');
-            })
+            $query->where('TestName', 'like', '%' . $request->TestName . '%');
+        })
             ->when(!empty($OrganName), function ($query) use ($OrganName) {
                 $query->where('OrganName', $OrganName);
             })
@@ -155,21 +166,21 @@ class ApiController extends Controller
             })
             ->skip(0)
             ->take($take)
-            ->join('test_prices', function($join) {
+            ->join('test_prices', function ($join) {
                 $join->on('test_prices.TestId', '=', 'tests.id');
             })
             ->where('test_prices.TestLocation', '=', 'bangalore')
             ->orderBy('test_prices.TestPrice', $request->orderBy ?? $orderBy)
             ->get();
 
-        if( $totalCount <= $take ) {
+        if ($totalCount <= $take) {
             $has_loading = 'no';
         }
         return response()->json([
             "status"    =>  true,
             "data"      =>  $data,
-            "has_loading"=> $has_loading,
-            'page' => ($page ?? 0 ) + 1,
+            "has_loading" => $has_loading,
+            'page' => ($page ?? 0) + 1,
             "take" => $take
         ]);
     }
@@ -188,7 +199,7 @@ class ApiController extends Controller
                 return response()->json([
                     "status"     => true,
                     "data"       => $User,
-                    "cart_items" => $this->cart_items($request,$User->id),
+                    "cart_items" => $this->cart_items($request, $User->id),
                     "message"    => "Login Success !"
                 ]);
             } else {
@@ -226,14 +237,14 @@ class ApiController extends Controller
         ]);
     }
     public function register(Request $request)
-    { 
-        if (!is_null(User::where('email', $request->email)->first()) ) {
+    {
+        if (!is_null(User::where('email', $request->email)->first())) {
             return response()->json([
                 "status"    =>  false,
                 "message" =>  'Email Id Already exists !'
             ]);
         }
-        if (!is_null(User::where('mobile', $request->mobile)->first()) ) {
+        if (!is_null(User::where('mobile', $request->mobile)->first())) {
             return response()->json([
                 "status"    =>  false,
                 "message" =>  'Mobile Number Already been taken !'
@@ -258,7 +269,7 @@ class ApiController extends Controller
             'name' => $request->name,
             'mobile' => $request->mobile,
         ]);
-        $CustomerDetails = CustomerDetails::where('user_id',$customer->id)->first();
+        $CustomerDetails = CustomerDetails::where('user_id', $customer->id)->first();
         $CustomerDetails->update([
             'first_name'   => $request->first_name,
             'last_name'    => $request->last_name,
@@ -391,17 +402,17 @@ class ApiController extends Controller
     }
     public function packages(Request $request)
     {
-        $Tests = Tests::with('SubTests')->where('IsPackage',"Yes")
+        $Tests = Tests::with('SubTests')->where('IsPackage', "Yes")
             ->when(!empty($request->gender), function ($query) use ($request) {
-                $query->whereIn('ApplicableGender', explode("_",$request->gender));
+                $query->whereIn('ApplicableGender', explode("_", $request->gender));
             })
             ->when(!empty($request->organs), function ($query) use ($request) {
-                $query->whereIn('OrganName', explode("_",$request->organs));
+                $query->whereIn('OrganName', explode("_", $request->organs));
             })
             ->when(!empty($request->conditions), function ($query) use ($request) {
-                $query->whereIn('HealthCondition', explode("_",$request->conditions));
+                $query->whereIn('HealthCondition', explode("_", $request->conditions));
             })
-            ->join('test_prices', function($join) use ($request) {
+            ->join('test_prices', function ($join) use ($request) {
                 $join->on('test_prices.TestId', '=', 'tests.id');
             })
             ->orderBy('test_prices.TestPrice', $request->price ?? "ASC")
@@ -496,7 +507,7 @@ class ApiController extends Controller
     {
         $customer = User::where('email', $request->email)->first();
         if (!is_null($customer)) {
-            Mail::to($customer->email)->send(new ResetPasswordMail($customer,$request->origin));
+            Mail::to($customer->email)->send(new ResetPasswordMail($customer, $request->origin));
             return response([
                 "status"   => true,
                 "customer" => $customer->id,
@@ -528,17 +539,17 @@ class ApiController extends Controller
     }
     public function cart_items(Request $request, $user_id)
     {
-        return Cart::where('user_id',$user_id)
-            ->join('tests','tests.id','=','carts.test_id')
-            ->join('test_prices',function($join) use ($request) {
-                $join->on('test_prices.TestId','=','tests.id')->where('TestLocation',$request->location ?? 'bangalore');
+        return Cart::where('user_id', $user_id)
+            ->join('tests', 'tests.id', '=', 'carts.test_id')
+            ->join('test_prices', function ($join) use ($request) {
+                $join->on('test_prices.TestId', '=', 'tests.id')->where('TestLocation', $request->location ?? 'bangalore');
             })
-            ->select('carts.id as cart_id','tests.*','test_prices.*')
+            ->select('carts.id as cart_id', 'tests.*', 'test_prices.*')
             ->get();
     }
     public function add_to_cart(Request $request)
     {
-        Cart::create(['user_id' => $request->user_id,'test_id' => $request->test_id]);
+        Cart::create(['user_id' => $request->user_id, 'test_id' => $request->test_id]);
         return [
             "status"  => true,
             "message" => "Added"
