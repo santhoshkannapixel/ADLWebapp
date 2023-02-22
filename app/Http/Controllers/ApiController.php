@@ -34,10 +34,10 @@ class ApiController extends Controller
 {
     public function locations()
     {
-        $data =  ApiConfig::where('apiType', 'GetTestMaster')->select([
+        $data   =  ApiConfig::where('apiType', 'GetTestMaster')->select([
             'id', 'location', 'location_slug'
-        ])->get();
-        return response()->json([
+        ])->orderBy('location')->get();
+        return  response()->json([
             "status"    =>  true,
             "data"      =>  $data
         ]);
@@ -48,13 +48,13 @@ class ApiController extends Controller
         $banner = [];
         foreach ($data as $item) {
             $banner[] = [
-                'Title' => $item->Title,
-                'Content' => $item->Content,
-                'Url' => $item->Url,
+                'Title'        => $item->Title,
+                'Content'      => $item->Content,
+                'Url'          => $item->Url,
                 'DesktopImage' => asset_url($item->DesktopImage),
-                'MobileImage' => asset_url($item->MobileImage),
-                'OrderBy' => $item->OrderBy,
-                'Status' => $item->Status
+                'MobileImage'  => asset_url($item->MobileImage),
+                'OrderBy'      => $item->OrderBy,
+                'Status'       => $item->Status
             ];
         }
         return response()->json([
