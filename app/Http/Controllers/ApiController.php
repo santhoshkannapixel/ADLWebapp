@@ -56,6 +56,7 @@ class ApiController extends Controller
         $data   = Tests::join('test_prices', function($join) {
             $join->on('test_prices.TestId', '=', 'tests.id');
         })->where('test_prices.TestLocation', '=', $request->TestLocation ?? 'bangalore')
+        ->where('is_home',1)
         ->limit(10) 
         ->get();
         return response()->json([
