@@ -47,7 +47,11 @@ class OrdersController extends Controller
                     return OrderStatus($data->order_status);
                 })
                 ->addColumn('action', function ($data) {
-                    return button('show',route('orders.show', $data->id)).button('phone',$data->User->CustomerDetails->phone_number).button('email',$data->User->CustomerDetails->email);
+                    if($data->User->CustomerDetails ?? false) {
+                        $contactBtns = button('phone',$data->User->CustomerDetails->phone_number).button('email',$data->User->CustomerDetails->email);
+                    }
+                    return button('show',route('orders.show', $data->id)).$contactBtns ?? "";
+               
                 })
                 ->rawColumns(['customer','action','payment_status','order_status'])
                 ->make(true);
