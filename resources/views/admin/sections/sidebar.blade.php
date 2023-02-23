@@ -119,7 +119,7 @@
     <hr>
     <div class="dropdown p-3 pt-0">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://www.staroceans.org/w3c/img_avatar.png" alt="" width="32" height="32" class="rounded-5 me-2">
+            <img src="{{ asset('public/images/avatar.png') }}" alt="" width="32" height="32" class="rounded-5 me-2">
             <b>{{ Sentinel::getUser()->name }}</b>
             <small class="ms-2 badge bg-success text-white">
                 {{ Sentinel::getUser()->roles[0]->name }}
