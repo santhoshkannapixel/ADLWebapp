@@ -265,14 +265,14 @@ class ApiController extends Controller
             "data"      =>  $User
         ]);
     }
-    public function update_customer(Request $request, $id)
+    public function update_customer(Request $request)
     {
-        $customer = User::find($id);
+        $customer = User::find($request->id);
         $customer->update([
             'name' => $request->name,
             'mobile' => $request->mobile,
         ]);
-        $CustomerDetails = CustomerDetails::where('user_id', $id)->first();
+        $CustomerDetails = CustomerDetails::where('user_id', $request->id)->first();
         $CustomerDetails->update([
             'first_name'   => $request->first_name,
             'last_name'    => $request->last_name,
@@ -286,7 +286,7 @@ class ApiController extends Controller
         return response()->json([
             "status"  => true,
             "message" => 'Your Information Updated !',
-            "data"    => User::with('CustomerDetails')->find($id)
+            "data"    => User::with('CustomerDetails')->find($request->id)
         ]);
     }
     public function update_billing_address(Request $request)
