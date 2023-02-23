@@ -272,7 +272,7 @@ class ApiController extends Controller
             'name' => $request->name,
             'mobile' => $request->mobile,
         ]);
-        $CustomerDetails = CustomerDetails::where('user_id', $customer->id)->first();
+        $CustomerDetails = CustomerDetails::where('user_id', $id)->first();
         $CustomerDetails->update([
             'first_name'   => $request->first_name,
             'last_name'    => $request->last_name,
