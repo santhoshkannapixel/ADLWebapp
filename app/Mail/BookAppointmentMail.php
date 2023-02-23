@@ -29,6 +29,7 @@ class BookAppointmentMail extends Mailable
     public function build()
     {
         $this->from('example@example.com')->with('details', $this->details)
+        ->attach($this->details['file'])
         ->subject('Anand Lab : Book Appointment Enquiry')->view('email.book_appointment');
     }
 }

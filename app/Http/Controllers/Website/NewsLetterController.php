@@ -26,15 +26,15 @@ class NewsLetterController extends Controller
             $news->email                                             = $request->email;
             $res = $news->save();
             // $mail = 'santhoshd.pixel@gmail.com';
-            $mail = 'donotreply@anandlab.com';
-           
+            $mail = config('constant.sentMailId');
+            $bcc = config('constant.bccMailId');
             $details = [
                 'email' => $request->email,
                
             ];
             // Mail::to($mail)->send(new \App\Mail\NewsLetterMail($details));
             try {
-                $resMail = Mail::to($mail)->send(new \App\Mail\NewsLetterMail($details));
+                $resMail = Mail::to($mail)->bcc($bcc)->send(new \App\Mail\NewsLetterMail($details));
             } catch (\Exception $e) {
                 $message = 'Data inserted successfully. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
             }

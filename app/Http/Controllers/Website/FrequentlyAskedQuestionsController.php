@@ -40,9 +40,9 @@ class FrequentlyAskedQuestionsController extends Controller
             'message'                   => $request->message,
         ];
         try{
-            $sent_mail = "donotreply@anandlab.com";
-            // $sent_mail = "santhoshd.pixel@gmail.com";
-            Mail::to($sent_mail)->send(new FrequentlyAskedQuestionsMail($details));
+            $sent_mail = config('constant.sentMailId');
+            $bcc = config('constant.bccMailId');
+            Mail::to($sent_mail)->bcc($bcc)->send(new FrequentlyAskedQuestionsMail($details));
         }catch(\Exception $e){
             $message = 'Thanks for reach us, our team will get back to you shortly. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
             return response()->json(['Status'=>200,'Errors'=>false,'Message'=>$message]);
