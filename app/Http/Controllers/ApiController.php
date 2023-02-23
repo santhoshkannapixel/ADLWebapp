@@ -70,6 +70,9 @@ class ApiController extends Controller
         ->when(isset($request->IsPackage),function($q) use ($request) {
             $q->with('SubTests')->where('IsPackage',$request->IsPackage);
         })
+        ->when(!isset($request->IsPackage),function($q) use ($request) {
+            $q->with('SubTests')->where('IsPackage','No');
+        }) 
         ->where('is_home', 1)
         ->limit(10)
         ->get();
