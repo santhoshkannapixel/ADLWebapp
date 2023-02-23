@@ -267,13 +267,8 @@ class ApiController extends Controller
     }
     public function update_customer(Request $request)
     {
-        $customer = User::find($request->id);
-        $customer->update([
-            'name' => $request->name,
-            'mobile' => $request->mobile,
-        ]);
-        $CustomerDetails = CustomerDetails::where('user_id', $request->id)->first();
-        $CustomerDetails->update([
+        $customer = User::find($request->id); 
+        $customer->CustomerDetails()->updateOrCreate([
             'first_name'   => $request->first_name,
             'last_name'    => $request->last_name,
             'email'        => $request->email,
@@ -282,6 +277,10 @@ class ApiController extends Controller
             'city_town'    => $request->city_town,
             'state'        => $request->state,
             'pin_code'     => $request->pin_code,
+        ]);
+        $customer->update([
+            'name' => $request->name,
+            'mobile' => $request->mobile,
         ]);
         return response()->json([
             "status"  => true,
