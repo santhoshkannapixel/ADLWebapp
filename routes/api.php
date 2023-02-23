@@ -29,7 +29,7 @@ Route::post('register', [ApiController::class,'register']);
 Route::get('create-order', [ApiController::class,'createOrder']);
 Route::get('get-orders/{id}', [ApiController::class,'getOrders']);
 Route::post('update-billing-details', [ApiController::class,'update_billing_address']);
-Route::post('update-customer/{id}', [ApiController::class,'update_customer']);
+Route::post('update-customer', [ApiController::class,'update_customer']);
 Route::post('save-payment-order', [ApiController::class,'save_payment_order']);
 Route::get('customer/{id}', [ApiController::class,'customer_info']);
 Route::get('packages',[ApiController::class,'packages']);
