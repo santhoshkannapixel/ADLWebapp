@@ -47,6 +47,7 @@ class OrdersController extends Controller
                     return OrderStatus($data->order_status);
                 })
                 ->addColumn('action', function ($data) {
+                    $contactBtns = '';
                     if($data->User->CustomerDetails ?? false) {
                         $contactBtns = button('phone',$data->User->CustomerDetails->phone_number).button('email',$data->User->CustomerDetails->email);
                     }
