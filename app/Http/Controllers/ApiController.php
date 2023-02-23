@@ -268,16 +268,29 @@ class ApiController extends Controller
     public function update_customer(Request $request)
     {
         $customer = User::with('CustomerDetails')->find($request->id); 
-        $customer->CustomerDetails()->updateOrCreate([
-            'first_name'   => $request->first_name,
-            'last_name'    => $request->last_name,
-            'email'        => $request->email,
-            'phone_number' => $request->phone_number,
-            'address'      => $request->address,
-            'city_town'    => $request->city_town,
-            'state'        => $request->state,
-            'pin_code'     => $request->pin_code,
-        ]);
+        if(!is_null($customer->CustomerDetails)) {
+            $customer->CustomerDetails()->update([
+                'first_name'   => $request->first_name,
+                'last_name'    => $request->last_name,
+                'email'        => $request->email,
+                'phone_number' => $request->phone_number,
+                'address'      => $request->address,
+                'city_town'    => $request->city_town,
+                'state'        => $request->state,
+                'pin_code'     => $request->pin_code,
+            ]);
+        } else {
+            $customer->CustomerDetails()->create([
+                'first_name'   => $request->first_name,
+                'last_name'    => $request->last_name,
+                'email'        => $request->email,
+                'phone_number' => $request->phone_number,
+                'address'      => $request->address,
+                'city_town'    => $request->city_town,
+                'state'        => $request->state,
+                'pin_code'     => $request->pin_code,
+            ]);
+        }
         $customer->update([
             'name' => $request->name,
             'mobile' => $request->mobile,
