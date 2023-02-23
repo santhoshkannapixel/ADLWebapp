@@ -62,14 +62,17 @@ class ApiController extends Controller
             "data"      =>  $data
         ]);
     }
-    public function topBookedTest(Request $request)
+    public function topBookedTestPackages(Request $request)
     {
         $data   = Tests::join('test_prices', function ($join) {
             $join->on('test_prices.TestId', '=', 'tests.id');
         })->where('test_prices.TestLocation', '=', $request->TestLocation ?? 'bangalore')
-            ->where('is_home', 1)
-            ->limit(10)
-            ->get();
+        ->when(isset($request->IsPackage),function($q) use ($request) {
+            $q->where('IsPackage',$request->IsPackage);
+        })
+        ->where('is_home', 1)
+        ->limit(10)
+        ->get();
         return response()->json([
             "status"    =>  true,
             "data"      =>  $data
