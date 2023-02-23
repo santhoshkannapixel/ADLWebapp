@@ -23,7 +23,7 @@ class OrdersController extends Controller
                     return OrderId($data->id);
                 })
                 ->addColumn('customer',function ($data) {
-                    return $data->User->name;
+                    return $data->User->name ?? "";
                 })
                 ->addColumn('phone_number',function ($data) {
                     return $data->User->CustomerDetails->phone_number;
