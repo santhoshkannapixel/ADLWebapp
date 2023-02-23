@@ -22,25 +22,50 @@ class ApiLocationSeeder extends Seeder
             'location' => 'Bangalore',
             'location_slug' => 'bangalore',
             'created_by' => 'Admin',
-        ]);
-
-        ApiConfig::create([
-            'apiUrl' => 'https://reports.anandlab.com/v3/labapi.asmx/GetTestMaster',
-            'corporateID' => '1140',
-            'passCode' => 'LMLOR34815',
-            'apiType' => 'GetTestMaster',
-            'location' => 'Mangalore',
-            'location_slug' => 'mangalore',
-            'created_by' => 'Admin'
-        ]);
-
+        ]);   
         ApiConfig::create([
             'apiUrl' => 'https://reports.anandlab.com/v3/labapi.asmx/GetTestMaster',
             'corporateID' => '3360',
             'passCode' => 'MEVIS7618',
             'apiType' => 'GetTestMaster',
-            'location' => 'Rest of Bangalore',
-            'location_slug' => 'rest-of-bangalore',
+            'location' => 'mysore',
+            'location_slug' => 'mysore',
+            'created_by' => 'Admin'
+        ]);
+        ApiConfig::create([
+            'apiUrl' => 'https://reports.anandlab.com/v3/labapi.asmx/GetTestMaster',
+            'corporateID' => '3360',
+            'passCode' => 'MEVIS7618',
+            'apiType' => 'GetTestMaster',
+            'location' => 'hubli',
+            'location_slug' => 'hubli',
+            'created_by' => 'Admin'
+        ]);
+        ApiConfig::create([
+            'apiUrl' => 'https://reports.anandlab.com/v3/labapi.asmx/GetTestMaster',
+            'corporateID' => '3360',
+            'passCode' => 'MEVIS7618',
+            'apiType' => 'GetTestMaster',
+            'location' => 'shimoga',
+            'location_slug' => 'shimoga',
+            'created_by' => 'Admin'
+        ]);
+        ApiConfig::create([
+            'apiUrl' => 'https://reports.anandlab.com/v3/labapi.asmx/GetTestMaster',
+            'corporateID' => '3360',
+            'passCode' => 'MEVIS7618',
+            'apiType' => 'GetTestMaster',
+            'location' => 'tiptur',
+            'location_slug' => 'tiptur',
+            'created_by' => 'Admin'
+        ]);
+        ApiConfig::create([
+            'apiUrl' => 'https://reports.anandlab.com/v3/labapi.asmx/GetTestMaster',
+            'corporateID' => '3360',
+            'passCode' => 'MEVIS7618',
+            'apiType' => 'GetTestMaster',
+            'location' => 'davangere',
+            'location_slug' => 'davangere',
             'created_by' => 'Admin'
         ]);
         // ==================
