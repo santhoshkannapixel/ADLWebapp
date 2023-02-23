@@ -68,7 +68,7 @@ class ApiController extends Controller
             $join->on('test_prices.TestId', '=', 'tests.id');
         })->where('test_prices.TestLocation', '=', $request->TestLocation ?? 'bangalore')
         ->when(isset($request->IsPackage),function($q) use ($request) {
-            $q->where('IsPackage',$request->IsPackage);
+            $q->with('SubTests')->where('IsPackage',$request->IsPackage);
         })
         ->where('is_home', 1)
         ->limit(10)
