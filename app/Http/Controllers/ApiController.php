@@ -267,7 +267,7 @@ class ApiController extends Controller
     }
     public function update_customer(Request $request)
     {
-        $customer = User::find($request->id); 
+        $customer = User::with('CustomerDetails')->find($request->id); 
         $customer->CustomerDetails()->updateOrCreate([
             'first_name'   => $request->first_name,
             'last_name'    => $request->last_name,
@@ -285,7 +285,7 @@ class ApiController extends Controller
         return response()->json([
             "status"  => true,
             "message" => 'Your Information Updated !',
-            "data"    => User::with('CustomerDetails')->find($request->id)
+            "data"    => $customer
         ]);
     }
     public function update_billing_address(Request $request)
