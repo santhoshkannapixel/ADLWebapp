@@ -26,10 +26,10 @@ class OrdersController extends Controller
                     return $data->User->name ?? "";
                 })
                 ->addColumn('phone_number',function ($data) {
-                    return $data->User->CustomerDetails->phone_number;
+                    return $data->User->CustomerDetails->phone_number ?? "";
                 })
                 ->addColumn('email',function ($data) {
-                    return $data->User->CustomerDetails->email;
+                    return $data->User->CustomerDetails->email ?? "";
                 })
                 ->addColumn('appoinment',function ($data) {
                     return $data->appoinment == 1 ? 'Yes' : 'No';
