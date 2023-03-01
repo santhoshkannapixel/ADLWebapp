@@ -20,6 +20,7 @@ class CreateContactUsTable extends Migration
             $table->string('mobile');
             $table->string('location')->nullable();
             $table->string('message')->nullable();
+            $table->string('page')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

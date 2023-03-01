@@ -25,11 +25,12 @@ class ContactUsController extends Controller
             return filedCall($validator->messages()); 
         }
         $data = new ContactUs;
-        $data->name      = $request->name;
-        $data->email     = $request->email;
-        $data->mobile    = $request->mobile;
-        $data->location  = $request->location;
-        $data->message   = $request->message;
+        $data->name     = $request->name;
+        $data->email    = $request->email;
+        $data->mobile   = $request->mobile;
+        $data->location = $request->location;
+        $data->message  = $request->message;
+        $data->page     = $request->page;
         $res             = $data->save();
 
         if($res)

@@ -17,6 +17,7 @@
                         <th>Mobile</th>
                         <th>Email </th>
                         <th>Location</th>
+                        <th>Page Name</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -39,6 +40,7 @@
                     {data:"mobile", name : "mobile"},
                     {data:"email", name : "email"},
                     {data:"location", name : "location"},
+                    {data:"page", name : "page"},
                     {data:"action", name : "action",orderable: false},
                     
                 ],
