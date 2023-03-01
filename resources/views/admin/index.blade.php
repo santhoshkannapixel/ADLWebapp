@@ -113,7 +113,10 @@
                             <option value="FRANCHISING_OPPORTUNITIES">FRANCHISING OPPORTUNITIES</option>
                             <option value="RESEARCH">RESEARCH</option>
                             <option value="BOOK_AN_APPOINTMENT">BOOK AN APPOINTMENT</option>
-                            <option value="HEAD_OFFICE">Healthcheckup for employees</option>
+                            <option value="HEAD_OFFICE">HEALTHCHECKUP FOR EMPLOYEES</option>
+                            {{-- <option value="CUSTOMERS">CUSTOMERS</option> --}}
+                            <option value="CAREER_ENQUIRY">CAREER ENQUIRIES</option>
+                            <option value="CONTACT_LIST">CONTACT LIST</option>
                         </select>
 
                         <input type="text" name="from_date" id="from_date" class="btn form-control form-control-sm text-start" placeholder="From Date" readonly />
@@ -132,6 +135,7 @@
                         <th>Email</th>
                         <th>Mobile</th>
                         <th>Date</th>
+                        <th>Type</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -178,6 +182,7 @@
                         {data: 'Email', name: 'Email'},
                         {data: 'Mobile', name: 'Mobile'},
                         {data: 'created_at', name: 'created_at'},
+                        {data: 'type', name: 'type'},
                     ],
                 });
             } load_data();

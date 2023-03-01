@@ -14,7 +14,9 @@ use App\Exports\PatientsConsumersExport;
 use App\Exports\ResearchExport;
 use App\Models\BookAppointment;
 use App\Models\BookHomeCollection;
+use App\Models\Career;
 use App\Models\ClinicalLabManagement;
+use App\Models\ContactUs;
 use App\Models\Enquiries;
 use App\Models\CustomerDetails;
 use App\Models\FeedBack;
@@ -54,6 +56,7 @@ class DashboardController extends Controller
                             foreach($data as $key=>$val)
                             {
                                 $val['Email'] = '';
+                                $val['type'] = 'BOOK HOME COLLECTION LIST';
                             }
                             break;
                         case 'PATIENTS_CONSUMERS_LIST':
@@ -61,6 +64,10 @@ class DashboardController extends Controller
                             ->whereDate('created_at', '>=', $from)
                             ->whereDate('created_at', '<=', $to)
                             ->get();
+                            foreach($data as $key=>$val)
+                            {
+                                $val['type'] = 'PATIENTS CONSUMERS LIST';
+                            }
                             break;
 
                         case 'FEEDBACK_LIST':
@@ -68,12 +75,20 @@ class DashboardController extends Controller
                             ->whereDate('created_at', '>=', $from)
                             ->whereDate('created_at', '<=', $to)
                             ->get();
+                            foreach($data as $key=>$val)
+                            {
+                                $val['type'] = 'FEEDBACK LIST';
+                            }
                             break;
                         case 'FREQUENTLY_ASKED_QUESTIONS_LIST':
                             $data = FrequentlyAskedQuestions::select('name as Name','email as Email','mobile as Mobile','created_at')
                             ->whereDate('created_at', '>=', $from)
                             ->whereDate('created_at', '<=', $to)
                             ->get();
+                            foreach($data as $key=>$val)
+                            {
+                                $val['type'] = 'FREQUENTLY ASKED QUESTIONS LIST';
+                            }
                             break;
 
                         case 'HOSPITAL_LAB_MANAGEMENT':
@@ -81,6 +96,10 @@ class DashboardController extends Controller
                             ->whereDate('created_at', '>=', $from)
                             ->whereDate('created_at', '<=', $to)
                             ->get();
+                            foreach($data as $key=>$val)
+                            {
+                                $val['type'] = 'HOSPITAL LAB MANAGEMENT LIST';
+                            }
                             break;
 
                         case 'CLINICAL_LAB_MANAGEMENT':
@@ -91,6 +110,7 @@ class DashboardController extends Controller
                             foreach($data as $key=>$val)
                             {
                                 $val['Name'] = '';
+                                $val['type'] = 'CLINICAL LAB MANAGEMENT LIST';
                             }
                             break;
                         case 'FRANCHISING_OPPORTUNITIES':
@@ -98,6 +118,10 @@ class DashboardController extends Controller
                             ->whereDate('created_at', '>=', $from)
                             ->whereDate('created_at', '<=', $to)
                             ->get();
+                            foreach($data as $key=>$val)
+                            {
+                                $val['type'] = 'FRANCHISING OPPORTUNITIES LIST';
+                            }
                             break;
 
                         case 'RESEARCH':
@@ -105,6 +129,10 @@ class DashboardController extends Controller
                             ->whereDate('created_at', '>=', $from)
                             ->whereDate('created_at', '<=', $to)
                             ->get();
+                            foreach($data as $key=>$val)
+                            {
+                                $val['type'] = 'RESEARCH LIST';
+                            }
                             break;
                         case 'BOOK_AN_APPOINTMENT':
                             $data = BookAppointment::select('name as Name','mobile as Mobile','created_at')
@@ -114,6 +142,7 @@ class DashboardController extends Controller
                             foreach($data as $key=>$val)
                             {
                                 $val['Email'] = '';
+                                $val['type'] = 'BOOK AN APPOINTMENT LIST';
                             }
                             break;
                         case 'HEAD_OFFICE':
@@ -121,7 +150,44 @@ class DashboardController extends Controller
                             ->whereDate('created_at', '>=', $from)
                             ->whereDate('created_at', '<=', $to)
                             ->get();
+                             foreach($data as $key=>$val)
+                            {
+                                $val['type'] = 'HEAD OFFICE LIST';
+                            }
                             break;
+                        // case 'CUSTOMERS':
+                        //     $data = User::select('name as Name','email as Email','mobile as Mobile','created_at')
+                        //     ->whereDate('created_at', '>=', $from)
+                        //     ->whereDate('created_at', '<=', $to)
+                        //     ->get();
+                        //     foreach($data as $key=>$val)
+                        //     {
+                        //         $val['type'] = 'CUSTOMERS LIST';
+                        //     }
+                        //     break;
+                        case 'CAREER_ENQUIRY':
+                            $data = Career::select('name as Name','email as Email','mobile as Mobile','created_at')
+                            ->whereDate('created_at', '>=', $from)
+                            ->whereDate('created_at', '<=', $to)
+                            ->get();
+                            foreach($data as $key=>$val)
+                            {
+                                $val['type'] = 'CAREER ENQUIRY LIST';
+                            }
+                            break;
+
+                        case 'CONTACT_LIST':
+                            $data = ContactUs::select('name as Name','email as Email','mobile as Mobile','created_at')
+                            ->whereDate('created_at', '>=', $from)
+                            ->whereDate('created_at', '<=', $to)
+                            ->get();
+                            foreach($data as $key=>$val)
+                            {
+                                $val['type'] = 'CONTACT LIST';
+                            }
+                            break;
+                            
+                            
                     }
                 }
                 else{
@@ -132,6 +198,11 @@ class DashboardController extends Controller
             else   {
                 $data = PatientsConsumers::select('name as Name','email as Email','mobile as Mobile','created_at')
                 ->get();
+                foreach($data as $key=>$val)
+                {
+                    $val['type'] = 'Patients Consumers List';
+                }
+
             }
 
             return datatables()->of($data)->addIndexColumn()->make(true);
