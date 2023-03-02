@@ -61,7 +61,7 @@ class DashboardController extends Controller
                             }
                             $datatables =  Datatables::of($data)
                             ->editColumn('status', function($row){
-                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="BOOK_HOME_COLLECTION_LIST" id="status"><option value="">--select--</option>';
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="BOOK_HOME_COLLECTION_LIST" id="status"><option value="">-- Select --</option>';
                                 foreach (config('dashboard.status') as $option)
                                 {
                                     if(!empty($row->status) && $row->status == $option){
@@ -96,7 +96,7 @@ class DashboardController extends Controller
                             }
                             $datatables =  Datatables::of($data)
                             ->editColumn('status', function($row){
-                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="PATIENTS_CONSUMERS_LIST" id="status"><option value="">--select--</option>';
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="PATIENTS_CONSUMERS_LIST" id="status"><option value="">-- Select --</option>';
                                 foreach (config('dashboard.status') as $option)
                                 {
                                     if(!empty($row->status) && $row->status == $option){
@@ -132,7 +132,7 @@ class DashboardController extends Controller
                             }
                             $datatables =  Datatables::of($data)
                             ->editColumn('status', function($row){
-                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="FEEDBACK_LIST" id="status"><option value="">--select--</option>';
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="FEEDBACK_LIST" id="status"><option value="">-- Select --</option>';
                                 foreach (config('dashboard.status') as $option)
                                 {
                                     if(!empty($row->status) && $row->status == $option){
@@ -167,7 +167,7 @@ class DashboardController extends Controller
                             }
                             $datatables =  Datatables::of($data)
                             ->editColumn('status', function($row){
-                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="FREQUENTLY_ASKED_QUESTIONS_LIST" id="status"><option value="">--select--</option>';
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="FREQUENTLY_ASKED_QUESTIONS_LIST" id="status"><option value="">-- Select --</option>';
                                 foreach (config('dashboard.status') as $option)
                                 {
                                     if(!empty($row->status) && $row->status == $option){
@@ -203,7 +203,7 @@ class DashboardController extends Controller
                             }
                             $datatables =  Datatables::of($data)
                             ->editColumn('status', function($row){
-                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="HOSPITAL_LAB_MANAGEMENT" id="status"><option value="">--select--</option>';
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="HOSPITAL_LAB_MANAGEMENT" id="status"><option value="">-- Select --</option>';
                                 foreach (config('dashboard.status') as $option)
                                 {
                                     if(!empty($row->status) && $row->status == $option){
@@ -240,7 +240,7 @@ class DashboardController extends Controller
                             }
                             $datatables =  Datatables::of($data)
                             ->editColumn('status', function($row){
-                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="CLINICAL_LAB_MANAGEMENT" id="status"><option value="">--select--</option>';
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="CLINICAL_LAB_MANAGEMENT" id="status"><option value="">-- Select --</option>';
                                 foreach (config('dashboard.status') as $option)
                                 {
                                     if(!empty($row->status) && $row->status == $option){
@@ -275,7 +275,7 @@ class DashboardController extends Controller
                             }
                             $datatables =  Datatables::of($data)
                             ->editColumn('status', function($row){
-                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="FRANCHISING_OPPORTUNITIES" id="status"><option value="">--select--</option>';
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="FRANCHISING_OPPORTUNITIES" id="status"><option value="">-- Select --</option>';
                                 foreach (config('dashboard.status') as $option)
                                 {
                                     if(!empty($row->status) && $row->status == $option){
@@ -311,7 +311,7 @@ class DashboardController extends Controller
                             }
                             $datatables =  Datatables::of($data)
                             ->editColumn('status', function($row){
-                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="RESEARCH" id="status"><option value="">--select--</option>';
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="RESEARCH" id="status"><option value="">-- Select --</option>';
                                 foreach (config('dashboard.status') as $option)
                                 {
                                     if(!empty($row->status) && $row->status == $option){
@@ -347,7 +347,7 @@ class DashboardController extends Controller
                             }
                             $datatables =  Datatables::of($data)
                             ->editColumn('status', function($row){
-                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="BOOK_AN_APPOINTMENT" id="status"><option value="">--select--</option>';
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="BOOK_AN_APPOINTMENT" id="status"><option value="">-- Select --</option>';
                                 foreach (config('dashboard.status') as $option)
                                 {
                                     if(!empty($row->status) && $row->status == $option){
@@ -382,7 +382,7 @@ class DashboardController extends Controller
                             }
                             $datatables =  Datatables::of($data)
                             ->editColumn('status', function($row){
-                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="HEAD_OFFICE" id="status"><option value="">--select--</option>';
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="HEAD_OFFICE" id="status"><option value="">-- Select --</option>';
                                 foreach (config('dashboard.status') as $option)
                                 {
                                     if(!empty($row->status) && $row->status == $option){
@@ -418,7 +418,7 @@ class DashboardController extends Controller
                             }
                             $datatables =  Datatables::of($data)
                             ->editColumn('status', function($row){
-                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="CAREER_ENQUIRY" id="status"><option value="">--select--</option>';
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="CAREER_ENQUIRY" id="status"><option value="">-- Select --</option>';
                                 foreach (config('dashboard.status') as $option)
                                 {
                                     if(!empty($row->status) && $row->status == $option){
@@ -454,7 +454,7 @@ class DashboardController extends Controller
                             }
                             $datatables =  Datatables::of($data)
                             ->editColumn('status', function($row){
-                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="CONTACT_LIST" id="status"><option value="">--select--</option>';
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="CONTACT_LIST" id="status"><option value="">-- Select --</option>';
                                 foreach (config('dashboard.status') as $option)
                                 {
                                     if(!empty($row->status) && $row->status == $option){
@@ -491,7 +491,7 @@ class DashboardController extends Controller
                     }
                     $datatables =  Datatables::of($data)
                     ->editColumn('status', function($row){
-                        $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="PATIENTS_CONSUMERS_LIST" id="status"><option value="">--select--</option>';
+                        $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="PATIENTS_CONSUMERS_LIST" id="status"><option value="">-- Select --</option>';
                         foreach (config('dashboard.status') as $option)
                         {
                             if(!empty($row->status) && $row->status == $option){
@@ -524,7 +524,7 @@ class DashboardController extends Controller
                 }
                 $datatables =  Datatables::of($data)
                 ->editColumn('status', function($row){
-                    $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="PATIENTS_CONSUMERS_LIST" id="status"><option value="">--select--</option>';
+                    $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="PATIENTS_CONSUMERS_LIST" id="status"><option value="">-- Select --</option>';
                     foreach (config('dashboard.status') as $option)
                     {
                         if(!empty($row->status) && $row->status == $option){
@@ -625,7 +625,7 @@ class DashboardController extends Controller
                             $data->status = $value ?? '';
                             $data->update();
                         }
-                        
+
                         break;
                     case 'BOOK_HOME_COLLECTION_LIST':
                         $data = BookHomeCollection::where('id',$id)->first();
