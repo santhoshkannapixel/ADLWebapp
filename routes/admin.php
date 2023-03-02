@@ -46,6 +46,8 @@ Route::middleware(['auth_users'])->group(function () {
             Route::post('/export', [DashboardController::class, 'exportData'])->name('dashboard.export');
         });
         Route::get('/', [DashboardController::class, 'dashboardData'])->name('dashboard.data');
+        Route::post('/dashboard-status', [DashboardController::class, 'status'])->name('dashboard.status');
+        Route::post('/dashboard-remark', [DashboardController::class, 'remark'])->name('dashboard.remark');
         // Route::group(['prefix' => 'settings'], function () {
             Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile');
             Route::post('/profile', [ProfileController::class, 'store'])->name('profile.store');

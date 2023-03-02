@@ -136,6 +136,8 @@
                         <th>Mobile</th>
                         <th>Date</th>
                         <th>Type</th>
+                        <th>Status</th>
+                        <th>Remarks</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -166,7 +168,7 @@
                     $('#pending_order').html(data.data.pending_order);
                     $('#failed_payment').html(data.data.failed_payment);
                 }
-            });
+            });         
             function load_data(from_date = '', to_date = '',search_data = '')    {
                 $('#data-table').DataTable({
                     lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
@@ -183,6 +185,8 @@
                         {data: 'Mobile', name: 'Mobile'},
                         {data: 'created_at', name: 'created_at'},
                         {data: 'type', name: 'type'},
+                        {data: 'status', name: 'status'},
+                        {data: 'remark', name: 'remark'},
                     ],
                 });
             } load_data();
@@ -211,13 +215,63 @@
                     toastr.error("Both Date is required")
                 }
             });
-
+            
             $('#refresh').click(function(){
                 $('#search_data').val('');
                 $('#from_date').val('');
                 $('#to_date').val('');
                 $('#data-table').DataTable().destroy();
                 load_data();
+            });
+                   
+            $(document).on('change','#status',function(){
+                var type    =       $(this).data("type");
+                var id      =       $(this).data("id");
+                var value   =       $(this).val();
+               
+                if(type != '' && id != '' && value != '')
+                {
+                    $.ajax({
+                        type: "POST",
+                        url:"{{ route('dashboard.status') }}",
+                        data: {
+                            id:id,
+                            type:type,
+                            value:value,
+                            _token: '{{csrf_token()}}'
+                        },
+                        success :function(data) {
+                            $('#data-table').DataTable().destroy();
+                            toastr.success("Status updated successfully");
+                        }
+                    })
+                }
+            });
+            $(document).on('blur','#remark',function(){
+                var type    =       $(this).data("type");
+                var id      =       $(this).data("id");
+                var value   =       $(this).val();
+                // alert(type)
+                // alert(id)
+                // alert(value)
+                if(type != '' && id != '')
+                {
+                    $.ajax({
+                        type: "POST",
+                        url:"{{ route('dashboard.remark') }}",
+                        data: {
+                            id:id,
+                            type:type,
+                            value:value,
+                            _token: '{{csrf_token()}}'
+                        },
+                        success :function(data) {
+                            $('#data-table').DataTable().destroy();
+                        }
+                    })
+                }
+               
+
             });
         });
     </script>

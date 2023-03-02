@@ -16,6 +16,7 @@ use App\Models\BookAppointment;
 use App\Models\BookHomeCollection;
 use App\Models\Career;
 use App\Models\ClinicalLabManagement;
+use Laracasts\Flash\Flash;
 use App\Models\ContactUs;
 use App\Models\Enquiries;
 use App\Models\CustomerDetails;
@@ -49,7 +50,7 @@ class DashboardController extends Controller
                     switch ($search) {
                         
                         case 'BOOK_HOME_COLLECTION_LIST':
-                            $data = BookHomeCollection::select('name as Name','mobile as Mobile','created_at')
+                            $data = BookHomeCollection::select('id','name as Name','mobile as Mobile','status','remark','created_at','status','remark')
                                     ->whereDate('created_at', '>=', $from)
                                     ->whereDate('created_at', '<=', $to)
                                     ->get();
@@ -58,9 +59,34 @@ class DashboardController extends Controller
                                 $val['Email'] = '';
                                 $val['type'] = 'BOOK HOME COLLECTION LIST';
                             }
+                            $datatables =  Datatables::of($data)
+                            ->editColumn('status', function($row){
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="BOOK_HOME_COLLECTION_LIST" id="status"><option value="">--select--</option>';
+                                foreach (config('dashboard.status') as $option)
+                                {
+                                    if(!empty($row->status) && $row->status == $option){
+                                        $selected = 'selected';
+                                    }else{
+                                        $selected = '';
+                                    }
+                                    $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                                }
+                                $status .= '</select>';
+                                return $status;
+                            })
+                            ->editColumn('remark', function($row){
+                                if(!empty($row->remark)){
+                                    $remark = $row->remark;
+                                }else{
+                                    $remark = '';
+                                }
+                                $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="BOOK_HOME_COLLECTION_LIST" id="remark" name="remark">'.$remark.'</textarea>';
+                                return $remark;
+                            })
+                            ->rawColumns(['status','remark']);
                             break;
                         case 'PATIENTS_CONSUMERS_LIST':
-                            $data = PatientsConsumers::select('name as Name','email as Email','mobile as Mobile','created_at')
+                            $data = PatientsConsumers::select('id','name as Name','email as Email','mobile as Mobile','created_at','status','remark')
                             ->whereDate('created_at', '>=', $from)
                             ->whereDate('created_at', '<=', $to)
                             ->get();
@@ -68,10 +94,35 @@ class DashboardController extends Controller
                             {
                                 $val['type'] = 'PATIENTS CONSUMERS LIST';
                             }
+                            $datatables =  Datatables::of($data)
+                            ->editColumn('status', function($row){
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="PATIENTS_CONSUMERS_LIST" id="status"><option value="">--select--</option>';
+                                foreach (config('dashboard.status') as $option)
+                                {
+                                    if(!empty($row->status) && $row->status == $option){
+                                        $selected = 'selected';
+                                    }else{
+                                        $selected = '';
+                                    }
+                                    $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                                }
+                                $status .= '</select>';
+                                return $status;
+                            })
+                            ->editColumn('remark', function($row){
+                                if(!empty($row->remark)){
+                                    $remark = $row->remark;
+                                }else{
+                                    $remark = '';
+                                }
+                                $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="PATIENTS_CONSUMERS_LIST" id="remark" name="remark">'.$remark.'</textarea>';
+                                return $remark;
+                            })
+                            ->rawColumns(['status','remark']);
                             break;
 
                         case 'FEEDBACK_LIST':
-                            $data = FeedBack::select('name as Name','email as Email','mobile as Mobile','created_at')
+                            $data = FeedBack::select('id','name as Name','email as Email','mobile as Mobile','created_at','status','remark')
                             ->whereDate('created_at', '>=', $from)
                             ->whereDate('created_at', '<=', $to)
                             ->get();
@@ -79,9 +130,34 @@ class DashboardController extends Controller
                             {
                                 $val['type'] = 'FEEDBACK LIST';
                             }
+                            $datatables =  Datatables::of($data)
+                            ->editColumn('status', function($row){
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="FEEDBACK_LIST" id="status"><option value="">--select--</option>';
+                                foreach (config('dashboard.status') as $option)
+                                {
+                                    if(!empty($row->status) && $row->status == $option){
+                                        $selected = 'selected';
+                                    }else{
+                                        $selected = '';
+                                    }
+                                    $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                                }
+                                $status .= '</select>';
+                                return $status;
+                            })
+                            ->editColumn('remark', function($row){
+                                if(!empty($row->remark)){
+                                    $remark = $row->remark;
+                                }else{
+                                    $remark = '';
+                                }
+                                $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="FEEDBACK_LIST" id="remark" name="remark">'.$remark.'</textarea>';
+                                return $remark;
+                            })
+                            ->rawColumns(['status','remark']);
                             break;
                         case 'FREQUENTLY_ASKED_QUESTIONS_LIST':
-                            $data = FrequentlyAskedQuestions::select('name as Name','email as Email','mobile as Mobile','created_at')
+                            $data = FrequentlyAskedQuestions::select('id','name as Name','email as Email','mobile as Mobile','created_at','status','remark')
                             ->whereDate('created_at', '>=', $from)
                             ->whereDate('created_at', '<=', $to)
                             ->get();
@@ -89,10 +165,35 @@ class DashboardController extends Controller
                             {
                                 $val['type'] = 'FREQUENTLY ASKED QUESTIONS LIST';
                             }
+                            $datatables =  Datatables::of($data)
+                            ->editColumn('status', function($row){
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="FREQUENTLY_ASKED_QUESTIONS_LIST" id="status"><option value="">--select--</option>';
+                                foreach (config('dashboard.status') as $option)
+                                {
+                                    if(!empty($row->status) && $row->status == $option){
+                                        $selected = 'selected';
+                                    }else{
+                                        $selected = '';
+                                    }
+                                    $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                                }
+                                $status .= '</select>';
+                                return $status;
+                            })
+                            ->editColumn('remark', function($row){
+                                if(!empty($row->remark)){
+                                    $remark = $row->remark;
+                                }else{
+                                    $remark = '';
+                                }
+                                $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="FREQUENTLY_ASKED_QUESTIONS_LIST" id="remark" name="remark">'.$remark.'</textarea>';
+                                return $remark;
+                            })
+                            ->rawColumns(['status','remark']);
                             break;
 
                         case 'HOSPITAL_LAB_MANAGEMENT':
-                            $data = HospitalLabManagement::select('name as Name','email as Email','mobile as Mobile','created_at')
+                            $data = HospitalLabManagement::select('id','name as Name','email as Email','mobile as Mobile','created_at','status','remark')
                             ->whereDate('created_at', '>=', $from)
                             ->whereDate('created_at', '<=', $to)
                             ->get();
@@ -100,10 +201,35 @@ class DashboardController extends Controller
                             {
                                 $val['type'] = 'HOSPITAL LAB MANAGEMENT LIST';
                             }
+                            $datatables =  Datatables::of($data)
+                            ->editColumn('status', function($row){
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="HOSPITAL_LAB_MANAGEMENT" id="status"><option value="">--select--</option>';
+                                foreach (config('dashboard.status') as $option)
+                                {
+                                    if(!empty($row->status) && $row->status == $option){
+                                        $selected = 'selected';
+                                    }else{
+                                        $selected = '';
+                                    }
+                                    $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                                }
+                                $status .= '</select>';
+                                return $status;
+                            })
+                            ->editColumn('remark', function($row){
+                                if(!empty($row->remark)){
+                                    $remark = $row->remark;
+                                }else{
+                                    $remark = '';
+                                }
+                                $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="HOSPITAL_LAB_MANAGEMENT" id="remark" name="remark">'.$remark.'</textarea>';
+                                return $remark;
+                            })
+                            ->rawColumns(['status','remark']);
                             break;
 
                         case 'CLINICAL_LAB_MANAGEMENT':
-                            $data = ClinicalLabManagement::select('email as Email','mobile as Mobile','created_at')
+                            $data = ClinicalLabManagement::select('id','email as Email','mobile as Mobile','created_at','status','remark')
                             ->whereDate('created_at', '>=', $from)
                             ->whereDate('created_at', '<=', $to)
                             ->get();
@@ -112,9 +238,34 @@ class DashboardController extends Controller
                                 $val['Name'] = '';
                                 $val['type'] = 'CLINICAL LAB MANAGEMENT LIST';
                             }
+                            $datatables =  Datatables::of($data)
+                            ->editColumn('status', function($row){
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="CLINICAL_LAB_MANAGEMENT" id="status"><option value="">--select--</option>';
+                                foreach (config('dashboard.status') as $option)
+                                {
+                                    if(!empty($row->status) && $row->status == $option){
+                                        $selected = 'selected';
+                                    }else{
+                                        $selected = '';
+                                    }
+                                    $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                                }
+                                $status .= '</select>';
+                                return $status;
+                            })
+                            ->editColumn('remark', function($row){
+                                if(!empty($row->remark)){
+                                    $remark = $row->remark;
+                                }else{
+                                    $remark = '';
+                                }
+                                $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="CLINICAL_LAB_MANAGEMENT" id="remark" name="remark">'.$remark.'</textarea>';
+                                return $remark;
+                            })
+                            ->rawColumns(['status','remark']);
                             break;
                         case 'FRANCHISING_OPPORTUNITIES':
-                            $data = FranchisingOpportunities::select('name as Name','email as Email','mobile as Mobile','created_at')
+                            $data = FranchisingOpportunities::select('id','name as Name','email as Email','mobile as Mobile','created_at','status','remark')
                             ->whereDate('created_at', '>=', $from)
                             ->whereDate('created_at', '<=', $to)
                             ->get();
@@ -122,10 +273,35 @@ class DashboardController extends Controller
                             {
                                 $val['type'] = 'FRANCHISING OPPORTUNITIES LIST';
                             }
+                            $datatables =  Datatables::of($data)
+                            ->editColumn('status', function($row){
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="FRANCHISING_OPPORTUNITIES" id="status"><option value="">--select--</option>';
+                                foreach (config('dashboard.status') as $option)
+                                {
+                                    if(!empty($row->status) && $row->status == $option){
+                                        $selected = 'selected';
+                                    }else{
+                                        $selected = '';
+                                    }
+                                    $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                                }
+                                $status .= '</select>';
+                                return $status;
+                            })
+                            ->editColumn('remark', function($row){
+                                if(!empty($row->remark)){
+                                    $remark = $row->remark;
+                                }else{
+                                    $remark = '';
+                                }
+                                $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="FRANCHISING_OPPORTUNITIES" id="remark" name="remark">'.$remark.'</textarea>';
+                                return $remark;
+                            })
+                            ->rawColumns(['status','remark']);
                             break;
 
                         case 'RESEARCH':
-                            $data = Research::select('name as Name','email as Email','mobile as Mobile','created_at')
+                            $data = Research::select('id','name as Name','email as Email','mobile as Mobile','created_at','status','remark')
                             ->whereDate('created_at', '>=', $from)
                             ->whereDate('created_at', '<=', $to)
                             ->get();
@@ -133,9 +309,34 @@ class DashboardController extends Controller
                             {
                                 $val['type'] = 'RESEARCH LIST';
                             }
+                            $datatables =  Datatables::of($data)
+                            ->editColumn('status', function($row){
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="RESEARCH" id="status"><option value="">--select--</option>';
+                                foreach (config('dashboard.status') as $option)
+                                {
+                                    if(!empty($row->status) && $row->status == $option){
+                                        $selected = 'selected';
+                                    }else{
+                                        $selected = '';
+                                    }
+                                    $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                                }
+                                $status .= '</select>';
+                                return $status;
+                            })
+                            ->editColumn('remark', function($row){
+                                if(!empty($row->remark)){
+                                    $remark = $row->remark;
+                                }else{
+                                    $remark = '';
+                                }
+                                $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="RESEARCH" id="remark" name="remark">'.$remark.'</textarea>';
+                                return $remark;
+                            })
+                            ->rawColumns(['status','remark']);
                             break;
                         case 'BOOK_AN_APPOINTMENT':
-                            $data = BookAppointment::select('name as Name','mobile as Mobile','created_at')
+                            $data = BookAppointment::select('id','name as Name','mobile as Mobile','created_at','status','remark')
                             ->whereDate('created_at', '>=', $from)
                             ->whereDate('created_at', '<=', $to)
                             ->get();
@@ -144,9 +345,34 @@ class DashboardController extends Controller
                                 $val['Email'] = '';
                                 $val['type'] = 'BOOK AN APPOINTMENT LIST';
                             }
+                            $datatables =  Datatables::of($data)
+                            ->editColumn('status', function($row){
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="BOOK_AN_APPOINTMENT" id="status"><option value="">--select--</option>';
+                                foreach (config('dashboard.status') as $option)
+                                {
+                                    if(!empty($row->status) && $row->status == $option){
+                                        $selected = 'selected';
+                                    }else{
+                                        $selected = '';
+                                    }
+                                    $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                                }
+                                $status .= '</select>';
+                                return $status;
+                            })
+                            ->editColumn('remark', function($row){
+                                if(!empty($row->remark)){
+                                    $remark = $row->remark;
+                                }else{
+                                    $remark = '';
+                                }
+                                $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="BOOK_AN_APPOINTMENT" id="remark" name="remark">'.$remark.'</textarea>';
+                                return $remark;
+                            })
+                            ->rawColumns(['status','remark']);
                             break;
                         case 'HEAD_OFFICE':
-                            $data = HeadOffice::select('name as Name','email as Email','mobile as Mobile','created_at')
+                            $data = HeadOffice::select('id','name as Name','email as Email','mobile as Mobile','created_at','status','remark')
                             ->whereDate('created_at', '>=', $from)
                             ->whereDate('created_at', '<=', $to)
                             ->get();
@@ -154,19 +380,35 @@ class DashboardController extends Controller
                             {
                                 $val['type'] = 'HEAD OFFICE LIST';
                             }
+                            $datatables =  Datatables::of($data)
+                            ->editColumn('status', function($row){
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="HEAD_OFFICE" id="status"><option value="">--select--</option>';
+                                foreach (config('dashboard.status') as $option)
+                                {
+                                    if(!empty($row->status) && $row->status == $option){
+                                        $selected = 'selected';
+                                    }else{
+                                        $selected = '';
+                                    }
+                                    $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                                }
+                                $status .= '</select>';
+                                return $status;
+                            })
+                            ->editColumn('remark', function($row){
+                                if(!empty($row->remark)){
+                                    $remark = $row->remark;
+                                }else{
+                                    $remark = '';
+                                }
+                                $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="HEAD_OFFICE" id="remark" name="remark">'.$remark.'</textarea>';
+                                return $remark;
+                            })
+                            ->rawColumns(['status','remark']);
                             break;
-                        // case 'CUSTOMERS':
-                        //     $data = User::select('name as Name','email as Email','mobile as Mobile','created_at')
-                        //     ->whereDate('created_at', '>=', $from)
-                        //     ->whereDate('created_at', '<=', $to)
-                        //     ->get();
-                        //     foreach($data as $key=>$val)
-                        //     {
-                        //         $val['type'] = 'CUSTOMERS LIST';
-                        //     }
-                        //     break;
+                       
                         case 'CAREER_ENQUIRY':
-                            $data = Career::select('name as Name','email as Email','mobile as Mobile','created_at')
+                            $data = Career::select('id','name as Name','email as Email','mobile as Mobile','created_at','status','remark')
                             ->whereDate('created_at', '>=', $from)
                             ->whereDate('created_at', '<=', $to)
                             ->get();
@@ -174,10 +416,35 @@ class DashboardController extends Controller
                             {
                                 $val['type'] = 'CAREER ENQUIRY LIST';
                             }
+                            $datatables =  Datatables::of($data)
+                            ->editColumn('status', function($row){
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="CAREER_ENQUIRY" id="status"><option value="">--select--</option>';
+                                foreach (config('dashboard.status') as $option)
+                                {
+                                    if(!empty($row->status) && $row->status == $option){
+                                        $selected = 'selected';
+                                    }else{
+                                        $selected = '';
+                                    }
+                                    $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                                }
+                                $status .= '</select>';
+                                return $status;
+                            })
+                            ->editColumn('remark', function($row){
+                                if(!empty($row->remark)){
+                                    $remark = $row->remark;
+                                }else{
+                                    $remark = '';
+                                }
+                                $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="CAREER_ENQUIRY" id="remark" name="remark">'.$remark.'</textarea>';
+                                return $remark;
+                            })
+                            ->rawColumns(['status','remark']);
                             break;
 
                         case 'CONTACT_LIST':
-                            $data = ContactUs::select('name as Name','email as Email','mobile as Mobile','created_at')
+                            $data = ContactUs::select('id','name as Name','email as Email','mobile as Mobile','created_at','status','remark')
                             ->whereDate('created_at', '>=', $from)
                             ->whereDate('created_at', '<=', $to)
                             ->get();
@@ -185,27 +452,107 @@ class DashboardController extends Controller
                             {
                                 $val['type'] = 'CONTACT LIST';
                             }
+                            $datatables =  Datatables::of($data)
+                            ->editColumn('status', function($row){
+                                $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="CONTACT_LIST" id="status"><option value="">--select--</option>';
+                                foreach (config('dashboard.status') as $option)
+                                {
+                                    if(!empty($row->status) && $row->status == $option){
+                                        $selected = 'selected';
+                                    }else{
+                                        $selected = '';
+                                    }
+                                    $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                                }
+                                $status .= '</select>';
+                                return $status;
+                            })
+                            ->editColumn('remark', function($row){
+                                if(!empty($row->remark)){
+                                    $remark = $row->remark;
+                                }else{
+                                    $remark = '';
+                                }
+                                $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="CONTACT_LIST" id="remark" name="remark">'.$remark.'</textarea>';
+                                return $remark;
+                            })
+                            ->rawColumns(['status','remark']);
                             break;
                             
                             
                     }
                 }
                 else{
-                    $data = PatientsConsumers::select('name as Name','email as Email','mobile as Mobile','created_at')
+                    $data = PatientsConsumers::select('id','name as Name','email as Email','mobile as Mobile','created_at','status','remark')
                     ->whereBetween('created_at', array($request->from_date, $request->to_date))->get();
+                    foreach($data as $key=>$val)
+                    {
+                        $val['type'] = 'PATIENTS CONSUMERS LIST';
+                    }
+                    $datatables =  Datatables::of($data)
+                    ->editColumn('status', function($row){
+                        $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="PATIENTS_CONSUMERS_LIST" id="status"><option value="">--select--</option>';
+                        foreach (config('dashboard.status') as $option)
+                        {
+                            if(!empty($row->status) && $row->status == $option){
+                                $selected = 'selected';
+                            }else{
+                                $selected = '';
+                            }
+                            $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                        }
+                        $status .= '</select>';
+                        return $status;
+                    })
+                    ->editColumn('remark', function($row){
+                        if(!empty($row->remark)){
+                            $remark = $row->remark;
+                        }else{
+                            $remark = '';
+                        }
+                        $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="PATIENTS_CONSUMERS_LIST" id="remark" name="remark">'.$remark.'</textarea>';
+                        return $remark;
+                    })
+                    ->rawColumns(['status','remark']);
                 }
             }
             else   {
-                $data = PatientsConsumers::select('name as Name','email as Email','mobile as Mobile','created_at')
-                ->get();
+                $data = PatientsConsumers::select('id','name as Name','email as Email','mobile as Mobile','created_at','status','remark')->get();
                 foreach($data as $key=>$val)
                 {
                     $val['type'] = 'Patients Consumers List';
                 }
+                $datatables =  Datatables::of($data)
+                ->editColumn('status', function($row){
+                    $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="PATIENTS_CONSUMERS_LIST" id="status"><option value="">--select--</option>';
+                    foreach (config('dashboard.status') as $option)
+                    {
+                        if(!empty($row->status) && $row->status == $option){
+                            $selected = 'selected';
+                        }else{
+                            $selected = '';
+                        }
+                        $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                    }
+                    $status .= '</select>';
+                    return $status;
+                })
+                ->editColumn('remark', function($row){
+                    if(!empty($row->remark)){
+                        $remark = $row->remark;
+                    }else{
+                        $remark = '';
+                    }
+                    $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="PATIENTS_CONSUMERS_LIST" id="remark" name="remark">'.$remark.'</textarea>';
+                    return $remark;
+                })
+                ->rawColumns(['status','remark']);
 
             }
+           
+            return $datatables->addIndexColumn()->make(true);
 
-            return datatables()->of($data)->addIndexColumn()->make(true);
+            // return datatables()->of($datatables)->addIndexColumn()->make(true);
         }
         return view('admin.index');
     }
@@ -259,6 +606,237 @@ class DashboardController extends Controller
                     return Excel::download(new HeadOfficeExport, 'head_office.xlsx');
                     break;
             }
+        }
+    }
+    public function status(Request $request)
+    {
+        $type   = $request->type;
+        $id     = $request->id;
+        $value  = $request->value;
+        if($id!='' && $value != '')
+        {
+            
+                switch ($type) {
+                    
+                    case 'PATIENTS_CONSUMERS_LIST':
+                        $data = PatientsConsumers::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->status = $value ?? '';
+                            $data->update();
+                        }
+                        
+                        break;
+                    case 'BOOK_HOME_COLLECTION_LIST':
+                        $data = BookHomeCollection::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->status = $value ?? '';
+                            $data->update();
+                        }
+                        break;
+                    case 'FEEDBACK_LIST':
+                        $data = FeedBack::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->status = $value ?? '';
+                            $data->update();
+                        }
+                        break;
+                    case 'FREQUENTLY_ASKED_QUESTIONS_LIST':
+                        $data = FrequentlyAskedQuestions::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->status = $value ?? '';
+                            $data->update();
+                        }
+                        break;
+                        
+                    case 'HOSPITAL_LAB_MANAGEMENT':
+                        $data = HospitalLabManagement::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->status = $value ?? '';
+                            $data->update();
+                        }
+                        break;
+
+                    case 'CLINICAL_LAB_MANAGEMENT':
+                        $data = ClinicalLabManagement::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->status = $value ?? '';
+                            $data->update();
+                        }
+                        break;
+                    case 'FRANCHISING_OPPORTUNITIES':
+                        $data = FranchisingOpportunities::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->status = $value ?? '';
+                            $data->update();
+                        }
+                        break;
+
+                    case 'RESEARCH':
+                        $data = Research::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->status = $value ?? '';
+                            $data->update();
+                        }
+                        break;
+                    case 'BOOK_AN_APPOINTMENT':
+                        $data = BookAppointment::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->status = $value ?? '';
+                            $data->update();
+                        }
+                        break;
+                    case 'HEAD_OFFICE':
+                        $data = HeadOffice::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->status = $value ?? '';
+                            $data->update();
+                        }
+                        break;
+                    
+                    case 'CAREER_ENQUIRY':
+                        $data = Career::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->status = $value ?? '';
+                            $data->update();
+                        }
+                        break;
+
+                    case 'CONTACT_LIST':
+                        $data = ContactUs::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->status = $value ?? '';
+                            $data->update();
+                        }
+                        break;
+                }
+        }
+    }
+    public function remark(Request $request)
+    {
+        $type   = $request->type;
+        $id     = $request->id;
+        $value  = $request->value;
+        if($id!='')
+        {
+                switch ($type) {
+                    
+                    case 'PATIENTS_CONSUMERS_LIST':
+                        $data = PatientsConsumers::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->remark = $value ?? '';
+                            $data->update();
+                        }
+                        break;
+                    case 'BOOK_HOME_COLLECTION_LIST':
+                        $data = BookHomeCollection::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->remark = $value ?? '';
+                            $data->update();
+                        }
+                        break;
+
+                    case 'FEEDBACK_LIST':
+                        $data = FeedBack::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->remark = $value ?? '';
+                            $data->update();
+                        }
+                        break;
+                        
+                    case 'FREQUENTLY_ASKED_QUESTIONS_LIST':
+                        $data = FrequentlyAskedQuestions::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->remark = $value ?? '';
+                            $data->update();
+                        }
+                        break;
+                        
+                    case 'HOSPITAL_LAB_MANAGEMENT':
+                        $data = HospitalLabManagement::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->remark = $value ?? '';
+                            $data->update();
+                        }
+                        break;
+
+                    case 'CLINICAL_LAB_MANAGEMENT':
+                        $data = ClinicalLabManagement::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->remark = $value ?? '';
+                            $data->update();
+                        }
+                        break;
+                    case 'FRANCHISING_OPPORTUNITIES':
+                        $data = FranchisingOpportunities::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->remark = $value ?? '';
+                            $data->update();
+                        }
+                        break;
+
+                    case 'RESEARCH':
+                        $data = Research::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->remark = $value ?? '';
+                            $data->update();
+                        }
+                        break;
+                    case 'BOOK_AN_APPOINTMENT':
+                        $data = BookAppointment::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->remark = $value ?? '';
+                            $data->update();
+                        }
+                        break;
+                    case 'HEAD_OFFICE':
+                        $data = HeadOffice::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->remark = $value ?? '';
+                            $data->update();
+                        }
+                        break;
+                    
+                    case 'CAREER_ENQUIRY':
+                        $data = Career::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->remark = $value ?? '';
+                            $data->update();
+                        }
+                        break;
+
+                    case 'CONTACT_LIST':
+                        $data = ContactUs::where('id',$id)->first();
+                        if(!empty($data))
+                        {
+                            $data->remark = $value ?? '';
+                            $data->update();
+                        }
+                        break;
+                }
+
         }
     }
 }
