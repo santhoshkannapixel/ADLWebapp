@@ -11,12 +11,12 @@
                 {{-- <h3 class="mb-3"><b>Sign In </b></h3>
                 <i class="fa fa-user-circle text-primary fa-3x mb-3"></i> --}}
                 <div class="form-floating">
-                    <input type="email" name="email" value="admin@gmail.com" class="rounded form-control" id="floatingInput" placeholder="name@example.com">
+                    <input type="email" name="email" value="" class="rounded form-control" id="floatingInput" placeholder="name@example.com">
                     <label for="floatingInput">Email address</label>
                 </div>
                 <br>
                 <div class="form-floating">
-                    <input type="password" value="12345678" name="password" class="rounded form-control" id="floatingPassword" placeholder="Password">
+                    <input type="password" value="" name="password" class="rounded form-control" id="floatingPassword" placeholder="Password">
                     <label for="floatingPassword">Password</label>
                 </div>
 
