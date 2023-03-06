@@ -119,8 +119,8 @@
                             <option value="CONTACT_LIST">CONTACT LIST</option>
                         </select>
 
-                        <input type="text" name="from_date" id="from_date" class="btn form-control form-control-sm text-start" placeholder="From Date" readonly />
-                        <input type="text" name="to_date" id="to_date" class="btn form-control form-control-sm text-start" placeholder="To Date" readonly />
+                        <input type="text" name="from_date" id="from_date" value="<?php echo date('Y-m-d'); ?>" class="btn form-control form-control-sm text-start" placeholder="From Date" readonly />
+                        <input type="text" name="to_date" id="to_date"  value="<?php echo date('Y-m-d'); ?>" class="btn form-control form-control-sm text-start" placeholder="To Date" readonly />
                         <button type="button" name="filter" id="filter" class="btn btn-primary form-control-sm"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </div>
                 </div>
@@ -170,6 +170,8 @@
                 }
             });         
             function load_data(from_date = '', to_date = '',search_data = '')    {
+                var from_date   =   $('#from_date').val();
+                var to_date     =   $('#to_date').val();
                 $('#data-table').DataTable({
                     lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                     processing: true,
@@ -217,9 +219,18 @@
             });
             
             $('#refresh').click(function(){
+
+                var tdate = new Date();
+                var dd = tdate.getDate(); //yields day
+                var MM = tdate.getMonth(); //yields month
+                var yyyy = tdate.getFullYear(); //yields year
+                var currentDate= yyyy + "-" +'0'+( MM+1) + "-" + '0'+dd;
+
+                var from_date   =   $('#from_date').val();
+                var to_date     =   $('#to_date').val();
                 $('#search_data').val('');
-                $('#from_date').val('');
-                $('#to_date').val('');
+                $('#from_date').val(currentDate);
+                $('#to_date').val(to_date);
                 $('#data-table').DataTable().destroy();
                 load_data();
             });

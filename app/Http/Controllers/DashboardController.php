@@ -31,6 +31,7 @@ use App\Models\PatientsConsumers;
 use App\Models\Research;
 use App\Models\Tests;
 use App\Models\User;
+use Carbon\Carbon;
 use Yajra\DataTables\Facades\DataTables;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
@@ -483,15 +484,206 @@ class DashboardController extends Controller
                     }
                 }
                 else{
-                    $data = PatientsConsumers::select('id','name as Name','email as Email','mobile as Mobile','created_at','status','remark')
-                    ->whereBetween('created_at', array($request->from_date, $request->to_date))->get();
-                    foreach($data as $key=>$val)
+                       // Patients Consumers
+                    $data_patients_consumers = PatientsConsumers::select('id','name as Name','email as Email','mobile as Mobile','created_at','status','remark')
+                    ->whereDate('created_at', '>=', $request->from_date)
+                    ->whereDate('created_at', '<=', $request->to_date)
+                    ->get();
+                    foreach($data_patients_consumers as $key=>$val)
                     {
                         $val['type'] = 'PATIENTS CONSUMERS LIST';
                     }
+                    foreach($data_patients_consumers as $key=>$val){
+                            $data[] = $val;
+                        }
+                    // Book Home
+                    $databookhome = BookHomeCollection::select('id','name as Name','mobile as Mobile','created_at','status','remark')
+                    ->whereDate('created_at', '>=', $request->from_date)
+                    ->whereDate('created_at', '<=', $request->to_date)
+                    ->get();
+                    foreach($databookhome as $key=>$val)
+                    {
+                        $val['Email'] = '';
+                        $val['type'] = 'BOOK HOME COLLECTION LIST';
+                    }
+                    foreach($databookhome as $key=>$val){
+                        $data[] = $val;
+                    }
+                    // Feed Back
+                    $data_feed_back = FeedBack::select('id','name as Name','email as Email','mobile as Mobile','created_at','status','remark')
+                    ->whereDate('created_at', '>=', $from)
+                    ->whereDate('created_at', '<=', $to)
+                    ->get();
+                    foreach($data_feed_back as $key=>$val)
+                    {
+                        $val['type'] = 'FEEDBACK LIST';
+                    }
+                    foreach($data_feed_back as $key=>$val){
+                        $data[] = $val;
+                    } 
+                     // FAQ
+                     $data_faq = FrequentlyAskedQuestions::select('id','name as Name','email as Email','mobile as Mobile','created_at','status','remark')
+                     ->whereDate('created_at', '>=', $from)
+                     ->whereDate('created_at', '<=', $to)
+                     ->get();
+                     foreach($data_faq as $key=>$val)
+                     {
+                         $val['type'] = 'FREQUENTLY ASKED QUESTIONS LIST';
+                     }
+                     foreach($data_faq as $key=>$val){
+                        $data[] = $val;
+                    } 
+                    //Hospital lab
+                    $data_hospital_lab = HospitalLabManagement::select('id','name as Name','email as Email','mobile as Mobile','created_at','status','remark')
+                    ->whereDate('created_at', '>=', $from)
+                    ->whereDate('created_at', '<=', $to)
+                    ->get();
+                    foreach($data_hospital_lab as $key=>$val)
+                    {
+                        $val['type'] = 'HOSPITAL LAB MANAGEMENT LIST';
+                    }
+                    foreach($data_hospital_lab as $key=>$val){
+                        $data[] = $val;
+                    }
+                    //clinical lab
+                    $data_clinical_lab = ClinicalLabManagement::select('id','email as Email','mobile as Mobile','created_at','status','remark')
+                    ->whereDate('created_at', '>=', $from)
+                    ->whereDate('created_at', '<=', $to)
+                    ->get();
+                    foreach($data_clinical_lab as $key=>$val)
+                    {
+                        $val['Name'] = '';
+                        $val['type'] = 'CLINICAL LAB MANAGEMENT LIST';
+                    }
+                    foreach($data_clinical_lab as $key=>$val){
+                        $data[] = $val;
+                    }
+                    // franchisting
+                    $data_franchising = FranchisingOpportunities::select('id','name as Name','email as Email','mobile as Mobile','created_at','status','remark')
+                    ->whereDate('created_at', '>=', $from)
+                    ->whereDate('created_at', '<=', $to)
+                    ->get();
+                    foreach($data_franchising as $key=>$val)
+                    {
+                        $val['type'] = 'FRANCHISING OPPORTUNITIES LIST';
+                    }
+                    foreach($data_franchising as $key=>$val){
+                        $data[] = $val;
+                    }
+                    // Research
+                    $data_research = Research::select('id','name as Name','email as Email','mobile as Mobile','created_at','status','remark')
+                    ->whereDate('created_at', '>=', $from)
+                    ->whereDate('created_at', '<=', $to)
+                    ->get();
+                    foreach($data_research as $key=>$val)
+                    {
+                        $val['type'] = 'RESEARCH LIST';
+                    }
+                    foreach($data_research as $key=>$val){
+                        $data[] = $val;
+                    }
+                    // BookAppointment
+                    $data_booking_appointment = BookAppointment::select('id','name as Name','mobile as Mobile','created_at','status','remark')
+                            ->whereDate('created_at', '>=', $from)
+                            ->whereDate('created_at', '<=', $to)
+                            ->get();
+                    foreach($data_booking_appointment as $key=>$val)
+                    {
+                        $val['Email'] = '';
+                        $val['type'] = 'BOOK AN APPOINTMENT LIST';
+                    }
+                    foreach($data_booking_appointment as $key=>$val){
+                        $data[] = $val;
+                    }
+                    //HeadOffice
+                    $data_head_office = HeadOffice::select('id','name as Name','email as Email','mobile as Mobile','created_at','status','remark')
+                        ->whereDate('created_at', '>=', $from)
+                        ->whereDate('created_at', '<=', $to)
+                        ->get();
+                    foreach($data_head_office as $key=>$val)
+                    {
+                        $val['type'] = 'HEAD OFFICE LIST';
+                    }
+                    foreach($data_head_office as $key=>$val){
+                        $data[] = $val;
+                    }
+                    //career
+                    $data_career = Career::select('id','name as Name','email as Email','mobile as Mobile','created_at','status','remark')
+                    ->whereDate('created_at', '>=', $from)
+                    ->whereDate('created_at', '<=', $to)
+                    ->get();
+                    foreach($data_career as $key=>$val)
+                    {
+                        $val['type'] = 'CAREER ENQUIRY LIST';
+                    }
+                    foreach($data_career as $key=>$val){
+                        $data[] = $val;
+                    }
+                    //ContactUs
+                    $data_contact = ContactUs::select('id','name as Name','email as Email','mobile as Mobile','created_at','status','remark')
+                    ->whereDate('created_at', '>=', $from)
+                    ->whereDate('created_at', '<=', $to)
+                    ->get();
+                    foreach($data_contact as $key=>$val)
+                    {
+                        $val['type'] = 'CONTACT LIST';
+                    }
+                    foreach($data_contact as $key=>$val){
+                        $data[] = $val;
+                    }
+
                     $datatables =  Datatables::of($data)
                     ->editColumn('status', function($row){
-                        $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="PATIENTS_CONSUMERS_LIST" id="status"><option value="">-- Select --</option>';
+                        if($row->type == "PATIENTS CONSUMERS LIST")
+                        {
+                            $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="PATIENTS_CONSUMERS_LIST" id="status"><option value="">-- Select --</option>';
+                            foreach (config('dashboard.status') as $option)
+                            {
+                                if(!empty($row->status) && $row->status == $option){
+                                    $selected = 'selected';
+                                }else{
+                                    $selected = '';
+                                }
+                                $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                            }
+                            $status .= '</select>';
+                            return $status;
+
+                            if(!empty($row->remark)){
+                                $remark = $row->remark;
+                            }else{
+                                $remark = '';
+                            }
+                            $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="PATIENTS_CONSUMERS_LIST" id="remark" name="remark">'.$remark.'</textarea>';
+                            return $remark;
+                        }
+
+                        if($row->type == "BOOK HOME COLLECTION LIST")
+                        {
+                            $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="BOOK_HOME_COLLECTION_LIST" id="status"><option value="">-- Select --</option>';
+                            foreach (config('dashboard.status') as $option)
+                            {
+                                if(!empty($row->status) && $row->status == $option){
+                                    $selected = 'selected';
+                                }else{
+                                    $selected = '';
+                                }
+                                $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                            }
+                            $status .= '</select>';
+                            return $status;
+
+                             if(!empty($row->remark)){
+                                    $remark = $row->remark;
+                                }else{
+                                    $remark = '';
+                                }
+                                $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="BOOK_HOME_COLLECTION_LIST" id="remark" name="remark">'.$remark.'</textarea>';
+                                return $remark;
+                        }
+                        if($row->type == "FEEDBACK LIST")
+                        {
+                        $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="FEEDBACK_LIST" id="status"><option value="">-- Select --</option>';
                         foreach (config('dashboard.status') as $option)
                         {
                             if(!empty($row->status) && $row->status == $option){
@@ -503,17 +695,273 @@ class DashboardController extends Controller
                         }
                         $status .= '</select>';
                         return $status;
+                        }
+                        if($row->type == "FREQUENTLY ASKED QUESTIONS LIST")
+                        {
+                            $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="FREQUENTLY_ASKED_QUESTIONS_LIST" id="status"><option value="">-- Select --</option>';
+                            foreach (config('dashboard.status') as $option)
+                            {
+                                if(!empty($row->status) && $row->status == $option){
+                                    $selected = 'selected';
+                                }else{
+                                    $selected = '';
+                                }
+                                $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                            }
+                            $status .= '</select>';
+                            return $status;
+                        }
+                        if($row->type == "HOSPITAL LAB MANAGEMENT LIST")
+                        {
+                            $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="HOSPITAL_LAB_MANAGEMENT" id="status"><option value="">-- Select --</option>';
+                            foreach (config('dashboard.status') as $option)
+                            {
+                                if(!empty($row->status) && $row->status == $option){
+                                    $selected = 'selected';
+                                }else{
+                                    $selected = '';
+                                }
+                                $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                            }
+                            $status .= '</select>';
+                            return $status;
+                        }
+                        if($row->type == "CLINICAL LAB MANAGEMENT LIST")
+                        {
+                            $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="CLINICAL_LAB_MANAGEMENT" id="status"><option value="">-- Select --</option>';
+                                foreach (config('dashboard.status') as $option)
+                                {
+                                    if(!empty($row->status) && $row->status == $option){
+                                        $selected = 'selected';
+                                    }else{
+                                        $selected = '';
+                                    }
+                                    $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                                }
+                                $status .= '</select>';
+                                return $status;
+                        }
+                        if($row->type == "FRANCHISING OPPORTUNITIES LIST")
+                        {
+                            $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="FRANCHISING_OPPORTUNITIES" id="status"><option value="">-- Select --</option>';
+                            foreach (config('dashboard.status') as $option)
+                            {
+                                if(!empty($row->status) && $row->status == $option){
+                                    $selected = 'selected';
+                                }else{
+                                    $selected = '';
+                                }
+                                $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                            }
+                            $status .= '</select>';
+                            return $status;
+                        }
+                        if($row->type == "RESEARCH LIST")
+                        {
+                            $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="RESEARCH" id="status"><option value="">-- Select --</option>';
+                            foreach (config('dashboard.status') as $option)
+                            {
+                                if(!empty($row->status) && $row->status == $option){
+                                    $selected = 'selected';
+                                }else{
+                                    $selected = '';
+                                }
+                                $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                            }
+                            $status .= '</select>';
+                            return $status;
+                        }
+                        if($row->type == "BOOK AN APPOINTMENT LIST")
+                        {
+                            $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="BOOK_AN_APPOINTMENT" id="status"><option value="">-- Select --</option>';
+                            foreach (config('dashboard.status') as $option)
+                            {
+                                if(!empty($row->status) && $row->status == $option){
+                                    $selected = 'selected';
+                                }else{
+                                    $selected = '';
+                                }
+                                $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                            }
+                            $status .= '</select>';
+                            return $status;
+                        }
+                        if($row->type == "HEAD OFFICE LIST")
+                        {
+                            $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="HEAD_OFFICE" id="status"><option value="">-- Select --</option>';
+                            foreach (config('dashboard.status') as $option)
+                            {
+                                if(!empty($row->status) && $row->status == $option){
+                                    $selected = 'selected';
+                                }else{
+                                    $selected = '';
+                                }
+                                $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                            }
+                            $status .= '</select>';
+                            return $status;
+                        }
+                        if($row->type == "CAREER ENQUIRY LIST")
+                        {
+                            $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="CAREER_ENQUIRY" id="status"><option value="">-- Select --</option>';
+                            foreach (config('dashboard.status') as $option)
+                            {
+                                if(!empty($row->status) && $row->status == $option){
+                                    $selected = 'selected';
+                                }else{
+                                    $selected = '';
+                                }
+                                $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                            }
+                            $status .= '</select>';
+                            return $status;
+                        }
+                        if($row->type == "CONTACT LIST")
+                        {
+                            $status = '<select class="form-control status" name="status" data-id="'.$row->id.'" data-type="CONTACT_LIST" id="status"><option value="">-- Select --</option>';
+                            foreach (config('dashboard.status') as $option)
+                            {
+                                if(!empty($row->status) && $row->status == $option){
+                                    $selected = 'selected';
+                                }else{
+                                    $selected = '';
+                                }
+                                $status .=  '<option value="'.$option.'" '.$selected.'>'.$option.'</option>';
+                            }
+                            $status .= '</select>';
+                            return $status;
+                        }
+                        
                     })
                     ->editColumn('remark', function($row){
-                        if(!empty($row->remark)){
-                            $remark = $row->remark;
-                        }else{
-                            $remark = '';
+                        if($row->type == "PATIENTS CONSUMERS LIST")
+                        {
+                            if(!empty($row->remark)){
+                                $remark = $row->remark;
+                            }else{
+                                $remark = '';
+                            }
+                            $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="PATIENTS_CONSUMERS_LIST" id="remark" name="remark">'.$remark.'</textarea>';
+                            return $remark;
                         }
-                        $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="PATIENTS_CONSUMERS_LIST" id="remark" name="remark">'.$remark.'</textarea>';
-                        return $remark;
+                        if($row->type == "BOOK HOME COLLECTION LIST")
+                        {
+                            if(!empty($row->remark)){
+                                $remark = $row->remark;
+                            }else{
+                                $remark = '';
+                            }
+                            $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="BOOK_HOME_COLLECTION_LIST" id="remark" name="remark">'.$remark.'</textarea>';
+                            return $remark;
+                        }
+                        if($row->type == "FEEDBACK LIST")
+                        {
+                            if(!empty($row->remark)){
+                                $remark = $row->remark;
+                            }else{
+                                $remark = '';
+                            }
+                            $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="FEEDBACK_LIST" id="remark" name="remark">'.$remark.'</textarea>';
+                            return $remark;
+                        }
+                        if($row->type == "FREQUENTLY ASKED QUESTIONS LIST")
+                        {
+                            if(!empty($row->remark)){
+                                $remark = $row->remark;
+                            }else{
+                                $remark = '';
+                            }
+                            $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="FREQUENTLY_ASKED_QUESTIONS_LIST" id="remark" name="remark">'.$remark.'</textarea>';
+                            return $remark;
+                        }
+                        if($row->type == "HOSPITAL LAB MANAGEMENT LIST")
+                        {
+                            if(!empty($row->remark)){
+                                $remark = $row->remark;
+                            }else{
+                                $remark = '';
+                            }
+                            $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="HOSPITAL_LAB_MANAGEMENT" id="remark" name="remark">'.$remark.'</textarea>';
+                            return $remark;
+                        }
+                        if($row->type == "CLINICAL LAB MANAGEMENT LIST")
+                        {
+                            if(!empty($row->remark)){
+                                $remark = $row->remark;
+                            }else{
+                                $remark = '';
+                            }
+                            $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="CLINICAL_LAB_MANAGEMENT" id="remark" name="remark">'.$remark.'</textarea>';
+                            return $remark;
+                        }
+                        if($row->type == "FRANCHISING OPPORTUNITIES LIST")
+                        {
+                            if(!empty($row->remark)){
+                                $remark = $row->remark;
+                            }else{
+                                $remark = '';
+                            }
+                            $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="FRANCHISING_OPPORTUNITIES" id="remark" name="remark">'.$remark.'</textarea>';
+                            return $remark;
+                        }
+                        if($row->type == "RESEARCH LIST")
+                        {
+                            if(!empty($row->remark)){
+                                $remark = $row->remark;
+                            }else{
+                                $remark = '';
+                            }
+                            $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="RESEARCH" id="remark" name="remark">'.$remark.'</textarea>';
+                            return $remark;
+                        }
+                        if($row->type == "BOOK AN APPOINTMENT LIST")
+                        {
+                            if(!empty($row->remark)){
+                                $remark = $row->remark;
+                            }else{
+                                $remark = '';
+                            }
+                            $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="BOOK_AN_APPOINTMENT" id="remark" name="remark">'.$remark.'</textarea>';
+                            return $remark;
+                        }
+                        if($row->type == "HEAD OFFICE LIST")
+                        {
+                            if(!empty($row->remark)){
+                                $remark = $row->remark;
+                            }else{
+                                $remark = '';
+                            }
+                            $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="HEAD_OFFICE" id="remark" name="remark">'.$remark.'</textarea>';
+                            return $remark;
+                        }
+                        if($row->type == "CAREER ENQUIRY LIST")
+                        {
+                            if(!empty($row->remark)){
+                                $remark = $row->remark;
+                            }else{
+                                $remark = '';
+                            }
+                            $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="CAREER_ENQUIRY" id="remark" name="remark">'.$remark.'</textarea>';
+                            return $remark;
+                        }
+                        if($row->type == "CONTACT LIST")
+                        {
+                            if(!empty($row->remark)){
+                                $remark = $row->remark;
+                            }else{
+                                $remark = '';
+                            }
+                            $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="CONTACT_LIST" id="remark" name="remark">'.$remark.'</textarea>';
+                            return $remark;
+                        }
                     })
-                    ->rawColumns(['status','remark']);
+                    ->editColumn('created_at',function($row){
+                   
+                        $created_at = Carbon::createFromFormat('Y-m-d H:i:s', $row['created_at'])->format('d-m-Y');
+                         return $created_at;
+                     
+                 })->rawColumns(['status','remark']);
+                 
                 }
             }
             else   {
@@ -546,7 +994,13 @@ class DashboardController extends Controller
                     $remark = '<textarea class="form-control" data-id="'.$row->id.'" data-type="PATIENTS_CONSUMERS_LIST" id="remark" name="remark">'.$remark.'</textarea>';
                     return $remark;
                 })
-                ->rawColumns(['status','remark']);
+                ->editColumn('created_at',function($row){
+                   
+                       $created_at = Carbon::createFromFormat('Y-m-d H:i:s', $row['created_at'])->format('d-m-Y');
+                        return $created_at;
+                    
+                })
+                ->rawColumns(['status','remark','created_at']);
 
             }
            
