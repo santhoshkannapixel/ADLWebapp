@@ -75,7 +75,7 @@
                     </thead>
                     <tbody>
                         @php $total_price = 0 @endphp
-                        @foreach ($data['order']['Tests'] as $key => $item)
+                        @foreach ($data['order']['tests'] as $key => $item)
                             @php $total_price += (int) $item->TestPrice @endphp
                             <tr>
                                 <td><small>{{ $item->TestId }}</small></td>
@@ -105,6 +105,6 @@
     <center>
         <br>
         Thanks,<br>
-        <strong>Anand Lab TEam</strong>
+        <strong>Anand Lab Team</strong>
     </center>
 @endcomponent
