@@ -264,7 +264,7 @@
                             _token: '{{csrf_token()}}'
                         },
                         success :function(data) {
-                            $('#data-table').DataTable().destroy();
+                            // $('#data-table').DataTable().destroy();
                             toastr.success("Status updated successfully");
                         }
                     })
