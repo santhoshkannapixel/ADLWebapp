@@ -84,8 +84,8 @@ class OrdersController extends Controller
                 "customer"     => $customer,
                 "order"        => $result,
                 "tests"        => $tests,
-                "status"       => 'Booked',
-                "order_status" => 'Pending',
+                "status"       => $request->order_status,
+                "order_status" => $request->order_status
             ]);
         }
         return back();
