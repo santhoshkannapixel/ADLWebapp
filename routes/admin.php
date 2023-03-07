@@ -35,7 +35,8 @@ use App\Http\Controllers\ApiController;
 use App\Http\Controllers\ConditionController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\OrdersController;
-use App\Http\Controllers\OrganController; 
+use App\Http\Controllers\OrganController;
+use App\Http\Controllers\SitemapXmlController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -253,3 +254,4 @@ Route::get('test-mail',function() {
     $action->sendMailNotification(6);
     return "action";
 });
+Route::get('/sitemap.xml', [SitemapXmlController::class, 'index']);
