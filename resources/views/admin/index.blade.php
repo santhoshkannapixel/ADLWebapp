@@ -7,8 +7,12 @@
         <div class="mb-1 lead"><strong>Welcome  <b class="text-gradient">{{ Sentinel::getUser()->name }}</b></strong></div>
         <span><b class="text-dark">Role :</b> <span class="badge bg-gradient">{{ Sentinel::getUser()->roles[0]->name }}</span></span>
     </div>
+   
+    @if(Sentinel::getUser()->roles[0]['id'] == "1") 
     <div class="row m-0">
+        
         <div class="col-3 p-1">
+            <a href="{{ route('test.index') }}">
             <div class="card h-100 shadow">
                 <div class="card-body">
                     <div class="h4 text-gradient"> <span id="total_test"></span> </div>
@@ -18,8 +22,10 @@
                     </div>
                 </div>
             </div>
+            </a>
         </div>
         <div class="col-3 p-1">
+            <a href="{{ route('test.index') }}">
             <div class="card h-100 shadow">
                 <div class="card-body">
                     <div class="h4 text-gradient"><span id="total_package"></span></div>
@@ -29,8 +35,10 @@
                     </div>
                 </div>
             </div>
+            </a>
         </div>
         <div class="col-3 p-1">
+            <a href="{{ route('orders.index') }}">
             <div class="card h-100 shadow">
                 <div class="card-body">
                     <div class="h4 text-gradient"><span id="total_order"></span></div>
@@ -40,8 +48,10 @@
                     </div>
                 </div>
             </div>
+            </a>
         </div>
         <div class="col-3 p-1">
+            <a href="{{ route('user.index') }}">
             <div class="card h-100 shadow">
                 <div class="card-body">
                     <div class="h4 text-gradient"><span id="total_customer"></span></div>
@@ -51,6 +61,7 @@
                     </div>
                 </div>
             </div>
+            </a>
         </div>
         <div class="col-4 p-1">
             <div class="card card-body shadow-sm">
@@ -86,6 +97,7 @@
             </div>
         </div>
     </div>
+    @endif
     <div class="card custom table-card m-1 mt-2">
         <div class="card-header">
             <div class="row m-0 align-items-center w-100">
