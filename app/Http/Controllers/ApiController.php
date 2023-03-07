@@ -369,7 +369,7 @@ class ApiController extends Controller
                 $Order->Tests()->create($product);
             }
         }
-        
+
         if($result['status']) {
             $this->sendMailNotification($Order->id);
         }
@@ -423,11 +423,12 @@ class ApiController extends Controller
         $tests    = OrderedTests::where('order_id',$id)->get();
         $customer = CustomerDetails::where('user_id', $order->User->id)->first();
         sendMail(new OrderStatusMail(), [
-            "email"    => $customer->email,
-            "customer" => $customer,
-            "order"    => $order,
-            "tests"    => $tests,
-            "status"   => 'Booked',
+            "email"        => $customer->email,
+            "customer"     => $customer,
+            "order"        => $order,
+            "tests"        => $tests,
+            "status"       => 'Booked',
+            "order_status" => 'Pending',
         ]);
     }
 

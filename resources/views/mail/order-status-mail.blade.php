@@ -1,4 +1,19 @@
 @component('mail::message')
+    <div class="card border shadow-sm mb-3">
+        <div class="card-body">
+            <table class="table">
+                <tr>
+                    <td>
+                        <img src="{{ asset('public/images/logo/logo.png') }}"  width="200" alt="logo">
+                    </td>
+                    <td>
+                        <div>Order #ID: <b> {{ $data['order']['order_id'] }}</b></div>
+                        <div>Order Status:  <b>{{ $data['order_status'] }}</b></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
     <p>Dear <b>{{ $data['customer']['first_name'] . ' ' . $data['customer']['last_name'] }}</b>, </p>
     <p>
         Thank you for your booking. we will send a confirmation mail

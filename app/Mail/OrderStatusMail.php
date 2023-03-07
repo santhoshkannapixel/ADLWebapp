@@ -28,7 +28,7 @@ class OrderStatusMail extends Mailable
     public function build()
     {
         return $this->markdown('mail.order-status-mail')
-                    ->subject("Your order has been ".$this->data['status'])
+                    ->subject("Your order is ".$this->data['status']." | ".$this->data['order']['order_id'])
                     ->with(['data'=>$this->data]);
     }
 }
