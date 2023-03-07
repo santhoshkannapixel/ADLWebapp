@@ -46,7 +46,7 @@ Route::middleware(['auth_users'])->group(function () {
             Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
             Route::post('/export', [DashboardController::class, 'exportData'])->name('dashboard.export');
         });
-        Route::get('/', [DashboardController::class, 'dashboardData'])->name('dashboard.data');
+        Route::get('/dashboardData', [DashboardController::class, 'dashboardData'])->name('dashboard.data');
         Route::post('/dashboard-status', [DashboardController::class, 'status'])->name('dashboard.status');
         Route::post('/dashboard-remark', [DashboardController::class, 'remark'])->name('dashboard.remark');
         // Route::group(['prefix' => 'settings'], function () {

@@ -8,27 +8,25 @@
     <tbody>
         @foreach (getAllRoutes() as $rootKey => $route)
             <tr>
-                <td class="px-3 bg-light border-end" width="20%"><b>{{ ucfirst($rootKey) }}</b></td>
+                <td class="px-3 bg-light border-end" width="20%"><small><b>{{ ucfirst($rootKey) }}</b></small></td>
                 <td style="padding:0 !important">
                     <div class="row m-0 align-content-center">
-                        @foreach ($route as $key => $name)
-                            <div class="col-3 p-0">
-                                <label for="{{ $name }}" class="bg-light w-100 p-2">
-                                    @php $function_name = explode('.',$name) @endphp
-                                    {{ ucwords(str_replace('-', ' ', end($function_name))) }}
-                                </label>
-                                <div class="d-flex align-items-center p-2">
-                                    <label  for="{{ $name }}_ON">
-                                        <input type="radio" value="1" name="{{ formatRoute($name) }}" id="{{ $name }}_ON" @isset($permissions) {{ $permissions[formatRoute($name)] ?? false == "1" ? 'checked' : ''}} @endisset>
-                                        <b class="text-success">ON</b>
-                                    </label>
-                                    <label class="ms-3" for="{{ $name }}_OFF">
-                                        <input type="radio" value="0" name="{{ formatRoute($name) }}" id="{{ $name }}_OFF" @isset($permissions) {{ $permissions[formatRoute($name)] ?? false == "0" ? 'checked' : ''}} @endisset>
-                                        <b class="text-danger">OFF</b>
-                                    </label>
-                                </div>
-                            </div>
-                        @endforeach
+                        @foreach ($route as $name) 
+                            <label label="{{  $permissions[formatRoute($name)] ?? '0' == 1 ? 'Access' : 'Not Access' }}" class="col-3 btn btn-sm text-start" for="{{ formatRoute($name) }}">
+                                @if (isset($permissions[formatRoute($name)]))
+                                    <input type="hidden" name="{{ formatRoute($name) }}" value="{{ $permissions[formatRoute($name)] == 0 ? 0 : '' }}">
+                                    <input class="form-check-input me-1 border" type="checkbox"
+                                        {{ $permissions[formatRoute($name)] == 1 ? 'checked' : '' }}
+                                        name="{{ formatRoute($name) }}" value="1" id="{{ formatRoute($name) }}">
+                                @else
+                                    <input type="hidden" name="{{ formatRoute($name) }}" value="0">
+                                    <input class="form-check-input me-1 border" type="checkbox"
+                                        name="{{ formatRoute($name) }}" value="1" id="{{ formatRoute($name) }}">
+                                @endif
+                                <small> @php $function_name = explode('.',$name) @endphp
+                                    {{ ucwords(str_replace('-', ' ', end($function_name))) }}</small>
+                            </label>
+                        @endforeach 
                     </div>
                 </td>
             </tr>
