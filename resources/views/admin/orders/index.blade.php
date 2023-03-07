@@ -10,7 +10,6 @@
             <div class="card-title">
                 Lab Test Orders
             </div>
-            <a class="btn btn-primary" href="{{ route('news-and-events.create') }}"><i class="fa fa-plus"></i> Add </a>
         </div>
         <div class="card-body">
             <table class="table table-sm table-bordered table-centered m-0 tr-sm table-hover" id="data-table">

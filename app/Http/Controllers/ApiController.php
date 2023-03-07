@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\HomeCollectionMail;
+use App\Mail\OrderStatusMail;
 use App\Mail\ResetPasswordMail;
 use App\Models\ApiConfig;
 use App\Models\Banners;
@@ -362,6 +363,10 @@ class ApiController extends Controller
             'order_id' => OrderId($Order->id),
         ]);
 
+        if($result['status']) {
+            $this->sendMailNotification($Order->id);
+        }
+
         if (count($request->products)) {
             foreach ($request->products as $key => $product) {
                 $Order->Tests()->create($product);
@@ -408,6 +413,18 @@ class ApiController extends Controller
             "order_id"       => $order_id,
             "order_response" => serialize($order_response)
         ];
+    }
+
+    public function sendMailNotification($id)
+    {
+        $order    = Orders::with('User','Tests')->find($id);
+        $customer = CustomerDetails::where('user_id', $order->User->id)->first();
+        sendMail(new OrderStatusMail(), [
+            "email"    => $customer->email,
+            "customer" => $customer,
+            "order"    => $order,
+            "status"    => 'Booked',
+        ]);
     }
 
     public function customer_info($id)

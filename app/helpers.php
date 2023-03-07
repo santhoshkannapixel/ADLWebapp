@@ -1,5 +1,6 @@
 <?php
 
+use App\Jobs\EmailJobs;
 use App\Models\ApiConfig;
 use App\Models\PaymentConfig;
 use Carbon\Carbon;
@@ -206,6 +207,13 @@ if (!function_exists('toggleButton')) {
             if($status == "5") {
                 return '<span class="badge-danger"><span class="fa fa-ban me-1"></span> Cancel Request Dined</span>';
             }
+        }
+    }
+
+    if (!function_exists('sendMail')) {
+        function sendMail($modal,$data)
+        {
+            return dispatch(new EmailJobs( new $modal(),$data));
         }
     }
 }

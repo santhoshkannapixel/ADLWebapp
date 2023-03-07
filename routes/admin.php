@@ -31,10 +31,11 @@ use App\Http\Controllers\Admin\PaymentConfigController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewsAndEventsController;
 use App\Http\Controllers\Admin\NewsLetterController;
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\ConditionController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\OrdersController;
-use App\Http\Controllers\OrganController;
+use App\Http\Controllers\OrganController; 
 use Illuminate\Support\Facades\Route;
 
 
@@ -245,4 +246,10 @@ Route::middleware(['auth_users'])->group(function () {
     Route::post('/contact-us/export', [ContactUsController::class, 'exportData'])->name('contact-us.export');
 
     
+});
+
+Route::get('test-mail',function() {
+    $action = new ApiController();
+    $action->sendMailNotification(1);
+    return "action";
 });
