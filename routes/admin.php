@@ -250,6 +250,6 @@ Route::middleware(['auth_users'])->group(function () {
 
 Route::get('test-mail',function() {
     $action = new ApiController();
-    $action->sendMailNotification(1);
+    $action->sendMailNotification(6);
     return "action";
 });

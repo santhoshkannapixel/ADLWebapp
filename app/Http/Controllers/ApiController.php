@@ -14,6 +14,7 @@ use App\Models\Cities;
 use App\Models\Conditions;
 use App\Models\CustomerDetails;
 use App\Models\NewsEvent;
+use App\Models\OrderedTests;
 use App\Models\Orders;
 use App\Models\Organs;
 use App\Models\Packages;
@@ -418,12 +419,14 @@ class ApiController extends Controller
     public function sendMailNotification($id)
     {
         $order    = Orders::with('User','Tests')->find($id);
+        $tests    = OrderedTests::where('order_id',$id)->get();
         $customer = CustomerDetails::where('user_id', $order->User->id)->first();
         sendMail(new OrderStatusMail(), [
             "email"    => $customer->email,
             "customer" => $customer,
             "order"    => $order,
-            "status"    => 'Booked',
+            "tests"    => $tests,
+            "status"   => 'Booked',
         ]);
     }
 

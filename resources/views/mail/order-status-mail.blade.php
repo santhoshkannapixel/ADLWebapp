@@ -67,21 +67,19 @@
                 <table class="table mb-0">
                     <thead class="table-light">
                         <tr>
-                            <th><small>Test ID</small></th>
                             <th><small>Test Name</small></th>
-                            <th><small>Test Type</small></th>
+                            <th><small>Type</small></th>
                             <th><small>Price</small></th>
                         </tr>
                     </thead>
                     <tbody>
                         @php $total_price = 0 @endphp
-                        @foreach ($data['order']['tests'] as $key => $item)
+                        @foreach ($data['tests'] as $key => $item)
                             @php $total_price += (int) $item->TestPrice @endphp
                             <tr>
-                                <td><small>{{ $item->TestId }}</small></td>
                                 <td><small>{{ $item->TestName }}</small></td>
                                 <td><small>{{ $item->IsPackage == 'Yes' ? 'Test Packages' : 'Lab Test' }}</small></td>
-                                <td><small>{{ $item->TestPrice }}</small></td>
+                                <td style="text-align:right"><small>₹{{ $item->TestPrice }}</small></td>
                             </tr>
                         @endforeach
                     </tbody>
