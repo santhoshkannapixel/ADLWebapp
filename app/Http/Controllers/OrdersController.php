@@ -79,13 +79,22 @@ class OrdersController extends Controller
             Flash::success('Order Status Changed !');
             $tests    = OrderedTests::where('order_id',$id)->get();
             $customer = CustomerDetails::where('user_id', $result->User->id)->first();
+            if($request->order_status == "0") {
+                $order_status = "Pending";
+            }
+            if($request->order_status == "1") {
+                $order_status = "Accepted";
+            }
+            if($request->order_status == "2") {
+                $order_status = "Denied";
+            }
             sendMail(new OrderStatusMail(), [
                 "email"        => $customer->email,
                 "customer"     => $customer,
                 "order"        => $result,
                 "tests"        => $tests,
-                "status"       => $request->order_status,
-                "order_status" => $request->order_status
+                "status"       => $order_status,
+                "order_status" => $order_status
             ]);
         }
         return back();
