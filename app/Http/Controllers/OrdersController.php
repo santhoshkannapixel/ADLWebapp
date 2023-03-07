@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderStatusMail;
 use App\Models\CustomerDetails;
+use App\Models\OrderedTests;
 use App\Models\Orders;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -69,9 +71,22 @@ class OrdersController extends Controller
 
     public function change_order_status(Request $request ,$id)
     {
-        $result = Orders::findOrFail($id)->update(['order_status' => $request->order_status]);
+        $result = Orders::with('User','Tests')->findOrFail($id);
+        $result->update([
+            'order_status' => $request->order_status
+        ]);
         if($result) {
             Flash::success('Order Status Changed !');
+            $tests    = OrderedTests::where('order_id',$id)->get();
+            $customer = CustomerDetails::where('user_id', $result->User->id)->first();
+            sendMail(new OrderStatusMail(), [
+                "email"        => $customer->email,
+                "customer"     => $customer,
+                "order"        => $result,
+                "tests"        => $tests,
+                "status"       => 'Booked',
+                "order_status" => 'Pending',
+            ]);
         }
         return back();
     }

@@ -76,7 +76,7 @@
         </div>
     </div>
     <div class="card border shadow-sm mb-3">
-        <div class="card-body" style="height: 370px;overflow:auto">
+        <div class="card-body" style="max-height: 370px;overflow:auto">
             <h6 class="header-title mb-3"><b>Items from Order</b></h6>
             <div class="table-responsive">
                 <table class="table mb-0">
