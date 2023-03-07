@@ -67,6 +67,7 @@
                 <table class="table mb-0">
                     <thead class="table-light">
                         <tr>
+                            <th>#</th>
                             <th><small>Test Name</small></th>
                             <th><small>Type</small></th>
                             <th><small>Price</small></th>
@@ -77,6 +78,7 @@
                         @foreach ($data['tests'] as $key => $item)
                             @php $total_price += (int) $item->TestPrice @endphp
                             <tr>
+                                <td><small>{{ $key + 1 }}</small></td>
                                 <td><small>{{ $item->TestName }}</small></td>
                                 <td><small>{{ $item->IsPackage == 'Yes' ? 'Test Packages' : 'Lab Test' }}</small></td>
                                 <td style="text-align:right"><small>₹{{ $item->TestPrice }}</small></td>
