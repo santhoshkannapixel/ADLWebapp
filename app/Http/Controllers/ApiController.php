@@ -362,17 +362,18 @@ class ApiController extends Controller
 
         $Order->update([
             'order_id' => OrderId($Order->id),
-        ]);
-
-        if($result['status']) {
-            $this->sendMailNotification($Order->id);
-        }
+        ]); 
 
         if (count($request->products)) {
             foreach ($request->products as $key => $product) {
                 $Order->Tests()->create($product);
             }
         }
+        
+        if($result['status']) {
+            $this->sendMailNotification($Order->id);
+        }
+
         return response()->json([
             "status" => $result['status'],
             "message" => $message
