@@ -9,7 +9,6 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-    Redirect 301 /test http://www.example.com/newpage.html
 
 
     # Redirect Trailing Slashes If Not A Folder...
