@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\CareerExport;
+use App\Exports\HeadOfficeExport;
 use App\Http\Controllers\Controller;
 use App\Models\Career;
 use Laracasts\Flash\Flash;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CareerController extends Controller
 {
@@ -53,5 +56,9 @@ class CareerController extends Controller
     {
         $data = Career::where('id',$id)->with('job')->first();
         return view('admin.manage_career.careers.view',compact('data'));
+    }
+    public function exportData(Request $request)
+    {
+        return Excel::download(new CareerExport, 'career.xlsx');
     }
 }

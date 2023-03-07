@@ -13,7 +13,7 @@ class PatientsConsumersExport implements FromCollection,WithHeadings
     */
     public function collection()
     {
-        return PatientsConsumers::select('name','email','mobile','date','gender','test_for_home_collection','preferred_date_1','preferred_date_2','preferred_time','address','pincode','created_at')->get();
+        return PatientsConsumers::select('name','email','mobile','dob','gender','test_for_home_collection','preferred_date_1','preferred_date_2','preferred_time','address','pincode','created_at')->get();
     }
     public function headings(): array
     {

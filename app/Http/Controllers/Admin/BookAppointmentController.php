@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\BookAppointmentExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BookAppointment;
@@ -10,6 +11,7 @@ use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BookAppointmentController extends Controller
 {
@@ -64,5 +66,9 @@ class BookAppointmentController extends Controller
         ->join('tests','tests.id','=','book_appointments.test_id')
         ->findOrFail($id);
         return view('admin.health-checkup.book-an-appointment.show', compact('data'));
+    }
+    public function exportData(Request $request)
+    {
+        return Excel::download(new BookAppointmentExport, 'book_appointment.xlsx');
     }
 }

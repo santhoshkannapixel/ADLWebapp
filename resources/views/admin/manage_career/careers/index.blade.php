@@ -7,7 +7,10 @@
             <div class="card-title">
                 Careers
             </div>
-           
+            <form method="POST" name="dashboard_export" action="{{ route('careers.export') }}" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                <button type="submit" id="dashboardExport" class="btn btn-primary" >Export</button>
+            </form>
             {{-- <a href="{{ route('home_visit.create') }}" class="btn btn-primary ms-3">
                 <i class="fa fa-plus me-2" aria-hidden="true"></i>
                 Add New

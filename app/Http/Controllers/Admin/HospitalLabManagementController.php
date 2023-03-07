@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\HospitalLabManagementExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\HospitalLabManagement;
@@ -10,6 +11,7 @@ use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class HospitalLabManagementController extends Controller
 {
@@ -55,5 +57,9 @@ class HospitalLabManagementController extends Controller
         mobile as mobile,email as email,designation as designation,message as message,DATE_FORMAT(created_at,'%d/%m/%Y') as created_date"))->findOrFail($id);
 
         return view('admin.doctors.hospital-lab-management.show', compact('data'));
+    }
+    public function exportData(Request $request)
+    {
+        return Excel::download(new HospitalLabManagementExport, 'hospital_lab_management.xlsx');
     }
 }

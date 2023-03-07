@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ContactExport;
 use App\Http\Controllers\Controller;
 use App\Models\ContactUs;
 use Yajra\DataTables\Facades\DataTables;
 use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ContactUsController extends Controller
 {
@@ -48,5 +50,10 @@ class ContactUsController extends Controller
     {
         $data = ContactUs::where('id',$id)->first();
         return view('admin.manage_contact.show',compact('data'));
+    }
+    public function exportData(Request $request)
+    {
+        return Excel::download(new ContactExport, 'contact.xlsx');
+
     }
 }

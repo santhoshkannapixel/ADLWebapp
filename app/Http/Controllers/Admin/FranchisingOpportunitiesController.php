@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\FranchisingOpportunitiesExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\FranchisingOpportunities;
@@ -10,6 +11,7 @@ use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FranchisingOpportunitiesController extends Controller
 {
@@ -55,5 +57,9 @@ class FranchisingOpportunitiesController extends Controller
         DATE_FORMAT(created_at,'%d/%m/%Y') as created_date"))->findOrFail($id);
 
         return view('admin.doctors.franchising-opportunities.show', compact('data'));
+    }
+    public function exportData(Request $request)
+    {
+        return Excel::download(new FranchisingOpportunitiesExport, 'franchising_opportunities.xlsx');
     }
 }

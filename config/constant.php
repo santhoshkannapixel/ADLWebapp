@@ -1,6 +1,6 @@
 <?php 
 return [
-    'sentMailId' =>"donotreply@anandlab.com",
-    'bccMailId' =>"branding@anandlab.com",
+    'sentMailId' =>"santhoshd.pixel@gmail.com",
+    'bccMailId' =>"67santhosh@gmail.com",
     
 ];

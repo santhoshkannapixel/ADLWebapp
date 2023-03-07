@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\BookHomeCollectionExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BookHomeCollection;
@@ -10,6 +11,7 @@ use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
 
 class BookHomeCollectionController extends Controller
@@ -63,5 +65,10 @@ class BookHomeCollectionController extends Controller
         $data   =   BookHomeCollection::select(DB::raw("name as name,mobile as mobile,location as location,file as file,
         test_name as test_name,comments as comments,DATE_FORMAT(created_at,'%d/%m/%Y') as created_date"))->findOrFail($id);
         return view('admin.enquiry.home-collection.show', compact('data'));
+    }
+    public function exportData(Request $request)
+    {
+        return Excel::download(new BookHomeCollectionExport, 'book_home_collection.xlsx');
+
     }
 }

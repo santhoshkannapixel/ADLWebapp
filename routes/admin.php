@@ -163,42 +163,57 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/home-collection', [BookHomeCollectionController::class, 'index'])->name('home-collection.index');
     Route::delete('/home-collection/{id}', [BookHomeCollectionController::class, 'destroy'])->name('home-collection.delete');
     Route::get('/home-collection/{id}', [BookHomeCollectionController::class, 'show'])->name('home-collection.show');
+    Route::post('/home-collection/export', [BookHomeCollectionController::class, 'exportData'])->name('home-collection.export');
+
 
     Route::get('/feedback', [FeedBackController::class, 'index'])->name('feedback.index');
     Route::delete('/feedback/{id}', [FeedBackController::class, 'destroy'])->name('feedback.delete');
     Route::get('/feedback/{id}', [FeedBackController::class, 'show'])->name('feedback.show');
+    Route::post('/feedback/export', [FeedBackController::class, 'exportData'])->name('feedback.export');
 
     Route::get('/faq', [FrequentlyAskedQuestionsController::class, 'index'])->name('faq.index');
     Route::delete('/faq/{id}', [FrequentlyAskedQuestionsController::class, 'destroy'])->name('faq.delete');
     Route::get('/faq/{id}', [FrequentlyAskedQuestionsController::class, 'show'])->name('faq.show');
+    Route::post('/faq/export', [FrequentlyAskedQuestionsController::class, 'exportData'])->name('faq.export');
 
     Route::get('/hospital-lab-management', [HospitalLabManagementController::class, 'index'])->name('hospital-lab-management.index');
     Route::delete('/hospital-lab-management/{id}', [HospitalLabManagementController::class, 'destroy'])->name('hospital-lab-management.delete');
     Route::get('/hospital-lab-management/{id}', [HospitalLabManagementController::class, 'show'])->name('hospital-lab-management.show');
+    Route::post('/hospital-lab-management/export', [HospitalLabManagementController::class, 'exportData'])->name('hospital-lab-management.export');
 
     Route::get('/clinical-lab-management', [ClinicalLabManagementController::class, 'index'])->name('clinical-lab-management.index');
     Route::delete('/clinical-lab-management/{id}', [ClinicalLabManagementController::class, 'destroy'])->name('clinical-lab-management.delete');
     Route::get('/clinical-lab-management/{id}', [ClinicalLabManagementController::class, 'show'])->name('clinical-lab-management.show');
+    Route::post('/clinical-lab-management/export', [ClinicalLabManagementController::class, 'exportData'])->name('clinical-lab-management.export');
 
     Route::get('/franchising-opportunities', [FranchisingOpportunitiesController::class, 'index'])->name('franchising-opportunities.index');
     Route::delete('/franchising-opportunities/{id}', [FranchisingOpportunitiesController::class, 'destroy'])->name('franchising-opportunities.delete');
     Route::get('/franchising-opportunities/{id}', [FranchisingOpportunitiesController::class, 'show'])->name('franchising-opportunities.show');
+    Route::post('/franchising-opportunities/export', [FranchisingOpportunitiesController::class, 'exportData'])->name('franchising-opportunities.export');
+
 
     Route::get('/research', [ResearchController::class, 'index'])->name('research.index');
     Route::delete('/research/{id}', [ResearchController::class, 'destroy'])->name('research.delete');
     Route::get('/research/{id}', [ResearchController::class, 'show'])->name('research.show');
+    Route::post('/research/export', [ResearchController::class, 'exportData'])->name('research.export');
+
 
     Route::get('/patients-consumers', [PatientsConsumersController::class, 'index'])->name('patients-consumers.index');
     Route::delete('/patients-consumers/{id}', [PatientsConsumersController::class, 'destroy'])->name('patients-consumers.delete');
     Route::get('/patients-consumers/{id}', [PatientsConsumersController::class, 'show'])->name('patients-consumers.show');
+    Route::post('/patients-consumers/export', [PatientsConsumersController::class, 'exportData'])->name('patients-consumers.export');
+
 
     Route::get('/book-an-appointment', [BookAppointmentController::class, 'index'])->name('book-an-appointment.index');
     Route::delete('/book-an-appointment/{id}', [BookAppointmentController::class, 'destroy'])->name('book-an-appointment.delete');
     Route::get('/book-an-appointment/{id}', [BookAppointmentController::class, 'show'])->name('book-an-appointment.show');
+    Route::post('/book-an-appointment/export', [BookAppointmentController::class, 'exportData'])->name('book-an-appointment.export');
 
     Route::get('/healthcheckup-for-employee', [HeadOfficeController::class, 'index'])->name('healthcheckup-for-employee.index');
     Route::delete('/healthcheckup-for-employee/{id}', [HeadOfficeController::class, 'destroy'])->name('healthcheckup-for-employee.delete');
     Route::get('/healthcheckup-for-employee/{id}', [HeadOfficeController::class, 'show'])->name('healthcheckup-for-employee.show');
+    Route::post('/healthcheckup-for-employee/export', [HeadOfficeController::class, 'exportData'])->name('healthcheckup-for-employee.export');
+
 
     Route::group(['prefix' => 'career/job-post'], function () {
         Route::get('/', [JobPostController::class, 'index'])->name('job-post.index');
@@ -221,10 +236,13 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('careers/status/{id}', [CareerController::class, 'status'])->name('careers.status');
     Route::get('careers/resume/{id}', [CareerController::class, 'download'])->name('resume.download');
     Route::get('careers/view/{id}', [CareerController::class, 'view'])->name('careers.view');
+    Route::post('/careers/export', [CareerController::class, 'exportData'])->name('careers.export');
+
 
     Route::get('contact-us', [ContactUsController::class, 'index'])->name('contact-us.index');
     Route::delete('contact-us/delete/{id?}', [ContactUsController::class, 'delete'])->name('contact-us.delete'); 
     Route::get('contact-us/view/{id}', [ContactUsController::class, 'view'])->name('contact-us.view');
+    Route::post('/contact-us/export', [ContactUsController::class, 'exportData'])->name('contact-us.export');
 
     
 });

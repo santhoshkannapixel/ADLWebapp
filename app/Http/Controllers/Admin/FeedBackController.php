@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\FeedBackExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\FeedBack;
@@ -10,6 +11,7 @@ use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FeedBackController extends Controller
 {
@@ -54,5 +56,9 @@ class FeedBackController extends Controller
         $data   =   FeedBack::select(DB::raw("name as name,mobile as mobile,email as email,location as location,message as message,
         DATE_FORMAT(created_at,'%d/%m/%Y') as created_date"))->findOrFail($id);
         return view('admin.enquiry.feedback.show', compact('data'));
+    }
+    public function exportData(Request $request)
+    {
+        return Excel::download(new FeedBackExport, 'feedback.xlsx');
     }
 }

@@ -7,6 +7,10 @@
             <div class="card-title">
                 Home Collection
             </div>
+            <form method="POST" name="dashboard_export" action="{{ route('home-collection.export') }}" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                <button type="submit" id="dashboardExport" class="btn btn-primary" >Export</button>
+            </form>
             
         </div>
         <div class="card-body"> 

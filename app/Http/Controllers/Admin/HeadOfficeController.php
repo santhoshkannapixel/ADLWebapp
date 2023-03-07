@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\HeadOfficeExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\HeadOffice;
@@ -10,6 +11,7 @@ use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class HeadOfficeController extends Controller
 {
@@ -55,5 +57,10 @@ class HeadOfficeController extends Controller
         designation,message as message,address as address,DATE_FORMAT(created_at,'%d/%m/%Y') as created_date"))->findOrFail($id);
 
         return view('admin.reach-us.head-office.show', compact('data'));
+    }
+    public function exportData(Request $request)
+    {
+        return Excel::download(new HeadOfficeExport, 'head_office.xlsx');
+
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ClinicalLabManagementExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ClinicalLabManagement;
@@ -10,6 +11,7 @@ use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ClinicalLabManagementController extends Controller
 {
@@ -56,5 +58,9 @@ class ClinicalLabManagementController extends Controller
         DATE_FORMAT(created_at,'%d/%m/%Y') as created_date"))->findOrFail($id);
 
         return view('admin.doctors.clinical-lab-management.show', compact('data'));
+    }
+    public function exportData(Request $request)
+    {
+        return Excel::download(new ClinicalLabManagementExport, 'clinical_lab_management.xlsx');
     }
 }
