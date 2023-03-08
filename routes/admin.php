@@ -157,10 +157,10 @@ Route::middleware(['auth_users'])->group(function () {
     // ================================================= //
 
 
-    Route::get('patients', [EnquiryController::class, 'index'])->name('patients.index');
-    Route::get('doctors', [DoctorsController::class, 'index'])->name('doctors.index');
-    Route::get('health-checkup', [HealthCheckupController::class, 'index'])->name('health-checkup.index');
-    Route::get('reach-us', [ReachUsController::class, 'index'])->name('reach-us.index');
+    // Route::get('patients', [EnquiryController::class, 'index'])->name('patients.index');
+    // Route::get('doctors', [DoctorsController::class, 'index'])->name('doctors.index');
+    // Route::get('health-checkup', [HealthCheckupController::class, 'index'])->name('health-checkup.index');
+    // Route::get('reach-us', [ReachUsController::class, 'index'])->name('reach-us.index');
 
     Route::get('/home-collection', [BookHomeCollectionController::class, 'index'])->name('home-collection.index');
     Route::delete('/home-collection/{id}', [BookHomeCollectionController::class, 'destroy'])->name('home-collection.delete');

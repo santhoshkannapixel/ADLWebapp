@@ -108,8 +108,12 @@
         </a>
         <ul class="dropdown-menu dropdown-menu-dark bg-my-dark text-small shadow" aria-labelledby="dropdownUser1" style="">
             <li><a class="dropdown-item" href="#"><b>{{ Sentinel::getUser()->name }}</b> <small class="ms-2 badge bg-success text-white">{{ Sentinel::getUser()->roles[0]->name }}</small></a></li>
+            @if (permission_check('ROLE_INDEX') || permission_check('USER_INDEX') || permission_check('API_CONFIG_INDEX') || permission_check('PAYMENT_CONFIG_INDEX')  )
             <li><a class="dropdown-item" href="{{ route('settings.index') }}">Settings</a></li>
+            @endif
+            @if (permission_check('ADMIN_PROFILE'))
             <li><a class="dropdown-item" href="{{ route('admin.profile') }}">Profile</a></li>
+            @endif
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="#" onclick="return document.getElementById('logout_form').submit()">Sign out</a></li>
         </ul>

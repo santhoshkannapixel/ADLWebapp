@@ -7,10 +7,12 @@
             <div class="card-title">
                 Patients Consumers List
             </div>
+            @if (permission_check('PATIENTS_CONSUMERS_EXPORT'))
             <form method="POST" name="dashboard_export" action="{{ route('patients-consumers.export') }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <button type="submit" id="dashboardExport" class="btn btn-primary" >Export</button>
             </form>
+            @endif
         </div>
         <div class="card-body"> 
             <table class="table table-bordered table-centered m-0 tr-sm table-hover" id="data-table">

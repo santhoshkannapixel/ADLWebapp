@@ -3,6 +3,8 @@
 use App\Jobs\EmailJobs;
 use App\Models\ApiConfig;
 use App\Models\PaymentConfig;
+use App\Models\Roles;
+use App\Models\RoleUsers;
 use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Support\Facades\Storage;
@@ -97,6 +99,32 @@ if (!function_exists('auth_id')) {
     function auth_id()
     {
         return Sentinel::getUser()->name;
+    }
+}
+if(!function_exists('permission_check'))
+{
+    function permission_check($data){
+
+        $id = Sentinel::getUser()->id;
+        if($id != 1)
+        {
+            $role =  RoleUsers::where('user_id',$id)->select('role_id')->first();
+            $role = Roles::where('id',$role['role_id'])->select('permissions')->first();
+            $ss = json_decode($role['permissions']);
+            if($ss->$data == 1) 
+            {
+                return true;
+            }
+            return false;
+        }
+        else if($id == 1)
+        {
+            return true;
+        }
+        
+      
+
+        // print_r($user);
     }
 }
 

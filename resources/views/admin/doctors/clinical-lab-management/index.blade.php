@@ -7,10 +7,12 @@
             <div class="card-title">
                 Clinical Lab Management
             </div>
+            @if (permission_check('CLINICAL_LAB_MANAGEMENT_EXPORT'))
             <form method="POST" name="dashboard_export" action="{{ route('clinical-lab-management.export') }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <button type="submit" id="dashboardExport" class="btn btn-primary" >Export</button>
             </form>
+            @endif
         </div>
         <div class="card-body"> 
             <table class="table table-bordered table-centered m-0 tr-sm table-hover" id="data-table">

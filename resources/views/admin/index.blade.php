@@ -108,11 +108,13 @@
                 </div>
                 <div class="col p-0 text-end">
                     <div class="input-group input-daterange m-0">
+                        @if (permission_check('DASHBOARD_EXPORT'))
                         <form method="POST" name="dashboard_export" action="{{ route('dashboard.export') }}" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <input type="hidden" name="export_enquiry" id="export_enquiry" value="">
                             <button type="submit" id="dashboardExport" class="btn btn-primary" >Export</button>
                         </form>
+                        @endif
                         <button type="button" name="refresh" id="refresh" class="btn btn-warning form-control-sm"><i class="fa fa-repeat" aria-hidden="true"></i></button>
                         <select name="search_data" id="search_data" class="form-select selectpicker">
                             <option value="">-- Search Enquiry  --</option>
