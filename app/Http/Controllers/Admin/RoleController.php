@@ -34,8 +34,15 @@ class RoleController extends Controller
                 return DataTables::eloquent($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
-                    $action = button('edit',route('role.edit', $data->id)).button('delete',route('role.delete', $data->id));
-                    return $action;
+                    $delete = '';
+                    $edit = '';
+
+                    if (permission_check('ROLE_EDIT'))
+                    $edit = button('edit',route('role.edit', $data->id));
+
+                    if (permission_check('ROLE_DELETE'))
+                    $delete   = button('delete',route('role.delete', $data->id));
+                    return $edit.$delete;
                 })
 
             ->make(true);

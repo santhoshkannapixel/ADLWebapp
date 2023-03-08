@@ -28,7 +28,10 @@ class ResearchController extends Controller
                     $user = Sentinel::getUser();
                     $show = '';
                     $delete = '';
+                    if (permission_check('RESEARCH_SHOW'))
                     $show =  button('show', route('research.show', $data->id));
+
+                    if (permission_check('RESEARCH_DELETE'))
                     $delete = button('delete', route('research.delete', $data->id));
 
                     return $show . $delete;

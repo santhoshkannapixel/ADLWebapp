@@ -40,7 +40,16 @@ class BannerController extends Controller
                     ';
                 })                
                 ->addColumn('action', function ($data) {
-                    return button('edit',route('banner.edit', $data->id)).button('delete',route('banner.delete', $data->id));
+                    $edit = '';
+                    $delete = '';
+
+                    if (permission_check('BANNER_EDIT'))
+                    $edit   = button('edit',route('banner.edit', $data->id));
+
+                    if (permission_check('BANNER_DELETE'))
+                    $delete = button('delete',route('banner.delete', $data->id));
+
+                    return $edit.$delete ; 
                 })
             ->rawColumns(['action','Mobile_Image','Desktop_Image'])
             ->make(true);

@@ -28,7 +28,11 @@ class FeedBackController extends Controller
                     $user = Sentinel::getUser();
                     $show = '';
                     $delete = '';
+
+                    if (permission_check('FEEDBACK_SHOW'))
                     $show =  button('show', route('feedback.show', $data->id));
+
+                    if (permission_check('FEEDBACK_DELETE'))
                     $delete = button('delete', route('feedback.delete', $data->id));
 
                     return $show . $delete;

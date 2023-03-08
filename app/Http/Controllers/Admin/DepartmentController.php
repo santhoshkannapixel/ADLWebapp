@@ -29,7 +29,16 @@ class DepartmentController extends Controller
                 })
 
                 ->addColumn('action', function ($data) {
-                    return button('edit',route('department.edit', $data->id)).button('delete',route('department.destroy', $data->id));
+                        $edit='';
+                        $delete='';
+
+                    if (permission_check('DEPARTMENT_EDIT'))
+                    $edit = button('edit',route('department.edit', $data->id));
+
+                    if (permission_check('DEPARTMENT_DESTROY'))
+                    $delete = button('delete',route('department.destroy', $data->id));
+
+                    return $edit.$delete;
                 })
             ->rawColumns(['action','status'])
             ->make(true);

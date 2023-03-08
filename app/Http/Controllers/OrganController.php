@@ -21,7 +21,16 @@ class OrganController extends Controller
                 ';
             })   
             ->addColumn('action', function ($data) {
-                return button('edit',route('organ.edit', $data->id)).button('delete',route('organ.destroy', $data->id));
+                 $edit='';
+                 $delete='';
+
+                if (permission_check('ORGAN_EDIT'))
+                $edit   = button('edit',route('organ.edit', $data->id));
+
+                if (permission_check('ORGAN_DESTROY'))
+                $delete = button('delete',route('organ.destroy', $data->id));
+
+                return $edit.$delete;
             })
             ->rawColumns(['action','image'])
             ->make(true);

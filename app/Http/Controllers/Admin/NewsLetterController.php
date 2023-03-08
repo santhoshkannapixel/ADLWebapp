@@ -27,7 +27,10 @@ class NewsLetterController extends Controller
                     $user = Sentinel::getUser();
                     $show = '';
                     $delete = '';
+                    if (permission_check('NEWS_LETTER_SHOW'))
                     $show =  button('show', route('news-letter.show', $data->id));
+
+                    if (permission_check('NEWS_LETTER_DELETE'))
                     $delete = button('delete', route('news-letter.delete', $data->id));
                     return $show . $delete;
                 })

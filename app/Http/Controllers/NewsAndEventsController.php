@@ -21,7 +21,15 @@ class NewsAndEventsController extends Controller
             $data = NewsEvent::select('*');
             return DataTables::of($data)->addIndexColumn()
                 ->addColumn('action', function ($data) {
-                    return button('edit',route('news-and-events.edit', $data->id)).button('delete',route('news-and-events.destroy', $data->id));
+                     
+                    $edit = '';
+                    $delete = '';
+                    if (permission_check('NEWS_AND_EVENTS_EDIT'))
+                    $edit   =   button('edit',route('news-and-events.edit', $data->id));
+
+                    if (permission_check('NEWS_AND_EVENTS_DESTROY'))
+                    $delete =   button('delete',route('news-and-events.destroy', $data->id));
+                    return $edit.$delete;
                 })->make(true);
         }
         return view('admin.news-and-events.index');

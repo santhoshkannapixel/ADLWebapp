@@ -34,7 +34,11 @@ class BookAppointmentController extends Controller
                     $user = Sentinel::getUser();
                     $show = '';
                     $delete = '';
+
+                    if (permission_check('BOOK_AN_APPOINTMENT_SHOW'))
                     $show =  button('show', route('book-an-appointment.show', $data->id));
+
+                    if (permission_check('BOOK_AN_APPOINTMENT_DELETE'))
                     $delete = button('delete', route('book-an-appointment.delete', $data->id));
 
                     return $show . $delete;

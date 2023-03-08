@@ -21,8 +21,15 @@ class JobPostController extends Controller
                 ->addColumn('action', function ($data) {
                     $edit = '';
                     $delete = '';
+
+                    if (permission_check('JOB_POST_EDIT'))
                     $edit=button('edit',route('job-post.edit', $data->id));
+
+
+                    if (permission_check('JOB_POST_DESTROY'))
                     $delete = button('delete',route('job-post.destroy', $data->id));
+
+
                     return $edit.$delete;
                 })
                 ->addColumn('status', function ($data) {

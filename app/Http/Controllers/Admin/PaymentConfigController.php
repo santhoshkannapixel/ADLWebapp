@@ -16,8 +16,15 @@ class PaymentConfigController extends Controller
             $data = PaymentConfig::all();
             return datatables()->of($data)
             ->addColumn('action', function($data){
-                $action = button('edit',route('payment_config.edit', $data->id)).button('delete',route('payment_config.delete', $data->id)); 
-                return $action;
+                $edit= '';
+                $delete='';
+
+                if (permission_check('PAYMENT_CONFIG_EDIT'))
+                $edit   = button('edit',route('payment_config.edit', $data->id));
+
+                if (permission_check('PAYMENT_CONFIG_DELETE'))
+                $delete = button('delete',route('payment_config.delete', $data->id)); 
+                return $edit.$delete;
             })
             ->rawColumns(array(
                 'action'

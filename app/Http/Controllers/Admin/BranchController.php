@@ -39,6 +39,7 @@ class BranchController extends Controller
                 })
 
                 ->addColumn('action', function ($data) {
+                    if (permission_check('BRANCH_SHOW'))
                     return button('show',route('branch.show', $data->id));
                 })
             ->rawColumns(['action','processing'])

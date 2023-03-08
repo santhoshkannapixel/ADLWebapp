@@ -17,6 +17,7 @@ class CustomersController extends Controller
                     return $data->CustomerDetails->phone_number ?? null;
                 })
                 ->addColumn('action', function ($data) {
+                    if (permission_check('CUSTOMERS_SHOW'))
                     return button('show',route('customers.show',$data->id));
                 })
                 ->make(true);

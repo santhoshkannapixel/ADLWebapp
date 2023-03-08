@@ -23,8 +23,13 @@ class ContactUsController extends Controller
                 ->addColumn('action', function ($data) {
                     $delete = '';
                     $view = '';
+                    if (permission_check('CONTACT_US_DELETE'))
                     $delete = button('delete', route('contact-us.delete', $data->id));
+
+
+                    if (permission_check('CONTACT_US_VIEW'))
                     $view = button('show', route('contact-us.view', $data->id));
+
                     return $view.$delete;
                 })
                 

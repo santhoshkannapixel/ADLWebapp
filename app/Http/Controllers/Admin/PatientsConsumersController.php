@@ -35,7 +35,10 @@ class PatientsConsumersController extends Controller
                     $user = Sentinel::getUser();
                     $show = '';
                     $delete = '';
+                    if (permission_check('PATIENTS_CONSUMERS_SHOW'))
                     $show =  button('show', route('patients-consumers.show', $data->id));
+
+                    if (permission_check('PATIENTS_CONSUMERS_DELETE'))
                     $delete = button('delete', route('patients-consumers.delete', $data->id));
 
                     return $show . $delete;

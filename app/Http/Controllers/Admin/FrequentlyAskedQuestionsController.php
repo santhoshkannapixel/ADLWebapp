@@ -28,7 +28,11 @@ class FrequentlyAskedQuestionsController extends Controller
                     $user = Sentinel::getUser();
                     $show = '';
                     $delete = '';
+
+                    if (permission_check('FAQ_SHOW'))
                     $show =  button('show', route('faq.show', $data->id));
+
+                    if (permission_check('FAQ_DELETE'))
                     $delete = button('delete', route('faq.delete', $data->id));
 
                     return $show . $delete;

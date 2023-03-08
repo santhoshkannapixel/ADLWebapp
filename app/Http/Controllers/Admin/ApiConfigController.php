@@ -15,8 +15,14 @@ class ApiConfigController extends Controller
         if($request->ajax()) {
             $data = ApiConfig::all();
             return datatables()->of($data)->addColumn('action', function($data){
-                $action = button('edit',route('api_config.edit', $data->id)).button('delete',route('api_config.delete', $data->id));
-                return $action;
+                $delete = '';
+                $edit = '';
+                if (permission_check('API_CONFIG_EDIT'))
+                $edit   = button('edit',route('api_config.edit', $data->id));
+
+                if (permission_check('API_CONFIG_DELETE'))
+                $delete = button('delete',route('api_config.delete', $data->id));
+                return $edit.$delete;
             })->rawColumns(['action'])->addIndexColumn()->make(true);
         }
         return view('admin.settings.api-config.index');

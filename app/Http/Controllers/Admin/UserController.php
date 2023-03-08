@@ -38,8 +38,14 @@ class UserController extends Controller
                 return $status;
             })
             ->addColumn('action', function($data){
-                $action = button('edit',route('user.edit', $data->id)).button('delete',route('user.delete', $data->id));
-                return $action;
+                $delete = '';
+                $edit = '';
+                if (permission_check('USER_EDIT'))
+                $edit   = button('edit',route('user.edit', $data->id));
+
+                if (permission_check('USER_DELETE'))
+                $delete = button('delete',route('user.delete', $data->id));
+                return $edit.$delete;
             })
             ->rawColumns(array(
                 'status',

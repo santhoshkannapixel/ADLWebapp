@@ -21,7 +21,16 @@ class ConditionController extends Controller
                 ';
             })   
             ->addColumn('action', function ($data) {
-                return button('edit',route('condition.edit', $data->id)).button('delete',route('condition.destroy', $data->id));
+                $edit = '';
+                $delete = '';
+
+                if (permission_check('CONDITION_EDIT'))
+                $edit = button('edit',route('condition.edit', $data->id));
+
+                if (permission_check('CONDITION_DESTROY'))
+                $delete = button('delete',route('condition.destroy', $data->id));
+
+                return $edit.$delete;
             })
             ->rawColumns(['action','image'])
             ->make(true);

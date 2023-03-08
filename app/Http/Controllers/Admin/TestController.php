@@ -59,10 +59,25 @@ class TestController extends Controller
                     return $TestSchedule;
                 })
                 ->addColumn('action', function ($data) use ($request){
+                    $show = '';
+                    $edit = '';
                     if($request->isPackage == 'No') {
-                        return button('show', route('test.show',$data->id)). button('edit', route('test.edit', $data->id));
+                        if (permission_check('TEST_SHOW'))
+                        $show = button('show', route('test.show',$data->id));
+
+                        if (permission_check('TEST_EDIT'))
+                        $edit = button('edit', route('test.edit', $data->id));
+
+                        return $show.$edit;
                     } else {
-                        return button('show', route('test.show',$data->id)). button('edit', route('test.edit',$data->id));
+                        if (permission_check('TEST_SHOW'))
+                        $show =  button('show', route('test.show',$data->id));
+
+                        if (permission_check('TEST_EDIT'))
+                        $edit =  button('edit', route('test.edit',$data->id));
+                        
+                        return $show.$edit;
+
                     }
                 })
                 ->rawColumns(['action', 'is_home', 'Test_Schedule', 'Drive_Through', 'Home_Collection', 'Applicable_Gender'])

@@ -28,7 +28,11 @@ class HospitalLabManagementController extends Controller
                     $user = Sentinel::getUser();
                     $show = '';
                     $delete = '';
+
+                    if (permission_check('HOSPITAL_LAB_MANAGEMENT_SHOW'))
                     $show =  button('show', route('hospital-lab-management.show', $data->id));
+
+                    if (permission_check('HOSPITAL_LAB_MANAGEMENT_DELETE'))
                     $delete = button('delete', route('hospital-lab-management.delete', $data->id));
 
                     return $show . $delete;

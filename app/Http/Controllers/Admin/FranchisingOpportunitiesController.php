@@ -28,7 +28,11 @@ class FranchisingOpportunitiesController extends Controller
                     $user = Sentinel::getUser();
                     $show = '';
                     $delete = '';
+
+                    if (permission_check('FRANCHISING_OPPORTUNITIES_SHOW'))
                     $show =  button('show', route('franchising-opportunities.show', $data->id));
+
+                    if (permission_check('FRANCHISING_OPPORTUNITIES_DELETE'))
                     $delete = button('delete', route('franchising-opportunities.delete', $data->id));
 
                     return $show . $delete;

@@ -28,7 +28,12 @@ class ClinicalLabManagementController extends Controller
                     $user = Sentinel::getUser();
                     $show = '';
                     $delete = '';
+
+                    if (permission_check('CLINICAL_LAB_MANAGEMENT_SHOW'))
                     $show =  button('show', route('clinical-lab-management.show', $data->id));
+
+
+                    if (permission_check('CLINICAL_LAB_MANAGEMENT_DELETE'))
                     $delete = button('delete', route('clinical-lab-management.delete', $data->id));
 
                     return $show . $delete;

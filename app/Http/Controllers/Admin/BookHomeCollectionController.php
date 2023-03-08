@@ -38,7 +38,11 @@ class BookHomeCollectionController extends Controller
                     $user = Sentinel::getUser();
                     $show = '';
                     $delete = '';
+
+                    if (permission_check('HOME_COLLECTION_SHOW'))
                     $show =  button('show', route('home-collection.show', $data->id));
+
+                    if (permission_check('HOME_COLLECTION_DELETE'))
                     $delete = button('delete', route('home-collection.delete', $data->id));
 
                     return $show . $delete;

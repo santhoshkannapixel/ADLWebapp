@@ -29,7 +29,12 @@ class CareerController extends Controller
                 ->addColumn('action', function ($data) {
                     $delete = '';
                     $view = '';
+
+                    if (permission_check('CAREERS_DELETE'))
                     $delete = button('delete', route('careers.delete', $data->id));
+
+
+                    if (permission_check('CAREERS_VIEW'))
                     $view = button('show', route('careers.view', $data->id));
                     return $view.$delete;
                 })
