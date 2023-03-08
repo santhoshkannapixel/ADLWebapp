@@ -6,7 +6,9 @@
             <div class="card-title">
                 API Configuration
             </div>
+            @if (permission_check('API_CONFIG_CREATE'))
             <a href="{{ route('api_config.create') }}" class="btn btn-primary"><i class="fa fa-plus me-2"></i> Add New</a>
+            @endif
         </div>
         <div class="card-body">
             <table class="table" id="data-table">

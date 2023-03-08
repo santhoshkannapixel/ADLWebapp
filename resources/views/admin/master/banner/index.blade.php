@@ -7,10 +7,12 @@
             <div class="card-title">
                 Banners List
             </div>
+            @if (permission_check('BANNER_CREATE'))
             <a href="{{ route('banner.create') }}" class="btn btn-primary ms-3">
                 <i class="fa fa-plus me-2" aria-hidden="true"></i>
                 Add New
             </a>
+            @endif
         </div>
         <div class="card-body"> 
             <table class="table table-bordered table-centered m-0 tr-sm table-hover" id="data-table">

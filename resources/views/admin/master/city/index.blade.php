@@ -7,7 +7,7 @@
             <div class="card-title">
                 City List
             </div>
-           
+            @if (permission_check('CITY_SYNC'))
             <form action="{{ route('city.sync') }}" method="POST">
                 @csrf
                 <small><b>Last Sync</b> :  {{ $last_sync }}</small>
@@ -15,6 +15,7 @@
                     <i class="fa fa-refresh me-2" aria-hidden="true"></i>
                     Sync Data</button>
             </form>
+            @endif
         </div>
         <div class="card-body"> 
             <table class="table table-bordered table-centered m-0 tr-sm table-hover" id="data-table">

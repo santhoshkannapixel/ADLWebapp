@@ -6,7 +6,7 @@
             <div class="card-title">
                 Lab Test & Packages List
             </div>
-
+            @if (permission_check('TEST_SYNC'))
             <form action="{{ route('test.sync') }}" method="POST">
                 @csrf
                 <small><b>Last Sync</b> : {{ $last_sync }}</small>
@@ -14,6 +14,7 @@
                     <i class="fa fa-refresh me-2" aria-hidden="true"></i>
                     Sync Data</button>
             </form>
+            @endif
         </div>
         <div class="card-body">
             <ul class="nav nav-pills m-3" id="pills-tab" role="tablist">

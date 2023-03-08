@@ -5,12 +5,14 @@
     <div class="card custom table-card">
         <div class="card-header">
             <div class="card-title">
-                Careers
+                Contact
             </div>
+            @if (permission_check('CONTACT_US_EXPORT'))
             <form method="POST" name="dashboard_export" action="{{ route('contact-us.export') }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <button type="submit" id="dashboardExport" class="btn btn-primary" >Export</button>
             </form>
+            @endif
         </div>
         <div class="card-body"> 
             <table class="table table-bordered table-centered m-0 tr-sm table-hover" id="data-table">

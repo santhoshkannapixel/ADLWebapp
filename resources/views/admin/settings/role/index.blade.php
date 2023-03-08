@@ -7,7 +7,9 @@
             <div class="card-title">
                 Role List
             </div>
+            @if (permission_check('ROLE_CREATE'))
             <a class="btn btn-primary"  href="{{ route('role.create') }}"><i class="fa fa-plus"></i> Add Role</a>
+            @endif
         </div>
         <div class="card-body">
             <table class="table table-bordered table-centered m-0 tr-sm table-hover" id="data-table">

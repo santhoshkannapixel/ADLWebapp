@@ -6,7 +6,9 @@
             <div class="card-title">
                 Users List
             </div>
+            @if (permission_check('USER_CREATE'))
             <a class="btn btn-primary"  href="{{ route('user.create') }}"><i class="fa fa-plus"></i> Add User</a>
+            @endif
         </div>
         <div class="card-body"> 
             <table class="table table-bordered table-centered m-0 tr-sm table-hover" id="data-table">

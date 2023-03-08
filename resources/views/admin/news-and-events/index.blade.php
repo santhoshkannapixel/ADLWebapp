@@ -10,7 +10,9 @@
             <div class="card-title">
                 News & Events List
             </div>
+            @if (permission_check('NEWS_AND_EVENTS_CREATE'))
             <a class="btn btn-primary" href="{{ route('news-and-events.create') }}"><i class="fa fa-plus"></i> Add </a>
+            @endif
         </div>
         <div class="card-body">
             <table class="table table-bordered table-centered m-0 tr-sm table-hover" id="data-table">
