@@ -371,7 +371,7 @@ class ApiController extends Controller
         }
 
         if($result['status']) {
-            $this->sendMailNotification($Order->id);
+            $this->sendMailNotification($Order->id,'PENDING');
         }
 
         return response()->json([
@@ -417,7 +417,7 @@ class ApiController extends Controller
         ];
     }
 
-    public function sendMailNotification($id)
+    public function sendMailNotification($id,$status)
     {
         $order    = Orders::with('User','Tests')->find($id);
         $tests    = OrderedTests::where('order_id',$id)->get();
@@ -428,7 +428,7 @@ class ApiController extends Controller
             "order"        => $order,
             "tests"        => $tests,
             "status"       => 'Booked',
-            "order_status" => 'Pending',
+            "order_status" => $status,
         ]);
     }
 

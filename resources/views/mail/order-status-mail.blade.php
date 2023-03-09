@@ -15,10 +15,29 @@
         </div>
     </div>
     <p>Dear <b>{{ $data['customer']['first_name'] . ' ' . $data['customer']['last_name'] }}</b>, </p>
-    <p>
-        Thank you for your booking. we will send a confirmation mail
-        <br> For more Queries visit <a href="https://www.anandlab.com/my-account">anandlab.com</a>
-    </p>
+    @if ($data['order_status'] === 'PENDING')
+        <p>
+            We are pleased to confirm that we have received your booking request. 
+            Thank you for choosing our Service for your Purpose. 
+            We will send you a confirmation mail soon. 
+        </p>
+        <p>For more information/ queries, <a href="https://www.anandlab.com/my-account">anandlab.com</a></p>
+    @endif
+    @if ($data['order_status'] === 'ACCEPTED')
+        <p>
+            Your order has been confirmed. Thank you for choosing us,
+            We appreciate your trust in our company and look forward to serving you in the future.
+        </p>
+        <p>For more information/ queries, <a href="https://www.anandlab.com/my-account">anandlab.com</a></p>
+    @endif
+    @if ($data['order_status'] === 'DENIED')
+        <p>
+            we are inform that your order <b>#{{ $data['order']['order_id'] }}</b> has been cancelled as per your request. 
+            We apologize for any inconvenience this may have caused. Thank you for considering our services, and we hope to have the opportunity to serve you in the future.
+        </p>
+    @endif
+    <hr>
+    <h4 class="mb-3">Your Booking Details</h4>
     <div class="card border shadow-sm mb-3">
         <div class="card-body">
             <h6 class="header-title mb-3"><b>Billing Information</b></h6>
@@ -120,6 +139,6 @@
     <center>
         <br>
         Thanks,<br>
-        <strong>Anand Lab Team</strong>
+        <strong>Team Anand Lab</strong>
     </center>
 @endcomponent

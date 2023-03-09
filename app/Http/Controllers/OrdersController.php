@@ -80,20 +80,23 @@ class OrdersController extends Controller
             $tests    = OrderedTests::where('order_id',$id)->get();
             $customer = CustomerDetails::where('user_id', $result->User->id)->first();
             if($request->order_status == "0") {
-                $order_status = "Pending";
+                $order_status = "PENDING";
+                $status = 'Booked';
             }
             if($request->order_status == "1") {
-                $order_status = "Accepted";
+                $order_status = "ACCEPTED";
+                $status = 'Confirmed';
             }
             if($request->order_status == "2") {
-                $order_status = "Denied";
+                $order_status = "DENIED";
+                $status = 'Canceled';
             }
             sendMail(new OrderStatusMail(), [
                 "email"        => $customer->email,
                 "customer"     => $customer,
                 "order"        => $result,
                 "tests"        => $tests,
-                "status"       => $order_status,
+                "status"       => $status,
                 "order_status" => $order_status
             ]);
         }

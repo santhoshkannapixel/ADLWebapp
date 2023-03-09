@@ -251,7 +251,7 @@ Route::middleware(['auth_users'])->group(function () {
 
 Route::get('test-mail',function() {
     $action = new ApiController();
-    $action->sendMailNotification(6);
+    $action->sendMailNotification(6,'DENIED');
     return "action";
 });
 Route::get('/sitemap.xml', [SitemapXmlController::class, 'index']);
