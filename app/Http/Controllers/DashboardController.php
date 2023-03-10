@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Exports\BookAppointmentExport;
 use App\Exports\BookHomeCollectionExport;
+use App\Exports\CareerExport;
 use App\Exports\ClinicalLabManagementExport;
+use App\Exports\ContactExport;
 use App\Exports\FeedBackExport;
 use App\Exports\FranchisingOpportunitiesExport;
 use App\Exports\FrequentlyAskedQuestionsExport;
@@ -1058,6 +1060,12 @@ class DashboardController extends Controller
                     break;
                 case 'HEAD_OFFICE':
                     return Excel::download(new HeadOfficeExport, 'head_office.xlsx');
+                    break;
+                case 'CONTACT_LIST':
+                    return Excel::download(new ContactExport, 'contact_us.xlsx');
+                    break;
+                case 'CAREER_ENQUIRY':
+                    return Excel::download(new CareerExport, 'career_enquiry.xlsx');
                     break;
             }
         }
