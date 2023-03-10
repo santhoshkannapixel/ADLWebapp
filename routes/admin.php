@@ -53,6 +53,8 @@ Route::middleware(['auth_users'])->group(function () {
         // Route::group(['prefix' => 'settings'], function () {
             Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile');
             Route::post('/profile', [ProfileController::class, 'store'])->name('profile.store');
+            Route::post('/profile_image', [ProfileController::class, 'imageDelete'])->name('profile.image');
+        
             Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
             Route::group(['prefix' => 'user'], function () {
                 Route::get('/', [UserController::class, 'index'])->name('user.index');

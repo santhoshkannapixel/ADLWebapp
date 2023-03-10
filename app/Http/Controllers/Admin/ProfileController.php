@@ -8,6 +8,7 @@ use Auth;
 use App\Models\User;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 use Laracasts\Flash\Flash;
 class ProfileController extends Controller
@@ -25,8 +26,8 @@ class ProfileController extends Controller
         $id = $request->id;
         $request->validate([
             'email' => 'required|unique:users,email,'.$id. ',id',
-            'name'      => 'required',
-
+            'name'  => 'required',
+            'image' => 'mimes:jpg,jpeg,png,svg',
         ]);
         // dd($request->all());
         $ins['name']              = $request->name;
@@ -50,10 +51,33 @@ class ProfileController extends Controller
             }
 
         }
+        if($request->file('image'))
+        {
+            if(Storage::exists($request->image)){
+                Storage::delete($request->image);
+            }
+            $image               =   $request->file('image')->store('public/files/users');
+            $info->image   =   $image;
+            $info->save();
+        }
+
         Flash::success( __('action.saved', ['type' => 'Profile']));
         return redirect()->route('dashboard.index');
            
 
         
+    }
+    public function imageDelete(Request $request)
+    {
+        $data = User::where('id',$request->id)->first();
+        $data->image    = '';
+       $res = $data->save();
+       if($res)
+       {
+        return response()->json(['res'=>"true"]);
+       }
+       else{
+        return response()->json(['res'=>"false"]);
+       }
     }
 }
