@@ -8,7 +8,7 @@
             <div class="card-title">
                 News & Events List
             </div>
-            <a class="btn btn-primary" href="{{ route('news-and-events.index') }}"><i class="fa fa-list"></i> News & Event List </a>
+            <a class="btn btn-primary" href="{{ route('news-and-events.index') }}"><i class="fa fa-arrow-left me-2"></i> Go back </a>
         </div>
         <div class="card-body">
             {!! Form::model($data, ['route' => ['news-and-events.update',$data->id],"class" => "py-4", 'method'=> 'POST']) !!}

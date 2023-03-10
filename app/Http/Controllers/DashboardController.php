@@ -1021,7 +1021,7 @@ class DashboardController extends Controller
         $data['customer'] = User::where('role_id',0)->count();
         $data['received_payment'] = Orders::where('payment_status',1)->count();
         $data['pending_order'] = Orders::whereNull('order_status')->count();
-        $data['failed_payment'] = Orders::where('order_status',2)->count();
+        $data['failed_payment'] = Orders::where('payment_status',0)->count();
         $data['cancel_order'] = Orders::where('order_status',3)->count();
         return response()->json(['data'=>$data]);
     }

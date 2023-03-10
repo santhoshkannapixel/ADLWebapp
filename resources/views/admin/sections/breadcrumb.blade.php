@@ -87,6 +87,17 @@
         {{ Route::is('api_config.create') ? "Create API Configuration" : '' }}
         {{ Route::is('api_config.edit') ? "Edit API Configuration" : '' }}
 
+        {{ Route::is('orders.index') ? "Order List" : '' }}
+        {{ Route::is('orders.show') ? "Order Show" : '' }}
+
+        {{ Route::is('customers.index') ? "Customer List" : '' }}
+        {{ Route::is('customers.show') ? "Customer Show" : '' }}
+
+        {{ Route::is('news-and-events.index') ? "News And Events List" : '' }}
+        {{ Route::is('news-and-events.edit') ? "News And Events Edit" : '' }}
+        
+        
+
         {{ Route::is('payment_config.index') ? "Payment Configuration" : '' }}
         {{ Route::is('payment_config.create') ? "Create Payment Configuration" : '' }}
         {{ Route::is('payment_config.edit') ? "Edit Payment Configuration" : '' }}

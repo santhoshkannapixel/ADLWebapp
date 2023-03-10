@@ -86,7 +86,7 @@
         @endif
         @if (permission_check('NEWS_AND_EVENTS_INDEX') )
         <li>
-            <a href="{{ route('news-and-events.index') }}" class="nav-link text-white {{ Route::is(['news-and-events.index']) ? "active" : "" }}">
+            <a href="{{ route('news-and-events.index') }}" class="nav-link text-white {{ Route::is(['news-and-events.index','news-and-events.edit']) ? "active" : "" }}">
                 <i class="fa fa-book"></i>News & Events
             </a>
         </li>

@@ -8,7 +8,7 @@
                 Edit  Banner 
             </div>
             <a href="{{ route('banner.index') }}" class="btn btn-primary ms-3">
-                <i class="fa fa-list me-2" aria-hidden="true"></i>
+                <i class="fa fa-arrow-left me-2" aria-hidden="true"></i>
                 Banner  List
             </a>
         </div>
