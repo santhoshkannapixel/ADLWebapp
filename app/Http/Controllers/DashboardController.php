@@ -1015,13 +1015,14 @@ class DashboardController extends Controller
     public function dashboardData(Request $request)
     {
         
-        $data['test'] = Tests::count();
-        $data['package'] = Packages::count();
+        $data['test'] = Tests::where('IsPackage','No')->count();
+        $data['package'] = Tests::where('IsPackage','Yes')->count();
         $data['order'] = Orders::count();
         $data['customer'] = User::where('role_id',0)->count();
         $data['received_payment'] = Orders::where('payment_status',1)->count();
         $data['pending_order'] = Orders::where('order_status',[0,null])->count();
         $data['failed_payment'] = Orders::where('payment_status',0)->count();
+        $data['cancel_order'] = Orders::where('payment_status',3)->count();
         return response()->json(['data'=>$data]);
     }
     public function exportData(Request $request)

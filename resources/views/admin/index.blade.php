@@ -51,7 +51,7 @@
             </a>
         </div>
         <div class="col-3 p-1">
-            <a href="{{ route('user.index') }}">
+            <a href="{{ route('customers.index') }}">
             <div class="card h-100 shadow">
                 <div class="card-body">
                     <div class="h4 text-gradient"><span id="total_customer"></span></div>
@@ -63,7 +63,7 @@
             </div>
             </a>
         </div>
-        <div class="col-4 p-1">
+        <div class="col-3 p-1">
             <div class="card card-body shadow-sm">
                 <div class="x-between y-center">
                     <div>
@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-4 p-1">
+        <div class="col-3 p-1">
             <div class="card card-body shadow-sm">
                 <div class="x-between y-center">
                     <div>
@@ -85,7 +85,18 @@
                 </div>
             </div>
         </div>
-        <div class="col-4 p-1">
+        <div class="col-3 p-1">
+            <div class="card card-body shadow-sm">
+                <div class="x-between y-center">
+                    <div>
+                        <div class="h4 text-info"><span id="cancel_order"></span> </div>
+                        <div><b>Cancel Order</b></div>
+                    </div>
+                    <i class="fa-2x bi bi-credit-card-fill text-info"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 p-1">
             <div class="card card-body shadow-sm">
                 <div class="x-between y-center">
                     <div>
@@ -181,6 +192,8 @@
                     $('#received_payment').html(data.data.received_payment);
                     $('#pending_order').html(data.data.pending_order);
                     $('#failed_payment').html(data.data.failed_payment);
+                    $('#cancel_order').html(data.data.cancel_order);
+                    
                 }
             });         
             function load_data(from_date = '', to_date = '',search_data = '')    {
