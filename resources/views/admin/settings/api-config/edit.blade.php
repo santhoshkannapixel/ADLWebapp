@@ -6,7 +6,7 @@
             <div class="card-title">
                 API Configuration
             </div>
-            <a href="{{ route('api_config.index') }}" class="btn btn-primary"><i class="fa fa-list me-2"></i> Appi List</a>
+            <a href="{{ route('api_config.index') }}" class="btn btn-primary"><i class="fa fa-arrow-left me-2"></i> Go back</a>
         </div>
 
         {!! Form::model($apiConfig,['route' =>['api_config.update' , $apiConfig->id] , "roleForm", "Method" => "POST"]) !!}

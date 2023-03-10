@@ -6,7 +6,7 @@
             <div class="card-title">
                 Edit User 
             </div>
-            <a class="btn btn-primary"  href="{{ route('user.index') }}"><i class="fa fa-list"></i> User Lists</a>
+            <a class="btn btn-primary"  href="{{ route('user.index') }}"><i class="fa fa-arrow-left me-2"></i> Go back</a>
         </div>
         <div class="card-body"> 
             {!! Form::model($user,['route' => ['user.update', $user->id], 'id' => 'role_user_form', 'method'=> 'put']) !!}

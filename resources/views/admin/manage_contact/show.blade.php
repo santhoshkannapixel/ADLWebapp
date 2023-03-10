@@ -7,7 +7,10 @@
             <div class="card-title">
                Contact Us
             </div>
-           
+            <a href="{{ url()->previous() }}" class="btn btn-primary ms-3">
+                <i class="fa fa-arrow-left me-2" aria-hidden="true"></i>
+                Go back
+            </a>
         </div>
         <div class="card-body"> 
             

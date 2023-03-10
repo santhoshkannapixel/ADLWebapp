@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Packages;
+use App\Models\TestPrice;
 use App\Models\Tests;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -193,6 +194,8 @@ class TestController extends Controller
     public function show($id)
     {
         $data   =   Tests::findOrFail($id); 
+        $testPrice  = TestPrice::where('TestId',$data->id)->first();
+        $data['testPrice'] = $testPrice['TestPrice'];
         return view('admin.master.tests.show', compact('data'));
     }
 

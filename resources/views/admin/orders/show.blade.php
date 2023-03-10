@@ -14,7 +14,7 @@
                     {{ dateTimeFormat($order->created_at) }}
                 </span>
             </div>
-            <a href="{{ url()->previous() }}" class="btn btn-primary ms-3">
+            <a href="{{ route('orders.index') }}" class="btn btn-primary ms-3">
                 <i class="fa fa-arrow-left me-2" aria-hidden="true"></i>
                 Go back
             </a>

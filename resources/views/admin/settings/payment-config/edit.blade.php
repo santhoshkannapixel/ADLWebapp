@@ -6,7 +6,7 @@
             <div class="card-title">
                 Payment Configuration 
             </div> 
-            <a href="{{ route('payment_config.index') }}" class="btn btn-primary"><i class="fa fa-list me-2"></i> Appi List</a>
+            <a href="{{ route('payment_config.index') }}" class="btn btn-primary"><i class="fa fa-arrow-left me-2"></i> Go back</a>
         </div>
 
         {!! Form::model($paymentConfig,['route' =>['payment_config.update' , $paymentConfig->id] , "roleForm", "Method" => "POST"]) !!}

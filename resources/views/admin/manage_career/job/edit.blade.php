@@ -14,8 +14,8 @@
                 Edit Job
             </div>
             <a href="{{ route('job-post.index') }}" class="btn btn-primary ms-3">
-                <i class="fa fa-list me-2" aria-hidden="true"></i>
-                Job Post List
+                <i class="fa fa-arrow-left me-2" aria-hidden="true"></i>
+                Go back
             </a>
         </div>
         <div class="card-body"> 

@@ -5,7 +5,7 @@
     <div class="card custom">
         <div class="card-header">
             <div class="card-title">
-                {{ $data->TestName }} <span class="ms-3 badge bg-white text-primary">₹ . {{ $data->TestPrice}} </span>
+                {{ $data->TestName }} <span class="ms-3 badge bg-white text-primary">₹ . {{ $data->testPrice}} </span>
             </div>
 
             <a href="{{ url()->previous() }}" class="btn btn-primary ms-3">

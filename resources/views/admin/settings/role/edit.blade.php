@@ -6,7 +6,7 @@
             <div class="card-title">
                 Edit Role
             </div>
-            <a class="btn btn-primary"  href="{{ route('role.index') }}"><i class="fa fa-list"></i>  Role List</a>
+            <a class="btn btn-primary"  href="{{ route('role.index') }}"><i class="fa fa-arrow-left me-2"></i>  Go back</a>
         </div>
         {!! Form::model($role, ['route' => ['role.update',$role->id],"id" => "roleForm", 'method'=> 'put']) !!}
             <div class="card-body"> 

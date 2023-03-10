@@ -105,14 +105,14 @@
     </div>
 </div>
 <div class="d-flex align-items-center">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb m-0">
-            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-            <li class="breadcrumb-item active" aria-current="page">
-                {{ breadcrumbTitle() }}
-            </li>
-        </ol>
-    </nav>
+        {{-- <nav aria-label="breadcrumb">
+            <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    {{ breadcrumbTitle() }}
+                </li>
+            </ol>
+        </nav> --}}
     <div class="dropdown ms-3 me-3 border-start ps-3">
         <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="{{ asset('public/images/avatar.png') }}" alt="" width="32" height="32" class="rounded-5 me-2">

@@ -8,8 +8,8 @@
                 Edit Organ 
             </div>
             <a href="{{ route('organ.index') }}" class="btn btn-primary ms-3">
-                <i class="fa fa-list me-2" aria-hidden="true"></i>
-                Organs List
+                <i class="fa fa-arrow-left me-2" aria-hidden="true"></i>
+                Go back
             </a>
         </div>
         <div class="card-body"> 
