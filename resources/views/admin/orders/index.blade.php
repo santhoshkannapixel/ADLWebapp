@@ -8,7 +8,7 @@
     <div class="card custom table-card">
         <div class="card-header">
             <div class="card-title">
-                Lab Test Orders
+               Orders
             </div>
         </div>
         <div class="card-body">

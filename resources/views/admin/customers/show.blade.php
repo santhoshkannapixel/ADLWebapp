@@ -8,7 +8,7 @@
     <div class="card custom table-card">
         <div class="card-header">
             <div class="card-title">
-                Customers
+                Customers Details
             </div>
             <a href="{{ url()->previous() }}" class="btn btn-primary ms-3">
                 <i class="fa fa-arrow-left me-2" aria-hidden="true"></i>

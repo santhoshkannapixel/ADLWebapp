@@ -8,7 +8,7 @@
     <div class="card custom table-card">
         <div class="card-header">
             <div class="card-title">
-                News & Events List
+                News & Events
             </div>
             @if (permission_check('NEWS_AND_EVENTS_CREATE'))
             <a class="btn btn-primary" href="{{ route('news-and-events.create') }}"><i class="fa fa-plus"></i> Add </a>

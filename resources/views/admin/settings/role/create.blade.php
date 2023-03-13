@@ -4,7 +4,7 @@
     <div class="card custom"> 
         <div class="card-header">
             <div class="card-title">
-                Create Role
+                New Role
             </div>
             <a class="btn btn-primary"  href="{{ route('role.index') }}"><i class="fa fa-list"></i>  Role List</a>
         </div>

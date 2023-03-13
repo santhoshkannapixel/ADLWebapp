@@ -5,7 +5,7 @@
     <div class="card custom table-card">
         <div class="card-header">
             <div class="card-title">
-                Sonditions
+                Condition
             </div>
             @if (permission_check('CONDITION_CREATE'))
             <a class="btn btn-primary" href="{{ route('condition.create') }}"><i class="fa fa-plus"></i> Add </a>

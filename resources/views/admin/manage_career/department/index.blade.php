@@ -5,7 +5,7 @@
     <div class="card custom table-card">
         <div class="card-header">
             <div class="card-title">
-                Department List
+                Department
             </div>
             @if (permission_check('DEPARTMENT_CREATE'))
             <a href="{{ route('department.create') }}" class="btn btn-primary ms-3">

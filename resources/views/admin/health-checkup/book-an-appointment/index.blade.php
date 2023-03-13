@@ -5,7 +5,7 @@
     <div class="card custom table-card"> 
         <div class="card-header">
             <div class="card-title">
-                book-an-appointment
+                Book an Appointment
             </div>
             @if (permission_check('BOOK_AN_APPOINTMENT_EXPORT'))
             <form method="POST" name="dashboard_export" action="{{ route('book-an-appointment.export') }}" enctype="multipart/form-data">

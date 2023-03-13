@@ -4,7 +4,7 @@
     <div class="card custom">
         <div class="card-header">
             <div class="card-title">
-                Create New Users
+                 New Users
             </div>
             <a class="btn btn-primary"  href="{{ route('user.index') }}"><i class="fa fa-list"></i> User Lists</a>
         </div>

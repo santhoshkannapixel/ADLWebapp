@@ -5,7 +5,7 @@
     <div class="card custom table-card"> 
         <div class="card-header">
             <div class="card-title">
-                FeedBack
+                Feed back
             </div>
             @if (permission_check('FEEDBACK_EXPORT'))
             <form method="POST" name="dashboard_export" action="{{ route('feedback.export') }}" enctype="multipart/form-data">

@@ -90,7 +90,7 @@
                 <div class="x-between y-center">
                     <div>
                         <div class="h4 text-info"><span id="cancel_order"></span> </div>
-                        <div><b>Cancel Order</b></div>
+                        <div><b>Cancel Order Request</b></div>
                     </div>
                     <i class="fa-2x bi bi-credit-card-fill text-info"></i>
                 </div>

@@ -4,7 +4,7 @@
     <div class="card custom">
         <div class="card-header">
             <div class="card-title">
-                Payment Configuration 
+               Edit Payment Configuration 
             </div> 
             <a href="{{ route('payment_config.index') }}" class="btn btn-primary"><i class="fa fa-arrow-left me-2"></i> Go back</a>
         </div>

@@ -5,7 +5,7 @@
     <div class="card custom table-card">
         <div class="card-header">
             <div class="card-title">
-                Banners List
+                Banners
             </div>
             @if (permission_check('BANNER_CREATE'))
             <a href="{{ route('banner.create') }}" class="btn btn-primary ms-3">

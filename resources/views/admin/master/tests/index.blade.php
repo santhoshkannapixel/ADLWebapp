@@ -4,7 +4,7 @@
     <div class="card custom table-card">
         <div class="card-header">
             <div class="card-title">
-                Lab Test & Packages List
+                Lab Test & Packages
             </div>
             @if (permission_check('TEST_SYNC'))
             <form action="{{ route('test.sync') }}" method="POST">

@@ -5,7 +5,7 @@
     <div class="card custom table-card">
         <div class="card-header">
             <div class="card-title">
-                City List
+                City
             </div>
             @if (permission_check('CITY_SYNC'))
             <form action="{{ route('city.sync') }}" method="POST">

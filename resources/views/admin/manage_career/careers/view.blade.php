@@ -5,7 +5,7 @@
     <div class="card custom table-card">
         <div class="card-header">
             <div class="card-title">
-                Home Visit List
+                 Career Details
             </div>
            
         </div>

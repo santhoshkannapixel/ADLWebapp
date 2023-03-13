@@ -5,7 +5,7 @@
     <div class="card custom">
         <div class="card-header">
             <div class="card-title">
-                Edit condition 
+                Edit Condition 
             </div>
             <a href="{{ route('condition.index') }}" class="btn btn-primary ms-3">
                 <i class="fa fa-arrow-left me-2" aria-hidden="true"></i>

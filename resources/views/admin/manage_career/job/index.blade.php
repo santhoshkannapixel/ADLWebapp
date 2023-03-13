@@ -5,7 +5,7 @@
     <div class="card custom table-card">
         <div class="card-header">
             <div class="card-title">
-                Job Post List
+                Job Post
             </div>
             @if (permission_check('JOB_POST_CREATE'))
             <a href="{{ route('job-post.create') }}" class="btn btn-primary ms-3">

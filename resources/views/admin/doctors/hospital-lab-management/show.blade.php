@@ -5,7 +5,7 @@
     <div class="card custom">
         <div class="card-header">
             <div class="card-title">
-                {{ $data->name }}  
+                Hospital Lab Management Details
             </div>
            
             <a href="{{ url()->previous() }}" class="btn btn-primary ms-3">

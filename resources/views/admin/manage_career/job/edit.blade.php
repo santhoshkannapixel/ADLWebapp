@@ -11,7 +11,7 @@
     <div class="card custom">
         <div class="card-header">
             <div class="card-title">
-                Edit Job
+                Edit Job Post
             </div>
             <a href="{{ route('job-post.index') }}" class="btn btn-primary ms-3">
                 <i class="fa fa-arrow-left me-2" aria-hidden="true"></i>

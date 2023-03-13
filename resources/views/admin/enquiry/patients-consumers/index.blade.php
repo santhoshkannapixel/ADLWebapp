@@ -5,7 +5,7 @@
     <div class="card custom table-card"> 
         <div class="card-header">
             <div class="card-title">
-                Patients Consumers List
+                Patients Consumers
             </div>
             @if (permission_check('PATIENTS_CONSUMERS_EXPORT'))
             <form method="POST" name="dashboard_export" action="{{ route('patients-consumers.export') }}" enctype="multipart/form-data">

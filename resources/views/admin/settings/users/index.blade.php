@@ -4,7 +4,7 @@
     <div class="card custom table-card">
         <div class="card-header">
             <div class="card-title">
-                Users List
+                Users
             </div>
             @if (permission_check('USER_CREATE'))
             <a class="btn btn-primary"  href="{{ route('user.create') }}"><i class="fa fa-plus"></i> Add User</a>

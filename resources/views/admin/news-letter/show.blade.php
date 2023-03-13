@@ -8,7 +8,7 @@ Home
     <div class="card custom">
         <div class="card-header">
             <div class="card-title">
-                News Letter Show
+                News Letter Details
             </div>
            
             <a href="{{ url()->previous() }}" class="btn btn-primary ms-3">
