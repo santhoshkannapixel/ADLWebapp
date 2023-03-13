@@ -48,7 +48,7 @@
         <li class="nav-item">
             <a class="nav-link {{ Route::is(['condition.index','condition.create','condition.edit']) ? "active" : "" }}" href="{{ route('condition.index') }}">
                 <i class="fa fa-picture-o me-2"></i>
-                conditions
+                Conditions
             </a>
         </li>
         @endif

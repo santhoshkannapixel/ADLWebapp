@@ -99,8 +99,8 @@
         {{ Route::is('organ.index') ? "Organs" : '' }}
         {{ Route::is('organ.edit') ? "Organs / Edit Organs " : '' }}
 
-        {{ Route::is('condition.index') ? "Organs" : '' }}
-        {{ Route::is('condition.edit') ? "Organs / Edit Organs " : '' }}
+        {{ Route::is('condition.index') ? "Condition" : '' }}
+        {{ Route::is('condition.edit') ? "Condition / Edit Condition " : '' }}
         
         
         {{ Route::is('payment_config.index') ? "Payment Configuration" : '' }}
