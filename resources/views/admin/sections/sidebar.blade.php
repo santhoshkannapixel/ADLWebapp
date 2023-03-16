@@ -144,7 +144,15 @@
     <hr>
     <div class="dropdown p-3 pt-0">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="{{ asset('public/images/avatar.png') }}" alt="" width="32" height="32" class="rounded-5 me-2">
+            <?php 
+            $image = Sentinel::getUser()->image;
+             ?>
+             @if(isset($image) && !empty($image))
+             <img src="{{ asset_url($image) }}" alt="" width="32" height="32" class="rounded-5 me-2">
+             @else
+             <img src="{{ asset('public/images/avatar.png') }}" alt="" width="32" height="32" class="rounded-5 me-2">
+             @endif
+           
             <b>{{ Sentinel::getUser()->name }}</b>
             <small class="ms-2 badge bg-success text-white">
                 {{ Sentinel::getUser()->roles[0]->name }}
