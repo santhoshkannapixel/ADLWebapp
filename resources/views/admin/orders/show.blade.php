@@ -139,6 +139,7 @@
                                 <tr>
                                     <th>Item</th>
                                     <th>Test ID</th>
+                                    <th>Dos Code</th>
                                     <th>Test Name</th>
                                     <th>Test Type</th>
                                     <th>Price</th>
@@ -151,6 +152,7 @@
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $item->TestId }}</td>
+                                        <td>{{ $item->DosCode }}</td>
                                         <td>{{ $item->TestName }}</td>
                                         <td>{{ $item->IsPackage == 'Yes' ? 'Test Packages' : 'Lab Test' }}</td>
                                         <td>{{ $item->TestPrice }}</td>

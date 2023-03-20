@@ -34,6 +34,7 @@
                     <tr>
                         <th>S.No </th>
                         <th>Test Id</th>
+                        <th>Dos Code</th>
                         <th>Test Name</th>
                         <th>Applicable Gender</th>
                         <th>Is Home</th>
@@ -75,6 +76,10 @@
                         {
                             data: "TestId",
                             name: "TestId"
+                        },
+                        {
+                            data: "DosCode",
+                            name: "DosCode"
                         },
                         {
                             data: "TestName",

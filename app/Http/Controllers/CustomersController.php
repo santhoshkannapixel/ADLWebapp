@@ -11,7 +11,7 @@ class CustomersController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()) {
-            $data = User::with('CustomerDetails')->where('role_id',0)->select('*');
+            $data = User::with('CustomerDetails')->where('role_id',0)->select('*')->orderBy('id','desc');
             return DataTables::of($data)->addIndexColumn()
                 ->addColumn('phone_number', function ($data) {
                     return $data->CustomerDetails->phone_number ?? null;
