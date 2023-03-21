@@ -111,10 +111,16 @@ if(!function_exists('permission_check'))
             $role =  RoleUsers::where('user_id',$id)->select('role_id')->first();
             $role = Roles::where('id',$role['role_id'])->select('permissions')->first();
             $ss = json_decode($role['permissions']);
-            if($ss->$data == 1) 
-            {
-                return true;
-            }
+            
+             try {
+                if($ss->$data == 1) 
+                {
+                    return true;
+                }
+             } catch (\Throwable $th) {
+                return false;
+             }
+          
             return false;
         }
         else if($id == 1)
