@@ -135,6 +135,8 @@ Route::middleware(['auth_users'])->group(function () {
             Route::get('/', [OrdersController::class, 'index'])->name('orders.index');
             Route::get('/show/{id}', [OrdersController::class, 'show'])->name('orders.show');
             Route::post('/change-order-status/{id}', [OrdersController::class, 'change_order_status'])->name('orders.change-order-status');
+            Route::post('/export', [OrdersController::class, 'exportData'])->name('orders.export');
+        
         });
 
         Route::group(['prefix' => 'customers'], function () {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\OrderExport;
 use App\Mail\OrderStatusMail;
 use App\Models\CustomerDetails;
 use App\Models\OrderedTests;
@@ -10,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Laracasts\Flash\Flash;
 use Yajra\DataTables\DataTables;
+use Maatwebsite\Excel\Facades\Excel;
 
 class OrdersController extends Controller
 {
@@ -101,5 +103,9 @@ class OrdersController extends Controller
             ]);
         }
         return back();
+    }
+    public function exportData(Request $request)
+    {
+        return Excel::download(new OrderExport, 'order.xlsx');
     }
 }
