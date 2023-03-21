@@ -78,6 +78,12 @@ class DashboardController extends Controller
                                 $status .= '</select>';
                                 return $status;
                             })
+                            ->editColumn('created_at',function($row){
+                   
+                                $created_at = Carbon::createFromFormat('Y-m-d H:i:s', $row['created_at'])->format('d-m-Y');
+                                 return $created_at;
+                             
+                            })
                             ->editColumn('remark', function($row){
                                 if(!empty($row->remark)){
                                     $remark = $row->remark;
@@ -112,6 +118,12 @@ class DashboardController extends Controller
                                 }
                                 $status .= '</select>';
                                 return $status;
+                            })
+                            ->editColumn('created_at',function($row){
+                   
+                                $created_at = Carbon::createFromFormat('Y-m-d H:i:s', $row['created_at'])->format('d-m-Y');
+                                 return $created_at;
+                             
                             })
                             ->editColumn('remark', function($row){
                                 if(!empty($row->remark)){
@@ -149,6 +161,12 @@ class DashboardController extends Controller
                                 $status .= '</select>';
                                 return $status;
                             })
+                            ->editColumn('created_at',function($row){
+                   
+                                $created_at = Carbon::createFromFormat('Y-m-d H:i:s', $row['created_at'])->format('d-m-Y');
+                                 return $created_at;
+                             
+                            })
                             ->editColumn('remark', function($row){
                                 if(!empty($row->remark)){
                                     $remark = $row->remark;
@@ -183,6 +201,12 @@ class DashboardController extends Controller
                                 }
                                 $status .= '</select>';
                                 return $status;
+                            })
+                            ->editColumn('created_at',function($row){
+                   
+                                $created_at = Carbon::createFromFormat('Y-m-d H:i:s', $row['created_at'])->format('d-m-Y');
+                                 return $created_at;
+                             
                             })
                             ->editColumn('remark', function($row){
                                 if(!empty($row->remark)){
@@ -219,6 +243,12 @@ class DashboardController extends Controller
                                 }
                                 $status .= '</select>';
                                 return $status;
+                            })
+                            ->editColumn('created_at',function($row){
+                   
+                                $created_at = Carbon::createFromFormat('Y-m-d H:i:s', $row['created_at'])->format('d-m-Y');
+                                 return $created_at;
+                             
                             })
                             ->editColumn('remark', function($row){
                                 if(!empty($row->remark)){
@@ -257,6 +287,12 @@ class DashboardController extends Controller
                                 $status .= '</select>';
                                 return $status;
                             })
+                            ->editColumn('created_at',function($row){
+                   
+                                $created_at = Carbon::createFromFormat('Y-m-d H:i:s', $row['created_at'])->format('d-m-Y');
+                                 return $created_at;
+                             
+                            })
                             ->editColumn('remark', function($row){
                                 if(!empty($row->remark)){
                                     $remark = $row->remark;
@@ -291,6 +327,12 @@ class DashboardController extends Controller
                                 }
                                 $status .= '</select>';
                                 return $status;
+                            })
+                            ->editColumn('created_at',function($row){
+                   
+                                $created_at = Carbon::createFromFormat('Y-m-d H:i:s', $row['created_at'])->format('d-m-Y');
+                                 return $created_at;
+                             
                             })
                             ->editColumn('remark', function($row){
                                 if(!empty($row->remark)){
@@ -328,6 +370,12 @@ class DashboardController extends Controller
                                 $status .= '</select>';
                                 return $status;
                             })
+                            ->editColumn('created_at',function($row){
+                   
+                                $created_at = Carbon::createFromFormat('Y-m-d H:i:s', $row['created_at'])->format('d-m-Y');
+                                 return $created_at;
+                             
+                            })
                             ->editColumn('remark', function($row){
                                 if(!empty($row->remark)){
                                     $remark = $row->remark;
@@ -364,6 +412,12 @@ class DashboardController extends Controller
                                 $status .= '</select>';
                                 return $status;
                             })
+                            ->editColumn('created_at',function($row){
+                   
+                                $created_at = Carbon::createFromFormat('Y-m-d H:i:s', $row['created_at'])->format('d-m-Y');
+                                 return $created_at;
+                             
+                            })
                             ->editColumn('remark', function($row){
                                 if(!empty($row->remark)){
                                     $remark = $row->remark;
@@ -398,6 +452,12 @@ class DashboardController extends Controller
                                 }
                                 $status .= '</select>';
                                 return $status;
+                            })
+                            ->editColumn('created_at',function($row){
+                   
+                                $created_at = Carbon::createFromFormat('Y-m-d H:i:s', $row['created_at'])->format('d-m-Y');
+                                 return $created_at;
+                             
                             })
                             ->editColumn('remark', function($row){
                                 if(!empty($row->remark)){
@@ -435,6 +495,12 @@ class DashboardController extends Controller
                                 $status .= '</select>';
                                 return $status;
                             })
+                            ->editColumn('created_at',function($row){
+                   
+                                $created_at = Carbon::createFromFormat('Y-m-d H:i:s', $row['created_at'])->format('d-m-Y');
+                                 return $created_at;
+                             
+                            })
                             ->editColumn('remark', function($row){
                                 if(!empty($row->remark)){
                                     $remark = $row->remark;
@@ -470,6 +536,12 @@ class DashboardController extends Controller
                                 }
                                 $status .= '</select>';
                                 return $status;
+                            })
+                            ->editColumn('created_at',function($row){
+                   
+                                $created_at = Carbon::createFromFormat('Y-m-d H:i:s', $row['created_at'])->format('d-m-Y');
+                                 return $created_at;
+                             
                             })
                             ->editColumn('remark', function($row){
                                 if(!empty($row->remark)){

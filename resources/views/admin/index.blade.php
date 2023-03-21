@@ -200,6 +200,7 @@
                 var from_date   =   $('#from_date').val();
                 var to_date     =   $('#to_date').val();
                 $('#data-table').DataTable({
+                    order: [ [6, 'desc'] ],
                     lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                     processing: true,
                     serverSide: true,
