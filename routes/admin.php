@@ -127,6 +127,8 @@ Route::middleware(['auth_users'])->group(function () {
             Route::get('/', [NewsLetterController::class, 'index'])->name('news-letter.index');
             Route::get('/{id}', [NewsLetterController::class, 'show'])->name('news-letter.show');
             Route::delete('/{id?}', [NewsLetterController::class, 'delete'])->name('news-letter.delete');
+            Route::post('/export', [NewsLetterController::class, 'exportData'])->name('news-letter.export');
+
         });
 
         Route::group(['prefix' => 'orders'], function () {

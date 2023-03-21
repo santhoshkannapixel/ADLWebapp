@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\NewsLetterExport;
 use App\Http\Controllers\Controller;
 use App\Models\NewsLetter;
 use Yajra\DataTables\Facades\DataTables;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use Laracasts\Flash\Flash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class NewsLetterController extends Controller
 {
@@ -52,5 +54,9 @@ class NewsLetterController extends Controller
     {
         $data   =   NewsLetter::select('id','email','created_at')->find($id);
         return view('admin.news-letter.show', compact('data'));
+    }
+    public function exportData(Request $request)
+    {
+        return Excel::download(new NewsLetterExport, 'news_letter.xlsx');
     }
 }
