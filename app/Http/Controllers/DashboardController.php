@@ -14,6 +14,7 @@ use App\Exports\HeadOfficeExport;
 use App\Exports\HospitalLabManagementExport;
 use App\Exports\PatientsConsumersExport;
 use App\Exports\ResearchExport;
+use App\Exports\AllEnquiryExport;
 use App\Models\BookAppointment;
 use App\Models\BookHomeCollection;
 use App\Models\Career;
@@ -1067,6 +1068,8 @@ class DashboardController extends Controller
                     break;
                 case 'CAREER_ENQUIRY':
                     return Excel::download(new CareerExport, 'career_enquiry.xlsx');
+                case 'All':
+                    return Excel::download(new AllEnquiryExport, 'all_enquiry.xlsx');
                     break;
             }
         }

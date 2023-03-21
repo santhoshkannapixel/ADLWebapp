@@ -223,8 +223,9 @@
                 var search_data =   $('#search_data').val();
                 if(search_data == '')
                 {
-                    toastr.error("Please Select Enquiry")
-                    return false;
+                    // toastr.error("Please Select Enquiry");
+                    $('#export_enquiry').val("All");
+                    // return false;
                 }
                 else{
                     $('#export_enquiry').val(search_data);
