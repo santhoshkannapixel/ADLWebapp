@@ -560,6 +560,7 @@ class DashboardController extends Controller
                 }
                 else{
                        // Patients Consumers
+                       $data = [];
                     $data_patients_consumers = PatientsConsumers::select('id','name as Name','email as Email','mobile as Mobile','created_at','status','remark')
                     ->whereDate('created_at', '>=', $request->from_date)
                     ->whereDate('created_at', '<=', $request->to_date)
@@ -706,7 +707,6 @@ class DashboardController extends Controller
                     foreach($data_contact as $key=>$val){
                         $data[] = $val;
                     }
-
                     $datatables =  Datatables::of($data)
                     ->editColumn('status', function($row){
                         if($row->type == "PATIENTS CONSUMERS LIST")
@@ -1101,47 +1101,49 @@ class DashboardController extends Controller
     public function exportData(Request $request)
     {
         $export_data = $request->export_enquiry;
+        $from = $request->export_enquiry_from_date ?? '';
+        $to = $request->export_enquiry_to_date ?? '';
         if(!empty($export_data))
         {
             switch($export_data)
             {
                 case 'BOOK_HOME_COLLECTION_LIST':
-                    return Excel::download(new BookHomeCollectionExport, 'book_home_collection.xlsx');
+                    return Excel::download(new BookHomeCollectionExport($from,$to), 'book_home_collection.xlsx');
                     break;
                 case 'PATIENTS_CONSUMERS_LIST':
-                    return Excel::download(new PatientsConsumersExport, 'patients_consumers.xlsx');
+                    return Excel::download(new PatientsConsumersExport($from,$to), 'patients_consumers.xlsx');
                     break;
                 case 'FEEDBACK_LIST':
-                    return Excel::download(new FeedBackExport, 'feedback.xlsx');
+                    return Excel::download(new FeedBackExport($from,$to), 'feedback.xlsx');
                     break;
                 case 'FREQUENTLY_ASKED_QUESTIONS_LIST':
-                    return Excel::download(new FrequentlyAskedQuestionsExport, 'faq.xlsx');
+                    return Excel::download(new FrequentlyAskedQuestionsExport($from,$to), 'faq.xlsx');
                     break;
                 case 'HOSPITAL_LAB_MANAGEMENT':
-                    return Excel::download(new HospitalLabManagementExport, 'hospital_lab_management.xlsx');
+                    return Excel::download(new HospitalLabManagementExport($from,$to), 'hospital_lab_management.xlsx');
                     break;
                 case 'CLINICAL_LAB_MANAGEMENT':
-                    return Excel::download(new ClinicalLabManagementExport, 'clinical_lab_management.xlsx');
+                    return Excel::download(new ClinicalLabManagementExport($from,$to), 'clinical_lab_management.xlsx');
                     break;
                 case 'FRANCHISING_OPPORTUNITIES':
-                    return Excel::download(new FranchisingOpportunitiesExport, 'franchising_opportunities.xlsx');
+                    return Excel::download(new FranchisingOpportunitiesExport($from,$to), 'franchising_opportunities.xlsx');
                     break;
                 case 'RESEARCH':
-                    return Excel::download(new ResearchExport, 'research.xlsx');
+                    return Excel::download(new ResearchExport($from,$to), 'research.xlsx');
                     break;
                 case 'BOOK_AN_APPOINTMENT':
-                    return Excel::download(new BookAppointmentExport, 'book_appointment.xlsx');
+                    return Excel::download(new BookAppointmentExport($from,$to), 'book_appointment.xlsx');
                     break;
                 case 'HEAD_OFFICE':
-                    return Excel::download(new HeadOfficeExport, 'head_office.xlsx');
+                    return Excel::download(new HeadOfficeExport($from,$to), 'head_office.xlsx');
                     break;
                 case 'CONTACT_LIST':
-                    return Excel::download(new ContactExport, 'contact_us.xlsx');
+                    return Excel::download(new ContactExport($from,$to), 'contact_us.xlsx');
                     break;
                 case 'CAREER_ENQUIRY':
-                    return Excel::download(new CareerExport, 'career_enquiry.xlsx');
+                    return Excel::download(new CareerExport($from,$to), 'career_enquiry.xlsx');
                 case 'All':
-                    return Excel::download(new AllEnquiryExport, 'all_enquiry.xlsx');
+                    return Excel::download(new AllEnquiryExport($request->export_enquiry_from_date,$request->export_enquiry_to_date), 'all_enquiry.xlsx');
                     break;
             }
         }
@@ -1263,6 +1265,7 @@ class DashboardController extends Controller
     }
     public function remark(Request $request)
     {
+  
         $type   = $request->type;
         $id     = $request->id;
         $value  = $request->value;

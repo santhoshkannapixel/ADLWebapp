@@ -121,8 +121,10 @@
                     <div class="input-group input-daterange m-0">
                         @if (permission_check('DASHBOARD_EXPORT'))
                         <form method="POST" name="dashboard_export" action="{{ route('dashboard.export') }}" enctype="multipart/form-data">
-                            {{ csrf_field() }}
+                           @csrf
                             <input type="hidden" name="export_enquiry" id="export_enquiry" value="">
+                            <input type="hidden" name="export_enquiry_from_date" id="export_enquiry_from_date" value="">
+                            <input type="hidden" name="export_enquiry_to_date" id="export_enquiry_to_date" value="">
                             <button type="submit" id="dashboardExport" class="btn btn-primary" >Export</button>
                         </form>
                         @endif
@@ -176,6 +178,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             $('.input-daterange').datepicker({
                 todayBtn:'linked',
                 format:'yyyy-mm-dd',
@@ -222,6 +229,10 @@
             } load_data();
             $('#dashboardExport').click(function(){
                 var search_data =   $('#search_data').val();
+                var from_date = $('#from_date').val();
+                var to_date = $('#to_date').val();
+                $('#export_enquiry_from_date').val(from_date);
+                $('#export_enquiry_to_date').val(to_date);
                 if(search_data == '')
                 {
                     // toastr.error("Please Select Enquiry");
@@ -231,6 +242,8 @@
                 else{
                     $('#export_enquiry').val(search_data);
                 }
+               
+              
 
             });
             $('#filter').click(function(){
@@ -258,10 +271,12 @@
                 var from_date   =   $('#from_date').val();
                 var to_date     =   $('#to_date').val();
                 $('#search_data').val('');
-                $('#from_date').val(currentDate);
-                $('#to_date').val(to_date);
-                $('#data-table').DataTable().destroy();
-                load_data();
+                // $('#from_date').val(currentDate);
+                // $('#to_date').val(to_date);
+                $('#from_date').val('');
+                $('#to_date').val('');
+                // $('#data-table').DataTable().destroy();
+                // load_data();
             });
                    
             $(document).on('change','#status',function(){
