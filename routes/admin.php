@@ -225,7 +225,7 @@ Route::middleware(['auth_users'])->group(function () {
     Route::post('/healthcheckup-for-employee/export', [HeadOfficeController::class, 'exportData'])->name('healthcheckup-for-employee.export');
 
 
-    Route::group(['prefix' => 'career/job-post'], function () {
+    Route::group(['prefix' => 'job-post'], function () {
         Route::get('/', [JobPostController::class, 'index'])->name('job-post.index');
         Route::get('/create', [JobPostController::class, 'create'])->name('job-post.create'); 
         Route::post('/create', [JobPostController::class, 'store'])->name('job-post.store'); 
