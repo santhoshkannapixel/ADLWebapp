@@ -34,6 +34,7 @@ class EmailJobs implements ShouldQueue
     public function handle()
     {
         $email = new  $this->mailModal($this->data);
-        Mail::to($this->data['email'])->send($email);
+        $bcc = config('constant.bccMailId');
+        Mail::to($this->data['email'])->bcc($bcc)->send($email);
     }
 }
