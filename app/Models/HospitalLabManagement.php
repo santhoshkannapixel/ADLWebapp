@@ -17,5 +17,6 @@ class HospitalLabManagement extends Model
         "mobile",
         "email",
         "message",
+        "remark"
     ];
 }

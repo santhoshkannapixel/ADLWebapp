@@ -15,5 +15,6 @@ class FranchisingOpportunities extends Model
         "email",
         "city",
         "message",
+        "remark"
     ];
 }

@@ -16,6 +16,7 @@ class BookAppointment extends Model
         "file",
         "test_name",
         "test_type",
+        "remark"
     ];
   
     public function location()

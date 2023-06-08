@@ -15,5 +15,7 @@ class Research extends Model
         "email",
         "city",
         "message",
+        "remark"
+
     ];
 }

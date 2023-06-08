@@ -15,5 +15,6 @@ class FeedBack extends Model
         "email",
         "location",
         "message",
+        'remark'
     ];
 }

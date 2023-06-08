@@ -16,7 +16,9 @@ class Career extends Model
         'mobile',
         'file',
         'message',
-        'status'
+        'status',
+        "remark"
+
     ];
     public function job()
     {

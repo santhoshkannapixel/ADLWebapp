@@ -15,5 +15,6 @@ class FrequentlyAskedQuestions extends Model
         "email",
         "location",
         "message",
+        'remark'
     ];
 }

@@ -16,5 +16,6 @@ class HeadOffice extends Model
         "company_name",
         "designation",
         "message",
+        "remark"
     ];
 }

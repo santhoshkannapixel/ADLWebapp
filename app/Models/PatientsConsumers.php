@@ -22,5 +22,6 @@ class PatientsConsumers extends Model
         "preferred_time",
         "address",
         "pincode",
+        'remark'
     ];
 }

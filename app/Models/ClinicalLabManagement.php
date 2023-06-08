@@ -16,5 +16,6 @@ class ClinicalLabManagement extends Model
         "mobile",
         "email",
         "message",
+        "remark"
     ];
 }
