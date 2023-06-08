@@ -36,7 +36,7 @@
     <script type="text/javascript">
         $(function () {
             var table = $('#data-table').DataTable({
-                "pageLength": 50,
+                "pageLength": 10,
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                
                 ajax: "{{ route('contact-us.index') }}",
