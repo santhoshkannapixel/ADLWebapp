@@ -20,5 +20,6 @@ return [
         "book_appointments",
         "head_offices",
         "careers",
+        "contact_us"
     ]
 ];
