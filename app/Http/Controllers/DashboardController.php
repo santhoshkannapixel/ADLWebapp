@@ -53,6 +53,9 @@ class DashboardController extends Controller
                 ->editColumn('created_at', function($row) {
                     return Carbon::parse($row->created_at)->format('M-d-Y');
                 })
+                ->editColumn('type', function($row) {
+                    return ucfirst(str_replace('_',' ', $row->type));
+                })
                 ->rawColumns(['status','remark'])
                 ->make(true);
         }
