@@ -28,7 +28,7 @@ class Kernel extends HttpKernel
      *
      * @var array<string, array<int, class-string|string>>
      */
-    protected $middlewareGroups = [
+    protected $middlewareGroups = [ 
         'web' => [
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
@@ -54,6 +54,7 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $routeMiddleware = [
+        'cors' => \App\Http\Middleware\Cors::class, 
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth_users' => \App\Http\Middleware\AuthMiddleware::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
