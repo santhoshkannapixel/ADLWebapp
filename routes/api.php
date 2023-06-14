@@ -17,7 +17,7 @@ use App\Http\Controllers\Website\CurrentOpeningController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::group(['middleware' => ['api', 'cors']], function ($router) {
+Route::group(['middleware' => ['cors']], function ($router) {
     Route::get('locations', [ApiController::class,'locations']);
     Route::get('banners', [ApiController::class,'banners']);
     Route::get('topBookedTest/{location}/{is_package}', [ApiController::class,'topBookedTestPackages']);
