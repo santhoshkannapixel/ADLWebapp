@@ -15,25 +15,35 @@ class ContactUsController extends Controller
 {
     public function contactUs(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'name'      => 'required',
-            'email'     => 'required|regex:/(.+)@(.+)\.(.+)/i',
-            'mobile'    => 'required|numeric|digits:10',
-           
-        ]);
+        if($request->email) {
+
+            $validator = Validator::make($request->all(),[
+                'name'      => 'required',
+                'email'     => 'required|regex:/(.+)@(.+)\.(.+)/i',
+                'mobile'    => 'required|numeric|digits:10',
+               
+            ]);
+        } else {
+            $validator = Validator::make($request->all(),[
+                'name'      => 'required',
+                'mobile'    => 'required|numeric|digits:10',
+            ]);
+        }
         if($validator->fails()){
             return filedCall($validator->messages()); 
         }
         $data = new ContactUs;
         $data->name     = $request->name;
-        $data->email    = $request->email;
+        if($request->email) { 
+            $data->email    = $request->email;
+        }
         $data->mobile   = $request->mobile;
         $data->location = $request->location;
         $data->message  = $request->message;
         $data->page     = $request->page;
         $res             = $data->save();
 
-        if($res)
+        if($res &&  $request->email)
         {
             $details = [
                 'name'                      => $request->name,
