@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\CustomerExport;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Maatwebsite\Excel\Facades\Excel;
@@ -13,7 +14,13 @@ class CustomersController extends Controller
     public function index(Request $request)
     {
         if($request->ajax()) {
-            $data = User::with('CustomerDetails')->where('role_id',0)->select('*')->orderBy('id','desc');
+            $data = User::with('CustomerDetails')->where('role_id',0)
+            ->when(!empty($request->start_date) && !empty($request->end_date), function ($query) use ($request) {
+                $start_month     = Carbon::parse($request->start_date)->startOfDay();
+                $end_month       = Carbon::parse($request->end_date)->endOfDay();
+                $query->whereBetween('created_at', [$start_month, $end_month]);
+            })
+            ->select('*')->orderBy('id','desc');
             return DataTables::of($data)->addIndexColumn()
                 ->addColumn('phone_number', function ($data) {
                     return $data->CustomerDetails->phone_number ?? null;
@@ -33,6 +40,6 @@ class CustomersController extends Controller
     }
     public function exportData(Request $request)
     {
-        return Excel::download(new CustomerExport, 'customer.xlsx');
+        return Excel::download(new CustomerExport($request), 'customer.xlsx');
     }
 }
