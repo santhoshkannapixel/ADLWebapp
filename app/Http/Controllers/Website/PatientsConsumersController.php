@@ -50,6 +50,7 @@ class PatientsConsumersController extends Controller
         $data->preferred_time           = $request->preferred_time;
         $data->address                  = $request->address;
         $data->pincode                  = $request->pincode;
+        $data->page_url                  = $request->page_url;
 
         $details = [
             'date_time'                 => now()->toDateString(),

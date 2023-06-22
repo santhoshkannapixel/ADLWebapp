@@ -116,6 +116,7 @@ class ApiController extends Controller
             "file"      => $file,
             "test_name" => $request->test_name,
             "comments"  => $request->comments,
+            "page_url" => $request->page_url 
         ]);
         $details = [
             'site_logo'             => asset('/images/logo/logo.png'),

@@ -57,7 +57,12 @@ class DashboardController extends Controller
                 ->editColumn('type', function($row) {
                     return ucfirst(str_replace('_',' ', $row->type));
                 })
-                ->rawColumns(['status','remark'])
+                ->editColumn('page_url', function($row) {
+                    if($row->page_url) {
+                        return '<a target="_blank" href="'.$row->page_url.'" title="'.$row->page_url.'" class="m-1 shadow-sm btn btn-sm text-success btn-outline-light"><i class="fa fa-eye"></i></a>'; 
+                    }
+                })
+                ->rawColumns(['status','remark','page_url'])
                 ->make(true);
         }
         return view('admin.index');

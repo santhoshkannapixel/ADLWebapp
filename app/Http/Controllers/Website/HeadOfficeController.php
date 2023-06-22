@@ -32,6 +32,8 @@ class HeadOfficeController extends Controller
         $data->address                  = $request->address;
         $data->designation              = $request->designation;
         $data->message                  = $request->message;
+        $data->page_url                  = $request->page_url;
+
         $res                            = $data->save();
         if($res)
         {

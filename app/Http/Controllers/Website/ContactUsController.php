@@ -41,6 +41,7 @@ class ContactUsController extends Controller
         $data->location = $request->location;
         $data->message  = $request->message;
         $data->page     = $request->page;
+        $data->page_url = $request->page_url;
         $res             = $data->save();
 
         if($res &&  $request->email)

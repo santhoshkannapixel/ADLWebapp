@@ -29,6 +29,7 @@ class FranchisingOpportunitiesController extends Controller
         $data->mobile                   = $request->mobile;
         $data->city                     = $request->city;
         $data->message                  = $request->message;
+        $data->page_url                  = $request->page_url;
         $res                            = $data->save();
         $details = [
             'date_time'                 => now()->toDateString(),

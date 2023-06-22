@@ -29,6 +29,8 @@ class FeedBackController extends Controller
         $data->mobile    = $request->mobile;
         $data->location  = $request->location;
         $data->message   = $request->message;
+        $data->page_url                  = $request->page_url;
+        
         $res             = $data->save();
         if($res)
         {

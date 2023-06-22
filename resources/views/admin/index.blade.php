@@ -165,6 +165,7 @@
                         <th>Type</th>
                         <th>Status</th>
                         <th>Remarks</th>
+                        <th>Page</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -251,7 +252,7 @@
                         {
                             data: 'type',
                             name: 'type'
-                        },
+                        },                        
                         {
                             data: 'status',
                             name: 'status'
@@ -259,6 +260,10 @@
                         {
                             data: 'remark',
                             name: 'remark'
+                        },
+                        {
+                            data: 'page_url',
+                            name: 'page_url'
                         },
                     ],
                 });

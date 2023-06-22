@@ -32,6 +32,8 @@ class BookAppointmentController extends Controller
         $data->mobile                                           = $request->mobile;
         $data->test_id                                          = $request->test_id;
         $data->test_type                                        = $request->test_type;
+        $data->page_url                  = $request->page_url;
+
         if($request->file('file'))
         {
             if($request->has('file')) {

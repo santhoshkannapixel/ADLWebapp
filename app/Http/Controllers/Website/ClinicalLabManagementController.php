@@ -29,6 +29,8 @@ class ClinicalLabManagementController extends Controller
         $data->email                                            = $request->email;
         $data->mobile                                           = $request->mobile;
         $data->message                                          = $request->message;
+        $data->page_url                  = $request->page_url;
+
         $res                                                    = $data->save();
 
         $details = [
