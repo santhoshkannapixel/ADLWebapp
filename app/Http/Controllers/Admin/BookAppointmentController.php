@@ -6,6 +6,7 @@ use App\Exports\BookAppointmentExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BookAppointment;
+use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Log;
@@ -19,7 +20,11 @@ class BookAppointmentController extends Controller
     {
         if ($request->ajax()) {
 
-            $data = BookAppointment::with(['location','test'])->orderBy('id', 'DESC');
+            $data = BookAppointment::with(['location','test'])->when(!empty($request->start_date) && !empty($request->end_date), function ($query) use ($request) {
+                $start_month     = Carbon::parse($request->start_date)->startOfDay();
+                $end_month       = Carbon::parse($request->end_date)->endOfDay();
+                $query->whereBetween('created_at', [$start_month, $end_month]);
+            })->orderBy('id', 'DESC');
             return DataTables::eloquent($data)
                 ->addIndexColumn()
                 ->addColumn('download', function ($data) {
@@ -73,6 +78,6 @@ class BookAppointmentController extends Controller
     }
     public function exportData(Request $request)
     {
-        return Excel::download(new BookAppointmentExport, 'book_appointment.xlsx');
+        return Excel::download(new BookAppointmentExport($request), 'book_appointment.xlsx');
     }
 }
