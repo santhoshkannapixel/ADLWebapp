@@ -6,6 +6,7 @@ use App\Exports\ResearchExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Research;
+use Carbon\Carbon;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Log;
@@ -19,7 +20,11 @@ class ResearchController extends Controller
     {
         if ($request->ajax()) {
 
-            $data = Research::orderBy('id', 'DESC');
+            $data = Research::when(!empty($request->start_date) && !empty($request->end_date), function ($query) use ($request) {
+                $start_month     = Carbon::parse($request->start_date)->startOfDay();
+                $end_month       = Carbon::parse($request->end_date)->endOfDay();
+                $query->whereBetween('created_at', [$start_month, $end_month]);
+            })->orderBy('id', 'DESC');
 
             return DataTables::eloquent($data)
                 ->addIndexColumn()
@@ -63,6 +68,6 @@ class ResearchController extends Controller
     }
     public function exportData(Request $request)
     {
-        return Excel::download(new ResearchExport, 'research.xlsx');
+        return Excel::download(new ResearchExport( $request), 'research.xlsx');
     }
 }
