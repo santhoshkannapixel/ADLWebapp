@@ -263,10 +263,10 @@ if (!function_exists('toggleButton')) {
                 if(empty($search)) {
                     $search = "WHERE created_at BETWEEN " . "'" .$config['from_date'] . "'" ." and "."'".$config['to_date']."'";
                 } else {
-                    $search = $search." and WHERE created_at BETWEEN " . "'" .$config['from_date'] . "'" ." and "."'".$config['to_date']."'";
+                    $search = $search." and created_at BETWEEN " . "'" .$config['from_date'] . "'" ." and "."'".$config['to_date']."'";
                 }
-            }
-            $rawQuery = DB::raw("select * from (
+            } 
+            return DB::select("select * from (
                 SELECT id,name,mobile,'-' AS email,status,remark,created_at,deleted_at, 'book_home_collections' AS type  FROM `book_home_collections` WHERE `book_home_collections`.`deleted_at` IS NULL
                 UNION SELECT id,name,mobile,email,status,remark,created_at,deleted_at, 'patients_consumers' AS type FROM `patients_consumers`  WHERE `patients_consumers`.`deleted_at` IS NULL
                 UNION SELECT id,name,mobile,email,status,remark,created_at,deleted_at, 'feed_backs' AS type FROM `feed_backs`  WHERE `feed_backs`.`deleted_at` IS NULL
@@ -279,8 +279,7 @@ if (!function_exists('toggleButton')) {
                 UNION SELECT id,name,mobile,email,status,remark,created_at,deleted_at, 'head_offices' AS type FROM `head_offices`  WHERE `head_offices`.`deleted_at` IS NULL
                 UNION SELECT id,name,mobile,email,status,remark,created_at,deleted_at, 'careers' AS type FROM `careers`  WHERE `careers`.`deleted_at` IS NULL
                 UNION SELECT id,name,mobile,email,status,remark,created_at,deleted_at, 'contact_us' AS type FROM `contact_us`  WHERE `contact_us`.`deleted_at` IS NULL
-           ) as all_enquires $search");
-            return DB::select($rawQuery);
+           ) as all_enquires $search ORDER BY created_at ASC");
         }
     }
 }

@@ -34,6 +34,7 @@ class DashboardController extends Controller
                 "from_date" => $request->from_date ?? null,
                 "to_date"   => $request->to_date ?? null
             ]);
+          
             return Datatables::of($enquiries)->addIndexColumn()
                 ->editColumn('status', function ($row) {
                     $status = '<select class="form-select form-select-sm status" name="status" data-id="' . $row->id . '" data-type="' . $row->type . '" id="status"><option value="">-- Select --</option>';

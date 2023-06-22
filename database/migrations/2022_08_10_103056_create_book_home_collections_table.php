@@ -20,7 +20,7 @@ class CreateBookHomeCollectionsTable extends Migration
             $table->string('location');
             $table->string('file');
             $table->string('test_name')->nullable();
-            $table->string('comments')->nullable();
+            $table->string('comments')->nullable(); 
             $table->softDeletes();
             $table->timestamps();
         });
