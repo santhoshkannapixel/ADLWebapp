@@ -9,7 +9,7 @@
             </div>
             @if (permission_check('HOSPITAL_LAB_MANAGEMENT_EXPORT'))
             <form method="POST" name="dashboard_export" action="{{ route('hospital-lab-management.export') }}" enctype="multipart/form-data">
-                {{ csrf_field() }}
+                @csrf
                 <button type="submit" id="dashboardExport" class="btn btn-primary" >Export</button>
             </form>
             @endif

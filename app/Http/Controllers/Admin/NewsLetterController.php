@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\NewsLetterExport;
 use App\Http\Controllers\Controller;
 use App\Models\NewsLetter;
+use Carbon\Carbon;
 use Yajra\DataTables\Facades\DataTables;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
@@ -17,10 +18,11 @@ class NewsLetterController extends Controller
     {
         if($request->ajax()) {
 
-            $data = NewsLetter::select([
-                'id',
-                'email',
-            ])->orderBy('id','desc');
+            $data = NewsLetter::when(!empty($request->start_date) && !empty($request->end_date), function ($query) use ($request) {
+                $start_month     = Carbon::parse($request->start_date)->startOfDay();
+                $end_month       = Carbon::parse($request->end_date)->endOfDay();
+                $query->whereBetween('created_at', [$start_month, $end_month]);
+            })->orderBy('id','desc');
 
             return DataTables::eloquent($data)
                 ->addIndexColumn()
@@ -57,6 +59,6 @@ class NewsLetterController extends Controller
     }
     public function exportData(Request $request)
     {
-        return Excel::download(new NewsLetterExport, 'news_letter.xlsx');
+        return Excel::download(new NewsLetterExport($request), 'news_letter.xlsx');
     }
 }

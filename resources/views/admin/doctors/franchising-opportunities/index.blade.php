@@ -9,7 +9,7 @@
             </div>
             @if (permission_check('FRANCHISING_OPPORTUNITIES_EXPORT'))
             <form method="POST" name="dashboard_export" action="{{ route('franchising-opportunities.export') }}" enctype="multipart/form-data">
-                {{ csrf_field() }}
+                @csrf
                 <button type="submit" id="dashboardExport" class="btn btn-primary" >Export</button>
             </form>
             @endif

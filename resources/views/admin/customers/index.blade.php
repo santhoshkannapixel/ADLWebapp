@@ -13,7 +13,7 @@
             @if (permission_check('CUSTOMERS_EXPORT'))
                 <form method="POST" name="dashboard_export" class="d-flex input-daterange"
                     action="{{ route('customers.export') }}" enctype="multipart/form-data">
-                    {{ csrf_field() }}
+                    @csrf
                     @csrf
                     <button type="button" name="refresh" id="refresh" class="btn btn-warning form-control-sm">
                         <i class="fa fa-repeat" aria-hidden="true"></i>
