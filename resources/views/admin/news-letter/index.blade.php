@@ -33,6 +33,7 @@ Home
                     <tr>
                         <th>S.No</th>
                         <th>Email</th>
+                        <th>Date & Time</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -73,6 +74,7 @@ Home
                     columns: [
                     {data: 'DT_RowIndex', name: 'id',orderable: false, searchable: false},
                     {data:"email", name : "email"},
+                    {data:"created_at", name : "created_at"},
                     {data:"action", name : "action", orderable: false, searchable: false}
                 ],
                 });

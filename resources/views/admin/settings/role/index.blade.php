@@ -17,7 +17,7 @@
                     <tr>
                         <th width="10%">No</th>
                         <th>Name</th>
-                        <th>Created At</th>
+                        <th>Date & Time</th>
                         <th width="100px">Action</th>
                     </tr>
                 </thead>

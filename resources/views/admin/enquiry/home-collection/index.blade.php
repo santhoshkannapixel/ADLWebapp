@@ -25,7 +25,7 @@
                         <th>Test Name</th>
                       
                         <th>Comments</th>
-                        <th>Created At</th>
+                        <th>Date & Time</th>
                         <th>File</th> 
                         <th width="100px">Action</th>
                     </tr>

@@ -15,7 +15,7 @@
                         <th>S.No</th>
                         <th>Payment Gateway Name</th>
                         <th>Payment Key / Id</th>
-                        <th>Created At</th>
+                        <th>Date & Time</th>
                         <th>Action</th>
                     </tr>
                 </thead>

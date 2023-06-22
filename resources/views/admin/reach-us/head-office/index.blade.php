@@ -35,7 +35,7 @@
                         <th>Company Name</th>
                         <th>Designation</th>
                         <th>Message</th>
-                        <th>Created At</th>
+                        <th>Date & Time</th>
                         <th width="100px">Action</th>
                     </tr>
                 </thead>

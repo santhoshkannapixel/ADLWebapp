@@ -26,7 +26,9 @@ class NewsLetterController extends Controller
 
             return DataTables::eloquent($data)
                 ->addIndexColumn()
-                          
+                ->editColumn('created_at', function ($data) {
+                    return dateFormat($data['created_at']);
+                })        
                 ->addColumn('action', function ($data) {
                     $user = Sentinel::getUser();
                     $show = '';

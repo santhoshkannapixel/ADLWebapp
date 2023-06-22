@@ -25,7 +25,7 @@
                         <th>Test Name</th>
                         <th>Test Type</th>
                         <th>File</th>
-                        <th>Created At</th>
+                        <th>Date & Time</th>
                         <th width="100px">Action</th>
                     </tr>
                 </thead>

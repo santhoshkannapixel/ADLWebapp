@@ -24,7 +24,7 @@
                         <th>Number of Employees</th>
                         <th>How can we help you?</th>
                         <th>Comments</th>
-                        <th>Created At</th>
+                        <th>Date & Time</th>
                         <th width="100px">Action</th>
                     </tr>
                 </thead>
