@@ -57,7 +57,7 @@ class DashboardController extends Controller
                             </div>';
                 })
                 ->editColumn('created_at', function ($row) {
-                    return Carbon::parse($row->created_at)->format('M-d-Y H:s:A');
+                    return Carbon::parse($row->created_at)->format('M-d-Y h:s:A');
                 })
                 ->editColumn('type', function ($row) {
                     return ucfirst(str_replace('_', ' ', $row->type));
