@@ -39,7 +39,7 @@ class JobPostController extends Controller
                     return $status;
                 })
                 ->addColumn('created_at', function ($data) {
-                    return date('d M Y', strtotime($data['created_at']));
+                    return dateFormat($data['created_at']);
                 })
                 ->rawColumns(['action','status'])
                 ->make(true);

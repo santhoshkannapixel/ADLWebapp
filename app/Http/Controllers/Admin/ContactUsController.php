@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\ContactExport;
 use App\Http\Controllers\Controller;
 use App\Models\ContactUs;
+use Carbon\Carbon;
 use Yajra\DataTables\Facades\DataTables;
 use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
@@ -14,19 +15,20 @@ class ContactUsController extends Controller
 {
     public function index(Request $request)
     {
-        
         if ($request->ajax()) {
-            $data = ContactUs::select('*')->orderBy('contact_us.created_at','desc');
+            $data = ContactUs::select('*')
+            ->when(!empty($request->start_date) && !empty($request->end_date), function ($query) use ($request) {
+                $start_month     = Carbon::parse($request->start_date)->startOfDay();
+                $end_month       = Carbon::parse($request->end_date)->endOfDay();
+                $query->whereBetween('created_at', [$start_month, $end_month]);
+            })->orderBy('contact_us.created_at','desc');
             return DataTables::eloquent($data)
                 ->addIndexColumn()
-                
                 ->addColumn('action', function ($data) {
                     $delete = '';
                     $view = '';
                     if (permission_check('CONTACT_US_DELETE'))
                     $delete = button('delete', route('contact-us.delete', $data->id));
-
-
                     if (permission_check('CONTACT_US_VIEW'))
                     $view = button('show', route('contact-us.view', $data->id));
 
@@ -34,7 +36,7 @@ class ContactUsController extends Controller
                 })
                 
                 ->addColumn('created_at', function ($data) {
-                    return date('d M Y', strtotime($data['created_at']));
+                    return dateFormat($data['created_at']);
                 })
             
                 ->rawColumns(['action', 'download'])
@@ -58,7 +60,6 @@ class ContactUsController extends Controller
     }
     public function exportData(Request $request)
     {
-        return Excel::download(new ContactExport, 'contact.xlsx');
-
+        return Excel::download(new ContactExport($request), 'contact.xlsx');
     }
 }

@@ -3,34 +3,27 @@
 namespace App\Exports;
 
 use App\Models\ContactUs;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class ContactExport implements FromCollection,WithHeadings
+class ContactExport implements FromCollection, WithHeadings
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
+    public $request;
+    public function __construct($request)
+    {
+        $this->request = $request;
+    }
 
-    // public function __construct($from,$to)
-    // {
-    //    $this->from_date = $from;
-    //    $this->to_date   = $to;
-    // }
-    
     public function collection()
     {
-        // $from   = $this->from_date;
-        // $to     = $this->to_date;
-        return ContactUs::select('name','mobile','email','location','message','status','remark','created_at')
-        // ->when($from != '', function ($query) use ($from) {
-        //     $query->whereDate('created_at', '>=', $from);
-        // })
-        // ->when($to != '', function ($query) use ($to) {
-        //     $query->whereDate('created_at', '<=', $to);
-        // })
-        ->get();
-        
+        return ContactUs::select('name', 'mobile', 'email', 'location', 'message', 'status', 'remark', 'created_at')
+            ->when(!empty($this->request->start_date) && !empty($this->request->end_date), function ($query) {
+                $start_month     = Carbon::parse($this->request->start_date)->startOfDay();
+                $end_month       = Carbon::parse($this->request->end_date)->endOfDay();
+                $query->whereBetween('created_at', [$start_month, $end_month]);
+            })
+            ->get();
     }
     public function headings(): array
     {

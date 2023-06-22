@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Razorpay\Api\Api;
 
+if (!function_exists('dateFormat')) {
+    function dateFormat($date)
+    {
+        return Carbon::parse($date)->format('M-d-Y h:s A');
+    }
+}
 if (!function_exists('auth_user_role')) {
     function auth_user_role()
     {

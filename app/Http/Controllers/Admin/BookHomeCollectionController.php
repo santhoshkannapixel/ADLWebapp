@@ -49,7 +49,7 @@ class BookHomeCollectionController extends Controller
                 })
 
                 ->addColumn('created_at', function ($data) {
-                    return date('d M Y', strtotime($data['created_at']));
+                    return dateFormat($data['created_at']);
                 })
 
                 ->rawColumns(['action', 'download'])
