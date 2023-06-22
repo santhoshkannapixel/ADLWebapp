@@ -27,42 +27,49 @@ use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller
 {
     public function index(Request $request)
-    { 
+    {
         if ($request->ajax()) {
             $enquiries = getAllEnquiries([
                 "type"      => $request->search_data ?? null,
                 "from_date" => $request->from_date ?? null,
                 "to_date"   => $request->to_date ?? null
             ]);
-          
+
             return Datatables::of($enquiries)->addIndexColumn()
-                ->editColumn('status', function ($row) {
-                    $status = '<select class="form-select form-select-sm status" name="status" data-id="' . $row->id . '" data-type="' . $row->type . '" id="status"><option value="">-- Select --</option>';
+                ->editColumn('action', function ($row) {
+                    $status = '';
                     foreach (config('dashboard.status') as $option) {
                         $selected = '';
                         if (!empty($row->status) && $row->status == $option) {
                             $selected = 'selected';
                         }
                         $status .=  '<option value="' . $option . '" ' . $selected . '>' . $option . '</option>';
+                    } 
+                    return '<div class="d-flex align-items-center">
+                                <b style="width:100px">Status</b>
+                                <span> :&nbsp;</span>
+                                <select class="border w-100" name="status" data-id="' . $row->id . '" data-type="' . $row->type . '" id="status"><option value="">-- Select --</option>'.$status.'</select>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <b style="width:100px">Remarks</b>
+                                <span> :&nbsp;</span>
+                                <textarea class="mt-1 border w-100" data-id="' . $row->id . '" data-type="' . $row->type . '"  id="remark" name="remark">' . $row->remark . '</textarea>
+                            </div>';
+                })
+                ->editColumn('created_at', function ($row) {
+                    return Carbon::parse($row->created_at)->format('M-d-Y H:s:A');
+                })
+                ->editColumn('type', function ($row) {
+                    return ucfirst(str_replace('_', ' ', $row->type));
+                })
+                ->editColumn('page', function ($row) {
+                    if ($row->page_url) {
+                        return ' <a target="_blank" href="' . $row->page_url . '" title="' . $row->page_url . '" class="ms-1"><i class="fa fa-link"></i> '.strtoupper($row->page).'</a>';
+                    } else {
+                        return strtoupper($row->page);
                     }
-                    $status .= '</select>';
-                    return $status;
                 })
-                ->editColumn('remark', function ($row) {
-                    return  '<textarea class="form-control" data-id="'.$row->id.'" data-type="' . $row->type . '"  id="remark" name="remark">'.$row->remark.'</textarea>';
-                })
-                ->editColumn('created_at', function($row) {
-                    return Carbon::parse($row->created_at)->format('M-d-Y');
-                })
-                ->editColumn('type', function($row) {
-                    return ucfirst(str_replace('_',' ', $row->type));
-                })
-                ->editColumn('page_url', function($row) {
-                    if($row->page_url) {
-                        return '<a target="_blank" href="'.$row->page_url.'" title="'.$row->page_url.'" class="m-1 shadow-sm btn btn-sm text-success btn-outline-light"><i class="fa fa-eye"></i></a>'; 
-                    }
-                })
-                ->rawColumns(['status','remark','page_url'])
+                ->rawColumns(['action', 'page'])
                 ->make(true);
         }
         return view('admin.index');

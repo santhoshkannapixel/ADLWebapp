@@ -162,10 +162,8 @@
                         <th>Email</th>
                         <th>Mobile</th>
                         <th>Date</th>
-                        <th>Type</th>
-                        <th>Status</th>
-                        <th>Remarks</th>
                         <th>Page</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -214,8 +212,8 @@
                         [6, 'desc']
                     ],
                     lengthMenu: [
-                        [10, 25, 50, -1],
-                        [10, 25, 50, "All"]
+                        [5,10, 25, 50, -1],
+                        [5,10, 25, 50, "All"]
                     ],
                     processing: true,
                     serverSide: true,
@@ -250,20 +248,12 @@
                             name: 'created_at'
                         },
                         {
-                            data: 'type',
-                            name: 'type'
+                            data: 'page',
+                            name: 'page'
                         },                        
                         {
-                            data: 'status',
-                            name: 'status'
-                        },
-                        {
-                            data: 'remark',
-                            name: 'remark'
-                        },
-                        {
-                            data: 'page_url',
-                            name: 'page_url'
+                            data: 'action',
+                            name: 'action'
                         },
                     ],
                 });

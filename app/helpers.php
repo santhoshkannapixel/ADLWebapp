@@ -267,18 +267,18 @@ if (!function_exists('toggleButton')) {
                 }
             } 
             return DB::select("select * from (
-                SELECT id,name,page_url,mobile,'-' AS email,status,remark,created_at,deleted_at, 'book_home_collections' AS type  FROM `book_home_collections` WHERE `book_home_collections`.`deleted_at` IS NULL
-                UNION SELECT id,name,page_url,mobile,email,status,remark,created_at,deleted_at, 'patients_consumers' AS type FROM `patients_consumers`  WHERE `patients_consumers`.`deleted_at` IS NULL
-                UNION SELECT id,name,page_url,mobile,email,status,remark,created_at,deleted_at, 'feed_backs' AS type FROM `feed_backs`  WHERE `feed_backs`.`deleted_at` IS NULL
-                UNION SELECT id,name,page_url,mobile,email,status,remark,created_at,deleted_at, 'frequently_asked_questions' AS type FROM `frequently_asked_questions`  WHERE `frequently_asked_questions`.`deleted_at` IS NULL
-                UNION SELECT id,name,page_url,mobile,email,status,remark,created_at,deleted_at, 'hospital_lab_management' AS type FROM `hospital_lab_management`  WHERE `hospital_lab_management`.`deleted_at` IS NULL
-                UNION SELECT id,doctors_name as name,page_url,mobile,email,status,remark,created_at,deleted_at, 'clinical_lab_management' AS type FROM `clinical_lab_management`  WHERE `clinical_lab_management`.`deleted_at` IS NULL
-                UNION SELECT id,name,page_url,mobile,email,status,remark,created_at,deleted_at, 'franchising_opportunities' AS type FROM `franchising_opportunities`  WHERE `franchising_opportunities`.`deleted_at` IS NULL
-                UNION SELECT id,name,page_url,mobile,email,status,remark,created_at,deleted_at, 'research' AS type FROM `research`  WHERE `research`.`deleted_at` IS NULL
-                UNION SELECT id,name,page_url,mobile,'-' AS email,status,remark,created_at,deleted_at, 'book_appointments' AS type FROM `book_appointments`  WHERE `book_appointments`.`deleted_at` IS NULL
-                UNION SELECT id,name,page_url,mobile,email,status,remark,created_at,deleted_at, 'head_offices' AS type FROM `head_offices`  WHERE `head_offices`.`deleted_at` IS NULL
-                UNION SELECT id,name,page_url,mobile,email,status,remark,created_at,deleted_at, 'careers' AS type FROM `careers`  WHERE `careers`.`deleted_at` IS NULL
-                UNION SELECT id,name,page_url,mobile,email,status,remark,created_at,deleted_at, 'contact_us' AS type FROM `contact_us`  WHERE `contact_us`.`deleted_at` IS NULL
+                SELECT id,name,page_url,page,mobile,'-' AS email,status,remark,created_at,deleted_at, 'book_home_collections' AS type  FROM `book_home_collections` WHERE `book_home_collections`.`deleted_at` IS NULL
+                UNION SELECT id,name,page_url,page,mobile,email,status,remark,created_at,deleted_at, 'patients_consumers' AS type FROM `patients_consumers`  WHERE `patients_consumers`.`deleted_at` IS NULL
+                UNION SELECT id,name,page_url,page,mobile,email,status,remark,created_at,deleted_at, 'feed_backs' AS type FROM `feed_backs`  WHERE `feed_backs`.`deleted_at` IS NULL
+                UNION SELECT id,name,page_url,page,mobile,email,status,remark,created_at,deleted_at, 'frequently_asked_questions' AS type FROM `frequently_asked_questions`  WHERE `frequently_asked_questions`.`deleted_at` IS NULL
+                UNION SELECT id,name,page_url,page,mobile,email,status,remark,created_at,deleted_at, 'hospital_lab_management' AS type FROM `hospital_lab_management`  WHERE `hospital_lab_management`.`deleted_at` IS NULL
+                UNION SELECT id,doctors_name as name,page_url,page,mobile,email,status,remark,created_at,deleted_at, 'clinical_lab_management' AS type FROM `clinical_lab_management`  WHERE `clinical_lab_management`.`deleted_at` IS NULL
+                UNION SELECT id,name,page_url,page,mobile,email,status,remark,created_at,deleted_at, 'franchising_opportunities' AS type FROM `franchising_opportunities`  WHERE `franchising_opportunities`.`deleted_at` IS NULL
+                UNION SELECT id,name,page_url,page,mobile,email,status,remark,created_at,deleted_at, 'research' AS type FROM `research`  WHERE `research`.`deleted_at` IS NULL
+                UNION SELECT id,name,page_url,page,mobile,'-' AS email,status,remark,created_at,deleted_at, 'book_appointments' AS type FROM `book_appointments`  WHERE `book_appointments`.`deleted_at` IS NULL
+                UNION SELECT id,name,page_url,page,mobile,email,status,remark,created_at,deleted_at, 'head_offices' AS type FROM `head_offices`  WHERE `head_offices`.`deleted_at` IS NULL
+                UNION SELECT id,name,page_url,page,mobile,email,status,remark,created_at,deleted_at, 'careers' AS type FROM `careers`  WHERE `careers`.`deleted_at` IS NULL
+                UNION SELECT id,name,page_url,page,mobile,email,status,remark,created_at,deleted_at, 'contact_us' AS type FROM `contact_us`  WHERE `contact_us`.`deleted_at` IS NULL
            ) as all_enquires $search ORDER BY created_at ASC");
         }
     }
