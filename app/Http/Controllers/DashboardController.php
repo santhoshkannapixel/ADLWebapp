@@ -82,7 +82,7 @@ class DashboardController extends Controller
             "from_date" => $request->export_enquiry_from_date ?? null,
             "to_date"   => $request->export_enquiry_to_date ?? null
         ]);
-        return  Excel::download(new DashboardExport($enquiries), $request->export_enquiry ?? "all" . '.xlsx');
+        return  Excel::download(new DashboardExport($enquiries), ($request->export_enquiry ?? "all") . '.xlsx');
     }
     public function status(Request $request)
     {
