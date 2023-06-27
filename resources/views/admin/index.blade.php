@@ -265,16 +265,7 @@
                 var to_date = $('#to_date').val();
                 $('#export_enquiry_from_date').val(from_date);
                 $('#export_enquiry_to_date').val(to_date);
-                if (search_data == '') {
-                    // toastr.error("Please Select Enquiry");
-                    $('#export_enquiry').val("All");
-                    // return false;
-                } else {
-                    $('#export_enquiry').val(search_data);
-                }
-
-
-
+                $('#export_enquiry').val(search_data);
             });
             $('#filter').click(function() {
                 var from_date = $('#from_date').val();

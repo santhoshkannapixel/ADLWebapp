@@ -1,20 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Exports\BookAppointmentExport;
-use App\Exports\BookHomeCollectionExport;
-use App\Exports\CareerExport;
-use App\Exports\ClinicalLabManagementExport;
-use App\Exports\ContactExport;
-use App\Exports\FeedBackExport;
-use App\Exports\FranchisingOpportunitiesExport;
-use App\Exports\FrequentlyAskedQuestionsExport;
-use App\Exports\HeadOfficeExport;
-use App\Exports\HospitalLabManagementExport;
-use App\Exports\PatientsConsumersExport;
-use App\Exports\ResearchExport;
-use App\Exports\AllEnquiryExport;
+ 
+use App\Exports\DashboardExport;
 use App\Models\Orders;
 use App\Models\Tests;
 use App\Models\User;
@@ -44,11 +32,11 @@ class DashboardController extends Controller
                             $selected = 'selected';
                         }
                         $status .=  '<option value="' . $option . '" ' . $selected . '>' . $option . '</option>';
-                    } 
+                    }
                     return '<div class="d-flex align-items-center">
                                 <b style="width:100px">Status</b>
                                 <span> :&nbsp;</span>
-                                <select class="border w-100" name="status" data-id="' . $row->id . '" data-type="' . $row->type . '" id="status"><option value="">-- Select --</option>'.$status.'</select>
+                                <select class="border w-100" name="status" data-id="' . $row->id . '" data-type="' . $row->type . '" id="status"><option value="">-- Select --</option>' . $status . '</select>
                             </div>
                             <div class="d-flex align-items-center">
                                 <b style="width:100px">Remarks</b>
@@ -64,7 +52,7 @@ class DashboardController extends Controller
                 })
                 ->editColumn('page', function ($row) {
                     if ($row->page_url) {
-                        return ' <a target="_blank" href="' . $row->page_url . '" title="' . $row->page_url . '" class="ms-1"><i class="fa fa-link"></i> '.strtoupper($row->page).'</a>';
+                        return ' <a target="_blank" href="' . $row->page_url . '" title="' . $row->page_url . '" class="ms-1"><i class="fa fa-link"></i> ' . strtoupper($row->page) . '</a>';
                     } else {
                         return strtoupper($row->page);
                     }
@@ -89,51 +77,12 @@ class DashboardController extends Controller
     }
     public function exportData(Request $request)
     {
-        $export_data = $request->export_enquiry;
-        $from = $request->export_enquiry_from_date ?? '';
-        $to = $request->export_enquiry_to_date ?? '';
-        if (!empty($export_data)) {
-            switch ($export_data) {
-                case 'BOOK_HOME_COLLECTION_LIST':
-                    return Excel::download(new BookHomeCollectionExport($from, $to), 'book_home_collection.xlsx');
-                    break;
-                case 'PATIENTS_CONSUMERS_LIST':
-                    return Excel::download(new PatientsConsumersExport($from, $to), 'patients_consumers.xlsx');
-                    break;
-                case 'FEEDBACK_LIST':
-                    return Excel::download(new FeedBackExport($from, $to), 'feedback.xlsx');
-                    break;
-                case 'FREQUENTLY_ASKED_QUESTIONS_LIST':
-                    return Excel::download(new FrequentlyAskedQuestionsExport($from, $to), 'faq.xlsx');
-                    break;
-                case 'HOSPITAL_LAB_MANAGEMENT':
-                    return Excel::download(new HospitalLabManagementExport($from, $to), 'hospital_lab_management.xlsx');
-                    break;
-                case 'CLINICAL_LAB_MANAGEMENT':
-                    return Excel::download(new ClinicalLabManagementExport($from, $to), 'clinical_lab_management.xlsx');
-                    break;
-                case 'FRANCHISING_OPPORTUNITIES':
-                    return Excel::download(new FranchisingOpportunitiesExport($from, $to), 'franchising_opportunities.xlsx');
-                    break;
-                case 'RESEARCH':
-                    return Excel::download(new ResearchExport($from, $to), 'research.xlsx');
-                    break;
-                case 'BOOK_AN_APPOINTMENT':
-                    return Excel::download(new BookAppointmentExport($from, $to), 'book_appointment.xlsx');
-                    break;
-                case 'HEAD_OFFICE':
-                    return Excel::download(new HeadOfficeExport($from, $to), 'head_office.xlsx');
-                    break;
-                case 'CONTACT_LIST':
-                    return Excel::download(new ContactExport($from, $to), 'contact_us.xlsx');
-                    break;
-                case 'CAREER_ENQUIRY':
-                    return Excel::download(new CareerExport($from, $to), 'career_enquiry.xlsx');
-                case 'All':
-                    return Excel::download(new AllEnquiryExport($request->export_enquiry_from_date, $request->export_enquiry_to_date), 'all_enquiry.xlsx');
-                    break;
-            }
-        }
+        $enquiries = getAllEnquiries([
+            "type"      => $request->export_enquiry ?? null,
+            "from_date" => $request->export_enquiry_from_date ?? null,
+            "to_date"   => $request->export_enquiry_to_date ?? null
+        ]);
+        return  Excel::download(new DashboardExport($enquiries), $request->export_enquiry ?? "all" . '.xlsx');
     }
     public function status(Request $request)
     {

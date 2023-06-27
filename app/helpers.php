@@ -266,12 +266,14 @@ if (!function_exists('toggleButton')) {
                 $search = "where all_enquires.type = " . "'" . $config['type'] . "'" . "";
             }
             if (!is_null($config['from_date']) && !empty($config['from_date']) && !is_null($config['to_date']) && !empty($config['to_date'])) {
-                if(empty($search)) {
-                    $search = "WHERE created_at BETWEEN " . "'" .$config['from_date'] . "'" ." and "."'".$config['to_date']."'";
+                $config['from_date'] = Carbon::parse($config['from_date'])->startOfDay();
+                $config['to_date']   = Carbon::parse($config['to_date'])->endOfDay();
+                if (empty($search)) {
+                    $search = "WHERE created_at BETWEEN " . "'" . $config['from_date'] . "'" . " and " . "'" . $config['to_date'] . "'";
                 } else {
-                    $search = $search." and created_at BETWEEN " . "'" .$config['from_date'] . "'" ." and "."'".$config['to_date']."'";
+                    $search = $search . " and created_at BETWEEN " . "'" . $config['from_date'] . "'" . " and " . "'" . $config['to_date'] . "'";
                 }
-            } 
+            }
             return DB::select("select * from (
                 SELECT id,name,page_url,page,mobile,'-' AS email,status,remark,created_at,deleted_at, 'book_home_collections' AS type  FROM `book_home_collections` WHERE `book_home_collections`.`deleted_at` IS NULL
                 UNION SELECT id,name,page_url,page,mobile,email,status,remark,created_at,deleted_at, 'patients_consumers' AS type FROM `patients_consumers`  WHERE `patients_consumers`.`deleted_at` IS NULL
