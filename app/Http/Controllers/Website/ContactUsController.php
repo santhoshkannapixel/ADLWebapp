@@ -15,26 +15,18 @@ class ContactUsController extends Controller
 {
     public function contactUs(Request $request)
     {
-        if($request->email) {
+        $validator = Validator::make($request->all(), [
+            'name'      => 'required',
+            'mobile'    => 'required|numeric|digits:10',
+        ]);
 
-            $validator = Validator::make($request->all(),[
-                'name'      => 'required',
-                'email'     => 'required|regex:/(.+)@(.+)\.(.+)/i',
-                'mobile'    => 'required|numeric|digits:10',
-               
-            ]);
-        } else {
-            $validator = Validator::make($request->all(),[
-                'name'      => 'required',
-                'mobile'    => 'required|numeric|digits:10',
-            ]);
+        if ($validator->fails()) {
+            return filedCall($validator->messages());
         }
-        if($validator->fails()){
-            return filedCall($validator->messages()); 
-        }
+
         $data = new ContactUs;
         $data->name     = $request->name;
-        if($request->email) { 
+        if ($request->email) {
             $data->email    = $request->email;
         }
         $data->mobile   = $request->mobile;
@@ -44,8 +36,7 @@ class ContactUsController extends Controller
         $data->page_url = $request->page_url;
         $res             = $data->save();
 
-        if($res &&  $request->email)
-        {
+        if ($res &&  $request->email) {
             $details = [
                 'name'                      => $request->name,
                 'mobile'                    => $request->mobile,
@@ -55,16 +46,15 @@ class ContactUsController extends Controller
                 'date_time'                 => now()->toDateString(),
 
             ];
-            try{
+            try {
                 $sent_mail = config('constant.sentMailId');
                 $bcc = config('constant.bccMailId');
                 Mail::to($sent_mail)->bcc($bcc)->send(new MailContactUs($details));
-            }catch(\Exception $e){
+            } catch (\Exception $e) {
                 $message = 'Thanks for reach us, our team will get back to you shortly. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-                return response()->json(['Status'=>200,'Errors'=>false,'Message'=>$message]);
+                return response()->json(['Status' => 200, 'Errors' => false, 'Message' => $message]);
             }
             return successCall();
         }
-
     }
 }
