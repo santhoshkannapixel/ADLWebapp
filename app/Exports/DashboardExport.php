@@ -14,7 +14,7 @@ use Maatwebsite\Excel\Concerns\WithEvents;
 class DashboardExport implements fromArray, WithHeadings, WithStyles, WithEvents
 {
     use Exportable, RegistersEventListeners;
-    public $data;
+    public $data = [];
     function __construct($data)
     {
         $this->data = $data;
