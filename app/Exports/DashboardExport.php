@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Concerns\WithEvents;
 
-class DashboardExport implements fromArray, WithHeadings, WithStyles, WithEvents
+class DashboardExport implements WithHeadings, WithStyles, WithEvents
 {
     use Exportable, RegistersEventListeners;
     public $data;
