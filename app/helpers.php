@@ -287,7 +287,7 @@ if (!function_exists('toggleButton')) {
                 UNION SELECT id,name,page_url,page,mobile,email,status,remark,created_at,deleted_at, 'head_offices' AS type FROM `head_offices`  WHERE `head_offices`.`deleted_at` IS NULL
                 UNION SELECT id,name,page_url,page,mobile,email,status,remark,created_at,deleted_at, 'careers' AS type FROM `careers`  WHERE `careers`.`deleted_at` IS NULL
                 UNION SELECT id,name,page_url,page,mobile,email,status,remark,created_at,deleted_at, 'contact_us' AS type FROM `contact_us`  WHERE `contact_us`.`deleted_at` IS NULL
-           ) as all_enquires $search ORDER BY created_at ASC");
+           ) as all_enquires $search ORDER BY created_at DESC");
         }
     }
 }
