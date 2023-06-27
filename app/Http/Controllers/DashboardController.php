@@ -46,15 +46,12 @@ class DashboardController extends Controller
                 })
                 ->editColumn('created_at', function ($row) {
                     return Carbon::parse($row->created_at)->format('M-d-Y h:s A');
-                })
-                ->editColumn('type', function ($row) {
-                    return ucfirst(str_replace('_', ' ', $row->type));
-                })
+                }) 
                 ->editColumn('page', function ($row) {
                     if ($row->page_url) {
-                        return ' <a target="_blank" href="' . $row->page_url . '" title="' . $row->page_url . '" class="ms-1"><i class="fa fa-link"></i> ' . strtoupper($row->page) . '</a>';
+                        return ' <a target="_blank" href="' . $row->page_url . '" title="' . $row->page_url . '" class="ms-1"><i class="fa fa-link"></i> ' . strtoupper($row->page) . '</a>'." | <b>".ucfirst(str_replace('_', ' ', $row->type))."</b>";;
                     } else {
-                        return strtoupper($row->page);
+                        return strtoupper($row->page)." | <b>".ucfirst(str_replace('_', ' ', $row->type))."</b>";
                     }
                 })
                 ->rawColumns(['action', 'page'])

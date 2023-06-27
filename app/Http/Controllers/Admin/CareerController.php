@@ -39,7 +39,7 @@ class CareerController extends Controller
                     return $view.$delete;
                 })
                 
-                ->addColumn('created_at', function ($data) {
+                ->editColumn('created_at', function ($data) {
                     return dateFormat($data['created_at']);
                 })
             
