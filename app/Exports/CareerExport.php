@@ -3,33 +3,31 @@
 namespace App\Exports;
 
 use App\Models\Career;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class CareerExport implements FromCollection,WithHeadings
+class CareerExport implements FromCollection, WithHeadings
 {
     /**
-    * @return \Illuminate\Support\Collection
-    */
-    protected $from_date ;
-    protected $to_date ;
-    public function __construct($from,$to)
+     * @return \Illuminate\Support\Collection
+     */
+    public $request;
+    public function __construct($request)
     {
-       $this->from_date = $from;
-       $this->to_date   = $to;
+        $this->request = $request;
     }
-   
+
     public function collection()
-    {
-        $from   = $this->from_date;
-        $to     = $this->to_date;
-        return Career::select('name','mobile','email','title','location','message','careers.status','careers.remark','careers.created_at')
-        ->leftJoin('job_posts','job_posts.id','=','careers.job_id')
-        ->when($from != '', function ($query) use ($from,$to) {
-            $query->whereDate('careers.created_at', '>=', $from);
-            $query->whereDate('careers.created_at', '<=', $to);
-        })
-        ->get();
+    { 
+        return Career::select('name', 'mobile', 'email', 'title', 'location', 'message', 'careers.status', 'remark', 'careers.created_at')
+            ->leftJoin('job_posts', 'job_posts.id', '=', 'careers.job_id')
+            ->when(!empty($this->request->start_date) && !empty($this->request->end_date), function ($query) {
+                $start_month     = Carbon::parse($this->request->start_date)->startOfDay();
+                $end_month       = Carbon::parse($this->request->end_date)->endOfDay();
+                $query->whereBetween('created_at', [$start_month, $end_month]);
+            })
+           ->latest() ->get();
     }
     public function headings(): array
     {

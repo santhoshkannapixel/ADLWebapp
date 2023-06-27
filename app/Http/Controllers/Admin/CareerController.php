@@ -6,6 +6,7 @@ use App\Exports\CareerExport;
 use App\Exports\HeadOfficeExport;
 use App\Http\Controllers\Controller;
 use App\Models\Career;
+use Carbon\Carbon;
 use Laracasts\Flash\Flash;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
@@ -18,7 +19,11 @@ class CareerController extends Controller
         
         if ($request->ajax()) {
             $data = Career::with('job')
-            ->select('*')->orderBy('careers.created_at','desc');
+            ->when(!empty($request->start_date) && !empty($request->end_date), function ($query) use ($request) {
+                $start_month     = Carbon::parse($request->start_date)->startOfDay();
+                $end_month       = Carbon::parse($request->end_date)->endOfDay();
+                $query->whereBetween('created_at', [$start_month, $end_month]);
+            })->orderBy('careers.created_at','desc');
             return DataTables::eloquent($data)
                 ->addIndexColumn()
                 ->addColumn('download', function ($data) {
@@ -64,6 +69,6 @@ class CareerController extends Controller
     }
     public function exportData(Request $request)
     {
-        return Excel::download(new CareerExport, 'career.xlsx');
+        return Excel::download(new CareerExport($request), 'career.xlsx');
     }
 }
