@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Career;
 use App\Models\Tests;
 
 class SitemapXmlController extends Controller
@@ -9,8 +10,11 @@ class SitemapXmlController extends Controller
     public function index()
     {
         $test_packages = Tests::all();
+        $carrers = Career::all();
         $website = [
             'reports',
+            'reports/account',
+            'my-cart',
             'for-patient',
             'login',
             'login-with-otp',
@@ -52,6 +56,6 @@ class SitemapXmlController extends Controller
             'privacy-policy',
             'terms-conditions',
         ];
-        return response()->view('site-map', compact('test_packages','website'))->header('Content-Type', 'text/xml');
+        return response()->view('site-map', compact('test_packages', 'website','carrers'))->header('Content-Type', 'text/xml');
     }
 }

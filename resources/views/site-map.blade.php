@@ -14,4 +14,12 @@
             <lastmod>{{ $row->created_at->tz('UTC')->toAtomString() }}</lastmod>
         </url>
     @endforeach 
+    @if (count($carrers))
+        @foreach ($carrers as $carrer)
+            <url>
+                <loc>https://www.anandlab.com/join-oppourtunities/{{ $carrer->id }}</loc>
+                <lastmod>{{ $carrer->created_at->tz('UTC')->toAtomString() }}</lastmod>
+            </url>
+        @endforeach
+    @endif
 </urlset>
