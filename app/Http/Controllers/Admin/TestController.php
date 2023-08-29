@@ -20,21 +20,19 @@ class TestController extends Controller
     {
         if ($request->ajax()) {
             $data = Tests::select('*');
-            $data->when(isset($request->isPackage),function($q) use ($request) {
-                $q->where('isPackage',$request->isPackage);
+            $data->when(isset($request->isPackage), function ($q) use ($request) {
+                $q->where('isPackage', $request->isPackage);
             });
             return DataTables::eloquent($data)
                 ->addIndexColumn()
                 ->addColumn('is_home', function ($data) {
-                    if($data->is_home)
-                    {
-                        $is_home  = '<input type="checkbox" class="checkbox"  onclick="isHomeStatusChange('.$data->id.')" checked  name="is_home" >';
-                    }
-                    else{
-                        $is_home  = '<input type="checkbox" class="checkbox"  onclick="isHomeStatusChange('.$data->id.')"    name="is_home" >';
+                    if ($data->is_home) {
+                        $is_home  = '<input type="checkbox" class="checkbox"  onclick="isHomeStatusChange(' . $data->id . ')" checked  name="is_home" >';
+                    } else {
+                        $is_home  = '<input type="checkbox" class="checkbox"  onclick="isHomeStatusChange(' . $data->id . ')"    name="is_home" >';
                     }
 
-                    
+
                     return $is_home;
                 })
                 ->addColumn('Applicable_Gender', function ($data) {
@@ -59,26 +57,25 @@ class TestController extends Controller
                     $TestSchedule  =  '<small>' . str_replace(',', ' ', $data->TestSchedule) . '</small>';
                     return $TestSchedule;
                 })
-                ->addColumn('action', function ($data) use ($request){
+                ->addColumn('action', function ($data) use ($request) {
                     $show = '';
                     $edit = '';
-                    if($request->isPackage == 'No') {
+                    if ($request->isPackage == 'No') {
                         if (permission_check('TEST_SHOW'))
-                        $show = button('show', route('test.show',$data->id));
+                            $show = button('show', route('test.show', $data->id));
 
                         if (permission_check('TEST_EDIT'))
-                        $edit = button('edit', route('test.edit', $data->id));
+                            $edit = button('edit', route('test.edit', $data->id));
 
-                        return $show.$edit;
+                        return $show . $edit;
                     } else {
                         if (permission_check('TEST_SHOW'))
-                        $show =  button('show', route('test.show',$data->id));
+                            $show =  button('show', route('test.show', $data->id));
 
                         if (permission_check('TEST_EDIT'))
-                        $edit =  button('edit', route('test.edit',$data->id));
-                        
-                        return $show.$edit;
+                            $edit =  button('edit', route('test.edit', $data->id));
 
+                        return $show . $edit;
                     }
                 })
                 ->rawColumns(['action', 'is_home', 'Test_Schedule', 'Drive_Through', 'Home_Collection', 'Applicable_Gender'])
@@ -98,7 +95,7 @@ class TestController extends Controller
 
             if (!is_null($response_data)) {
                 foreach ($response_data as $data) {
-                    $test = Tests::updateOrCreate(["TestId"=>$data->TestId],[
+                    $test = Tests::updateOrCreate(["TestId" => $data->TestId], [
                         "TestId"                           => $data->TestId ?? null,
                         "DosCode"                          => $data->DosCode ?? null,
                         "TestName"                         => $data->TestName ?? null,
@@ -117,15 +114,19 @@ class TestController extends Controller
                         "BasicInstruction"                 => $data->BasicInstruction ?? null,
                         "DriveThrough"                     => $data->DriveThrough ?? null,
                         "HomeCollection"                   => $data->HomeCollection ?? null,
-                        "OrganName"                        => str_replace('+',' ', str_replace('%0D%0A','',urlencode($data->OrganName))),
-                        "HealthCondition"                  => str_replace('+',' ', str_replace('%0D%0A','',urlencode($data->HealthCondition))),
+                        "OrganName"                        => str_replace('+', ' ', str_replace('%0D%0A', '', urlencode($data->OrganName))),
+                        "HealthCondition"                  => str_replace('+', ' ', str_replace('%0D%0A', '', urlencode($data->HealthCondition))),
                         "CteateDate"                       => $data->CteateDate ?? null,
                         "ModifiedDate"                     => $data->ModifiedDate ?? null,
                         "TestSchedule"                     => $data->TestSchedule ?? null,
                     ]);
                     if (isset($data->SubTestList)) {
-                        foreach ($data->SubTestList as  $subTest) { 
-                            $test->SubTests()->updateOrcreate([
+                        $cTest =   Tests::with('SubTests')->find($test->id);
+                        if (isset($cTest->SubTests)) {
+                            $cTest->SubTests()->delete();
+                        }
+                        foreach ($data->SubTestList as  $subTest) {
+                            $test->SubTests()->create([
                                 "SubTestId"      => $subTest->SubTestId,
                                 "SubTestDOSCode" => $subTest->SubTestDOSCode,
                                 "SubTestName"    => $subTest->SubTestName
@@ -135,10 +136,10 @@ class TestController extends Controller
                     $test->TestPrice()->updateOrcreate([
                         "TestPrice"    => $data->TestPrice,
                         "TestLocation" => $api['location']
-                    ]); 
+                    ]);
                     // try {
                     // if ($data->IsPackage == "No") {
-                        
+
                     // } 
                     // else {
                     //     $Packages = Packages::updateOrCreate([
@@ -193,8 +194,8 @@ class TestController extends Controller
 
     public function show($id)
     {
-        $data   =   Tests::findOrFail($id); 
-        $testPrice  = TestPrice::where('TestId',$data->id)->first();
+        $data   =   Tests::findOrFail($id);
+        $testPrice  = TestPrice::where('TestId', $data->id)->first();
         $data['testPrice'] = $testPrice['TestPrice'];
         return view('admin.master.tests.show', compact('data'));
     }
@@ -208,37 +209,33 @@ class TestController extends Controller
     public function update(Request $request, $id)
     {
         $data   =   Tests::findOrFail($id);
-        if($request->is_home == 'on')
-        {
+        if ($request->is_home == 'on') {
             $data->is_home = 1;
-        }
-        else{
+        } else {
             $data->is_home = 0;
         }
         $data->sorting_order = $request->sorting_order ?? '';
-        if($request->image) {
-            if(Storage::exists($request->image)) {
+        if ($request->image) {
+            if (Storage::exists($request->image)) {
                 Storage::delete($request->image);
             }
-            $Image = Storage::put('TestImage',$request->image);
+            $Image = Storage::put('TestImage', $request->image);
             $data->image = $Image;
         }
         $data->save();
-        Flash::success( __('action.saved', ['type' => 'Package Updated']));
+        Flash::success(__('action.saved', ['type' => 'Package Updated']));
 
         return redirect()->route('test.index');
     }
     public function status(Request $request)
     {
         $data   =   Tests::findOrFail($request->id);
-        if($data->is_home == '1')
-        {
+        if ($data->is_home == '1') {
             $data->is_home = '0';
-        }
-        else{
+        } else {
             $data->is_home = 1;
         }
         $result = $data->update();
-        return response()->json(['status'=>$result]);
+        return response()->json(['status' => $result]);
     }
 }
