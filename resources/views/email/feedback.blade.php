@@ -242,8 +242,7 @@
                                                                                                     </td>
                                                                                                     <td>{{ $row['answer'] == 1 ? 'Yes' : 'No' }}
                                                                                                     </td>
-                                                                                                    <td>{{ $row['comments'] }}
-                                                                                                    </td>
+                                                                                                    <td>{{ $row['comments'] ?? '-' }}</td>
                                                                                                 </tr>
                                                                                             @endforeach
                                                                                         </tbody>
