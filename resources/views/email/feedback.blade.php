@@ -91,7 +91,9 @@
                                                                                                     <a href="#"
                                                                                                         style="color: #fff; text-decoration: none !important;"
                                                                                                         target="_blank">
-                                                                                                        <img title="Logo" style="max-width: 300px;" src="http://adladmin.pixel-studios.net/public/images/logo/logo-dark.png" ></a>
+                                                                                                        <img title="Logo"
+                                                                                                            style="max-width: 300px;"
+                                                                                                            src="http://adladmin.pixel-studios.net/public/images/logo/logo-dark.png"></a>
                                                                                                 </td>
                                                                                             </tr>
                                                                                         </tbody>
@@ -137,7 +139,10 @@
                                         <tbody>
                                             <tr>
                                                 <td height="30" style="border-collapse: collapse;">
-                                                    <h2 style="background: #fff; text-align: center; margin-bottom:0px; font-size: 24px;">FeedBack Enquiry</h2></td>
+                                                    <h2
+                                                        style="background: #fff; text-align: center; margin-bottom:0px; font-size: 24px;">
+                                                        FeedBack Enquiry</h2>
+                                                </td>
                                             </tr>
                                             <!--end space height -->
                                             <tr>
@@ -152,38 +157,78 @@
                                                                         bgcolor="#f8f8f8">
                                                                         <tr>
                                                                             <td class="column" align="left">
-                                                                                <table cellpadding="10" cellspacing="10">
+                                                                                <table cellpadding="10"
+                                                                                    cellspacing="10">
                                                                                     <tbody>
                                                                                         <tr>
-                                                                                            <td style="padding-left:10px"><strong>Name</strong>:</td>
-                                                                                            <td style="padding-left:10px">{!! $details['name'] !!}</td>
+                                                                                            <td
+                                                                                                style="padding-left:10px">
+                                                                                                <strong>Name</strong>:
+                                                                                            </td>
+                                                                                            <td
+                                                                                                style="padding-left:10px">
+                                                                                                {!! $details['name'] !!}
+                                                                                            </td>
                                                                                         </tr>
                                                                                         <tr>
-                                                                                            <td style="padding-left:10px"><strong>Mobile</strong>:</td>
-                                                                                            <td style="padding-left:10px">{!! $details['mobile'] !!}</td>
+                                                                                            <td
+                                                                                                style="padding-left:10px">
+                                                                                                <strong>Mobile</strong>:
+                                                                                            </td>
+                                                                                            <td
+                                                                                                style="padding-left:10px">
+                                                                                                {!! $details['mobile'] !!}
+                                                                                            </td>
                                                                                         </tr>
                                                                                         <tr>
-                                                                                            <td style="padding-left:10px"><strong>Email</strong>:</td>
-                                                                                            <td style="padding-left:10px">{!! $details['email'] !!}</td>
+                                                                                            <td
+                                                                                                style="padding-left:10px">
+                                                                                                <strong>Email</strong>:
+                                                                                            </td>
+                                                                                            <td
+                                                                                                style="padding-left:10px">
+                                                                                                {!! $details['email'] !!}
+                                                                                            </td>
                                                                                         </tr>
                                                                                         <tr>
-                                                                                            <td style="padding-left:10px"><strong>Location</strong>:</td>
-                                                                                            <td style="padding-left:10px">{!! $details['location'] !!}</td>
+                                                                                            <td
+                                                                                                style="padding-left:10px">
+                                                                                                <strong>Location</strong>:
+                                                                                            </td>
+                                                                                            <td
+                                                                                                style="padding-left:10px">
+                                                                                                {!! $details['location'] !!}
+                                                                                            </td>
                                                                                         </tr>
                                                                                         <tr>
-                                                                                            <td style="padding-left:10px"><strong>Message</strong>:</td>
-                                                                                            <td style="padding-left:10px">{!! $details['message'] !!}</td>
+                                                                                            <td
+                                                                                                style="padding-left:10px">
+                                                                                                <strong>Message</strong>:
+                                                                                            </td>
+                                                                                            <td
+                                                                                                style="padding-left:10px">
+                                                                                                {!! $details['message'] !!}
+                                                                                            </td>
                                                                                         </tr>
                                                                                         <tr>
-                                                                                            <td style="padding-left:10px"><strong>Overall experience rate</strong>:</td>
-                                                                                            <td style="padding-left:10px">{{ ucfirst(str_replace('-',' ', $details['rating_comments'])) }}</td>
+                                                                                            <td
+                                                                                                style="padding-left:10px">
+                                                                                                <strong>Overall
+                                                                                                    experience
+                                                                                                    rate</strong>:</td>
+                                                                                            <td
+                                                                                                style="padding-left:10px">
+                                                                                                {{ ucfirst(str_replace('-', ' ', $details['rating_comments'])) }}
+                                                                                            </td>
                                                                                         </tr>
                                                                                     </tbody>
                                                                                 </table>
                                                                                 @if (count($details['question_answer']))
-                                                                                    <table cellpadding="10" cellspacing="10">
+                                                                                    <hr>
+                                                                                    <table cellpadding="10"
+                                                                                        cellspacing="10">
                                                                                         <tr>
-                                                                                            <th>Question Number</th>
+                                                                                            <th>Q.No</th>
                                                                                             <th>Question</th>
                                                                                             <th>Answer</th>
                                                                                             <th>Comment </th>
@@ -191,10 +236,14 @@
                                                                                         <tbody>
                                                                                             @foreach ($details['question_answer'] as $key => $row)
                                                                                                 <tr>
-                                                                                                    <td>{{ $key + 1 }}</td>
-                                                                                                    <td>{{ $row['question'] }}</td>
-                                                                                                    <td>{{ $row['answer'] }}</td>
-                                                                                                    <td>{{ $row['comments'] }}</td>
+                                                                                                    <td>{{ $key + 1 }}
+                                                                                                    </td>
+                                                                                                    <td>{{ $row['question'] }}
+                                                                                                    </td>
+                                                                                                    <td>{{ $row['answer'] == 1 ? 'Yes' : 'No' }}
+                                                                                                    </td>
+                                                                                                    <td>{{ $row['comments'] }}
+                                                                                                    </td>
                                                                                                 </tr>
                                                                                             @endforeach
                                                                                         </tbody>
@@ -205,7 +254,7 @@
                                                                     </table>
                                                                 </td>
                                                             </tr>
-                                                           
+
                                                         </tbody>
                                                     </table>
 
@@ -348,7 +397,7 @@
                                                 </td>
                                             </tr>
                                             <!-- end space height -->
-                                           
+
                                             <!--  END FOOTER COPY RIGHT -->
                                             <!-- start space height -->
                                             <tr>
