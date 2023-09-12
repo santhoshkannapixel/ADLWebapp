@@ -11,48 +11,66 @@ use Illuminate\Support\Facades\Mail;
 
 class FeedBackController extends Controller
 {
+    function formatQacomments($request)
+    {
+        $qa = [];
+        $qac = [];
+        foreach ($request as $key => $value) {
+            $formatedKey = str_replace('-', ' ', str_replace(['QA_', 'QAC_'], '', $key));
+            if (strstr($key, 'QA_')) {
+                $qa[] = [$formatedKey => $value];
+            }
+            if (strstr($key, 'QAC_')) {
+                $qac[] = [$formatedKey => $value];
+            }
+        }
+        $temp = [];
+        foreach ($qa as $key => $value) {
+            $temp[] = [
+                "question" => ucfirst(array_keys($qac[$key])[0]) . "?",
+                "answer" => array_values($value)[0],
+                "comments" => array_values($qac[$key])[0],
+            ];
+        }
+        return  $temp;
+    }
     public function store(Request $request)
     {
-    
-        $validator = Validator::make($request->all(),[
-            'name'      => 'required',
-            'email'     => 'required|regex:/(.+)@(.+)\.(.+)/i',
-            'mobile'    => 'required|numeric|digits:10',
-           
+        $validator = Validator::make($request->all(), [
+            'name'   => 'required',
+            'email'  => 'required|regex:/(.+)@(.+)\.(.+)/i',
+            'mobile' => 'required|numeric|digits:10'
         ]);
-        if($validator->fails()){
-            return filedCall($validator->messages()); 
+        if ($validator->fails()) {
+            return filedCall($validator->messages());
         }
-        $data = new FeedBack;
-        $data->name      = $request->name;
-        $data->email     = $request->email;
-        $data->mobile    = $request->mobile;
-        $data->location  = $request->location;
-        $data->message   = $request->message;
-        $data->page_url                  = $request->page_url;
-        
-        $res             = $data->save();
-        if($res)
-        {
-            $details = [
-                'name'                      => $request->name,
-                'mobile'                    => $request->mobile,
-                'email'                     => $request->email,
-                'location'                  => $request->location,
-                'message'                   => $request->message,
-                'date_time'             => now()->toDateString(),
 
+        $data           = new FeedBack;
+        $data->name     = $request->name;
+        $data->email    = $request->email;
+        $data->mobile   = $request->mobile;
+        $data->location = $request->location;
+        $data->message  = $request->message;
+        $data->page_url = $request->page_url;
+
+        if ($data->save()) {
+            $details = [
+                'name'            => $request->name,
+                'mobile'          => $request->mobile,
+                'email'           => $request->email,
+                'location'        => $request->location,
+                'message'         => $request->message,
+                'date_time'       => now()->toDateString(),
+                'rating_comments' => $request->rating,
+                'question_answer' => $this->formatQacomments($request->all())
             ];
-            try{
-                $sent_mail = config('constant.sentMailId');
-                $bcc = config('constant.bccMailId');
-                Mail::to($sent_mail)->bcc($bcc)->send(new FeedBackMail($details));
-            }catch(\Exception $e){
+            try {
+                Mail::to(config('constant.sentMailId'))->bcc(config('constant.bccMailId'))->send(new FeedBackMail($details));
+            } catch (\Exception $e) {
                 $message = 'Thanks for reach us, our team will get back to you shortly. Please setup your <a href="setting/mail_setting">mail setting</a> to send mail.';
-                return response()->json(['Status'=>200,'Errors'=>false,'Message'=>$message]);
+                return response()->json(['Status' => 200, 'Errors' => false, 'Message' => $message]);
             }
             return successCall();
         }
-
     }
 }

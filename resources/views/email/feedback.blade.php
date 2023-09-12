@@ -174,8 +174,32 @@
                                                                                             <td style="padding-left:10px"><strong>Message</strong>:</td>
                                                                                             <td style="padding-left:10px">{!! $details['message'] !!}</td>
                                                                                         </tr>
+                                                                                        <tr>
+                                                                                            <td style="padding-left:10px"><strong>Overall experience rate</strong>:</td>
+                                                                                            <td style="padding-left:10px">{{ ucfirst(str_replace('-',' ', $details['rating_comments'])) }}</td>
+                                                                                        </tr>
                                                                                     </tbody>
                                                                                 </table>
+                                                                                @if (count($details['question_answer']))
+                                                                                    <table cellpadding="10" cellspacing="10">
+                                                                                        <tr>
+                                                                                            <th>Question Number</th>
+                                                                                            <th>Question</th>
+                                                                                            <th>Answer</th>
+                                                                                            <th>Comment </th>
+                                                                                        </tr>
+                                                                                        <tbody>
+                                                                                            @foreach ($details['question_answer'] as $key => $row)
+                                                                                                <tr>
+                                                                                                    <td>{{ $key + 1 }}</td>
+                                                                                                    <td>{{ $row['question'] }}</td>
+                                                                                                    <td>{{ $row['answer'] }}</td>
+                                                                                                    <td>{{ $row['comments'] }}</td>
+                                                                                                </tr>
+                                                                                            @endforeach
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                @endif
                                                                             </td>
                                                                         </tr>
                                                                     </table>
