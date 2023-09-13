@@ -25,8 +25,14 @@
                         </tr>
                     @endif
                 @endforeach
-                @if (!is_null($data->qa_comments))
-                    @if (strstr($data['page_url'], 'feedback-b2b'))
+            </table>
+        </div>
+    </div>
+    @if (!is_null($data->qa_comments))
+        @if (strstr($data['page_url'], 'feedback-b2b'))
+            <div class="card mb-3">
+                <div class="card-body">
+                    <table class="table m-0 h-100">
                         @foreach (json_decode($data->qa_comments) as $key => $row)
                             <tr>
                                 <td width="25%"><strong>{{ ucfirst($row->question) }}</strong>:</td>
@@ -34,11 +40,11 @@
                                 <td width="65%"> {{ $row->answer }}</td>
                             </tr>
                         @endforeach
-                    @endif
-                @endif
-            </table> 
-        </div>
-    </div>
+                    </table>
+                </div>
+            </div>
+        @endif
+    @endif
     <div class="card">
         <div class="card-body">
             @if (!strstr($data['page_url'], 'feedback-b2b'))
