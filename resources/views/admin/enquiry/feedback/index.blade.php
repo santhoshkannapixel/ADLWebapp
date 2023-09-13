@@ -22,8 +22,7 @@
                         <th>Name</th>
                         <th>Mobile</th>
                         <th>Email</th>
-                        <th>Location</th>
-                        <th>Message</th>
+                        <th>Page URL</th>
                         <th>Date & Time</th>
                         <th width="100px">Action</th>
                     </tr>
@@ -47,8 +46,7 @@
                     {data: 'name', name: 'name'},
                     {data: 'mobile', name: 'mobile'},
                     {data: 'email', name: 'email'},
-                    {data: 'location', name: 'location'},
-                    {data: 'message', name: 'message'},
+                    {data: 'page_url', name: 'page_url'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
