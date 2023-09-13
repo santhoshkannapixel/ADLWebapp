@@ -57,7 +57,7 @@ class FeedBackController extends Controller
     public function show($id)
     {
         // $data   =   FeedBack::findOrFail($id);
-        $data   =   FeedBack::select(DB::raw("name as name,mobile as mobile,email as email,location as location,message as message,
+        $data   =   FeedBack::select(DB::raw("qa_comments,name as name,mobile as mobile,email as email,location as location,message as message,
         DATE_FORMAT(created_at,'%d/%m/%Y') as created_date"))->findOrFail($id);
         return view('admin.enquiry.feedback.show', compact('data'));
     }
