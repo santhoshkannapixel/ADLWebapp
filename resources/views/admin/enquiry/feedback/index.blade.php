@@ -23,7 +23,7 @@
                         <th>Mobile</th>
                         <th>Email</th>
                         <th>Page URL</th>
-                        <th>Date & Time</th>
+                        <th width="200px">Date & Time</th>
                         <th width="100px">Action</th>
                     </tr>
                 </thead>
