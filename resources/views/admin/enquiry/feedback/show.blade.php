@@ -1,8 +1,7 @@
 @extends('admin.enquiry.layout')
 
 @section('admin_enquiry_content')
-
-    <div class="card custom">
+    <div class="card custom mb-3">
         <div class="card-header">
             <div class="card-title">
                 Feed back Details
@@ -37,7 +36,11 @@
                         @endforeach
                     @endif
                 @endif
-            </table>
+            </table> 
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
             @if (!strstr($data['page_url'], 'feedback-b2b'))
                 <table cellpadding="10" cellspacing="10">
                     <thead>
