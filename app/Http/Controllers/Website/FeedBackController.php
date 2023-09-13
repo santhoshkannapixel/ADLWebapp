@@ -15,6 +15,7 @@ class FeedBackController extends Controller
     {
         $qa = [];
         $qac = [];
+        $temp = [];
         foreach ($request as $key => $value) {
             $formatedKey = str_replace('-', ' ', str_replace(['QA_', 'QAC_'], '', $key));
             if (strstr($key, 'QA_')) {
@@ -24,15 +25,24 @@ class FeedBackController extends Controller
                 $qac[] = [$formatedKey => $value];
             }
         }
-        $temp = [];
-        foreach ($qa as $key => $value) {
-            $temp[] = [
-                "question" => ucfirst(array_keys($qac[$key])[0]) . "?",
-                "answer" => array_values($value)[0],
-                "comments" => array_values($qac[$key])[0],
-            ];
+        if (strstr( $request['page_url'], 'feedback-b2b')) {
+            foreach ($qa as $key => $value) {
+                $temp[] = [
+                    "question" => array_keys($value)[0] ?? '-',
+                    "answer" => array_values($value)[0] ?? '-',
+                ];
+            }
+            return  $temp;
+        } else { 
+            foreach ($qa as $key => $value) {
+                $temp[] = [
+                    "question" => ucfirst(array_keys($qac[$key])[0]) . "?",
+                    "answer" => array_values($value)[0] ?? '',
+                    "comments" => array_values($qac[$key])[0] ?? '',
+                ];
+            }
+            return  $temp;
         }
-        return  $temp;
     }
     public function store(Request $request)
     {
@@ -51,8 +61,7 @@ class FeedBackController extends Controller
         $data->mobile   = $request->mobile;
         $data->location = $request->location;
         $data->message  = $request->message;
-        $data->page_url = $request->page_url;
-
+        $data->page_url = $request->page_url; 
         if ($data->save()) {
             $details = [
                 'name'            => $request->name,
@@ -62,6 +71,7 @@ class FeedBackController extends Controller
                 'message'         => $request->message,
                 'date_time'       => now()->toDateString(),
                 'rating_comments' => $request->rating,
+                'page_url'        => $request->page_url,
                 'question_answer' => $this->formatQacomments($request->all())
             ];
             try {

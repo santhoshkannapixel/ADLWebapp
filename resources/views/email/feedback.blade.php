@@ -215,7 +215,8 @@
                                                                                                 style="padding-left:10px">
                                                                                                 <strong>Overall
                                                                                                     experience
-                                                                                                    rate</strong>:</td>
+                                                                                                    rate</strong>:
+                                                                                            </td>
                                                                                             <td
                                                                                                 style="padding-left:10px">
                                                                                                 {{ ucfirst(str_replace('-', ' ', $details['rating_comments'])) }}
@@ -225,28 +226,45 @@
                                                                                 </table>
                                                                                 @if (count($details['question_answer']))
                                                                                     <hr>
-                                                                                    <table cellpadding="10"
-                                                                                        cellspacing="10">
-                                                                                        <tr>
-                                                                                            <th>Q.No</th>
-                                                                                            <th>Question</th>
-                                                                                            <th>Answer</th>
-                                                                                            <th>Comment </th>
-                                                                                        </tr>
-                                                                                        <tbody>
-                                                                                            @foreach ($details['question_answer'] as $key => $row)
-                                                                                                <tr>
-                                                                                                    <td>{{ $key + 1 }}
-                                                                                                    </td>
-                                                                                                    <td>{{ $row['question'] }}
-                                                                                                    </td>
-                                                                                                    <td>{{ $row['answer'] == 1 ? 'Yes' : 'No' }}
-                                                                                                    </td>
-                                                                                                    <td>{{ $row['comments'] ?? '-' }}</td>
-                                                                                                </tr>
-                                                                                            @endforeach
-                                                                                        </tbody>
-                                                                                    </table>
+                                                                                    @if (!strstr($details['page_url'], 'feedback-b2b'))
+                                                                                        <table cellpadding="10"
+                                                                                            cellspacing="10">
+                                                                                            <tr>
+                                                                                                <th>Q.No</th>
+                                                                                                <th>Question</th>
+                                                                                                <th>Answer</th>
+                                                                                                <th>Comment </th>
+                                                                                            </tr>
+                                                                                            <tbody>
+                                                                                                @foreach ($details['question_answer'] as $key => $row)
+                                                                                                    <tr>
+                                                                                                        <td>{{ $key + 1 }}
+                                                                                                        </td>
+                                                                                                        <td>{{ $row['question'] }}
+                                                                                                        </td>
+                                                                                                        <td>{{ $row['answer'] == 1 ? 'Yes' : 'No' }}
+                                                                                                        </td>
+                                                                                                        <td>{{ $row['comments'] ?? '-' }}
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                @endforeach
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    @else
+                                                                                        <table cellpadding="10"
+                                                                                            cellspacing="10">
+                                                                                            <tbody>
+                                                                                                @foreach ($details['question_answer'] as $key => $row)
+                                                                                                    <tr>
+                                                                                                        <th>{{ $row['question'] }}
+                                                                                                            :</th>
+                                                                                                        <td>{{ $row['answer'] }}
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                @endforeach
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    @endif
                                                                                 @endif
                                                                             </td>
                                                                         </tr>
