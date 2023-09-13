@@ -62,7 +62,7 @@ class FeedBackController extends Controller
         $data->location    = $request->location;
         $data->message     = $request->message;
         $data->page_url    = $request->page_url;
-        $data->qa_comments = $question_answer;
+        $data->qa_comments = json_encode($question_answer);
         
         if ($data->save()) {
             $details = [
@@ -74,7 +74,7 @@ class FeedBackController extends Controller
                 'date_time'       => now()->toDateString(),
                 'rating_comments' => $request->rating,
                 'page_url'        => $request->page_url,
-                'question_answer' => $this->formatQacomments($request->all())
+                'question_answer' => $question_answer
             ];
             try {
                 Mail::to(config('constant.sentMailId'))->bcc(config('constant.bccMailId'))->send(new FeedBackMail($details));
