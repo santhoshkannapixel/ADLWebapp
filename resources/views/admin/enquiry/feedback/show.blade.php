@@ -28,7 +28,7 @@
                 @endforeach
                 @if (!is_null($data->qa_comments))
                 @if (strstr($data['page_url'], 'feedback-b2b'))
-                    @foreach ($data->qa_comments as $key => $row)
+                    @foreach (json_decode($data->qa_comments) as $key => $row)
                         <tr>
                             <td width="25%"><strong>{{ ucfirst($row['question']) }}</strong>:</td>
                             <td width="5%" class="text-center">:</td>
