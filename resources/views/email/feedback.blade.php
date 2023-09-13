@@ -228,7 +228,7 @@
                                                                                             @foreach ($details['question_answer'] as $key => $row)
                                                                                                 <tr>
                                                                                                     <td style="padding-left:10px">
-                                                                                                        <strong>{{ $row['question'] }}</strong>:
+                                                                                                        <strong>{{ ucfirst($row['question']) }}</strong>:
                                                                                                     </td>
                                                                                                     <td style="padding-left:10px">
                                                                                                         {{ $row['answer'] }}

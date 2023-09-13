@@ -54,14 +54,16 @@ class FeedBackController extends Controller
         if ($validator->fails()) {
             return filedCall($validator->messages());
         }
-
-        $data           = new FeedBack;
-        $data->name     = $request->name;
-        $data->email    = $request->email;
-        $data->mobile   = $request->mobile;
-        $data->location = $request->location;
-        $data->message  = $request->message;
-        $data->page_url = $request->page_url; 
+        $question_answer   = $this->formatQacomments($request->all());
+        $data              = new FeedBack;
+        $data->name        = $request->name;
+        $data->email       = $request->email;
+        $data->mobile      = $request->mobile;
+        $data->location    = $request->location;
+        $data->message     = $request->message;
+        $data->page_url    = $request->page_url;
+        $data->qa_comments = $question_answer;
+        
         if ($data->save()) {
             $details = [
                 'name'            => $request->name,
