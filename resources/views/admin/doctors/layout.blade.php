@@ -36,6 +36,14 @@
         </a>
      </li>
      @endif
+     @if (permission_check('FEEDBACK_INDEX'))
+     <li class="nav-item">
+        <a class="nav-link {{ Route::is(['feedback.index', 'feedback.show']) ? "active" : "" }}" href="{{ route('feedback.index')."/feedback-b2b" }}">
+           <i class="fa-users fa me-2"></i>
+           FeedBack
+        </a>
+     </li>
+     @endif
    </ul>
    <div class="my-4">
       @yield('admin_doctors_content')

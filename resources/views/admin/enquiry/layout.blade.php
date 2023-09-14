@@ -22,7 +22,7 @@
      @endif
      @if (permission_check('FEEDBACK_INDEX'))
      <li class="nav-item">
-        <a class="nav-link {{ Route::is(['feedback.index', 'feedback.show']) ? "active" : "" }}" href="{{ route('feedback.index') }}">
+        <a class="nav-link {{ Route::is(['feedback.index', 'feedback.show']) ? "active" : "" }}" href="{{ route('feedback.index') }}/feedback">
            <i class="fa-users fa me-2"></i>
            FeedBack
         </a>

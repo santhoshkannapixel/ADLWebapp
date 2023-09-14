@@ -174,9 +174,9 @@ Route::middleware(['auth_users'])->group(function () {
     Route::post('/home-collection/export', [BookHomeCollectionController::class, 'exportData'])->name('home-collection.export');
 
 
-    Route::get('/feedback', [FeedBackController::class, 'index'])->name('feedback.index');
-    Route::delete('/feedback/{id}', [FeedBackController::class, 'destroy'])->name('feedback.delete');
-    Route::get('/feedback/{id}', [FeedBackController::class, 'show'])->name('feedback.show');
+    Route::get('/feedback/{type?}', [FeedBackController::class, 'index'])->name('feedback.index');
+    Route::delete('/feedback/destroy/{id}', [FeedBackController::class, 'destroy'])->name('feedback.delete');
+    Route::get('/feedback/{type}/{id}', [FeedBackController::class, 'show'])->name('feedback.show');
     Route::post('/feedback/export', [FeedBackController::class, 'exportData'])->name('feedback.export');
 
     Route::get('/faq', [FrequentlyAskedQuestionsController::class, 'index'])->name('faq.index');

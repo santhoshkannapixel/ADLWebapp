@@ -15,25 +15,25 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class FeedBackController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, $type = 'feedback')
     {
         if ($request->ajax()) {
 
-            $data = FeedBack::orderBy('id', 'DESC');
+            $data = FeedBack::where('page_url', 'LIKE', "%/$type")->orderBy('id', 'DESC');
 
             return DataTables::eloquent($data)
                 ->addIndexColumn()
 
-                ->addColumn('action', function ($data) {
+                ->addColumn('action', function ($data) use ($type) {
                     $user = Sentinel::getUser();
                     $show = '';
                     $delete = '';
 
                     if (permission_check('FEEDBACK_SHOW'))
-                    $show =  button('show', route('feedback.show', $data->id));
+                        $show =  button('show', route('feedback.show', ["type" => $type, "id" =>  $data->id]));
 
                     if (permission_check('FEEDBACK_DELETE'))
-                    $delete = button('delete', route('feedback.delete', $data->id));
+                        $delete = button('delete', route('feedback.delete', ["type" => $type, "id" =>  $data->id]));
 
                     return $show . $delete;
                 })
@@ -47,14 +47,14 @@ class FeedBackController extends Controller
         }
         return view('admin.enquiry.feedback.index');
     }
-    public function destroy($id = null)
+    public function destroy($type, $id = null)
     {
         $careers  = FeedBack::find($id);
         $careers->delete();
         Flash::success(__('action.deleted', ['type' => 'FeedBack']));
         return redirect()->back();
     }
-    public function show($id)
+    public function show($type, $id)
     {
         // $data   =   FeedBack::findOrFail($id);
         $data   =   FeedBack::select(DB::raw("qa_comments,page_url,name as name,mobile as mobile,email as email,location as location,message as message,

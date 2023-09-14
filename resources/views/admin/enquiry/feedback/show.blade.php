@@ -1,6 +1,5 @@
-@extends('admin.enquiry.layout')
-
-@section('admin_enquiry_content')
+@extends(request()->route()->type == 'feedback' ? 'admin.enquiry.layout' : 'admin.doctors.layout')
+@section(request()->route()->type == 'feedback' ? 'admin_enquiry_content' : 'admin_doctors_content')
     <div class="card custom mb-3">
         <div class="card-header">
             <div class="card-title">
