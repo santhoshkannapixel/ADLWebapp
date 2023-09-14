@@ -3,10 +3,10 @@
     <div class="card custom table-card">
         <div class="card-header">
             <div class="card-title">
-                Feed back
+                {{ ucfirst(request()->route()->type) }}
             </div>
             @if (permission_check('FEEDBACK_EXPORT'))
-                <form method="POST" name="dashboard_export" action="{{ route('feedback.export') }}"
+                <form method="POST" name="dashboard_export" action="{{ route('feedback.export', request()->route()->type) }}"
                     enctype="multipart/form-data">
                     @csrf
                     <button type="submit" id="dashboardExport" class="btn btn-primary">Export</button>

@@ -177,7 +177,7 @@ Route::middleware(['auth_users'])->group(function () {
     Route::get('/feedback/{type?}', [FeedBackController::class, 'index'])->name('feedback.index');
     Route::delete('/feedback/destroy/{id}', [FeedBackController::class, 'destroy'])->name('feedback.delete');
     Route::get('/feedback/{type}/{id}', [FeedBackController::class, 'show'])->name('feedback.show');
-    Route::post('/feedback/export', [FeedBackController::class, 'exportData'])->name('feedback.export');
+    Route::post('/feedback/{type}/export', [FeedBackController::class, 'exportData'])->name('feedback.export');
 
     Route::get('/faq', [FrequentlyAskedQuestionsController::class, 'index'])->name('faq.index');
     Route::delete('/faq/{id}', [FrequentlyAskedQuestionsController::class, 'destroy'])->name('faq.delete');

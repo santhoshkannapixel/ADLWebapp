@@ -12,7 +12,8 @@ class FeedBackExport implements FromCollection,WithHeadings
     */
     public function collection()
     {
-        return FeedBack::select('name','email','mobile','location','message','created_at')->get();
+        $type =  request()->route()->type ?? 'feedback';
+        return FeedBack::where('page_url', 'LIKE', "%/$type")->select('name','email','mobile','location','message','created_at')->get();
     }
     public function headings(): array
     {

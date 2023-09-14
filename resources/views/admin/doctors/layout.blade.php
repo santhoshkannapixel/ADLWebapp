@@ -40,7 +40,7 @@
      <li class="nav-item">
         <a class="nav-link {{ Route::is(['feedback.index', 'feedback.show']) ? "active" : "" }}" href="{{ route('feedback.index')."/feedback-b2b" }}">
            <i class="fa-users fa me-2"></i>
-           FeedBack
+           FeedBack B2B
         </a>
      </li>
      @endif
