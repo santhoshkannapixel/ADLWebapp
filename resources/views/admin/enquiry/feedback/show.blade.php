@@ -28,10 +28,13 @@
         </div>
     </div>
     @if (!is_null($data->qa_comments))
-        @if (strstr($data['page_url'], 'feedback-b2b'))
+        @if (!strstr($data['page_url'], 'feedback-b2b'))
             <div class="card mb-3">
                 <div class="card-body">
                     <table class="table m-0 h-100">
+                        <thead>
+                            <tr><th>Question</th><th></th><th>Answer</th></tr>
+                        </thead>
                         @foreach (json_decode($data->qa_comments) as $key => $row)
                             <tr>
                                 <td width="25%"><strong>{{ ucfirst($row->question) }}</strong>:</td>
@@ -44,9 +47,10 @@
             </div>
         @endif
     @endif
+    
     <div class="card">
         <div class="card-body">
-            @if (!strstr($data['page_url'], 'feedback-b2b'))
+            @if (strstr($data['page_url'], 'feedback-b2b'))
                 <table cellpadding="10" cellspacing="10">
                     <thead>
                         <tr>

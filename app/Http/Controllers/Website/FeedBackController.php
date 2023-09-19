@@ -28,17 +28,17 @@ class FeedBackController extends Controller
         if (strstr( $request['page_url'], 'feedback-b2b')) {
             foreach ($qa as $key => $value) {
                 $temp[] = [
-                    "question" => array_keys($value)[0] ?? '-',
-                    "answer" => array_values($value)[0] ?? '-',
+                    "question" => ucfirst(array_keys($qac[$key])[0]) . "?",
+                    "answer" => array_values($value)[0] ?? '',
+                    "comments" => array_values($qac[$key])[0] ?? '',
                 ];
             }
             return  $temp;
         } else { 
             foreach ($qa as $key => $value) {
                 $temp[] = [
-                    "question" => ucfirst(array_keys($qac[$key])[0]) . "?",
-                    "answer" => array_values($value)[0] ?? '',
-                    "comments" => array_values($qac[$key])[0] ?? '',
+                    "question" => array_keys($value)[0] ?? '-',
+                    "answer" => array_values($value)[0] ?? '-',
                 ];
             }
             return  $temp;
