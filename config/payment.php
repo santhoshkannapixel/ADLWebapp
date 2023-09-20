@@ -1,5 +1,5 @@
 <?php
 return [
-    'KeyID' => 'rzp_test_S5bQihn0KDELkq',
-    'KeySecret' => 'MZ2gsjti999NSHqRS3lY9TjB'
+    'KeyID' => 'rzp_live_cannuAHYYLsJIo',
+    'KeySecret' => 'zRG7TgniW08KfZ1FR8lVHEzv'
 ];

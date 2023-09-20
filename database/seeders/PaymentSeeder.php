@@ -16,8 +16,8 @@ class PaymentSeeder extends Seeder
     {
         PaymentConfig::create([
             'gateWayName' => 'Rayzorpay',
-            'payKeyId' => 'rzp_test_S5bQihn0KDELkq',
-            'paySecretKey' => 'MZ2gsjti999NSHqRS3lY9TjB'
+            'payKeyId' => 'rzp_live_cannuAHYYLsJIo',
+            'paySecretKey' => 'zRG7TgniW08KfZ1FR8lVHEzv'
         ]);
     }
 }
